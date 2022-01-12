@@ -1,0 +1,74 @@
+function hayMasDe5Bolitas() {
+    /*
+        PROPÓSITO: Describe si la celda actual tiene mas de 5 bolitas
+        en total
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna,es una funcion total
+    */
+    
+    return (nroBolitas(Rojo) + nroBolitas(Azul) 
+            + nroBolitas(Verde) + nroBolitas(Negro) > 5)
+
+}
+
+function hayAlMenos5Bolitas() {
+    /*
+        PROPÓSITO:Indica si en la celda actua hay al menos 5 bolitas
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+     return (nroBolitas(Rojo) + nroBolitas(Azul) 
+            + nroBolitas(Verde) + nroBolitas(Negro) >= 5)
+}
+
+function hayAlMenos5BolitasYEnElBordeEste() {
+    /*
+        PROPÓSITO: Indica si en la celda actua hay al menos 5 bolitas y el
+        borde se encuentra justo al este de la misma
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (hayAlMenos5Bolitas() && not puedeMover(Este))
+}
+
+function hayDeTodosLosColores() {
+    /*
+        PROPÓSITO: Describe si en la celda actual hay bolitas de todos
+        los colores
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (hayBolitas(Rojo) && hayBolitas(Azul) && hayBolitas(Negro) && hayBolitas(Verde))
+}
+
+function faltaBolitasDeAlgunColor1() {
+    /*
+        PROPÓSITO: indica si falta bolitas de algun color en la
+        celda actual
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (not hayBolitas(Rojo) || not hayBolitas(Verde) 
+            ||not hayBolitas(Azul) ||not hayBolitas(Negro))
+}
+
+function faltaBolitasDeAlgunColor2() {
+    /*
+        PROPÓSITO: indica si falta bolitas de algun color en la
+        celda actual
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (not hayDeTodosLosColores())
+}

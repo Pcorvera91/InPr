@@ -1,0 +1,111 @@
+function gobwarts_nuevaCamadaParaAspirantesEn_(gobwarts, nombres){
+    nuevoGobwarts := gobwarts
+    foreach nombreDeEstudiante in nombres {
+        nuevoGobwarts := gobwarts_ConNuevoEstudianteConNombre_(nuevoGobwars, nombre)
+    }
+    return (nuevoGobwarts)
+}
+
+function gobwarts_ConNuevoEstudianteConNombre_(gobwarts, nombre){
+    return (Gobwarts(gobwarts | casas <- 
+                        elementosHasta(casas(gobwarts),  casaConNombreEn_(casaDe_SeleccionadaPara_(gobwarts, nombre)))
+                         ++ [casa_ConEstudiante_( casaConNombreEn_(casaDe_SeleccionadaPara_(gobwarts, nombre)), nombre)]
+                         ++ elementosDespuesDe(casas(gobwarts),  casaConNombreEn_(casaDe_SeleccionadaPara_(gobwarts, nombre)))
+                    )
+            )
+}
+
+function casasConNombreEn_(gobwarts, nombreDeCasa){
+    while(nombre(primero(casasPorRecorrer)) /= nombreDeCasa){
+        casasPorRecorrer := resto(casasPorRecorrer)
+    }
+    return(primero(casasPorRecorrer))
+}
+
+function casa_ConEstudiante_(casa, nombre){
+    return(Casa(casa | estudiantes <- estudiantes(casa) ++ [nuevoEstudianteConNombre(nombre)))]
+}
+
+function nuevoEstudianteConNombre(nombre){
+    return (Estudiante(nombre <- nombre, edad <-11, hechizosConocidos <- []))
+}
+
+
+
+function  cantidadDeHechizosPopularesDe_Entre_(gobwarts, listaDeHechizos) {
+    hechizosPopulares := 0
+    foreach hechizos in list {
+        hechizosPopulares := hechizosPopulares + unoSi_Cero_Sino(esHechizoPopular(gobwarts, hechizo))
+    }
+    return (hechizosPopulares)
+}
+
+function esHechizoPopular(gobwarts, hechizo){
+    return (estudiantesQueSabenElHechizo(gobwarts, hechizo) > cantidadDeEstudiantesDe_(gobwarts) div 2)
+}
+
+function estudiantesQueSabenElHechizo(gobwarts, hechizo) {
+    estudiantesQueSaben := 0
+    foreach estudiante in todosLosEstudiantesEn_(gobwarts){
+        estudiantesQueSaben := estudiantesQueSaben + unoSi_Cero_Sino(conoce_ElHechizo_(estudiante, hechizo))
+    }
+    return (estudiantesQueSaben)
+}
+
+function todosLosEstudiantesEn_(gobwarts){
+    estudiantesTotales := estudiantes(primero(casas(gobwarts)))
+    foreach casa in resto(casas(gobwarts)){
+        estudiantesTotales := estudiantesTotales ++ estudiantes(casa)
+    }
+    return (estudiantesTotales)
+}
+
+function conoce_ElHechizo(estudiante, hechizo) {
+    return (contiene_A_(hechizosConocidos(estudiante), hechizo))
+}
+
+function hayMortifagoEn_(gobwarts){
+    estudiantesPorVer:= todosLosEstudiantesEn_(gobwarts)
+    while(not esVacia(estudiantesPorVer) && not(esMortifagoEn_(primero(estudiantesPorVer), gobwarts))){
+        estudiantesPorVer:= resto(estudiantesPorVer)
+    }
+    return (not esVacia(estudiantesPorVer))
+}
+
+function esMortifago(estudiante, gobwarts){
+    return(conoceAlgunoDeLosHechizos(estudiante, hechizosProhibidos(gobwarts)))
+}
+
+function conoceAlgunoDeLosHechizos(estudiante, hechizos){
+    return(not esVacia(interseccionEntre_Y_(hechizosConocidos(estudiante), hechizos)))
+}
+
+
+function representantesDeLasCasasEn_(gobwarts){
+    representantes := []
+    foreach casa in casas(gobwarts){
+        representantes := representantes ++ [representanteDe_(casa)]
+    }
+    return(representantes)
+}
+
+function representanteDe_(casa){
+    elMejorRepresentante := primero(estudiantesAvanzados(casa))
+    foreach estudiante in resto(estudiantesAvanzados(casa)){
+        elMejorRepresentante := elMejorRepresentanteEntre(elMejorRepresentante, estudiante)
+    }
+    return elMejorRepresentante
+}
+
+function elMejorRepresentanteEntre(primerEstudiante, segundoEstudiante){
+    return (choose
+        primerEstudiante when (esMejorRepresentante(primerEstudiante,segundoEstudiante))
+        segundoEstudiante otherwise
+    })
+}
+
+function esMejorRepresentante(primerEstudiante, segundoEstudiante){
+    return(esMasViejo(primerEstudiante) || 
+            (tienenMismaEdad(primerEstudiante, segundoEstudiante) && sabeMasHechizos(primerEstudiante, segundoEstudiante))
+    )
+}

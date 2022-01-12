@@ -1,0 +1,182 @@
+/*
+Locacion Tapada: 1 Negra
+Locacion Destapada : 0 Negras
+Hay mina: 1 Roja
+Pistas: de 1 a 8 bolitas Azules
+
+*/
+
+function hayMina(){
+/*
+    PROPOSITO:Indica si hay 1 mina en la 
+    locacion actual
+    PRECONDICION:Ninguna
+    RESULTADO:Booleano
+
+*/
+
+    return (nroBolitas(Rojo)==1)
+
+}
+
+function locacionTapada() {
+    /*
+        PROPÓSITO:indica si hay 1 locacion tapada
+        TIPO:Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Negro)==1)
+}
+
+function locacionDestapada() {
+    /*
+        PROPÓSITO:Indica si hay 1 locacion destapada
+        TIPO:Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (not hayBolitas(Negro))
+}
+
+
+
+function cantidadMinasVecinas() {
+/*
+    PROPOSITO:Determina el numero de minas  desde la locacion 
+    actual
+    PRECONDICION:Ninguna
+    RESULTADO:Numero
+
+*/    
+  return (nroMinasEnDireccionesOrtogonales() + nroMinasEnLasDiagonales())
+}
+
+
+function nroMinasEnDireccionesOrtogonales(){
+/*
+    PROPOSITO:Describe la cantidad de minas en direcciones ortogonales
+    PRECONDICION:Ninguna
+    RESULTADO:Numero
+*/    
+    direccionActual:=minDir()
+    cantidadDeMinasVecinasVistas:=0
+    while(direccionActual /= maxDir()){
+        cantidadDeMinasVecinasVistas:=cantidadDeMinasVecinasVistas + cantidadDeMinasAl_(direccionActual)
+        direccionActual:=siguiente(direccionActual)
+    }
+
+    return(cantidadDeMinasVecinasVistas + cantidadDeMinasAl_(direccionActual))
+
+}
+
+function nroVecinasVivasEnLasDiagonales(){
+
+/*
+    PROPOSITO:Describe la cantidad de minas vecinas en las diagonales
+    PRECONDICION:ninguna
+    RESULTADO:Numero
+
+
+*/    
+    
+    
+    return(nroVecinasEnLasDiagonalesAl_(Norte) + nroVecinasEnLasDiagonalesAl_(Sur))
+    
+    
+}
+
+
+function nroVecinasEnLasDiagonalesAl_(direccion){
+    
+/*
+    PROPOSITO:Describe la cantidad de  minas vecinas en las diagonales Oeste y este a direccion
+    PRECONDICION:Ninguna
+    RESULTADO:Numero
+
+*/
+
+    Mover_Si_(direccion,puedeMover(direccion))
+    
+    return(cantidadDeMinasAl_(Oeste) + cantidadDeMinasAl_(Este))
+
+    
+    
+}
+
+function cantidadDeMinasAl_(direccion){
+/*
+    PROPOSITO:Describe la cantidad de minas que hay en la direccion dada
+    PRECONDICION:Ninguna
+    RESULTADO:Numero
+*/    
+
+
+    Mover_Si_(direccion,puedeMover(direccion))
+    
+    return(elegir_Cuando_YSiNo_(1,hayMina(),0))
+
+
+}
+
+procedure PonerPista() {
+    /*
+        PROPÓSITO:Pone una pista en la locacion actual
+        PRECONDICIONES:
+            *En la locacion actual no hay pista ni mina
+    */
+    Poner__Veces(Azul,cantidadMinasVecinas())
+}
+
+procedure PonerPistaSiNoHayMina() {
+    /*
+        PROPÓSITO:Pone una pista si en la locacion actual no
+        hay mina
+        PRECONDICIONES:
+            * Ninguna
+    */
+    if (not hayMina() ) {
+        PonerPista()
+    }
+
+
+}
+
+
+procedure PonerPistas() {
+    /*
+        PROPÓSITO:Pone las pistas en todas las locaciones
+        del tablero (salvo aquellas que tienen minas)
+        PRECONDICIONES:
+            *hay al menos 1 locacion con mina
+    */
+    InferirInfo()
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (estoyAlFinalDeUnRecorrido__(Este,Norte)) {
+        PonerPistaSiNoHayMina()
+        PasarASiguienteCelda__(Este,Norte)
+    }
+    PonerPistaSiNoHayMina()
+}
+
+procedure MarcarLocacion() {
+    /*
+        PROPÓSITO:Marca la locacion actual 
+
+        PRECONDICIONES:
+            *El cabezal se encuentra sobre una locacion destapada y 
+            con pista.
+
+        OBSERVACIONES:Si la locacion actual tiene una mina, la marca con
+        una bolita verde, si no tiene mina, la marca con 2 verdes
+    */
+    if(hayMina()){
+        Poner(Verde)
+    }
+
+    else {
+        Poner__Veces(Verde,2)
+    }
+}

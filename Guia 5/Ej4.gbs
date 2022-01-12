@@ -1,0 +1,115 @@
+procedure PudrirManzana() {
+    /*
+        PROPÓSITO: pudre una manzana retirando un gusano
+        PRECONDICIONES:
+            * Al menos hay una manzana en buen estado y un gusano en
+            la celda actual
+    */
+    if (cantidadDeManzanasSanas() >=1 &&
+        cantidadDeGusanos() >= 1) {
+
+        
+        ​Reemplazar_Y_Por_(manzanaSana(), gusano(), manzanaPodrida())
+    }
+        
+
+    
+}
+
+procedure ​Reemplazar_Y_Por_(primerColorAReemplazar, segundoColorAReemplazar, colorAAgregar){
+    /*
+        PROPÓSITO:  Se reemplaza una bolita de primerColorAReemplazar y
+        segundoColorAReemplazar por una bolita de colorAAgregar en la celda
+        actual
+        PARÁMETROS:
+            * primerColorAReemplazar: color - describe al color de la bolita
+            que se reemplaza primero.
+            * segundoColorAReemplazar: color - describe al color de la bolita
+            que se reemplaza segundo.
+            *colorAAgregar:color - describe el color de la bolita a agregar
+        PRECONDICIONES:
+            * ninguna
+    */
+     
+        Sacar(primerColorAReemplazar)
+        Sacar(segundoColorAReemplazar)
+        Poner(colorAAgregar)
+    
+}
+
+procedure PudrirHasta_Manzanas(cantidadAPudrir) {
+    /*
+        PROPÓSITO:Pudre cantidadAPudrir de manzanas 
+        PARÁMETROS:
+            * cantidadAPudrir: numero - indica la cantidad de manzanas
+            a pudrir.
+            
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    repeat(cantidadAPudrir){
+
+        PudrirManzana()
+
+    }
+
+}
+
+function cantidadDeManzanasSanas() {
+    /*
+        PROPÓSITO:Denota la cantidad de manzanas en buen estado que hay
+        en la celda actual
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Rojo))
+}
+
+function cantidadDeGusanos() {
+    /*
+        PROPÓSITO:Denota la cantidad de gusanos que hay
+        en la celda actual
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Verde))
+}
+
+function manzanaSana() {
+    /*
+        PROPÓSITO:  Representa una manzana sana
+        TIPO:Color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Rojo)
+}
+
+
+function manzanaPodrida() {
+    /*
+        PROPÓSITO:  Representa una manzana podrida
+        TIPO:Color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Negro)
+}
+
+function gusano() {
+    /*
+        PROPÓSITO:  Representa una gusano
+        TIPO:Color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Verde)
+}

@@ -1,0 +1,79 @@
+
+program{
+    return(esDíaDeFinDeSemana_(Domingo))
+}
+
+
+type DiaDeLaSemana is variant{
+    
+    case Lunes{}
+    case Martes{}
+    case Miercoles{}
+    case Jueves{}
+    case Viernes{}
+    case Sabado {}
+    case Domingo{}
+    
+}
+
+function diaSiguiente_(diaDeLaSemana){
+/*
+    PROPOSITO:Devuelve el ddiaDeLaSemanaia siguiente a diaDeLaSemana
+    PRECONDICION:Ninguna
+    RESULTADO:DiaDeLaSemana
+    PARAMETROS:
+        diaDeLaSemana:-DiaDeLaSemana, es el dia a evaluar
+
+*/ 
+
+    return(choose
+                Martes when (diaDeLaSemana==Lunes)
+                Miercoles when (diaDeLaSemana==Martes)
+                Jueves when (diaDeLaSemana==Miercoles)
+                Viernes when (diaDeLaSemana==Jueves)
+                Sabado when (diaDeLaSemana==Viernes)
+                Domingo when (diaDeLaSemana==Sabado)
+                Lunes otherwise)
+
+
+}
+
+
+function diaPrevio_(diaDeLaSemana){
+/*
+    PROPOSITO:Devuelve el dia siguiente a diaDeLaSemana
+    PRECONDICION:Ninguna
+    RESULTADO:DiaDeLaSemana
+    PARAMETROS:
+        diaDeLaSemana:-DiaDeLaSemana, es el dia a evaluar
+
+*/    
+   
+   return(choose
+                Domingo when (diaDeLaSemana==Lunes)
+                Lunes when (diaDeLaSemana==Martes)
+                Martes when (diaDeLaSemana==Miercoles)
+                Miercoles when (diaDeLaSemana==Jueves)
+                Jueves when (diaDeLaSemana==Viernes)
+                Viernes when (diaDeLaSemana==Sabado)
+                Sabado otherwise)
+   
+   
+}
+
+
+function esDíaDeFinDeSemana_(diaDeLaSemana){
+/*
+    PROPOSITO:Indica si el dia diaDeLaSemana es un dia de fin de semana
+    PRECONDICION:Ninguna
+    RESULTADO:Booleano
+    PARAMETRO:
+        *diaDeLaSemana:DiaDeLaSemana, es el dia de la semana a evaluar
+
+*/
+
+
+    return(diaDeLaSemana == Sabado || diaDeLaSemana == Domingo)
+
+}
+

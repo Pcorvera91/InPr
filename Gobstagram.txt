@@ -1,0 +1,110 @@
+type TipoDePerfil is variant {
+    /* PROPÓSITO: modelar los tipos de perfil */
+    case Empresa {}
+    case Persona {}
+    case Mascota {}
+}
+type Perfil is record {
+    /* PROPÓSITO: modelar un perfil
+    INV.REP.: nombre no es vacío
+    */
+    field nombre // String
+    field fotos // [Foto]
+    field tipo // TipoDePerfil
+    field seguidores // [String]
+}
+type Foto is record {
+    /* PROPÓSITO: modelar una foto
+    INV.REP.: id no es vacío
+    */
+    field id // String
+    field tamanio // Número
+    field likes // [String]
+}
+
+
+function unPerfil(parámetro1, parámetro2) {
+   
+    
+    return (Perfil(nombre <- "Pepito",
+                  fotos <- [(Foto(id <- "ae13",
+                                  tamanio<-1234,
+                                  likes <- ["Juancito","Cuchuflito"]),
+                            (Foto(id <- "tg56",
+                                  tamanio <- 567,
+                                  likes<- ["Chucha","Jose"]))],
+                    tipo <- Persona
+                    seguidores<-["Juancito","Cuchuflito","Chucha","Jose"]))
+}
+
+
+/*tamañoDeFoto_
+     PROPÓSITO: Describe el tamaño de la foto con
+    el identificador dado
+    PRECONDICIONES: ninguna
+    PARÁMETROS: un String que identifica una foto
+    RESULTADO: Número
+    
+perfilDe_En_
+     PROPÓSITO: Describe el perfil del gobster dado
+    en el gobstagram dado
+    PRECONDICIONES: el gobster está en el gobstagram
+    PARÁMETROS: * un String que identifica un Perfil
+    * una Lista de Perfiles
+    RESULTADO: Perfil
+    
+*/
+
+function  perfil_ConFoto_(perfil,nuevaFoto) {
+    /*
+        PROPÓSITO:Dado un perfil y una foto describe el perfil dado con una
+        nueva foto con el identificador dado. 
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO: Tipo
+        PRECONDICIONES:
+            * La nueva foto debe tener su tamaño calculado, y no tener likes
+    */
+    
+    return (Perfil(perfil | fotos <- fotos(perfil) ++ [nuevaFoto]))
+}
+
+
+function  galeríasDePerfilesDe_(perfiles) {
+    /*
+        PROPÓSITO:dada una lista de perfiles,describa una lista con las
+        listas de fotos de cada perfil del gobstagram dado
+        PARÁMETROS:
+            * perfiles: Lista de Perfil - describe la lista de perfiles en el cual se quieren
+            mostrar las fotos de cada pefil dado.
+            
+        TIPO: Lista de Lista de Foto
+        PRECONDICIONES:
+            * cada perfil tienen al menos una foto.
+    */
+
+    fotosMostradas:=[]
+
+    foreach perfil in perfiles {
+        fotosMostradas:=fotosMostradas ++ [fotos(perfil)]
+    }
+    
+    return (fotosMostradas)
+}
+
+
+function es_LikerEn_(nombreDelGobster,perfil) {
+    /*
+        PROPÓSITO:indica si el gobster con el nombre dado dio al menos un like a fotos del
+        Perfil dado.
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO: Tipo
+        PRECONDICIONES:
+            * ....
+    */
+    
+    return ()
+}

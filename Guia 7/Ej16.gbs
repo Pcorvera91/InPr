@@ -1,0 +1,288 @@
+/*
+h. La función mayorNroDeVueloDespegando()​, que retorne el número de
+vuelo más grande que esté despegando en el aeropuerto.
+*/
+
+function cantidadDeCanalesLibres() {
+    /*
+        PROPÓSITO: Devuelve la cantidad de canales sin aviones
+        TIPO:numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    IrAlBorde(Oeste)
+    cantidadDeCanalesVistos:=unoSi_SinoCero(hayCanalLibre())
+    while(puedeMover(Este)){
+
+        Mover(Este)
+        cantidadDeCanalesVistos:=cantidadDeCanalesVistos +
+                                 unoSi_SinoCero(not hayAvionEnCanal())
+
+    }
+    return (cantidadDeCanalesVistos)
+}
+
+function hayAvionEnCanal() {
+    /*
+        PROPÓSITO:Indica si hay un avion en el canal
+        TIPO:Booleano,verdadero si hay un avion en el canal
+        PRECONDICIONES:
+            *No hay
+    */
+    IrAlBorde(Sur)
+    while(puedeMover(Norte) && (not hayAvion())){
+
+        Mover(Norte)
+
+    }
+    return (hayAvion())
+}
+
+function hayAvion() {
+    /*
+        PROPÓSITO: Indica si hay un avion
+        TIPO:Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (hayBolitas(Azul))
+}
+
+function hayAvionDespegando() {
+    /*
+        PROPÓSITO:  Indica si el avion actual esta despegando
+        TIPO:Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (hayAvion() && hayIndicadorDeDespegue())
+}
+
+function hayAvionAterrizando() {
+    /*
+        PROPÓSITO: indica si el avion actual esta aterrizando
+        TIPO:booleano
+        PRECONDICIONES:
+            *ninguna
+    */
+    
+    return (hayAvion() && hayIndicadorDeAterrizaje())
+}
+
+function hayIndicadorDeAterrizaje() {
+    /*
+        PROPÓSITO:Indica si hay un indicador de que el avion esta 
+        aterrizando
+        TIPO: Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (hayBolitas(Rojo))
+}
+
+function hayIndicadorDeDespegue() {
+    /*
+        PROPÓSITO:Indica si hay un indicador de que el avion esta 
+        despegando
+        TIPO: Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (hayBolitas(Verde))
+}
+
+function nroDeVuelo() {
+    /*
+        PROPÓSITO:Describe el numero de vuelo del avion actual
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Azul))
+}
+
+function cantidadDeAvionesDespegando() {
+    /*
+        PROPÓSITO:Describe la cantidad total de aviones que estan 
+        despegando en todo el aereopuerto
+        TIPO:Numero
+        PRECONDICIONES:
+            *Ninguna
+    */
+    cantidadDeAvionesVistos:=unoSi_SinoCero(hayAvionDespegando())
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (estoyAlFinalDeUnRecorrido__(Este,Norte)) {
+        
+        PasarALaSiguienteCelda__(Este,Norte)
+
+        cantidadDeAvionesVistos:=cantidadDeAvionesDespegandoVistos +
+                                           unoSi_SinoCero(hayAvionDespegando())
+    }
+    return (cantidadDeAvionesVistos)
+}
+
+
+function cantidadDeAvionesTotales() {
+    /*
+        PROPÓSITO:Describe la cantidad total de aviones despegando y
+        aterrizando que hay en todo el aereopuerto
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    return(cantidadDeAvionesAterrizando() + cantidadDeAvionesDespegando())
+  
+}
+
+function cantidadDeAvionesAterrizando() {
+     /*
+        PROPÓSITO:Describe la cantidad total de aviones que estan 
+        aterrizando en todo el aereopuerto
+        TIPO:Numero
+        PRECONDICIONES:
+            *Ninguna
+    */
+    cantidadDeAvionesVistos:=unoSi_SinoCero(hayAvionAterrizando())
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (estoyAlFinalDeUnRecorrido__(Este,Norte)) {
+        
+        PasarALaSiguienteCelda__(Este,Norte)
+
+        cantidadDeAvionesVistos:=cantidadDeAvionesDespegandoVistos +
+                                           unoSi_SinoCero(hayAvionAterrizando())
+    }
+    return (cantidadDeAvionesVistos)
+}
+
+function hayAvionDespegandoEnCanal() {
+    /*
+        PROPÓSITO:Indica si hay un avion despegando en el canal actual
+        TIPO:Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    IrAlBorde(Sur)
+    while (puedeMover(Norte) && (not hayAvionDespegando())) {
+        Mover(Norte)
+    }
+    return (hayAvionDespegando())
+}
+
+function hayAvionAterrizandoEnCanal() {
+    /*
+        PROPÓSITO:Indica si hay un avion aterrizando en el canal actual
+        TIPO:Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    IrAlBorde(Norte)
+    while (puedeMover(Sur) && (not hayAvionAterrizando())) {
+        Mover(Sur)
+    }
+    return (hayAvionAterrizando())
+}
+
+function hayCanalConColisionInminente() {
+    /*
+        PROPÓSITO:Indica si el canal actual hay probabilidad de que 
+        ocurra una colision
+        TIPO:Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+
+    return(hayAvionAterrizandoEnCanal() && hayAvionDespegandoEnCanal())
+}    
+
+function ​cantidadDeCanalesConColisiónInminente()​ {
+    /*
+        PROPÓSITO: devuelva la cantidad de carriles con posibles 
+        colisiones en todo el aeropuerto.
+        TIPO:numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    IrAlBorde(Oeste)
+    cantidadDeCanalesVistos:=unoSi_SinoCero(hayCanalConColisionInminente())
+    while(puedeMover(Este)){
+
+        Mover(Este)
+        cantidadDeCanalesVistos:=cantidadDeCanalesVistos +
+                                 unoSi_SinoCero(hayCanalConColisionInminente())
+
+    }
+    return (cantidadDeCanalesVistos)
+}
+
+
+procedure IrACanalLibreParaDespegar()​ {
+    /*
+        PROPÓSITO:deja el cabezal en el primer canal libre más cercano 
+        al Sureste del aeropuerto.
+        PRECONDICIONES:
+            *Ninguna
+    */
+    IrAlCanalLibreAl__(Sur,Este)
+
+}
+
+function hayCanalLibre() {
+    /*
+        PROPÓSITO:Indica si el canal actual esta libre
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (not hayAvionEnCanal())
+}
+
+procedure ​IrACanalLibreParaAterrizar() {
+    /*
+        PROPÓSITO:deja el cabezal en el primer canal libre más cercano 
+        al Noroeste del aeropuerto.
+        PRECONDICIONES:
+            * Ninguna
+    */
+   IrAlCanalLibreAl__(Norte,Oeste)
+}
+
+procedure IrAlCanalLibreAl__(dirPrincipal,dirSecundaria) {
+    /*
+        PROPÓSITO:deja el cabezal en el primer canal libre más cercano 
+        al dirPrincipal dirSecundaria del aeropuerto.
+        PARÁMETROS:
+            * dirPrincipal: direccion - es la direccion vertical.
+            * dirSecundaria: direccion - es la direccion secundaria.
+        PRECONDICIONES:
+            *ninguna
+    */
+    IrAlBorde(dirPrincipal)
+    IrAlBorde(dirSecundaria)
+    while(puedeMover(opuesto(dirSecundaria)) && (not hayCanalLibre())){
+        
+        Mover(opuesto(dirSecundaria))
+
+    }
+}
+
+procedure IrACanalConColisiónInminente()​ {
+    /*
+        PROPÓSITO: deje el cabezal en el primer Carril con una colisión
+        inminente
+        PRECONDICIONES:
+            * Ninguna
+    */
+    IrAlBorde(Sur)
+    IrAlBorde(Oeste)
+    while(puedeMover(Este) && (not hayCanalConColisionInminente())){
+        
+        Mover(Este))
+
+    }
+}

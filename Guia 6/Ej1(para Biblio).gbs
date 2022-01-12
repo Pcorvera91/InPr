@@ -1,0 +1,36 @@
+procedure IrAlBorde_(direccion) {
+    /*
+        PROPÓSITO:  lleva el cabezal al borde hacia la direccion
+        dada
+        PARÁMETROS:
+            * direccion: direcion- es la direccion donde mueve el cabezal
+            hasta llegar al borde.
+           
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    while(not estoyEnElBorde_(direccion)){
+
+        Mover(direccion)
+
+    }
+
+
+}
+
+function estoyEnElBorde(direccionDelBorde) {
+    /*
+        PROPÓSITO: Indica si el cabezal esta en el borde hacia
+        direccionDelBorde
+        PARÁMETROS:
+            * direccionDelBorde: direccion - Indica la direccion donde se
+            encuentra el borde.
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (not puedeMover(direccionDelBorde))
+}

@@ -1,0 +1,24 @@
+function lista_AgrupadosDeA_(listaAAgrupar,cantidad) {
+    /*
+        PROPÓSITO:Dada una lista de elementos y un numero que representa
+        la cantidad describe una lista de listas que agrupa los 
+        elementos de la lista dada en grupos,donde cada sublista 
+        tiene la cantidad dada de elementos
+        PARÁMETROS:
+            * listaAAgrupar: lista de elementos - describe la lista 
+            de elementos que se desea agrupar.
+            *cantidad: numero - es el numero en el cual
+            se desea agrupar los elementos en varias sublistas.
+        TIPO: Lista de listas de elementos
+        PRECONDICIONES:
+            *Ninguna
+    */
+    listaAgrupadaHastaAhora:=[]
+    elementosQueFaltanAgrupar:=listaAAgrupar
+    while (not esVacía(elementosQueFaltanAgrupar) && not cantidad > longitudDe_(elementosQueFaltanAgrupar)) {
+        listaAgrupadaHastaAhora:=listaAgrupadaHastaAhora ++ [segmentoInicialDeLargo_de_(cantidad,elementosQueFaltanAgrupar)]
+        elementosQueFaltanAgrupar:=laLista_SinLosPrimeros_(elementosQueFaltanAgrupar,cantidad)
+    }
+
+    return (listaAgrupadaHastaAhora ++ [elementosQueFaltanAgrupar] )
+}

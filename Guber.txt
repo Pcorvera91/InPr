@@ -1,0 +1,215 @@
+procedure LlevarVehiculoAlInicioDeUnRecorrido() {
+    /*
+        PROPÓSITO:Posiciona el vehiculo a la esquina Noroeste del
+        mapa
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre el vehiculo
+    */
+    MoverVehiculoAlBorde_(Norte)
+    MoverVehiculoAlBorde_(Oeste)
+}
+
+procedure MoverVehiculoAlBorde_(direccionAMover) {
+    /*
+        PROPÓSITO: Mueve el vehiculo  al borde **direccionAMover**
+        PARÁMETROS:
+            * direccionAMover:Direccion - es la direccion que se desea
+            mover al borde.
+           
+        PRECONDICIONES:
+            * Ninguna
+    */
+    while ( puedeMover(direccionAMover)) {
+        MoverVehiculoAl_(direccionAMover)
+    }
+
+
+}
+
+function elVehiculoEstaAlFinalDeUnRecorrido() {
+    /*
+        PROPÓSITO:Indica si el vehiculo se encuentra en la ubicacion
+        de la esquina Sureste del mapa
+        TIPO: Booleano
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre el vehiculo
+    */
+    
+    return (not puedeMover(Sur) && not puedeMover(Este))
+}
+
+procedure MoverVehiculoAProximaUbicacion() {
+    /*
+        PROPÓSITO:Mueve el vehiculo a la siguiente ubicacion en un
+        recorrido por el mapa hacia el sureste
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre el vehiculo
+    */
+    
+    if(puedeMover(Este)){
+        MoverVehiculoAl_(Este)
+    }
+
+    else{
+        MoverVehiculoAl_(Sur)
+        MoverVehiculoAlBorde_(Oeste)
+    }
+
+}
+
+function direccionHaciaLaCualEstaElDestino() {
+    /*
+        PROPÓSITO:Indica hacia que direccion esta el destino del pasajero
+        TIPO:Direccion
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre el vehiculo
+            *En la ubicacion actual esta el vehiculo con el pasajero
+    */
+    direccionActual:=minDir()
+
+    while (direccionActual /= maxDir() && not hayDestinoAl_De_(direccionActual,idDePasajeroEnVehiculo())) {
+        direccionActual:=siguiente(direccionActual)
+    }
+
+    return (direccionActual)
+}
+
+function hayDestinoAl_De_(direccionDeDestino,idPasajero) {
+    /*
+        PROPÓSITO:Indica si hay un destino de **idPasajero** hacia
+        **direccionDeDestino**
+        PARÁMETROS:
+            * direccionDeDestino: Direccion - es la direccion donde
+            supuestamente se encuentra el destino
+            * idPasajero: numero - es el identificador del pasajero del
+            cual se desea saber en alguna ubicacion a 
+            **direccionDeDestino** se encuentra su destino
+        TIPO:Booleano
+        PRECONDICIONES:
+            * IdPasajero esta entre 1 y 499
+            *En la ubicacion actual esta el vehiculo con el pasajero
+    */
+    while (not esDestinoDe_(idPasajero) && puedeMover(direccionDeDestino)) {
+        Mover(direccionDeDestino)
+    }
+    return (esDestinoDe_(idPasajero))
+}
+
+procedure LlevarTodosLosPasajerosDelMapaASuDestino() {
+    /*
+        PROPÓSITO:Lleva a cada uno de los pasajeros a su destino
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre el vehiculo
+    */
+    repeat (cantidadDePasajerosEsperando()) {
+        RecogerYLlevarPasajeroADestino()
+    }
+}
+
+function cantidadDePasajerosEsperando() {
+    /*
+        PROPÓSITO:Describe la cantidad de pasajeros totales que esperan
+        ser recogidos
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    IrAlInicioDeUnRecorrido__(Sur,Este)
+    cantidadDePasajerosVistos:=0
+    while (not estoyAlFinalDeUnRecorrido(Sur,Este)) {
+        cantidadDePasajerosVistos:=cantidadDePasajerosVistos +
+                                  unoSi_SinoCero(hayPasajero())
+        PasarASiguienteCelda__(Sur,Este)
+    }
+    return (cantidadDePasajerosVistos + unoSi_SinoCero(hayPasajero()))
+}
+
+procedure RecogerYLlevarPasajeroADestino() {
+    /*
+        PROPÓSITO:Recoge y lleva al pasajero a destino
+        PRECONDICIONES:
+            *El cabezal se encuentra sobre el vehiculo
+    */
+    BuscarPasajeroYRecogerlo()
+    LlevarPasajeroADestino()
+
+}
+
+procedure BuscarPasajeroYRecogerlo() {
+    /*
+        PROPÓSITO:El Vehiculo busca a algun pasajero que esta esperando 
+        para luego  recogerlo
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre el vehiculo
+            *el pasajero tiene un id entre 1 y 499
+    */
+    LlevarVehiculoAlInicioDeUnRecorrido()
+    
+    while (not elVehiculoEstaAlFinalDeUnRecorrido() && not hayPasajero()) {
+        MoverVehiculoAProximaUbicacion()
+    }
+
+    RecogerPasajero_(idDePasajero())
+    
+}
+
+procedure LlevarPasajeroADestino() {
+    /*
+        PROPÓSITO: Lleva al pasajero a destino
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre el vehiculo
+            * El vehiculo esta ocupado por el pasajero
+            * Hay 1 destino en alguna de las 4 direcciones ortogonales
+    */
+    while (not esDestinoDe_(idDePasajeroEnVehiculo())) {
+        MoverVehiculoAl_(direccionHaciaLaCualEstaElDestino())
+    }
+
+    BajarPasajero_(idDePasajeroEnVehiculo())
+}
+
+function cantidadDePersonasPorGrupoSegunId_(idPasajero) {
+    /*
+        PROPÓSITO: Indica la cantidad de personas en un grupo de 
+        pasajeros con id **idPasajero** que estan esperando un viaje
+        PARÁMETROS:
+            * idPasajero:Numero - es el identificador del pasajero
+            en el cual se desea saber la cantidad de personas que
+            hay en la misma.
+           
+        TIPO: Numero
+        PRECONDICIONES:
+            * idPasajero es un numero del 1 al 499
+    */
+    
+    return (choose
+                   1 when (idPasajero>=1 && idPasajero <=99)
+                   2 when (idPasajero>=100 && idPasajero <=199)
+                   3 when (idPasajero>=200 && idPasajero <=299)
+                   4 when (idPasajero>=300 && idPasajero <=399)
+                   5 otherwise
+    })
+}
+
+function cantidadDePersonasEsperando() {
+    /*
+        PROPÓSITO:Indica el total de personas que estan esperando un viaje
+        TIPO:Numero
+        PRECONDICIONES:
+            *Ninguna
+    */
+    IrAlInicioDeUnRecorrido__(Sur,Este)
+    cantidadDePersonasVistas:=0
+    while (not estoyAlFinalDeUnRecorrido(Sur,Este)) {
+        cantidadDePersonasVistas:=cantidadDePersonasVistas +
+                                  elegir_Cuando_Sino_(cantidadDePersonasPorGrupoSegunId_(idDePasajero()),hayPasajero(),0)
+        PasarASiguienteCelda__(Sur,Este)
+    }
+    return (
+        
+            cantidadDePersonasVistas +
+            elegir_Cuando_Sino_(cantidadDePersonasPorGrupoSegunId_(idDePasajero()),hayPasajero(),0)
+            
+            )
+    
+}

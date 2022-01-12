@@ -1,0 +1,23 @@
+procedure Poner_Bolitas_EnElTablero(listaDeNumeros,color) {
+    /*
+        PROPÓSITO: dada una lista de números y un color, recorre el tablero y pone en cada 
+        celda la cantidad de bolitas del color dado
+        PARÁMETROS:
+            * listaDeNumeros: es la cantidad de bolitas de color dado a poner en cada celda.
+            * color: es el color a poner
+        PRECONDICIONES:
+            * Ninguna
+    */
+
+    listaDeNumerosHastaAhora:=listaDeNumeros
+    IrAlInicioDeUnRecorrido__(Norte,Oeste)
+    while (not estoyAlFinalDeUnRecorrido__(Norte,Este) && not esVacia(listaDeNumerosHastaAhora)) {
+        Poner__Veces(color,primero(listaDeNumerosHastaAhora))
+        listaDeNumerosHastaAhora:=resto(listaDeNumerosHastaAhora)
+    }
+
+    Poner__Veces(color,primero(listaDeNumerosHastaAhora))
+    
+}
+
+

@@ -1,0 +1,189 @@
+//---------------------Parcial 1 parte 2
+
+Como parte de la mejora de la representación incorporando las nuevas herramientas aprendidas, se definieron las
+siguientes funciones para modelar a las posibles clases:
+
+  function tipo() {
+    /* PROPÓSITO: describir la representación de los tipos
+       PRECONDICIONES: ninguna
+       RESULTADO: un Color, que se utiliza para representar al
+                  tipo de elemento
+    */
+
+  function dirección() {
+    /* PROPÓSITO: describir la representación de las direcciones
+       PRECONDICIONES: ninguna
+       RESULTADO: un Color, que se utiliza para representar a las
+                  direcciones
+    */
+
+   function códigoDeDir_(dirección)
+    /* PROPÓSITO: describir el código de la dirección dada
+       PRECONDICIONES: ninguna
+       PARÁMETROS: dirección, la Dirección a codificar
+       RESULTADO: un Número, el código de la dirección dada
+    */
+
+  function límite() {
+    /* PROPÓSITO: describir el código del elemento Límite
+       PRECONDICIONES: ninguna
+       RESULTADO: un Número, el código correspondiente
+    */
+
+  function espinas() {
+    /* PROPÓSITO: describir el código del elemento Espinas
+       PRECONDICIONES: ninguna
+       RESULTADO: un Número, el código correspondiente
+    */
+
+Escribir el procedimiento Poner_ApuntandoAl_, que dado el código de un elemento (del que se sabe que posee un atributo de dirección) y 
+una dirección, 
+coloque en la celda actual la representación de ese elemento apuntando en la dirección dada, suponiendo que la celda actual está vacía. 
+
+Utilizando el procedimiento recién definido, escribir PonerEspinasApuntandoAl_, que dada una dirección, coloca la representación del
+elemento Espinas en la dirección dada.
+
+
+//----------------- Ejercicio nro 2
+
+
+
+Durante el juego, la burbuja puede moverse en cualquiera de las 4 direcciones. Sin embargo, si se mueve hacia unas espinas que apuntan 
+en la dirección opuesta a la del movimiento, la burbuja explotará. Por esa razón, es necesario determinar si al moverse, la bola explotará
+o no contra unas espinas, por lo que se hace necesario construir una función laBurbujaExplotaráContraEspinasAlMoverseAl_, que dada una
+dirección de movimiento, y suponiendo que la burbuja está en la celda actual, indica si la burbuja impactará contra espinas, explotando,
+o no, al moverse en la dirección dada.
+
+AYUDA: para que la burbuja explote, debe haber una espina en la celda lindante en la dirección a moverse y la espina en esa celda lindante deb
+e apuntar en contra de la dirección a moverse.
+
+Pueden utilizarse las siguientes funciones primitivas:
+
+function hayEspinasAl_(dirección)
+  /* PROPÓSITO: indicar si en la celda lindante en la dirección
+                dada hay representadas espinas
+     PARÁMETROS: dirección, la Dirección a controlar
+     PRECONDICIONES: ninguna
+     RESULTADO: un Booleano, Verdadero si hay espinas en la celda
+                             lindante en la dirección dada
+  */
+
+function direcciónDeLasEspinasAl_(dirección)
+  /* PROPÓSITO: describir la dirección a la que apuntan las
+                espinas que se encuentran en la celda lindante en
+                la dirección dada
+     PARÁMETROS: dirección, la Dirección a controlar
+     PRECONDICIONES:
+      * la celda lindante en la dirección dada tiene espinas
+        representadas
+     RESULTADO: una Dirección, a dónde apuntan las espinas de la
+                celda lindante en la dirección dada
+  */
+
+
+//-------------------------------------------------------------------------------
+
+Parcial 1 parte 3
+
+
+Como parte del procesamiento necesario para el juego, se precisa conocer cuántas afirmaciones simples
+hay conformadas en el tablero. Escribir una función cantidadDeAfirmacionesSimples, que suponiendo que
+en el tablero está representado un juego de “Goba es vos”, describe la cantidad de afirmaciones simples
+que están conformadas en el mismo. Se puede utilizar la siguiente función 
+primitiva:  esCentroDeAfirmaciónSimple, que indica si la celda actual es el centro de una afirmación simple,
+suponiendo que la celda actual contiene al texto conectivo “es”.
+
+
+
+ejercicio nro 2
+
+
+Para que el juego pueda continuar, en todo momento debe ser consistente. El juego es consistente cuando hay una
+afirmación de identidad, que establezca que algún objeto “es vos”, y debe existir al menos un objeto de ese tipo.
+Escribir una función elJuegoEsConsistente, que indica si en el tablero hay representado un juego consistente. 
+Para esto, se puede suponer que no hay más de una afirmación de identidad, y entonces es necesario hacer las siguientes subtareas:
+
+
+determinar si existe una afirmación de identidad (si existe, es la única, dada la suposición), y
+determinar si existe en el tablero una instancia del objeto mencionado por la afirmación de identidad.
+Para esto, se debe obtener el código del objeto mencionado por la afirmación de identidad, y buscar en
+todo el tablero para saber si el mismo está presente. 
+
+Suponer definidas las siguientes operaciones como primitivas:
+
+procedure IrAAfirmaciónDeIdentidadSiExiste()
+/* PROPÓSITO: lleva el cabezal hasta el centro de la primera afirmación 
+              de identidad, si hay al menos una. Si no hay ninguna, 
+              el cabezal puede quedar en cualquier lugar arbitrario.
+   PRECONDICIONES: ninguna
+*/
+
+function esAfirmaciónDeIdentidad()
+/* PROPÓSITO: indica si la celda actual es el centro de una afirmación 
+              de identidad
+   PRECONDICIONES: ninguna
+  RESULTADO: un Booleano, verdadero cuando la celda actual es el 
+              centro de una afirmación de identidad
+*/
+
+function códigoDelObjetoDeLaAfirmaciónActual()
+/* PROPÓSITO: describe el código del objeto que aparece como nombre de 
+              la afirmación actual
+   PRECONDICIONES:
+    * el cabezal se encuentra en el centro de una afirmación simple
+  RESULTADO: un Número, el código del objeto correspondiente
+*/
+
+function esObjetoDeCódigo_(códigoDeObjeto) 
+/* PROPÓSITO: indica si en la celda actual está representado
+              el objeto con el código dado
+   PRECONDICIONES: ninguna
+   PARÁMETROS: * códigoDeObjeto, un Número que corresponde al código de algún objeto
+   RESULTADO: un Booleano, verdadero cuando en la celda actual está
+              representado un objeto con el código dado
+*/
+
+
+//---------------------------------------------------------------------------------------------
+
+PARCIAL 2
+
+Ejercicio nro 1
+
+Escribir una función mago_LuegoDeAprenderWingardiumLeviosa, que dado un mago, agrega como habilidad,
+el hechizo de encantamiento del nombre mencionado, de nivel 1 y con la característica de levitación.
+
+
+ejercicio nro 2
+
+Escribir una función hayProfesoresQueJueganGobstonesEn_, que dada una lista de magos de Hogwarts, indica si alguno de los profesores
+de esa lista juega Gobstones con cualquier nivel.
+La habilidad de jugar Gobstones se modela con un registro de denominación "Gobstones", de disciplina Otra y con características
+"juego" y "bolitas mágicas".
+AYUDA: recordar que existe una función primitiva lista_EstáIncluidaEn_, que dadas dos listas, indica si todos los elementos 
+de la primera están contenidos entre los de la segunda.
+
+
+
+ejercicio 3
+
+
+Los hermanos Weasley abrieron un negocio de bromas mágicas, y muchos estudiantes corrieron a comprar bromas (y capaz algún profe también).
+Escribir 
+una función mago_TieneHabilidadesCon_, que dados un mago y una lista de características, indique si el mago dado tiene alguna habilidad 
+que tenga 
+todas esas características. Usarla para escribir una función elMago_EsEstudiateConBromasDeWW, que indica si el mago dado es un estudiante
+y tiene alguna habilidad con características "broma" y "de W&W".
+
+
+
+ejercicio nro 4
+
+El Sr. Filch supo del negocio de los hermanos Weasley, y está decidido a encontrar a todos los estudiantes que tengan alguna
+de estas bromas en su poder y confiscarles dichas bromas. Escribir una función 
+estudiantesDe_ConfiscadosPorFilch, que dada una lista de todos los magos de Hogwarts, describe a los estudiantes de la lista
+dada que tenían habilidades con características "broma" y "de W&W" donde a cada
+estudiante esas habilidades le fueron quitadas y además, por cada habilidad eliminada deben haber perdido 10 puntos para su casa.
+
+AYUDA: considerar una subtarea que dada una lista de habilidades describe cuántas de ellas son bromas de W&W, y otra que dada una
+lista de habilidades describe aquellas de la lista que no son bromas de W&W.

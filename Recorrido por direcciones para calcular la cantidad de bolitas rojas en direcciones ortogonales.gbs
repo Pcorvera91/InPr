@@ -1,0 +1,54 @@
+program{
+    return(cantidadDeRojasEnVecinas())
+}
+
+function cantidadDeElementos_EnOrtogonales(elementoAContar){
+    dirActual:=minDir()
+    cantidadDeElementosVistos:=0
+    while(dirActual /= maxDir()){
+        
+       
+        
+        cantidadDeElementosVistos:=cantidadDeElementosVistos + 
+				  cantidadDeElementos_En_(elementoAContar,dirActual)
+        
+        
+        
+        dirActual:=siguiente(dirActual)
+        
+        
+        
+    }
+
+    
+    return(cantidadDeElementosVistos + 
+				  cantidadDeElementos_En_(elementoAContar,dirActual))
+
+}
+
+procedure Mover_Si_(direccion, condicion) {
+    /*
+        PROPÓSITO:  Dado un color y un valor de verdad llamado condicion
+        mueve el cabezal
+         una celda a la direccion dada si el valor de verdad de la 
+        condicion es verdadero y si no lo es, no lo mueve
+        PARÁMETROS:
+            * direccion: direccion - es la direccion a mover.
+            * condicion: booleano - es el valor de verdad que indica verdadero
+            mueve el cabezal a direccion.
+        PRECONDICIONES:
+            *Al menos debe haber una celda a direccion de la celda actual
+    */
+    if (condicion) {
+        Mover(direccion)
+    }
+}
+
+function cantidadElementos_En_(cantidadDeElemento,direccion){
+    
+    
+    Mover_Si_(direccion,puedeMover(direccion))
+    return(cantidadDeElemento)
+    
+    
+}

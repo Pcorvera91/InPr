@@ -1,0 +1,17 @@
+function coloresEnLaCeldaActual() {
+    /*
+        PROPÓSITO:Describe una lista de colores que aparecen en la celda actual
+        TIPO:Lista de colores
+        PRECONDICIONES:
+            *Ninguna
+    */
+    colorActual := minColor()
+    listaDeColoresHastaAhora := []
+    while (colorActual/=maxColor()) {
+        listaDeColoresHastaAhora := listaDeColoresHastaAhora ++ 
+                                    singularSi(colorActual,hayBolitas(colorActual))
+        colorActual:=siguiente(colorActual)
+    }
+    return (listaDeColoresHastaAhora ++ singularSi(colorActual,hayBolitas(colorActual)))
+}
+

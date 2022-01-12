@@ -1,0 +1,162 @@
+procedure DibujarRelojAnalógicoSimplificado() {
+    /*
+        PROPÓSITO: Dibuja un reloj simplificado de radio 2
+        PRECONDICIONES:
+            * la celda inicial debe estar situada en el centro del reloj
+            * al menos debe haber 2 celdas lindantes al norte, 2 al sur
+            2 al este y 2 al oeste de la celda inicial
+            * el tablero debe estar vacio.
+    */
+    Dibujar12YVolverAlInicio()
+    Dibujar6YVolverAlInicio()
+    Dibujar9YVolverAlInicio()
+    Dibujar3YVolverAlInicio()
+    
+}
+
+procedure Dibujar12YVolverAlInicio() {
+    /*
+        PROPÓSITO:  Dibuja el numero 12 del reloj a 2 celdas de 
+        distancia al norte de la celda inicial
+        PRECONDICIONES:
+            * Al menos debe haber 2 celdas lindantes al norte de la
+            celda inicial.
+            * la ultima celda de las 2 lindantes al norte de la actual
+            esta vacia
+    */
+    Mover2AlNorte()
+    Poner12Rojas()
+    Mover2AlSur()
+    
+}
+
+procedure Dibujar6YVolverAlInicio() {
+    /*
+        PROPÓSITO:Dibuja el numero 6 del reloj,a 2 celdas de 
+        distancia  al sur de la celda inicial
+        PRECONDICIONES:
+            * Al menos debe haber 2 celdas lindantes al sur de la
+            celda inicial.
+            *la ultima celda de las 2 lindantes al sur de la actual
+            esta vacia
+    */
+    Mover2AlSur()
+    Poner6Rojas()
+    Mover2AlNorte()
+
+}
+
+procedure Dibujar9YVolverAlInicio() {
+    /*
+        PROPÓSITO:Dibuja el numero 9 del reloj,a 2 celdas de 
+        distancia al oeste de la celda inicial
+        PRECONDICIONES:
+            * Al menos debe haber 2 celdas lindantes al Oeste de la
+            celda inicial.
+            *la ultima celda de las 2 lindantes al oeste de la actual
+            esta vacia
+    */
+    
+    Mover2AlOeste()
+    Poner9Rojas()
+    Mover2AlEste()
+}
+
+procedure Dibujar3YVolverAlInicio() {
+    /*
+         PROPÓSITO:Dibuja el numero 3 del reloj,a 2 celdas de 
+        distancia al este de la celda inicial
+        PRECONDICIONES:
+            * Al menos debe haber 2 celdas lindantes al este de la
+            celda inicial.
+            *la ultima celda de las 2 lindantes al este de la actual
+            esta vacia
+    */
+    Mover2AlEste()
+    Poner3Rojas()
+    Mover2AlOeste()
+}
+
+
+procedure Mover2AlNorte() {
+    /*
+        PROPÓSITO:  El cabezal mueve 2 celdas al norte
+        PRECONDICIONES:
+            * Al menos debe haber 2 celdas al norte de la celda actual
+    */
+    Mover(Norte)
+    Mover(Norte)
+    
+}
+
+procedure Mover2AlSur() {
+    /*
+        PROPÓSITO:  El cabezal mueve 2 celdas al sur
+        PRECONDICIONES:
+            * Al menos debe haber 2 celdas al sur de la celda actual
+    */
+    Mover(Sur)
+    Mover(Sur)
+}
+
+procedure Mover2AlEste() {
+    /*
+        PROPÓSITO:  El cabezal mueve 2 celdas al Este
+        PRECONDICIONES:
+            * Al menos debe haber 2 celdas al Este de la celda actual
+    */
+    Mover(Este)
+    Mover(Este)
+    
+}
+
+procedure Mover2AlOeste() {
+    /*
+        PROPÓSITO:  El cabezal mueve 2 celdas al oeste
+        PRECONDICIONES:
+            * Al menos debe haber 2 celdas al oeste de la celda actual
+    */
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+procedure Poner3Rojas() {
+    /*
+        PROPÓSITO:  Pone 3 Bolitas Rojas
+        PRECONDICIONES:
+            * Ninguna
+    */
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    
+}
+
+procedure Poner6Rojas() {
+    /*
+        PROPÓSITO:  Pone 6 Bolitas Rojas
+        PRECONDICIONES:
+            * Ninguna
+    */
+    Poner3Rojas()
+    Poner3Rojas()
+}
+
+procedure Poner9Rojas() {
+    /*
+        PROPÓSITO:  Pone 9 bolitas rojas
+        PRECONDICIONES:
+            * Ninguna
+    */
+    Poner6Rojas()
+    Poner3Rojas()
+}
+
+procedure Poner12Rojas() {
+    /*
+        PROPÓSITO:  Pone 12 bolitas rojas
+        PRECONDICIONES:
+            * Ninguna
+    */
+    Poner6Rojas()   Poner6Rojas()
+}

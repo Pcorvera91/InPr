@@ -1,0 +1,20 @@
+function reversoDe_(listaDeElementos) {
+    /*
+        PROPÓSITO:Dada una lista describe la lista que tiene los mismos
+        elementos que la dada pero en orden inverso
+        PARÁMETROS:
+            * listaDeElementos: Lista de cualquier tipo - es la lista
+            que se desea convertir
+            
+        TIPO:Lista de elementos
+        PRECONDICIONES:
+            * Ninguna
+    */
+    listaConvertidaHastaAhora:=[]
+
+    foreach elemento in listaDeElementos {
+        listaConvertidaHastaAhora:=snoc(listaConvertidaHastaAhora,elemento)
+    }
+
+    return (listaConvertidaHastaAhora)
+}

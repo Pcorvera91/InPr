@@ -1,0 +1,203 @@
+procedure EscribirFecha___(dia, mes, año) {
+    /*
+        PROPÓSITO: Escribe una fecha con un dia, un mes y un año
+        dados
+        PARÁMETROS:
+            * dia: numero - representa el dia con bolitas azules.
+            * mes: numero - representa el mes con bolitas rojas.
+            * año: numero - representa el año con bolitas verdes.
+        PRECONDICIONES:
+            * dia debe ser entre 1 y 31
+            *mes debe ser entre 1 y 12
+            *al menos debe haber 2 celdas lindantes de la actual
+            *tanto la celda actual como las 2 lindantes deben
+            estar vacias.
+    */
+    EscribirDia_(dia)
+    Mover(Este)
+    EscribirMes_(mes)
+    Mover(Este)
+    EscribirAnio(año)
+}
+
+procedure EscribirDia_(dia){
+    /*
+        PROPÓSITO:  Escribe el dia representando con bolitas azules
+        PARÁMETROS:
+            * dia: numero - es la cantidad de bolitas azules a poner
+            para representar el dia.
+            
+        PRECONDICIONES:
+            * la celda actual debe estar vacia
+    */
+    repeat (dia) {
+        Poner(Azul)
+    }
+}
+
+procedure EscribirMes_(mes){
+    /*
+        PROPÓSITO:  Escribe el mes representando con bolitas rojas
+        PARÁMETROS:
+            * mes: numero - es la cantidad de bolitas rojas a poner
+            para representar el mes.
+            
+        PRECONDICIONES:
+            * la celda actual debe estar vacia
+    */
+    repeat (mes) {
+        Poner(Rojo)
+    }
+}
+
+procedure EscribirAnio_(año){
+    /*
+        PROPÓSITO:  Escribe el año representando con bolitas Verdes
+        PARÁMETROS:
+            * año: numero - es la cantidad de bolitas Verdes a poner
+            para representar el año.
+            
+        PRECONDICIONES:
+            * la celda actual debe estar vacia
+    */
+    repeat (año) {
+        Poner(Verde)
+    }
+}
+
+procedure RegistrarReformaUniversitaria(){
+/*  
+    PROPOSITO:Registra la fecha de la 
+    reforma universitaria ,en la celda actual 
+    y las 2 proximas al este
+        
+    
+    PRECONDICION: 
+        *hay al menos 2 celdas lindantes al este de la celda 
+        inicial.
+        *tanto la celda actual como las 2 lindantes al este estan vacias
+
+
+*/
+
+    EscribirFecha___(dia, mes, año)
+
+
+}
+
+procedure RegistrarReglamentacionVotoFemenino(){
+/*  
+    PROPOSITO:Registra la fecha de la reglamentacion del
+    voto femenino ,en la celda actual 
+    y las 2 proximas al este
+        
+    
+    PRECONDICION: 
+        *hay al menos 2 celdas lindantes al este de la celda 
+        inicial.
+        *tanto la celda actual como las 2 lindantes al este estan vacias
+
+
+*/
+
+    EscribirFecha___(dia, mes, año)
+
+
+}
+
+procedure RegistrarReformaUniversitaria(){
+/*  
+    PROPOSITO:Registra la fecha de la 
+    reforma universitaria ,en la celda actual 
+    y las 2 proximas al este
+        
+    
+    PRECONDICION: 
+        *hay al menos 2 celdas lindantes al este de la celda 
+        inicial.
+        *tanto la celda actual como las 2 lindantes al este estan vacias
+
+
+*/
+
+    EscribirFecha___(dia, mes, año)
+
+
+}
+
+procedure RegistrarInicioTPI(){
+/*  
+    PROPOSITO:Registra la fecha del inicio de TPI
+    ,en la celda actual y las 2 proximas al este
+        
+    
+    PRECONDICION: 
+        *hay al menos 2 celdas lindantes al este de la celda 
+        inicial.
+        *tanto la celda actual como las 2 lindantes al este estan vacias
+
+
+*/
+
+    EscribirFecha___(dia, mes, año)
+
+
+}
+
+procedure RegistrarDiaInternacionalDelTrabajador(){
+/*  
+    PROPOSITO:Registra la fecha en la que ocurrieron 
+    los hechos conmemorados en el Día Internacional de
+    los Trabajadores; ,en la celda actual y las 2 proximas al este
+        
+    
+    PRECONDICION: 
+        *hay al menos 2 celdas lindantes al este de la celda 
+        inicial.
+        *tanto la celda actual como las 2 lindantes al este estan vacias
+
+
+*/
+
+    EscribirFecha___(dia, mes, año)
+
+
+}
+
+procedure RegistrarCreacionMinisterioDeCYT(){
+/*  
+    PROPOSITO:Registra la fecha de la creacion del ministerio
+    de CyT ,en la celda actual y las 2 proximas al este
+        
+    
+    PRECONDICION: 
+        *hay al menos 2 celdas lindantes al este de la celda 
+        inicial.
+        *tanto la celda actual como las 2 lindantes al este estan vacias
+
+
+*/
+
+    EscribirFecha___(dia, mes, año)
+
+
+}
+
+procedure RegistrarDisolucionMinisterioDeCYT(){
+/*  
+    PROPOSITO:Registra la fecha de la disolucion del ministerio
+    de CyT ,en la celda actual y las 2 proximas al este
+        
+    
+    PRECONDICION: 
+        *hay al menos 2 celdas lindantes al este de la celda 
+        inicial.
+        *tanto la celda actual como las 2 lindantes al este estan vacias
+
+
+*/
+
+    EscribirFecha___(dia, mes, año)
+
+
+}

@@ -1,0 +1,214 @@
+function marcasEn_QuePuedenEncontrarseEn_(cadenaVentas, localidad) {
+    /*
+        PROPÓSITO:Dada una lista de cadena de ventas y un string que representa la localidad
+        describe una lista de marcas de los productos (sin repetidos) que se encuentran en 
+        la localidad dada
+        PARÁMETROS:
+            * cadenaVentas:CadenaDeVentas - es la cadenas de ventas en el cual
+            se desea saber las marcas que hay en la localidad dada.
+            * localidad: String - es la localidad en el cual se desea saber las marcas que hay
+            en los locales en la localidad dada
+        TIPO:Lista de Marca
+        PRECONDICIONES:
+            * Ninguna
+    */
+    marcasVistas:=[]
+
+    foreach codigo in codigosEn_QuePuedenEncontrarseEn_(locales(cadenaVentas),localidad) {
+        marcasVistas:=marcasVistas ++ 
+                      agregaLasMarcasDe_SiApareceElCodigo_(computadoras(cadenaVentas),codigo)
+    }
+
+    return (sinDuplicados_(marcasVistas))
+}
+
+function codigosEn_QuePuedenEncontrarseEn_(locales,localidad) {
+    /*
+        PROPÓSITO:Dada 1 lista de locales y una localidad describe una lista de numeros que 
+        son los codigos de las computadoras que aparecen en el o los locales en la localidad
+        dada
+        PARÁMETROS:
+            * locales: Lista de Local - Son los locales en el cual se desean filtrar los 
+            codigos de las computadoras de la localidad dada.
+            * localidad: String - Representa la localidad en la cual se desean filtrar los codigos
+            de las computadoras en los locales de la localidad dada.
+        TIPO:Lista de Numeros
+        PRECONDICIONES:
+            * Ninguna
+    */
+
+    codigosVistos:=[]
+    foreach local in locales {
+        codigosVistos:=codigosVistos ++ 
+                elige_Si_Sino_(computadorasEnStock(local),localidad(local)==localidad,[])
+    }
+    
+    return (codigosVistos)
+}
+
+
+function agregaLasMarcasDe_SiApareceElCodigo_(computadoras,codigo) {
+    /*
+        PROPÓSITO:Dada una lista de computadoras y un numero que representa el codigo de la 
+        computadora,describe una lista de marcas en el caso de que aparezca el codigo en la 
+        lista de computadoras dada
+        PARÁMETROS:
+            * computadoras:Lista de Computadora - es la lista de computadoras en el cual se 
+            desea saber la marca de computadoras que hay segun el codigo dado.
+            * codigo:Numero - es el codigo de la computadora en el cual se desea saber su marca.
+        TIPO:Lista de Marca
+        PRECONDICIONES:
+            * Ninguna
+    */
+    marcasVistas:=[]
+
+    foreach computadora in computadoras {
+        marcasVistas:=marcasVistas ++ 
+                      singularSi(marca(computadora),codigoDeVenta(computadora)==codigo)
+    }
+
+    return (marcasVistas)
+}
+
+function stockTotalEn_DeComputadorasConAlMenos_(cadenaVentas,minimoDeRAM) {
+    /*
+        PROPÓSITO: dada una cadena de ventas y un numero que representa el minimo de ram 
+        describe un numero de las computadoras que hay en stock en la cadena dada que tenga 
+        el minimo de ram dado
+        PARÁMETROS:
+            * cadenaVentas: CadenaDeVentas - describe la cadena de ventas en el cual se 
+            desea saber las computadoras con el minimo de RAM dado que hay en stock.
+            * minimoDeRAM: - describe el minimo de ram de las computadoras a filtrar.
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna(se considera que la memoria esta en MB en la INV.REP del registro 
+            Computadora)
+    */
+    computadorasVistas:=[]
+
+    foreach computadora in computadoras(cadenaVentas) {
+        
+        computadorasVistas:=computadorasVistas ++ 
+                            singularSi(computadora,memoria(computadora)>=minimoDeRAM)
+
+    }
+
+    return (longitudDe_(computadorasVistas))
+}
+
+function puedoComprarAlgoEn_DeMarca_Con_(cadenaDeVentas,marca,dineroDisponible) {
+    /*
+        PROPÓSITO:dada una cadena de ventas una marca de computadora y un numero que 
+        representa el dinero disponible del comprador,indica si hay alguna computadora en la 
+        cadena de ventas de esa marca que puede comprarse con ese dinero
+        PARÁMETROS:
+            * cadenaDeVentas: CadenaDeVentas - describe la cadena de ventas en el cual se
+            desea saber si hay alguna computadora de la marca dada que se pueda comprar
+            segun el dinero disponible dado.
+            * marca: Marca - describe la marca de la computadora en el cual se quiere saber
+            si hay alguna computadora de esta marca que se pueda comprar segun el dinero 
+            disponible dado.
+            * dineroDisponible: Numero - describe el dinero disponible del comprador en el cual
+            desea comprar la computadora con la marca dada .
+        TIPO:Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    computadorasQueFaltan:=computadoras(cadenaDeVentas)
+    while (not esVacia(computadorasQueFaltan) && 
+          not laComputadora_EsDeMarca_YLaPuedoComprarCon_(primero(computadorasQueFaltan),marca,dineroDisponible)) {
+        
+        computadorasQueFaltan:=resto(computadorasQueFaltan)
+    }
+    return (not esVacia(computadorasQueFaltan))
+}
+
+
+function laComputadora_EsDeMarca_YLaPuedoComprarCon_(computadora,marca,dineroQueHay) {
+    /*
+        PROPÓSITO:Dada una computadora una marca de computadora y un numero que representa
+        al dinero disponible, indica si la computadora dada es de marca a la dada y se puede
+        comprar con el dinero disponible dado.
+        PARÁMETROS:
+            * computadora: Computadora - describe la computadora que se desea comprar .
+            * marca: Marca - describe la marca de la computadora que se desea comprar.
+            * dineroQueHay: Numero - describe el dinero disponible que hay para saber
+            si se puede comprar la computadora con la marca dada.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (marca(computadora)==marca && precio(computadora) <= dineroQueHay)
+}
+
+function computadorasEn_QueSeVendenEn_YTienenSpecs__(cadenaDeVentas,localidad,minimoCPU,minimoMemoria) {
+    /*
+        PROPÓSITO:Dada una cadena de ventas,una localidad,2 numeros que representan el minimo
+        de CPU y el minimo de memoria,describe las computadoras de la cadena que tienen al menos
+        esa cantidad de CPU,y al menos esa cantidad de memoria,y se encuentran en stock en algun
+        local de la localidad dada
+        PARÁMETROS:
+
+            * cadenaDeVentas: CadenaDeVentas - describe la cadena de ventas en el cual se desean
+            saber las computadoras en stock que tienen al menos la cantidad de CPU y memoria dada.
+            * localidad: String - describe a la localidad de los locales en el cual se desea
+            saber las computadoras en stock con las especificaciones dadas.
+            * minimoCPU: Numero - describe el minimo de CPU de las computadoras a filtrar.
+            * minimoMemoria: Numero - describe el minimo de memoria de las computadoras a filtrar.
+
+        TIPO: Lista de Computadora
+        PRECONDICIONES:
+            *Ninguna
+    */
+
+    computadorasVistas:=[]
+
+    foreach computadora in computadorasEn_QueSeVendenEn_(cadenaDeVentas,localidad) {
+        computadorasVistas:=computadorasVistas ++ 
+                          singularSi(computadora,laCompu_TieneUnMinimoDe_Y_(computadora,minimoCPU,minimoMemoria))
+    }
+
+    return (computadorasVistas)
+}
+
+function computadorasEn_QueSeVendenEn_(cadenaDeVentas,localidad) {
+    /*
+        PROPÓSITO:dada una cadena de ventas y un string que representa la localidad,describe 
+        la lista de computadoras que se venden en la localidad dada
+        PARÁMETROS:
+            * cadenaDeVentas: CadenaDeVentas - describe la cadena de ventas en el cual se 
+            desea saber las computadoras que se venden en el o los locales en la localidad 
+            dada.
+            * localidad: String - describe la localidad en el cual se desean saber las 
+            computadoras que estan en stock.
+        TIPO: Lista de Computadora
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    computadorasVistas:=[]
+
+    foreach codigo in codigosEn_QuePuedenEncontrarseEn_(locales(cadenaVentas),localidad) {
+        computadorasVistas:=computadorasVistas ++
+                          [maquina_ConCodigo_(computadoras(cadenaDeVentas),codigo)]
+    }
+
+    return (computadorasVistas)
+}
+
+
+function laCompu_TieneUnMinimoDe_Y_(computadora,minimoCPU,minimoMemoria) {
+    /*
+        PROPÓSITO:Dada una computadora y 2 numeros que representan el minimo de CPU y el 
+        minimo de memoria,indica si la computadora dada tienen al menos el minimo de CPU y 
+        de memoria dadas
+        PARÁMETROS:
+            * no las voy a describir por pereza
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (memoria(computadora)>=minimoMemoria && cpu(computadora)>=minimoCPU)
+}

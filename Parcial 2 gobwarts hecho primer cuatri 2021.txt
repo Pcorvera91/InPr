@@ -1,0 +1,288 @@
+
+
+function mago_LuegoDeAprenderWingardiumLeviosa(mago) {
+    /*
+        PROPÓSITO:Dado un mago agrega como habilidad el encantamiento mencionado de nivel 1
+        y con caracteristica de levitacion.
+        PARÁMETROS:
+            * mago: Mago-Es el mago que aprende el wingardium leviosa.
+            
+        TIPO:Mago
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Mago(mago | habilidades -> habilidades(mago) ++ [wingardiumLeviosaDeNivel1()]))
+}
+
+function wingardiumLeviosaDeNvel1() {
+    /*
+        PROPÓSITO:Describe la habilidad wingardium leviosa de nivel 1
+        TIPO:Habilidad
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Habilidad(denominacion -> "Wingardium Leviosa" ,
+                                      disciplina -> Encantamientos,
+                                      nivel -> 1,
+                                      caracteristicas -> ["levitacion"]))
+}
+
+function hayProfesoresQueJueganGobstonesEn_(magosDeHogwarts) {
+    /*
+        PROPÓSITO:Dada una lista de magos indica si algunos de esta lista juega gobstones
+        con cualquier nivel
+        PARÁMETROS:
+            * magosDeHogwarts:Lista de Mago - describe la lista de magos en el cual se
+            desean saber si algunos de estos magos juegan a gobstones.
+            
+        TIPO:Booleano
+        PRECONDICIONES:
+           * Se considera que hay al menos un registro con denominacion "Gobstones" es de
+            diciplina Otra,y con caracteristicas"juego" y "bolitas magicas"
+    */
+    profesoresQueFaltan:=magos_QueSonProfesores(magosDeHogwarts)
+
+    while(not esVacia(profesoresQueFaltan) &&  not elMago_JuegaGobstones(primero(profesoresQueFaltan))){
+
+        profesoresQueFaltan:=resto(profesoresQueFaltan)
+
+    }
+
+    return (not esVacia(profesoresQueFaltan))
+}
+
+function elMago_JuegaGobstones(mago) {
+    /*
+        PROPÓSITO:Dado un mago, indica si el mismo juega a gobstones
+        PARÁMETROS:
+            * mago: Mago - es el mago en el cual se desea saber si juega a gobstones.
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Se considera que hay al menos un registro con denominacion "Gobstones" es de
+            diciplina Otra,y con caracteristicas"juego" y "bolitas magicas"
+    */
+
+    habilidadesQueFaltan:=habilidades(mago)
+    while (not esVacia(habilidadesQueFaltan) && not denominacion(primero(habilidadesQueFaltan)) == "Gobstones" ) {
+        habilidadesQueFaltan:=resto(habilidadesQueFaltan)
+    }
+    
+    return (not esVacia(habilidadesQueFaltan))
+}
+
+function magos_QueSonProfesores(magos) {
+    /*
+        PROPÓSITO:Dada una lista de magos, describe la lista de magos resultante en el cual
+        son todos profesores
+        PARÁMETROS:
+            * magos: Lista de Mago - son los magos en el cual se desea saber cual de todos
+            son profesores.
+            
+        TIPO:Lista de Mago
+        PRECONDICIONES:
+            * Ninguna
+    */
+    profesoresVistos:=[]
+
+    foreach mago in magos {
+        profesoresVistos:= profesoresVistos ++ singularSi(mago,elMago_EsProfesor(mago))
+    }
+
+    return (profesoresVistos)
+}
+
+function elMago_EsProfesor(mago) {
+    /*
+        PROPÓSITO:Dado un mago indica si es profesor
+        PARÁMETROS:
+            * mago: Mago - es el mago en el cual se desea saber si es profesor.
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (rol(mago)==Profesor)
+}
+
+function mago_TieneHabilidadesCon_(mago, caracteristicas) {
+    /*
+        PROPÓSITO:Dado un mago y una lista de caracteristicas indica si el mago dado tiene 
+        alguna habilidad que tenga todas las caracteristicas dadas
+        PARÁMETROS:
+            * mago: Mago - es el mago en el cual se desea saber si tiene alguna habilidad
+            con las caracteristicas dadas
+            * caracteristicas: Lista de String - son las caracteristicas que se desean saber si
+            la tiene alguna habilidad del mago dado.
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+
+    habilidadesQueFaltan:=habilidades(mago)
+
+    while (not esVacia(habilidadesQueFaltan) && not caracteristicas(primero(habilidadesQueFaltan))==caracteristicas) {
+
+        habilidadesQueFaltan:=resto(habilidadesQueFaltan)
+        
+    }
+
+    
+    
+    return (not esVacia(habilidadesQueFaltan))
+}
+
+function elMago_EsEstudiateConBromasDeWW(mago) {
+    /*
+        PROPÓSITO: dado un mago, indica si el mago dado tiene alguna habilidad con caracteristicas
+        de "broma" y "W&W"
+        PARÁMETROS:
+            * mago: Mago - Es el mago en el cual se desea saber si tiene alguna habilidad con
+            caracteristica "broma" y "de W&W".
+            
+        TIPO:Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (mago_TieneHabilidadesCon_(mago,["broma","de W&W"]))
+}
+
+
+
+
+function estudiantesDe_ConfiscadosPorFilch(magosDeHogwarts) {
+    /*
+        PROPÓSITO:Dada una lista de magos,describe a los estudiantes de la lista dada
+        que tengan habilidades con caracteristicas de "broma" y "de W&W",donde a cada 
+        estudiante las habilidades les fueron quitadas y ademas, por cada habilidad eliminada
+        deben haber perdido 10 puntos para su casa
+        PARÁMETROS:
+            * magosDeHogwarts: Lista de Mago - Son los magos en el cual se quieren confiscar
+            a aquellos que tienen alguna habilidad con caracteristicas de "broma"y"de W&W" .
+            
+        TIPO:Lista de Mago
+        PRECONDICIONES:
+            *Ninguna
+    */
+    estudiantesYaConfiscados:=[]
+
+    foreach estudiante in estudiantes_DeHogwarts(magosDeHogwarts) {
+        estudiantesYaConfiscados:=estudiantesYaConfiscados ++ 
+                                  singularSi(estudiante_Confiscado(estudiante),
+                                  elMago_EsEstudiateConBromasDeWW(estudiante))
+                                  
+    }
+
+    return ()
+}
+
+
+function estudiantes_DeHogwarts(magosDeHogwarts) {
+    /*
+        PROPÓSITO:Dada una lista de magos, describe la lista de magos resultante en el cual
+        son todos estudiantes
+        PARÁMETROS:
+            * magos: Lista de Mago - son los magos en el cual se desea saber cual de todos
+            son estudiantes.
+            
+        TIPO:Lista de Mago
+        PRECONDICIONES:
+            * Ninguna
+    */
+    estudiantesVistos:=[]
+
+    foreach mago in magos {
+        estudiantesVistos:= estudiantesVistos ++ singularSi(mago,elMago_EsEstudiante(mago))
+    }
+
+    return (estudiantesVistos)
+}
+
+function elMago_EsEstudiante(mago) {
+    /*
+        PROPÓSITO:Dado un mago indica si es Estudiante
+        PARÁMETROS:
+            * mago: Mago - es el mago en el cual se desea saber si es Estudiante.
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (rol(mago)==Estudiante)
+}
+
+
+function cantidadDeHabilidadesDeBromaYWWEn_(habilidades) {
+    /*
+        PROPÓSITO:Dada una lista de habilidades describe la cantidad de habilidades que
+        son de broma y de W&W
+        PARÁMETROS:
+            * habilidades: Lista de Habilidad - descripción.
+            
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    cantidadDeBromasContadas:=0
+
+    foreach habilidad in habilidades {
+        cantidadDeBromasContadas:=cantidadDeBromasContadas + 
+                                unoSi_SinoCero(habilidad_EsDeBromaYWW(hablidad))
+    }
+
+    return (cantidadDeBromasContadas)
+}
+
+
+
+
+
+
+function estudiante_Confiscado(estudiante) {
+    /*
+        PROPÓSITO: Dado un estudiante, describe al estudiante luego de ser confiscado
+        PARÁMETROS:
+            * estudiante:Mago - Es el estudiante a confiscar.
+           
+        TIPO:Mago
+        PRECONDICIONES:
+            * El estudiante para ser confiscado cuenta con al menos 1 habilidad de bromas y
+            de W&W 
+            *el mago tiene rol de estudiante
+    */
+    
+    return (Mago(estudiante | puntos -> puntos(estudiante) - 
+                            (cantidadDeHabilidadesDeBromaYWWEn_(habilidades(estudiante) * 10),
+                            habilidades -> habilidadesConfiscadasDe_(estudiante))))
+}
+
+function habilidadesConfiscadasDe_(mago) {
+    /*
+        PROPÓSITO:Dado un mago, describe la lista de habilidades luego que fueron quitadas
+        las que son de bromas y de W&W
+        PARÁMETROS:
+            * mago: Mago - es el mago a confiscar.
+           
+        TIPO:Lista de Habilidad
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    habilidadesPermitidasVistas:=[]
+
+    foreach habilidad in habilidades(mago){
+
+        habilidadesPermitidasVistas:=habilidadesPermitidasVistas ++ 
+                                     singularSi(habilidad,not caracteristicas(habilidad) ==["broma","de W&W"] )
+
+    }
+
+    return (habilidadesPermitidasVistas)
+}

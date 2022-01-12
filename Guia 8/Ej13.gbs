@@ -1,0 +1,113 @@
+type Empleado is record {
+/*
+    PROPOSITO:Modela los datos de un empleado
+    INV.REP:Sueldo > 0
+
+*/    
+    field identidadEmpleado		// Persona
+    field puesto		// Puesto
+    field sueldo                // Numero en ctvs
+
+}
+
+function empleado_ConSueldoActualizadoA_(empleado,sueldoAActualizar) {
+    /*
+        PROPÓSITO:dado un empleado y un
+        nuevo sueldo, describe al empleado con el sueldo actualizado.
+        PARÁMETROS:
+            * empleado: Empleado- Es el empleado que se quiere actualizar
+            el sueldo
+            * saldoAActualizar: numero - es el sueldo a actualizar
+        TIPO: empleado
+        PRECONDICIONES:Ninguna
+            
+    */
+    
+    return (Empleado(empleado | sueldo <- sueldoAActualizar))
+}
+
+function empleado_ConNuevoPuesto_(empleado,puestoNuevo) {
+    /*
+        PROPÓSITO:dado un empleado y un
+        nuevo puesto, describe al empleado con el puesto actualizado.
+        PARÁMETROS:
+            * empleado: Empleado- Es el empleado que se quiere actualizar
+            el puesto
+            * puestoNuevo: Puesto - es el puesto a actualizar
+        TIPO: empleado
+        PRECONDICIONES:Ninguna
+            
+    */
+    
+    return (Empleado(empleado | puesto <- puestoNuevo))
+}
+
+function categoríaDelPuesto_(valorDePuesto) {
+    /*
+        PROPÓSITO:dado un valor de tipo puesto devuelve su categoria
+        
+        PARÁMETROS:
+            * valorDePuesto: numero - es el valor de la categoria
+            del puesto.
+            
+        TIPO: Puesto
+        PRECONDICIONES:
+            * valorDePuesto tiene que ser de 1 a 4
+    */
+    
+    return (choose
+        GestorDeProyecto when (valorDePuesto==4)
+        LiderDeProyecto when (valorDePuesto==3)
+        Desarrollador when (valorDePuesto==2)
+        Operador otherwise
+    })
+}
+
+function tienenIgualSueldo_Y_(empleado1, empleado2) {
+    /*
+        PROPÓSITO:dados dos empleados indica si ambos
+                cobran lo mismo.
+        PARÁMETROS:
+            * empleado1: empleado - es el primer empleado en el cual
+            se quiere comparar el sueldo con el segundo empleado
+            * empleado2: empleado - es el segundo empleado en el cual
+            se quiere comparar el sueldo con el primer empleado
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (sueldo(empleado1) == sueldo(empleado2))
+}
+
+function empleado_ConAumentoEn_PorBonoDeFinalizaciónDeProyecto(empleado,porcentajeAumento) {
+    /*
+        PROPÓSITO:dado un empleado y un porcentaje de aumento describa 
+        al empleado con el sueldo actualizado en ese porcentaje. 
+        PARÁMETROS:
+            * empleado: empleado - es el empleado en el cual se quiere
+            actualizar su sueldo
+            * porcentajeAumento: numero - es el porcentaje del aumento
+            del empleado
+        TIPO:empleado
+        PRECONDICIONES:
+            * porcentajeAumento es de 0 a 100 
+    */
+    
+    return (Empleado(empleado | sueldo <- aumentoDe_Al_(sueldo(empleado),porcentajeAumento)))
+}
+
+function aumentoDe_Al_(sueldo,porcentaje) {
+    /*
+        PROPÓSITO:dado un sueldo y un porcentaje describe el aumento del
+        sueldo segun el porcentaje dado
+        PARÁMETROS:
+            * sueldo: numero - es el sueldo a actualizar
+            * porcentaje: numero - es el porcentaje que se desea aumentar
+        TIPO: Numero
+        PRECONDICIONES:
+            * sueldo > 0 y porcentaje es un numero del 0 a 100
+    */
+    
+    return (((porcentaje + 100)* sueldo) / 100 )
+}

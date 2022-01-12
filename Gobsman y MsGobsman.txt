@@ -1,0 +1,513 @@
+procedure ComerTodosLosCocosDelNivel() {
+    /*
+        PROPÓSITO: Gobsman come todos los cocos presentes en el nivel,
+        al comer todos los cocos gobsman se encuentra en la esquina 
+        superior derecha
+        PRECONDICIONES:
+            *hay un coco en cada celda del tablero
+    */
+    LlevarGobsmanAlInicioDelNivelAl__(Oeste,Sur)
+    while (not estaGobsmanAlFinalDelNivelAl__(Este,Norte)) {
+        ComerCoco()
+        MoverAGobsmanALaSiguienteCeldaAl__(Este,Norte)
+    }
+}
+
+procedure LlevarGobsmanAlInicioDelNivelAl__(dirPrincipal,dirSecundaria) {
+    /*
+        PROPÓSITO:Mueve a gobsman al inicio del nivel a la esquina
+        dirPrincipal y dirSecundaria
+        PARÁMETROS:
+            * dirPrincipal: direccion - es la direccion principal a 
+            mover.
+            * dirSecundaria:direccion - es la direccion secundaria a 
+            mover.
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre el gobsman
+    */
+    
+    LlevarGobsManAlBorde_(dirPrincipal)
+    LlevarGobsManAlBorde_(dirSecundaria)
+
+}
+
+function estaGobsmanAlFinalDelNivelAl__(dirPrincipal,dirSecundaria) {
+    /*
+        PROPÓSITO:Verifica si el gobsman esta al final del nivel en la 
+        direccion dirPrincipal y dirSecundaria
+        PARÁMETROS:
+           * dirPrincipal: direccion - es la direccion principal a 
+            evaluar.
+            * dirSecundaria:direccion - es la direccion secundaria a 
+            evaluar.
+        TIPO: Booleano,Denota verdadero si el gobsman esta al final del
+        nivel al dirPrincipal y dirSecundaria
+        PRECONDICIONES:
+            * el cabezal se encuentra sobre gobsman
+    */
+    
+    return (not puedeMover(dirPrincipal) && not puedeMover(dirSecundaria))
+}
+
+procedure MoverGobsmanALaSiguienteCeldaAl__(dirPrincipal,dirSecundaria) {
+    /*
+        PROPÓSITO:Mueve el gobsman a la siguiente celda en direccion
+        dirPrincipal dirSecundaria
+        PARÁMETROS:
+            * dirPrincipal: direccion - es la direccion principal a 
+            mover.
+            * dirSecundaria:direccion - es la direccion secundaria a 
+            mover.
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre el gobsman
+    */
+    
+    if (puedeMover(dirPrincipal)) {
+        
+        MoverGobsManAl_(dirPrincipal)
+
+    }
+
+    else {
+        
+        MoverGobsManAl_(dirSecundaria)
+        LlevarGobsManAlBorde_(opuesto(dirPrincipal))
+
+    }
+
+
+}
+
+procedure ComerCerezaSiHay() {
+    /*
+        PROPÓSITO:Gobsman come una cereza si la hay en la celda actual
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    if (hayCereza()) {
+        
+        ComerCereza()
+
+    }
+
+
+}
+
+procedure ComerTodosLasCerezasDelNivel() {
+    /*
+        PROPÓSITO: Gobsman come todos los cerezas presentes en el nivel,
+        al comer todos las cerezas gobsman se encuentra en la esquina 
+        superior derecha
+        PRECONDICIONES:
+            *Ninguna
+    */
+    LlevarGobsmanAlInicioDelNivelAl__(Oeste,Sur)
+    while (not estaGobsmanAlFinalDelNivelAl__(Este,Norte)) {
+        ComerCerezaSiHay()
+        MoverAGobsmanALaSiguienteCeldaAl__(Este,Norte)
+    }
+}
+
+
+procedure ComerTodoLoQueSeEncuentreEnElNivel() {
+    /*
+        PROPÓSITO:Gobsman se come todo lo que se encuentra en el nivel
+        es decir come todos los cocos y todas las cerezas del nivel,
+        gobsman termina en la esquina superior derecha
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre gobsman
+            *hay un coco en cada celda del tablero
+    */
+    
+    ComerTodosLosCocosDelNivel() 
+    ComerTodosLasCerezasDelNivel()
+
+}
+
+procedure ​ComerTodoLoQueSeEncuentreEnElNivelV2() {
+    /*
+        PROPÓSITO:Gobsman se come todo lo que se encuentra en el nivel
+        es decir come todos los cocos y todas las cerezas del nivel,
+        gobsman termina en la esquina superior derecha
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre gobsman
+            *hay un coco o una cereza en cada celda del tablero
+    */
+    LlevarGobsmanAlInicioDelNivelAl__(Oeste,Sur)
+    while (not estaGobsmanAlFinalDelNivelAl__(Este,Norte)) {
+        ComerCerezaSiHaySinoComerCoco()
+        MoverAGobsmanALaSiguienteCeldaAl__(Este,Norte)
+    }
+
+
+}
+
+procedure ComerCerezaSiHaySinoComerCoco() {
+    /*
+        PROPÓSITO: Si en la celda actual hay una cereza, lo come de lo 
+        contrario, come 1 coco
+        PRECONDICIONES:
+            * Gobsman esta en la celda actual
+            * hay un coco  en la celda actual
+    */
+    
+    if (hayCereza()) {
+        ComerCereza()
+    }
+
+    else {
+        
+        ComerCoco()
+    }
+
+
+}
+
+procedure RecorrerNivelMuriendoEnElFantasma() {
+    /*
+        PROPÓSITO:Gobsman muere cuando se encuentra con un fantasma, en
+        algun lugar del nivel
+        PRECONDICIONES:
+            * Hay al menos 1 fantasma en el nivel
+            *el cabezal se encuentra sobre el gobsman
+    */
+   
+    LlevarGobsmanAlInicioDelNivelAl__(Oeste,Sur)
+    while (not hayFantasma()) {
+        MoverAGobsmanALaSiguienteCeldaAl__(Este,Norte)
+    }
+
+    MorirGobsMan()
+
+}
+
+procedure ​RecorrerNivelMuriendoSiHayFantasma() {
+    /*
+        PROPÓSITO: Gobsman muere en el caso de que se encuentre con
+        un fantasma de lo contrario, llega hasta la ultima celda del 
+        recorrido
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre el gobsman
+    */
+    LlevarGobsmanAlInicioDelNivelAl__(Oeste,Sur)
+    while (not estaGobsmanAlFinalDelNivelAl__(Este,Norte) && not hayFantasma()) {
+        MoverAGobsmanALaSiguienteCeldaAl__(Este,Norte)
+    }
+
+    MorirGobsManSiHayFantasma()
+}
+
+
+
+
+
+procedure JugarNivelEnDireccion__(dirPrincipal,dirSecundaria) {
+    /*
+        PROPÓSITO:Se juega el nivel  en direccion dirPrincipal dirSecundaria
+        PARÁMETROS:
+             * dirPrincipal: direccion - es la direccion principal a 
+            mover.
+            * dirSecundaria:direccion - es la direccion secundaria a 
+            mover.
+        PRECONDICIONES:
+            * el cabezal se encuentra sobre el gobsman
+             * Hay una representacion del juego gobsman
+    */
+     LlevarGobsmanAlInicioDelNivelAl__(opuesto(dirPrincipal),opuesto(dirSecundaria))
+     while (not estaGobsmanAlFinalDelNivelAl__(dirPrincipal,dirSecundaria) && not hayFantasma()) {
+        
+        ComerCerezaSiHaySinoComerCoco()
+
+        MoverAGobsmanALaSiguienteCeldaAl__(dirPrincipal,dirSecundaria)
+
+    }
+
+    MorirGobsManSiHayFantasma()
+
+}
+
+procedure MorirGobsManSiHayFantasma() {
+    /*
+        PROPÓSITO: Si en la celda actual hay un fantasma gobsman muere
+        PRECONDICIONES:
+            * El cabezal se se encuentra sobre el gobsman
+    */
+    
+    if (hayFantasma()) {
+        MorirGobsMan()
+    }
+
+
+}
+
+procedure JugarNivel() {
+    /*
+        PROPÓSITO:Juega el nivel del juego gobsman
+        PRECONDICIONES:
+            * Hay una representacion del juego gobsman
+            *El cabezal se encuentra sobre el gobsman
+    */
+    
+    JugarNivelEnDireccion__(Este,Sur)
+
+
+}
+
+function gobsmanEstaVivo() {
+    /*
+        PROPÓSITO:Describe cuando gobsman esta vivo
+        TIPO:Booleano, denota verdadero si gobsman esta vivo
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Azul)==1)
+}
+
+function gobsmanEstaMuerto() {
+    /*
+        PROPÓSITO:Describe cuando gobsman esta Muerto
+        TIPO:Booleano, denota verdadero si gobsman esta Muerto
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Azul)==2)
+}
+
+function coco() {
+    /*
+        PROPÓSITO:Representa a un coco
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Negro)
+}
+
+function hayCereza() {
+    /*
+        PROPÓSITO:indica si en la celda actual hay una cereza
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Rojo)==2)
+}
+
+function hayFanstasma() {
+    /*
+        PROPÓSITO:Describe si hay un fantasma en la celda actual
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Verde)==5)
+}
+
+procedure​ ComerCereza(){
+
+/*
+    PROPÓSITO: Come la cereza haya en la celda actual.
+    PRECONDICIONES:
+        * Hay una cereza en la celda actual.
+        * Gobs-Man está en la celda actual.
+*/
+
+    Sacar__Veces(Rojo,2)
+
+}
+
+function puntajeDelCoco() {
+    /*
+        PROPÓSITO: Describe el puntaje del coco en la celda actual
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (100)
+}
+
+function puntajeDeLaCereza() {
+    /*
+        PROPÓSITO: Describe el puntaje de la cereza en la celda actual
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (2000)
+}
+
+function puntajeDelCocoMasLaCereza() {
+    /*
+        PROPÓSITO: Describe el puntaje total del coco y la cereza
+        en la celda actual
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (puntajeDelCoco() + puntajeDeLaCereza())
+}
+
+function puntajeDeLaFrutilla() {
+    /*
+        PROPÓSITO: Describe el puntaje de la Frutilla en la celda actual
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (500)
+}
+
+function puntajeDelCocoMasLaFrutilla() {
+    /*
+        PROPÓSITO: Describe el puntaje total del coco y la Frutilla
+        en la celda actual
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (puntajeDelCoco() + puntajeDeLaFrutilla())
+}
+
+function puntajeDeLaFrutillaMasLaCereza() {
+    /*
+        PROPÓSITO:Describe el puntaje total de la frutilla y la cereza
+        en la celda actual
+        TIPO: Numero
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (puntajeDeLaFrutilla() + puntajeDeLaCereza())
+}
+
+function puntajeTotalDeTodasLasFrutas() {
+    /*
+        PROPÓSITO: Describe el puntaje total en la celda actual
+        de todas las frutas del juego gobsmas es decir, el total de la
+        frutilla mas la del coco mas la de la cereza
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (puntajeDeLaFrutillaMasLaCereza() + puntajeDelCoco())
+}
+
+function puntajeAObtenerEnCeldaActual() {
+    /*
+        PROPÓSITO:Describe los puntos a obtener en la celda actual
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (choose
+                puntajeTotalDeTodasLasFrutas() when (hayCocoFrutillaYCereza())
+                puntajeDeLaFrutillaMasLaCereza() when (hayFrutillaYCereza())
+                puntajeDelCocoMasLaCereza() when (hayCocoYCereza())
+                puntajeDeLaCereza() when (hayCereza())
+                puntajeDelCocoMasLaFrutilla() when (hayCocoYFrutilla())
+                puntajeDeLaFrutilla() when (hayFrutilla())
+                puntajeDelCoco() when (hayCoco())
+                puntajeNulo()           otherwise
+    })
+}
+
+
+function puntajeNulo() {
+    /*
+        PROPÓSITO: Describe puntaje 0
+        TIPO: Numero
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (0)
+}
+
+function ​cantidadDePuntosEnElNivel() {
+    /*
+        PROPÓSITO:Indica la cantidad total de puntos que se pueden
+        obtener en el nivel
+        TIPO: Numero
+        PRECONDICIONES:
+            * El cabezal se encuentra sobre MsGobsman
+    */
+    cantidadDePuntosContados:= puntajeAObtenerEnCeldaActual()
+    LlevarGobsmanAlInicioDelNivelAl__(Oeste,Sur)
+    while (not estaGobsmanAlFinalDelNivelAl__(Este,Norte)) {
+        MoverAGobsmanALaSiguienteCeldaAl__(Este,Norte)
+        cantidadDePuntosContados:= cantidadDePuntosContados +
+                                   puntajeAObtenerEnCeldaActual()
+    }
+    return (cantidadDePuntosContados)
+}
+
+function hayAlgúnFantasmaEnElNivel() {
+    /*
+        PROPÓSITO:Indica si hay algun fantasma en el nivel 
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    LlevarGobsmanAlInicioDelNivelAl__(Oeste,Sur)
+    while (not estaGobsmanAlFinalDelNivelAl__(Este,Norte) && not hayFantasma()) {
+        MoverAGobsmanALaSiguienteCeldaAl__(Este,Norte)
+    }
+
+    return (hayFanstasma())
+}
+
+function ​cantidadDePuntosEnNivelHacia_Y_(dirPrincipal,dirSecundaria) {
+    /*
+        PROPÓSITO:Indica cuantos puntos acumularia MsGobsman en un 
+        recorrido en direccion dirPrincipal y dirSecundaria
+        PARÁMETROS:
+             * dirPrincipal: direccion - es la direccion principal a 
+            mover.
+            * dirSecundaria:direccion - es la direccion secundaria a 
+            mover.
+        TIPO: Numero
+        PRECONDICIONES:
+            * El cabezal arranca sobre MsGobsman
+    */
+    
+    cantidadDePuntosContados:= puntajeAObtenerEnCeldaActual()
+    LlevarGobsmanAlInicioDelNivelAl__(opuesto(dirPrincipal),opuesto(dirSecundaria))
+    while (not estaGobsmanAlFinalDelNivelAl__(dirPrincipal,dirSecundaria) && not hayFantasma()) {
+        MoverAGobsmanALaSiguienteCeldaAl__(dirPrincipal,dirSecundaria)
+        cantidadDePuntosContados:= cantidadDePuntosContados +
+                                   puntajeAObtenerEnCeldaActual()
+    }
+    return (cantidadDePuntosContados)
+}
+
+function esMejorRecorridoHacia_Y_QueHacia_Y_(dirPrincipal1,dirSecundaria1,dirPrincipal2,dirSecundaria2) {
+    /*
+        PROPÓSITO:indica si un recorrido en ​dirPrincipal1 y
+                  dirSecundaria1 acumula efectivamente más puntos que
+                   un recorrido en ​dirPrincipal2 y dirSecundaria2​.
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO: Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (​cantidadDePuntosEnNivelHacia_Y_(dirPrincipal1,dirSecundaria1) >
+            cantidadDePuntosEnNivelHacia_Y_(dirPrincipal2,dirSecundaria2) )
+}
+    
+

@@ -1,0 +1,55 @@
+function ​nroVacías() {
+    /*
+        PROPÓSITO:describe la cantidad de celdas vacias del tablero
+        TIPO: numero
+        PRECONDICIONES:
+            * ninguna
+    */
+    celdasVaciasVistas:=0
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyAlFinalDeUnRecorrido__(Este,Norte)) {
+        
+        celdasVaciasVistas:=celdasVaciasVistas + escogeUnoSiEsVaciaSinoCero()
+        PasarALaSiguienteCelda__(Este,Norte)
+
+    }
+    return (celdasVaciasVistas + escogeUnoSiEsVaciaSinoCero())
+}
+
+function escogeUnoSiEsVaciaSinoCero() {
+    /*
+        PROPÓSITO:Escoge 1 si la celda actual esta vacia de lo contrario
+        escoge 0
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (choose
+                1 when (esCeldaVacia())
+            
+                0 otherwise
+    })
+}
+
+function colorMinimoConBolitas() {
+    /*
+        PROPÓSITO:Denota el color mas chico de las bolitas presentes
+        que hay en la celda actual.
+        TIPO: Color
+        PRECONDICIONES:
+            * Al menos debe haber alguna bolita de algun color en la celda actual
+
+        OBSERVACIONES:Si no hay bolitas de algun color
+        cae en un bucle infinito
+    */
+    colorActual:=minColor()
+    
+    while(colorActual/=maxColor() && not hayBolitas(colorActual)){
+
+        colorActual:= siguiente(colorActual)
+
+    }
+
+    return (colorActual)
+}

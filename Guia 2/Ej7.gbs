@@ -1,0 +1,140 @@
+procedure DibujarPiramideGigante() {
+    /*
+        PROPÓSITO:  Dibuja una piramide gigante de 11 bloques de base y 6 de altura
+        PRECONDICIONES:
+            * Al menos debe ser un tablero de 11x6 para que el programa funcione
+    */
+    DibujarPiramide()
+    Mover(Este)
+    DibujarPiramideInvertida()
+    Mover(Este)
+    DibujarPiramide()
+    Mover1AlNorteY5AlOeste()
+    DibujarPiramide()
+}
+
+
+procedure DibujarPiramide() {
+    /*
+        PROPÓSITO:  Dibuja una piramide de 5 celdas de base y 3 celdas de altura
+        PRECONDICIONES:
+            *Al menos debe haber 4 celdas lindantes al este del cabezal
+            *y de las 2 lindantes al este del cabezal al menos debe haber otra
+            2 lindantes al norte
+    */
+    DibujarBase()
+    PosicionarseParaDibujarMedio()
+    DibujarMedio()
+    PosicionarseParaDibujarPunta()
+    DibujarPunta()
+}
+
+procedure DibujarPiramideInvertida(){
+    /*
+        PROPÓSITO:  Dibuja una piramide invertida de 5 celdas de base y 3 celdas de altura.
+        PRECONDICIONES:
+            *Al menos debe haber 4 celdas lindantes al este y 2 al norte del cabezal
+            *y de las 2 lindantes al este del cabezal al menos debe haber otra
+            2 lindantes al sur
+            
+    */
+    PosicionarseParaDibujarBaseInvertida()
+    DibujarBase()
+    PosicionarseParaDibujarMedioInvertido()
+    DibujarMedio()
+    PosicionarseParaDibujarPuntaInvertida()
+    DibujarPunta()
+    
+}
+
+procedure PosicionarseParaDibujarMedio() {
+    /*
+        PROPÓSITO:  Posiciona el cabezal para dibujar el sector medio de la piramide
+        PRECONDICIONES:
+            * Al menos debe haber 1 celda al norte y 3 celdas al oeste de la celda actual
+    */
+    Mover(Norte)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+    
+}
+
+procedure PosicionarseParaDibujarPunta() {
+    /*
+        PROPÓSITO:  Posiciona el cabezal para dibujar la punta de la piramide
+        PRECONDICIONES:
+            * Al menos debe haber 1 celda al norte y 1 celda al oeste de la celda actual
+    */
+    Mover(Norte)
+    Mover(Oeste)
+}
+
+procedure PosicionarseParaDibujarBaseInvertida() {
+    /*
+        PROPÓSITO:  Posiciona el cabezal para dibujar la base de una piramide invertida
+        PRECONDICIONES:
+            * Al menos debe haber 2 celdas al norte  de la celda actual
+    */
+    Mover(Norte)
+    Mover(Norte)
+    
+}
+
+procedure PosicionarseParaDibujarMedioInvertido() {
+    /*
+        PROPÓSITO:  Posiciona el cabezal para dibujar el sector medio de la piramide invertida
+        PRECONDICIONES:
+            * Al menos debe haber 1 celda al sur y 3 celdas al oeste de la celda actual
+    */
+    Mover(Sur)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+    
+}
+
+
+procedure PosicionarseParaDibujarPuntaInvertida() {
+    /*
+        PROPÓSITO:  Posiciona el cabezal para dibujar la punta de la piramide invertida
+        PRECONDICIONES:
+            * Al menos debe haber 1 celda al sur y 1 celda al oeste de la celda actual
+    */
+    Mover(Sur)
+    Mover(Oeste)
+}
+
+procedure Mover1AlNorteY5AlOeste() {
+    /*
+        PROPÓSITO:  Mueve el cabezal 1 al norte y 5 al oeste 
+        PRECONDICIONES:
+            * hay al menos 1 lindante al norte
+            *hay al menos 5 lindantes al oeste de la lindante al norte
+    */
+    Mover(Norte)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+procedure DibujarBase()
+/* PROPÓSITO: Dibuja una base de pirámide de 5 celdas de lado
+PRECONDICIONES:
+* La celda actual debe estar vacía
+* Debe haber cuatro celdas vacías al Este del cabezal
+*/
+procedure DibujarMedio()
+/* PROPÓSITO: Dibuja un sector del medio de pirámide
+de 3 celdas de lado
+PRECONDICIONES:
+* La celda actual debe estar vacía
+* Debe haber dos celdas vacías al Este del cabezal
+*/
+procedure DibujarPunta()
+/* PROPÓSITO: Dibuja una punta de pirámide
+PRECONDICIONES:
+* La celda actual debe estar vacía
+*/

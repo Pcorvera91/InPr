@@ -1,0 +1,33 @@
+
+program{
+    DibujarArcoIris()
+}
+
+
+
+
+
+
+
+procedure DibujarArcoIris(){
+/*
+    PROPOSITO:Dibuja un arcoiris poniendo una bolita Azul en la celda actual, una Negra en la celda siguiente 
+    al Este, una Roja en la siguiente al Este, y una Verde en la siguiente al Este, dejando el cabezal 
+    en la celda inicial.
+    
+    PRECONDICION: *Al menos debe haber 3 celdas lindantes al este desde la celda inicial.
+                  
+
+*/
+
+    Poner(Azul)
+    Mover(Este)
+    Poner(Negro)
+    Mover(Este)
+    Poner(Rojo)
+    Mover(Este)
+    Poner(Verde)
+    IrAlBorde(Oeste)
+
+
+}

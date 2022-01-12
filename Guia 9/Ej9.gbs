@@ -1,0 +1,46 @@
+function manoDe3CartasDe_(mazoDeCartas) {
+    /*
+        PROPÓSITO:dado un mazo,describe una mano de 3 cartas tomadas del mismo
+        PARÁMETROS:
+           
+            * mazoDeCartas: lista de cartas - es el mazo de cartas en el cual se toman las
+            primeras 3 cartas de la misma.
+        TIPO:Lista de cartas
+        PRECONDICIONES:
+            * Al menos el mazo debe contener 3 cartas
+    */
+    
+    primerasTresCartasDeLaTira_(mazoDeCartas)
+
+    return (primerasTresCartasDeLaTira_(mazoDeCartas))
+}
+
+function tieneEnvido_(manoDe3Cartas) {
+    /*
+        PROPÓSITO:Dada una mano de 3 cartas indica si la misma tiene 2 cartas del mismo palo
+        PARÁMETROS:
+            * manoDe3Cartas: lista de cartas - es el mano a evaluar
+            
+        TIPO:Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (palo(primeraCartaDeLaMano_(manoDe3Cartas)) == palo(segundaCartaDeLaMano_(manoDe3Cartas)) 
+           ||
+           palo(segundaCartaDeLaMano_(manoDe3Cartas)) == palo(terceraCartaDeLaMano_(manoDe3Cartas)))
+}
+
+function tieneFlor(parámetro1, parámetro2) {
+    /*
+        PROPÓSITO:  ....
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO: Tipo
+        PRECONDICIONES:
+            * ....
+    */
+    
+    return ()
+}

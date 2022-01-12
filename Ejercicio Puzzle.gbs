@@ -1,0 +1,27 @@
+function esConfiguracionGanadora() {
+    /*
+        PROPÓSITO:  Indica si hay una configuracion ganadora en el tablero
+      
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Hay un puzzle representado en el tablero
+            *El puzzle es de 3x3
+            *El cabezal esta en el centro del puzzle
+    */
+    
+    return (lasSumasSonTodasIguales() && 
+            lasFichasDiagonalesTienenMismoColor() && 
+            lasFichasEnFilaYColumnaTienenDistintoColor())
+}
+
+function lasSumasSonTodasIguales() {
+    /*
+        PROPÓSITO:Indica si la suma de la fila,columna y las diagonales
+        son iguales
+        TIPO: Booleano
+        PRECONDICIONES:
+            * ....
+    */
+    
+    return ()
+}

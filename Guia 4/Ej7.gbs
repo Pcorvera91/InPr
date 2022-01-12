@@ -1,0 +1,32 @@
+/*
+Soldados:1 negra
+enemigos:1 roja por cada soldado
+*/
+
+procedure EnviarAliadosPraDuplicarEnemigos() {
+    /*
+        PROPÓSITO:Agrega soldados aliados en la celda actual para que
+        haya el doble de aliados que de soldados enemigos
+        PRECONDICIONES:
+            *Ninguna
+    */
+    Poner__Veces(Negro,nroBolitas(Rojo)*2)
+}
+
+
+procedure PelearLaBatalla() {
+    /*
+        PROPÓSITO:  Simula una batalla entre soldados aliados y enemigos
+        PRECONDICIONES:
+            * al menos debe haber 2 soldados enemigos y 3 aliados en la
+            celda actual
+    */
+    
+    Sacar__Veces(Negro,(nroBolitas(Rojo)*3) div 2)
+    
+    SacarTodas_(Rojo)
+
+
+}
+
+

@@ -1,0 +1,20 @@
+function lista_Desagrupada(listaDeListas) {
+    /*
+        PROPÓSITO: Dada una lista de listas describe una lista que contiene cada uno de los
+        elementos de las listas internas de la lista dada
+        PARÁMETROS:
+            * listaDeListas: Lista de elementos 2D - describe la lista a desagrupar.
+            
+        TIPO: Lista de elementos
+        PRECONDICIONES:
+            * Ninguna
+    */
+    listaDesagrupadaHastaAhora:=[]
+
+    foreach lista in listaDeListas{
+
+        listaDesagrupadaHastaAhora:=listaDesagrupadaHastaAhora ++ lista
+
+    }
+    return (listaDesagrupadaHastaAhora)
+}

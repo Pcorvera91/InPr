@@ -1,0 +1,29 @@
+procedure VaciarFilaDe_(color){
+    /*
+        PROPÓSITO:Quita todas las bolitas de color de cada una de las celdas
+        de la fila actual,el cabezal puede terminar en cualquier celda de 
+        la fila
+        PARÁMETROS:
+            * color: color - es el color de las bolitas a sacar.
+            
+        PRECONDICIONES:
+            * Ninguna
+        OBSERVACIONES:la fila actual es  aquella en la que se encuentra en 
+        la celda actual.
+
+        El cabezal se mueve en la direccion este.
+
+        
+
+        
+
+    */
+    IrAlBorde(Oeste)
+    while (not estoyEnElBorde_(Este)) {
+        
+        SacarTodas_(color)
+        Mover(Este)
+    }
+
+    
+}

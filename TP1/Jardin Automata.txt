@@ -1,0 +1,299 @@
+
+program{
+    PlantarJardinEnFormatoBanderin()
+}
+
+
+
+
+
+
+procedure PrepararJardinEnFormatoBanderin () {
+PROPÓSITO: Preparar el jardin del autómata jardinero en formato banderín
+preparando la Tierra para la plantación, plantar el pasto,
+plantar las flores y regar cada una de las parcelas que componen
+dicho jardín, iniciando en el celda actual y finalizando en la parcela
+más el Noroeste del jardín.
+PRECONDICIONES:
+- El jardín no tiene la tierra preparada para su plantación, ni flores
+ni pasto y ninguna de sus parcelas está regada.
+- Hay al menos 5 celdas lintantes al Este y 4 celdas lindantes al Norte
+de la celda actual.
+OBSERVACIONES:
+La representacion del jardín en formato banderín se construye realizando
+cada una de las actividades en la primera fila solo 5 parcelas, en la segunda
+fila 4 parcelas, en la tercer fila 3 parcelas, en la cuarta fila
+nuevamente 4 parcelas y en la quinta y última 5 parcelas. 
+*/
+    PrepararTierraEnJardin()
+    PlantarPastoEnJardin()
+    PlantarFloresEnJardin()
+    RegarJardin()
+}
+
+procedure PrepararTierraEnJardin() {
+    /*
+        PROPÓSITO:  El automata prepara la tierra en un jardin con forma de banderin
+        PRECONDICIONES:
+            * la tierra del jardin no debe estar preparada
+            *hay al menos 5 parcelas al este y 4 al norte de la parcela inicial
+        OBSERVACIONES:la tierra preparada es en la primera fila, 5 parcelas, 
+        la segunda 4 parcelas, la tercera,3 parcelas, la cuarta 4 parcelas y la
+        quinta 5 parcelas, la celda inicial es el borde superior izquierdo
+    */
+    PrepararTierraDe_Parcelas(5)
+    Mover_Al_YMover_Al_(5,Oeste,1,Sur)
+    PrepararTierraDe_Parcelas(4)
+    Mover_Al_YMover_Al_(4,Oeste,1,Sur)
+    PrepararTierraDe_Parcelas(3)
+    Mover_Al_YMover_Al_(3,Oeste,1,Sur)
+    PrepararTierraDe_Parcelas(4)
+    Mover_Al_YMover_Al_(4,Oeste,1,Sur)
+    PrepararTierraDe_Parcelas(5)
+    IrAlInicioDelJardin()
+    
+}
+
+
+procedure PrepararTierraDe_Parcelas(cantidadParcelas) {
+    /*
+        PROPÓSITO: El Automata prepara la tierra de una cantidad de parcelas dadas
+        en una fila
+        PARÁMETROS:
+            * cantidadParcelas: numero - indica la cantidad de parcelas a preparar
+        
+        PRECONDICIONES:
+            * al menos debe haber cantidadParcelas lindantes al este de la parcela actual
+            *La tierra en una fila de cantidadParcelas no debe estar preparada
+    */
+    repeat (cantidadParcelas) {
+        Mover(Este)
+        PrepararTierraEnParcela()
+    }
+    
+}
+
+procedure Mover_Al_YMover_Al_(cantidad1,direccion1,cantidad2,direccion2) {
+    /*
+        PROPÓSITO:  Mueve una cantidad1 de veces hacia direccion1 para luego mover una cantidad2 
+        de veces hacia direccion2
+        PARÁMETROS:
+            * cantidad1: numero - es la cantidad de veces que mueve el cabezal en el primer tramo
+            * direccion1: direccion - es hacia donde se mueve en el primer tramo.
+            * cantidad2: numero - es la cantidad de veces que mueve el cabezal en el segundo tramo
+            * direccion2: direccion - es hacia donde se mueve en el segundo tramo.
+        PRECONDICIONES:
+            * al menos debe haber cantidad1 lindantes a direccion1 y cantidad2 lindantes a direccion2 
+            de la parcela actual
+    */
+    Mover__Veces(direccion1,cantidad1)
+    Mover__Veces(direccion2,cantidad2)
+}
+
+procedure IrAlInicioDelJardin() {
+    /*
+        PROPÓSITO:  Va al inicio del jardin
+        PRECONDICIONES:
+            * Al menos debe haber 5 parcelas al oeste y 4 al norte de la parcela actual
+    */
+    Mover_Al_YMover_Al_(5,Oeste,4,Norte)
+}
+
+procedure PrepararTierraEnParcela() {
+    /*
+        PROPÓSITO:  Prepara la tierra en la parcela actual
+        PRECONDICIONES:
+            * No debe haber tierra preparada en la parcela actual
+    */
+    Poner(Negro)
+}
+
+procedure PlantarPastoEnJardin() {
+    /*
+        PROPÓSITO:  El automata planta el pasto en un jardin, formando un banderin
+        PRECONDICIONES:
+            * Debe haber tierra preparada en el jardin.
+            *hay al menos 5 parcelas al este y 4 al norte de la parcela inicial
+        OBSERVACIONES:el pasto plantado es en la primera fila, 5 parcelas, 
+        la segunda 4 parcelas, la tercera,3 parcelas, la cuarta 4 parcelas y la
+        quinta 5 parcelas,la celda inicial es el borde superior izquierdo
+    */
+    PlantarPastoDe_Parcelas(5)
+    Mover_Al_YMover_Al_(5,Oeste,1,Sur)
+    PlantarPastoDe_Parcelas(4)
+    Mover_Al_YMover_Al_(4,Oeste,1,Sur)
+    PlantarPastoDe_Parcelas(3)
+    Mover_Al_YMover_Al_(3,Oeste,1,Sur)
+    PlantarPastoDe_Parcelas(4)
+    Mover_Al_YMover_Al_(4,Oeste,1,Sur)
+    PlantarPastoDe_Parcelas(5)
+    IrAlInicioDelJardin()
+}
+
+procedure PlantarPastoDe_Parcelas(cantidadParcelas) {
+    /*
+        PROPÓSITO: El Automata planta pasto de una cantidad de parcelas dadas
+        en una fila
+        PARÁMETROS:
+            * cantidadParcelas: numero - indica la cantidad de parcelas a plantar
+        
+        PRECONDICIONES:
+            * al menos debe haber cantidadParcelas lindantes al este de la parcela actual
+            *La tierra en una fila de cantidadParcelas debe estar preparada
+    */
+    repeat (cantidadParcelas) {
+        Mover(Este)
+        PlantarPastoEnParcela()
+    }
+    
+
+}
+
+
+procedure PlantarFloresEnJardin() {
+    /*
+        PROPÓSITO:  El automata planta flores en un jardin, formando un banderin
+        PRECONDICIONES:
+            * Debe haber tierra preparada en el jardin.
+            *debe haber pasto plantado en el jardin
+            *hay al menos 5 parcelas al este y 4 al norte de la parcela inicial
+        OBSERVACIONES:el pasto plantado es en la primera fila, 5 parcelas, 
+        la segunda 4 parcelas, la tercera,3 parcelas, la cuarta 4 parcelas y la
+        quinta 5 parcelas,la celda inicial es el borde superior izquierdo
+    */
+    PlantarFloresDe_Parcelas(5)
+    Mover_Al_YMover_Al_(5,Oeste,1,Sur)
+    PlantarFloresDe_Parcelas(4)
+    Mover_Al_YMover_Al_(4,Oeste,1,Sur)
+    PlantarFloresDe_Parcelas(3)
+    Mover_Al_YMover_Al_(3,Oeste,1,Sur)
+    PlantarFloresDe_Parcelas(4)
+    Mover_Al_YMover_Al_(4,Oeste,1,Sur)
+    PlantarFloresDe_Parcelas(5)
+    IrAlInicioDelJardin()
+}
+
+
+procedure PlantarFloresDe_Parcelas(cantidadParcelas) {
+    /*
+        PROPÓSITO: El Automata planta flores de una cantidad de parcelas dadas
+        en una fila
+        PARÁMETROS:
+            * cantidadParcelas: numero - indica la cantidad de parcelas a plantar
+        
+        PRECONDICIONES:
+            * al menos debe haber cantidadParcelas lindantes al este de la parcela actual
+            *La tierra en una fila de cantidadParcelas debe estar preparada
+            *El Pasto en una fila de cantidadParcelas debe estar plantado
+    */
+    repeat (cantidadParcelas) {
+        Mover(Este)
+        PlantarFloresEnParcela()
+    }
+    
+
+}
+
+procedure RegarJardin() {
+    /*
+        PROPÓSITO:  El automata  riega  un jardin, en forma de banderin
+        PRECONDICIONES:
+            * Debe haber tierra preparada en el jardin.
+            *debe haber pasto y flores plantadas en el jardin
+            *hay al menos 5 parcelas al este y 4 al norte de la parcela inicial
+        OBSERVACIONES:el pasto plantado es en la primera fila, 5 parcelas, 
+        la segunda 4 parcelas, la tercera,3 parcelas, la cuarta 4 parcelas y la
+        quinta 5 parcelas,la celda inicial es el borde superior izquierdo
+    */
+    Regar_Parcelas(5)
+    Mover_Al_YMover_Al_(5,Oeste,1,Sur)
+    Regar_Parcelas(4)
+    Mover_Al_YMover_Al_(4,Oeste,1,Sur)
+    Regar_Parcelas(3)
+    Mover_Al_YMover_Al_(3,Oeste,1,Sur)
+    Regar_Parcelas(4)
+    Mover_Al_YMover_Al_(4,Oeste,1,Sur)
+    Regar_Parcelas(5)
+    IrAlInicioDelJardin()
+}
+
+procedure  Regar_Parcelas(cantidadParcelas) {
+    /*
+        PROPÓSITO: El Automata riega una cantidad de parcelas dadas
+        en una fila
+        PARÁMETROS:
+            * cantidadParcelas: numero - indica la cantidad de parcelas a regar.
+        
+        PRECONDICIONES:
+            * al menos debe haber cantidadParcelas lindantes al este de la parcela actual
+            *La tierra en una fila de cantidadParcelas debe estar preparada
+            *El Pasto y las flores en una fila de cantidadParcelas deben estar plantados
+    */
+    repeat (cantidadParcelas) {
+        Mover(Este)
+        RegarLaParcela()
+    }
+    
+}
+
+procedure PlantarPastoEnParcela() {
+    /*
+        PROPÓSITO:  planta el pasto en la parcela actual
+        PRECONDICIONES:
+            * debe haber tierra preparada en la parcela actual
+    */
+    Poner__Veces(Verde,98)
+}
+
+procedure PlantarFloresEnParcela() {
+    /*
+        PROPÓSITO:  planta las flores en la parcela actual
+        PRECONDICIONES:
+            * debe haber tierra preparada en la parcela actual
+            *debe haber pasto plantado en la parcela actual
+    */
+    Poner__Veces(Rojo,3)
+}
+
+procedure RegarLaParcela() {
+    /*
+        PROPÓSITO:  Riega la parcela actual
+        PRECONDICIONES:
+            * debe haber tierra preparada en la parcela actual
+            *debe haber pasto y flores plantadas en la parcela
+            actual
+            
+    */
+    Poner__Veces(Azul,4)
+}
+
+procedure Poner__Veces(color, cantidad) {
+    /*
+        PROPÓSITO: Pone una cantidad de bolitas de un determinado color
+        PARÁMETROS:
+            * color: color - es el color de la bolita a poner.
+            * cantidad: numero - es la cantidad de bolitas de color dado.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    repeat (cantidad) {
+        Poner(color)
+    }
+}
+
+procedure Mover__Veces(direccion, cantidad) {
+    /*
+        PROPÓSITO:  Mueve el cabezal una cantidad de veces a
+        direccion
+        PARÁMETROS:
+            * direccion: direccion - es la direccion a mover.
+            * cantidad: numero - es la cantidad de veces que 
+            mueve el cabezal.
+        PRECONDICIONES:
+            * Al menos debe haber cantidad celdas a direccion de 
+            la actual.
+    */
+    repeat (cantidad) {
+        Mover(direccion)
+    }
+}

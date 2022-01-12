@@ -1,0 +1,43 @@
+function direccionesOpuestasDe_(direcciones) {
+    /*
+        PROPÓSITO:Dada una lista de direcciones describa la lista de 
+        direcciones en donde cada elemento es el opuesto al de la 
+        posicion original
+        PARÁMETROS:
+            * direcciones:Lista de direcciones - describe la lista de
+            direcciones que se desea convertir a su opuesto.
+            
+        TIPO: Lista de direcciones opuestas
+        PRECONDICIONES:
+            *la lista no esta vacia
+    */
+    direccionesOpuestasHastaAhora:=[]
+    foreach direccion in direcciones{
+        direccionesOpuestasHastaAhora:=direccionesOpuestasHastaAhora ++ 
+                                        [opuesto(direccion)]
+    }
+
+    return (direccionesOpuestasHastaAhora)
+}
+
+function direccionesSiguientesDe_(direcciones) {
+    /*
+        PROPÓSITO:Dada una lista de direcciones describa la lista de 
+        direcciones en donde cada elemento es el siguiente al de la 
+        posicion original
+        PARÁMETROS:
+            * direcciones:Lista de direcciones - describe la lista de
+            direcciones que se desea convertir a su siguiente.
+            
+        TIPO: Lista de direcciones siguientes
+        PRECONDICIONES:
+            *la lista no esta vacia
+    */
+    direccionesSiguientesHastaAhora:=[]
+    foreach direccion in direcciones{
+        direccionesSiguientesHastaAhora:=direccionesSiguientesHastaAhora ++ 
+                                        [siguiente(direccion)]
+    }
+
+    return (direccionesSiguientesHastaAhora)
+}

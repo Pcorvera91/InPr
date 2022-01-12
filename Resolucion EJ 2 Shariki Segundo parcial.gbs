@@ -1,0 +1,49 @@
+procedure ExplotarSucesiones(){
+    /*
+        
+    */
+    IrAlInicioDelRecorrido__(Este,Norte)
+    while(not esFinalDelRecorrido__(Este,Norte)){
+        // tengo que poner algo....
+        DetonarSucesionSiPuede()
+        PasarASiguienteCeldaDelRecorrido__(Este,Norte)
+    }
+    DetonarSucesionSiPuede()
+}
+
+
+procedure DetonarSucesionSiPuede(){
+    /**/
+    if( hayFicha() && haySucesion()){
+        DetonarSucesionAl_ConLongitudDe_(direccionDeLaSucesion(),
+        longitudDeSucesionDeFichasEn_DeLaFicha_(direccion,fichaActual()))
+    }
+}
+
+procedure DetonarSucesionAl_ConLongitudDe_(direccion, longitudDeSucesion){
+   
+   repeat(longitudDeSucesion - 1){
+       SacarFicha()
+       Mover(direccion)
+   }
+   SacarFicha()
+   
+   Mover__Veces(opuesto(direccion), longitudDeSucesion - 1)
+}
+
+function longitudDeSucesionDeFichasEn_DeLaFicha_(direccion, formaDeFicha){
+    
+    longitudDeSucesionesVistasHastaAhora := 1
+    
+    while(puedeMover(direccion) && esIgual_ASiguienteFichaAl_(formaDeFicha,direccion)){
+        Mover(direccion)
+        longitudDeSucesionesVistasHastaAhora :=longitudDeSucesionesVistasHastaAhora + 1
+    }
+    
+    return(longitudDeSucesionesVistasHastaAhora)
+}
+
+function esIgual_ASiguienteFichaAl_(formaDeFicha,direccion){
+    Mover(direccion)
+    return(formaDeFicha == fichaActual())
+}

@@ -1,0 +1,180 @@
+/*
+
+3 Negras:Deposito central
+2 Negras:Deposito local
+1 negra: Marca de camino de central a local
+1 Azul:1 unidad de mercaderia.
+
+*/
+
+function esDepositoCentral() {
+    /*
+        PROPÓSITO:  Indica si el cabezal esta en el deposito central
+        TIPO:Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Negro)==3)
+}
+
+function esDepositoLocal() {
+    /*
+        PROPÓSITO:  Indica si el cabezal esta en el deposito Local
+        TIPO:Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Negro)==2)
+}
+
+function hayMarcaDeCamino() {
+    /*
+        PROPÓSITO:Indica si en la celda actual hay marca de camino
+        TIPO: Booleano
+        PRECONDICIONES:
+            * No hay
+    */
+    
+    return (nroBolitas(Negro)==1)
+}
+
+procedure IrDelLocal_AlCentral(direccion) {
+    /*
+        PROPÓSITO: Mueve el cabezal del deposito local al central 
+        a una direccion dada
+        PARÁMETROS:
+            * direccion: direccion - Es la direccion donde mueve el
+            cabezal para ir al deposito central.
+            
+        PRECONDICIONES:
+            * El cabezal se encuentra en un deposito local que se
+            encuentra a direccion
+    */
+    
+    while((not esDepositoCentral()) && hayMarcaDeCamino()){
+
+
+        Mover(opuesto(direccion))
+
+    }
+
+}
+
+
+procedure IrDelCentralAlLocal_(direccion) {
+    /*
+        PROPÓSITO: Mueve el cabezal del deposito central al local
+        a una direccion dada
+        PARÁMETROS:
+            * direccion: direccion - Es la direccion donde mueve el
+            cabezal para ir al deposito local.
+            
+        PRECONDICIONES:
+            * El cabezal se encuentra en un deposito central
+            
+    */
+    
+    IrDelLocal_AlCentral(opuesto(direccion))
+
+}
+
+procedure Llevar_MercaderíasAlLocal_(cantidad, dirección) {
+    /*
+        PROPÓSITO: lleva la cantidad de mercadería indicada del depósito central al depósito local que 
+        está en la ​dirección indicada.
+        PARÁMETROS:
+            * cantidad:numero- es la cantidad de mercaderia a llevar
+            * direccion: direccion -es la direccion donde lleva la 
+            mercaderia .
+            
+        PRECONDICIONES:
+            * el cabezal se encuentra en el deposito central
+    */
+    
+
+    if (cantidadDeMercaderia() >= cantidad ) {
+        
+        Tomar_UnidadesDeMercaderia(cantidad)
+        IrDelCentralAlLocal_(direccion)
+        Dejar_UnidadesDeMercaderia(cantidad)
+        IrDelLocal_AlCentral(direccion)
+
+
+    }
+
+
+}
+
+procedure Tomar_UnidadesDeMercaderia(cantidadDeUnidades) {
+    /*
+        PROPÓSITO: Toma cantidadDeUnidades de mercaderia del deposito
+        central
+        PARÁMETROS:
+            * cantidadDeUnidades: numero - es la cantidad de unidades
+            a tomar.
+            
+        PRECONDICIONES:
+            * Al menos hay una cantidadDeUnidades suficientes en el
+            deposito actual
+            *el cabezal se encuentra en el deposito central
+    */
+
+    Sacar__Veces(Azul,cantidadDeUnidades)
+    
+}
+
+procedure Dejar_UnidadesDeMercaderia(cantidadDeUnidades) {
+    /*
+        PROPÓSITO: Deja cantidadDeUnidades de mercaderia del deposito
+        local actual
+        PARÁMETROS:
+            * cantidadDeUnidades: numero - es la cantidad de unidades
+            a dejar.
+            
+        PRECONDICIONES:
+            
+            *el cabezal se encuentra en el deposito local
+    */
+
+    Poner__Veces(Azul,cantidadDeUnidades)
+    
+}
+
+procedure Traer_MercaderíasDelLocal_(cantidad, dirección) {
+    /*
+        PROPÓSITO: trae la cantidad de mercadería indicada del depósito 
+        local al depósito central que está en la ​dirección indicada.
+        PARÁMETROS:
+            * cantidad:numero- es la cantidad de mercaderia a llevar
+            * direccion: direccion -es la direccion donde lleva la 
+            mercaderia .
+            
+        PRECONDICIONES:
+            * el cabezal se encuentra en el deposito local a direccion
+    */
+    
+    Llevar_MercaderíasAlLocal_(cantidad, opuesto(dirección))
+
+}
+
+
+procedure Mover_MercaderíasDelLocal_AlLocal_(cantidad,origen,destino) {
+    /*
+        PROPÓSITO: Mueve una cantidad de mercaderia desde el deposito
+        de origen al deposito de destino
+        PARÁMETROS:
+            * cantidad: numero - cantidad de mercaderia.
+            * origen: direccion - es la ubicacion del deposito 
+            local de origen.
+            * destino: direccion - es la ubicacion del deposito 
+            local de destino.
+        PRECONDICIONES:
+            * El cabezal se encuentra en el local de origen
+    */
+    
+    Traer_MercaderíasDelLocal_(cantidad, origen)
+    Llevar_MercaderíasAlLocal_(cantidad, destino)
+
+}

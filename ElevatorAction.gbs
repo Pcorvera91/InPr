@@ -1,0 +1,60 @@
+procedure MoverElevadorAlPiso_(pisoAMover) {
+    /*
+        PROPÓSITO:Mueve el elevador a **pisoAMover**
+        PARÁMETROS:
+            * pisoAMover: numero - indica el numero de piso
+            a mover
+            
+        PRECONDICIONES:
+            * **pisoAMover** es mayor o igual a 0
+            *al menos debe haber (**pisoAMover**- el piso actual)
+            pisos al norte o al sur. 
+    */
+
+    if (pisoAMover > pisoActual()) {
+        Subir_Pisos(pisoAMover - pisoActual())
+    }
+    else {
+        Bajar_Pisos(pisoActual() - pisoAMover)
+    }
+    
+}
+
+procedure Subir_Pisos(cantidadDePisosASubir) {
+    /*
+        PROPÓSITO: El elevador sube una **cantidadDePisosASubir** 
+        PARÁMETROS:
+            * cantidadDePisosASubir:numero- indica la cantidad de pisos
+            a subir
+    
+        PRECONDICIONES:
+            * Al menos debe haber una **cantidadDePisosASubir** arriba
+            del piso actual
+            
+    */
+    
+    repeat (cantidadDePisosASubir) {
+        SubirElevadorUnPiso()
+    }
+
+}
+
+procedure Bajar_Pisos(cantidadDePisosABajar) {
+    /*
+        PROPÓSITO: El elevador sube una **cantidadDePisosABajar** 
+        PARÁMETROS:
+            * cantidadDePisosABajar:numero- indica la cantidad de pisos
+            a Bajar
+    
+        PRECONDICIONES:
+            * Al menos debe haber una **cantidadDePisosABajar** abajo
+            del piso actual
+            
+    */
+    
+    repeat (cantidadDePisosABajar) {
+        BajarElevadorUnPiso()
+    }
+
+}
+

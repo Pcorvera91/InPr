@@ -1,0 +1,165 @@
+/*
+Tablero=Bosque
+Celda=parcela
+1 verde= 1 arbol
+1 negra=bomba
+1 roja= 1 semilla
+1 azul= 1 unidad de nutrientes
+*/
+
+procedure Poner_Semillas(cantidadDeSemillasAPoner) {
+    /*
+        PROPÓSITO:Pone cantidadDeSemillasAPoner de semillas 
+        en la parcela actual
+        PARÁMETROS:
+            * cantidadDeSemillasAPoner: numero - describe la 
+            cantidad de semillas a poner
+            
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    Poner__Veces(Rojo,cantidadDeSemillasAPoner)
+
+}
+
+procedure Poner_Arboles(cantidadDeArbolesAPoner) {
+    /*
+        PROPÓSITO:Pone cantidadDeArbolesAPoner de Arboles
+        en la parcela actual
+        PARÁMETROS:
+            * cantidadDeArbolesAPoner: numero - describe la 
+            cantidad de Arboles a poner
+            
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    Poner__Veces(Verde,cantidadDeArbolesAPoner)
+
+}
+
+procedure Sacar_Semillas(cantidadDeSemillasASacar) {
+    /*
+        PROPÓSITO:Pone cantidadDeSemillasASacar de semillas 
+        en la parcela actual
+        PARÁMETROS:
+            * cantidadDeSemillasASacar: numero - describe la 
+            cantidad de semillas a Sacar
+            
+        PRECONDICIONES:
+            * debe haber al menos cantidadDeSemillasASacar en
+            la parcela actual
+    */
+    
+    Sacar__Veces(Rojo,cantidadDeSemillasASacar)
+
+}
+
+procedure Sacar_Arboles(cantidadDeArbolesASacar) {
+    /*
+        PROPÓSITO:Pone cantidadDeArbolesASacar de Arboles
+        en la parcela actual
+        PARÁMETROS:
+            * cantidadDeArbolesASacar: numero - describe la 
+            cantidad de Arboles a Sacar
+            
+        PRECONDICIONES:
+           * debe haber al menos cantidadDeArbolesASacar en
+            la parcela actual
+    */
+    
+    Sacar__Veces(Verde,cantidadDeArbolesASacar)
+
+}
+
+procedure PonerBomba() {
+    /*
+        PROPÓSITO:Pone una bomba en la parcela actual
+        PRECONDICIONES:
+            * Ninguna
+    */
+    Poner(Negro)
+}
+
+procedure SacarBomba() {
+    /*
+        PROPÓSITO:saca una bomba en la parcela actual
+        PRECONDICIONES:
+            * al menos debe haber una bomba en la parcela
+            actual
+    */
+    Sacar(Negro)
+}
+
+procedure Poner_Nutrientes(cantidadDeNutrientesAPoner) {
+    /*
+        PROPÓSITO:Pone cantidadDeNutrientesAPoner de Nutrientes
+        en la parcela actual
+        PARÁMETROS:
+            * cantidadDeNutrientesAPoner: numero - describe la 
+            cantidad de Nutrientes a poner
+            
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    Poner__Veces(Azul,cantidadDeNutrientesAPoner)
+
+}
+
+procedure Sacar_Nutrientes(cantidadDeNutrientesASacar) {
+    /*
+        PROPÓSITO:Pone cantidadDeNutrientesASacar de Nutrientes 
+        en la parcela actual
+        PARÁMETROS:
+            * cantidadDeNutrientesASacar: numero - describe la 
+            cantidad de Nutrientes a Sacar
+            
+        PRECONDICIONES:
+            * debe haber al menos cantidadDeNutrientessASacar en
+            la parcela actual
+    */
+    
+    Sacar__Veces(Azul,cantidadDeNutrientesASacar)
+
+}
+
+procedure Poner_SemillasAl_(cantidad, dirección) {
+    /*
+        PROPÓSITO: Pone una cantidad dada de semillas a una
+        parcela lindante a direccion
+        PARÁMETROS:
+            * cantidad: numero - cantidad de semillas a poner
+            * direccion: tipo - direccion de las semillas a poner
+        PRECONDICIONES:
+            * Al menos debe haber una parcela lindante a direccion
+            de la parcela actual
+    */
+
+    Mover(direccion)
+    Poner_Semillas(cantidad)
+
+
+}
+
+procedure Sacar_ÁrbolesAl_(cantidad, dirección) {
+    /*
+        PROPÓSITO: saca una cantidad dada de arboles a una
+        parcela lindante a direccion
+        PARÁMETROS:
+            * cantidad: numero - cantidad de arboles a sacar
+            * direccion: tipo - direccion de las arboles a sacar
+        PRECONDICIONES:
+            * Al menos debe haber una parcela lindante a direccion
+            de la parcela actual
+            *en la parcela lindante a direccion al menos debe haber una cantidad
+            de arboles. 
+    */
+    
+    Mover(direccion)
+    Sacar_Arboles(cantidad)
+
+
+
+}

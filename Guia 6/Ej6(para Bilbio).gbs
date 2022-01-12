@@ -1,0 +1,21 @@
+procedure VaciarFilaDe_HaciaEl_(color, dirección) {
+    /*
+        PROPÓSITO: Quita todas las bolitas de color de cada una de las celdas
+        de la fila actual hacia la direccion dada
+        PARÁMETROS:
+            * color: color - Color de las bolitas a quitar.
+            * direccion: direccion - direccion donde se mueve 
+            para vaciar la fila.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    IrAlBorde(opuesto(direccion))
+    while (not estoyEnElBorde_(direccion)) {
+        
+        SacarTodas_(color)
+        Mover(direccion)
+    }
+
+
+}

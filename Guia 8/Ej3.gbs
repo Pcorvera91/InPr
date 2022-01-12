@@ -1,0 +1,70 @@
+type Celda is record {
+/*
+    PROPOSITO:Modelar la celda del tablero
+    INV.REP:Los numeros son todos mayor a 0
+*/    
+    field cantidadDeAzules		// {Numero}
+    field cantidadDeNegras		// {Numero}
+    field cantidadDeRojas		// {Numero}
+    field cantidadDeVerdes		// {Numero}
+    
+}
+
+function celdaActual() {
+    /*
+        PROPÓSITO:Describe la celda actual como un registro de tipo celda
+        TIPO:Celda
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Celda(cantidadDeAzules<-nroBolitas(Azul)
+                  cantidadDeRojas<-nroBolitas(Rojo)
+                  cantidadDeVerdes<-nroBolitas(Verde)
+                  cantidadDeNegras<-nroBolitas(Negro)))
+}
+
+function cantidadDeAzules_(celda) {
+    /*
+        PROPÓSITO:Describe la cantidad de azules de la celda dada
+        PARÁMETROS:
+            * celda:celda:Es la celda donde se determina la cantidad de
+            azules
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (cantidadDeAzules(celda))
+}
+
+function cantidadTotalDeBolitas_(celda) {
+    /*
+        PROPÓSITO:describe la cantidad total de bolitas de
+                  los 4 colores de la celda dada.
+        PARÁMETROS:
+            * celda:Celda:Es la celda donde se determina la cantidad
+              total de bolitas
+           
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (cantidadDeAzules_(celda)+cantidadDeRojas(celda)+cantidadDeVerdes(celda)+cantidadDeNegras(celda))
+}
+
+function la_tieneMasBolitasQue_(celda1, celda2) {
+    /*
+        PROPÓSITO:dadas dos celdas, indica si la primera
+                  tiene más bolitas que la segunda.
+        PARÁMETROS:
+            * celda1: Celda - Es la primer celda a comparar
+            * celda2: Celda - Es la segunda celda a comparar
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (cantidadTotalDeBolitas_(celda1) > cantidadTotalDeBolitas_(celda2))
+}

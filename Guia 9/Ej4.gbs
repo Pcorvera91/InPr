@@ -1,0 +1,35 @@
+function devolverDireccion_EnListaSiNoPuedeMover(direccion) {
+    /*
+        PROPÓSITO:Dada una direccion, la devuelve en lista si no
+        puede mover a la direccion dada
+        PARÁMETROS:
+            * direccion: direccion - es la direccion a evaluar.
+            
+        TIPO:Lista de direccion
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (choose
+        [direccion] when (not puedeMover(direccion))
+        
+        [] otherwise
+    })
+}
+
+function direccionesAlBorde() {
+    /*
+        PROPÓSITO:Describe una lista de direcciones en las que el cabezal
+        no se puede mover
+        TIPO:Lista de direcciones
+        PRECONDICIONES:
+            *Ninguna
+    */
+    listaDeDireccionesHastaAhora:=[]
+    direccionActual:=minDir()
+    while (direccionActual /= maxDir()) {
+        listaDeDireccionesHastaAhora:=listaDeDireccionesHastaAhora ++ devolverDireccion_EnListaSiNoPuedeMover(direccionActual)
+        direccionActual:=siguiente(direccionActual)
+    }
+    return (listaDeDireccionesHastaAhora ++ devolverDireccion_EnListaSiNoPuedeMover(direccionActual))
+}

@@ -1,0 +1,78 @@
+function minimoElementoDe_(listaDeNumeros) {
+    /*
+        PROPÓSITO: dada una lista de numeros describe el elemento mas
+        chico que se encuentra en la lista
+        PARÁMETROS:
+            * listaDeNumeros:es la lista en el cual se desea saber
+            cual es el minimo elemento
+        TIPO: Numero
+        PRECONDICIONES:
+            * Al menos hay 2 elementos en la lista dada
+    */
+    numeroMinimoActual:=primero(listaDeNumeros)
+    numerosQueFaltan:=resto(listaDeNumeros)
+    while (not esVacia(numerosQueFaltan)) {
+        numeroMinimoActual:=minimoEntre__(numeroMinimoActual,primero(numerosQueFaltan))
+        numerosQueFaltan:=resto(numerosQueFaltan)
+    }
+    
+    return (numeroMinimoActual)
+}
+
+function minimoEntre__(n1,n2) {
+    /*
+        PROPÓSITO: dados 2 numeros describe el minimo entre ellos 2
+        PARÁMETROS:
+            * n1: numero - es el primer numero a evaluar
+            * n2: numero - es el segundo numero a evaluar
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (choose
+         n1   when (n1<=n2)
+        
+        n2 otherwise
+    })
+}
+
+function sinElMinimoElemento_(listaDeNumeros) {
+    /*
+        PROPÓSITO:dada una lista de numeros describe la lista que se
+        obtiene de eliminar una unica vez el elemento mas chico
+        PARÁMETROS:
+            * listaDeNumeros:  es la lista que se desea quitar el minimo
+            elemento.
+            
+        TIPO: Lista de numeros
+        PRECONDICIONES:
+            * Ninguna
+    */
+    listaSinElMinimoHastaAhora:=[]
+    foreach numero in listaDeNumeros {
+        listaSinElMinimoHastaAhora:=listaSinElMinimoHastaAhora ++ 
+                                    singularSi(numero, minimoElementoDe_(listaDeNumeros) /=numero )
+    }
+    return (listaSinElMinimoHastaAhora)
+}
+
+function lista_Ordenada(listaDeNumeros) {
+    /*
+        PROPÓSITO:dada una lista de numeros describe la lista con los elementos ordenados
+        de menor a mayor
+        PARÁMETROS:
+            * listaDeNumeros:  es la lista de numeros a ordenar.
+           
+        TIPO: Lista de numeros ordenada
+        PRECONDICIONES:
+            * ninguna
+    */
+    listaOrdenadaHastaAhora:=[]
+    numerosQueFaltanOrdenar:=listaDeNumeros
+    while (not esVacia(listaDeNumeros)) {
+        listaOrdenadaHastaAhora:=listaOrdenadaHastaAhora ++ [mínimoElementoDe_(numerosQueFaltanOrdenar)]
+        numerosQueFaltanOrdenar:=sinElMinimoElemento_(numerosQueFaltanOrdenar)
+    }
+    return (listaOrdenadaHastaAhora)
+}

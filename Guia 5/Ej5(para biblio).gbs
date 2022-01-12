@@ -1,0 +1,138 @@
+procedure Poner_Si_(color, condicion) {
+    /*
+        PROPÓSITO:  Dado un color y un valor de verdad llamado condicion
+        pone una bolita del color dado si el valor de verdad de la 
+        condicion es verdadero y no lo ponga si no
+        PARÁMETROS:
+            * color: color - es el color de la bolita a poner.
+            * condicion: booleano - es el valor de verdad que indica si
+            se pone la bolita de color o no.
+        PRECONDICIONES:
+            *Ninguna
+    */
+    if (condicion) {
+        Poner(color)
+    }
+}
+
+procedure Sacar_Si_(color, condicion) {
+    /*
+        PROPÓSITO:  Dado un color y un valor de verdad llamado condicion
+        Saca una bolita del color dado si el valor de verdad de la 
+        condicion es verdadero y no lo ponga si no
+        PARÁMETROS:
+            * color: color - es el color de la bolita a Sacar.
+            * condicion: booleano - es el valor de verdad que indica si
+            se Saca la bolita de color o no.
+        PRECONDICIONES:
+            *Ninguna
+    */
+    if (condicion) {
+        Sacar(color)
+    }
+}
+
+procedure Mover_Si_(direccion, condicion) {
+    /*
+        PROPÓSITO:  Dado un color y un valor de verdad llamado condicion
+        mueve el cabezal
+         una celda a la direccion dada si el valor de verdad de la 
+        condicion es verdadero y si no lo es, no lo mueve
+        PARÁMETROS:
+            * direccion: direccion - es la direccion a mover.
+            * condicion: booleano - es el valor de verdad que indica verdadero
+            mueve el cabezal a direccion.
+        PRECONDICIONES:
+            *Al menos debe haber una celda a direccion de la celda actual
+    */
+    if (condicion) {
+        Mover(direccion)
+    }
+}
+
+procedure DesempatarParaElLocal__(colorDelLocal, colorDelVisitante) {
+    /*
+        PROPÓSITO: Dados el color del equipo local **colorDelLocal** 
+        y el color del equipo visitante **colorDelVisitante** desempata
+        si tanto el equipo local y el visitante tienen el mismo puntaje
+        PARÁMETROS:
+            * colorLocal: color - es el color del equipo local.
+            * colorVisitante: color - es el color del equipo Visitante.
+        PRECONDICIONES:
+            * colorDelLocal es diferente que colorDelVisitante
+    */
+    
+        
+    AnotarUnPuntoParaElEquipo_SiHayEmpateCon_(colorDelLocal,colorDelVisitante)
+
+   
+    
+}
+
+procedure AnotarUnPuntoParaElEquipo_SiHayEmpateCon_(colorDelEquipo1,colorDelEquipo2) {
+    /*
+        PROPÓSITO:  Anota 1 punto para el equipo colorDelEquipo1 si hay empate
+
+        PARÁMETROS:
+            * colorDelEquipo1: color - indica el color del equipo que
+            desempata.
+            *colorDelEquipo2:color-indica el color del equipo que pierde en el desempate
+            
+        PRECONDICIONES:
+            * Ninguna
+    */
+
+
+    Poner_Si_(colorDelEquipo1,hayEmpateParaElEquipo_Y_(colorEquipo1,colorEquipo2) )
+
+
+}
+
+function hayEmpateParaElEquipo_Y_(colorEquipo1,colorEquipo2) {
+    /*
+        PROPÓSITO:  Indica si colorEquipo1 y colorEquipo2 estan
+        empatados
+        PARÁMETROS:
+            * colorEquipo1:color-es el color del primer equipo
+            *colorEquipo2:color-es el color del 2do equipo
+        TIPO: Booleano, denota verdadero si colorEquipo1 y colorEquipo2 tienen el mismo puntaje
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (puntajeDelEquipo_(colorEquipo1)==puntajeDelEquipo_(colorEquipo2))
+}
+
+function puntajeDelEquipo_(colorDelEquipo) {
+    /*
+        PROPÓSITO:  Denota el  puntaje del equipo colorDelEquipo
+        PARÁMETROS:
+            * colorDelEquipo:color-es el color del equipo
+        TIPO: Numero
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (nroBolitas(colorDelEquipo))
+}
+
+procedure ​Reemplazar_Y_Por_(primerColorAReemplazar, segundoColorAReemplazar, colorAAgregar){
+    /*
+        PROPÓSITO:  Se reemplaza una bolita de primerColorAReemplazar y
+        segundoColorAReemplazar siempre y cuando hayan por una bolita de colorAAgregar en la celda
+        actual
+        PARÁMETROS:
+            * primerColorAReemplazar: color - describe al color de la bolita
+            que se reemplaza primero.
+            * segundoColorAReemplazar: color - describe al color de la bolita
+            que se reemplaza segundo.
+            *colorAAgregar:color - describe el color de la bolita a agregar
+        PRECONDICIONES:
+            * ninguna
+    */
+        Poner_Si_(colorAAgregar,hayBolitas(primerColorAReemplazar) && hayBolitas(segundoColorAReemplazar))
+        Sacar_Si_(primerColorAReemplazar, hayBolitas(primerColorAReemplazar))
+        Sacar_Si_(segundoColorAReemplazar, hayBolitas(segundoColorAReemplazar))
+        
+    
+}

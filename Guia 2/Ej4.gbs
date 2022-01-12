@@ -1,0 +1,149 @@
+procedure SembrarYRegarLote() {
+    /*
+        PROPÓSITO:Siembra y riega semillas de tomate en un lote de 5x3
+        PRECONDICIONES:
+            * al menos debe haber 2 parcela al norte y 4 al este de la
+            parcela inicial 
+            *antes de la siembra el lote debe estar vacio
+            *el lote debe estar sembrado para su riego
+        OBSERVACIONES:Como parcela inicial se la considera a la parcela 
+        inferior izquierda.
+        el lote es de 5x3
+    */
+    SembrarLote()
+    IrALaParcelaDelBordeSur()
+    RegarLote()
+    
+    
+}
+
+procedure SembrarLote() {
+    /*
+        PROPÓSITO:  Siembra semillas en un lote de 5x3
+        PRECONDICIONES:
+            * Al menos debe haber 2 parcela al norte y 4 al este de la
+            parcela inicial
+            *El lote esta vacio
+    */
+
+        
+        SembrarFila()
+        MoverALaSiguienteParcelaAlNorte()
+
+        SembrarFila()
+        MoverALaSiguienteParcelaAlNorte()
+    
+        SembrarFila()
+}
+
+procedure RegarLote() {
+    /*
+        PROPÓSITO:  Riega las semillas en un lote de 5x3
+        PRECONDICIONES:
+            * Al menos debe haber 2 parcela al norte y 4 al este de la
+            parcela inicial
+            *El lote tiene semillas sembradas
+    */
+
+        
+        RegarFila()
+        MoverALaSiguienteParcelaAlNorte()
+
+        RegarFila()
+        MoverALaSiguienteParcelaAlNorte()
+
+        RegarFila()
+}
+
+
+procedure SembrarFila() {
+    /*
+        PROPÓSITO:  Siembra semillas en una fila de 5 parcelas
+        PRECONDICIONES:
+            * Al menos debe haber 4 parcelas al este de la parcela inicial
+            *La fila de 5 parcelas esta vacia
+    */
+    
+    Sembrar()
+    MoverALaSiguienteParcelaAlEste()
+   
+    Sembrar()
+    MoverALaSiguienteParcelaAlEste()
+
+    Sembrar()
+    MoverALaSiguienteParcelaAlEste()
+
+    Sembrar()
+    MoverALaSiguienteParcelaAlEste()
+
+    Sembrar()
+    IrALaParcelaDelBordeOeste()
+    
+    
+}
+
+procedure RegarFila() {
+    /*
+        PROPÓSITO:  riega semillas en una fila de 5 parcelas
+        PRECONDICIONES:
+            * Al menos debe haber 4 parcelas al este de la parcelas inicial
+            *La fila de 5 parcelas debe estar sembrada
+    */
+    
+    Regar()
+    MoverALaSiguienteParcelaAlEste()
+
+    Regar()
+    MoverALaSiguienteParcelaAlEste()
+
+    Regar()
+    MoverALaSiguienteParcelaAlEste()
+
+    Regar()
+    MoverALaSiguienteParcelaAlEste()
+        
+    Regar()
+    IrALaParcelaDelBordeOeste()
+    
+    
+}
+
+procedure MoverALaSiguienteParcelaAlEste(){
+    /*
+        PROPÓSITO:  Mueve a la siguiente parcela al Este
+        PRECONDICIONES:
+            * hay una parcela lindante al este de la actual
+    */
+    Mover(Este)
+}
+
+
+procedure MoverALaSiguienteParcelaAlNorte() {
+    /*
+        PROPÓSITO:  Mueve a la siguiente parcela al norte
+        PRECONDICIONES:
+            * hay una parcela lindante al norte de la actual
+    */
+    
+    Mover(Norte)
+}
+
+
+procedure IrALaParcelaDelBordeSur() {
+    /*
+        PROPÓSITO:  Mueve a la parcela del borde sur
+        PRECONDICIONES:
+            * ....
+    */
+    IrAlBorde(Sur)
+}
+
+procedure IrALaParcelaDelBordeOeste() {
+    /*
+        PROPÓSITO:  Mueve a la parcela del borde oeste
+        PRECONDICIONES:
+            * ....
+    */
+    IrAlBorde(Oeste)
+}
+

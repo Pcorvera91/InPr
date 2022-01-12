@@ -1,0 +1,38 @@
+program {
+  DibujarCuadrado()
+}
+
+procedure DibujarCuadrado() {
+  DibujarLíneaAlNorte()
+  DibujarLíneaAlEste()
+  DibujarLíneaAlSur()
+  DibujarLíneaAlOeste()
+}
+
+procedure DibujarLíneaAlNorte() {
+  repeat(4) {
+    Poner(Verde)
+    Mover(Norte)
+  }
+}
+
+procedure DibujarLíneaAlEste() {
+  repeat(4) {
+    Poner(Verde)
+    Mover(Este)
+  }
+}
+
+procedure DibujarLíneaAlSur() {
+  repeat(4) {
+    Poner(Verde)
+    Mover(Verde)//ERROR No se puede mover verde
+  }
+}
+
+procedure DibujarLíneaAlOeste() {
+  repeat(Negro)/*ERROR:Repetir Negro, en la condicion se debe poner un numero para repetir */{
+    Poner(Sur)//ERROR: No se puede Poner una bolita de color sur
+    Mover(Oeste)
+  }
+}

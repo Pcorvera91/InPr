@@ -1,0 +1,66 @@
+procedure IrAlInicioDeUnRecorrido__(dirPrincipal, dirSecundaria) {
+    /*
+        PROPÓSITO: Mueve el cabezal al inicio de un recorrido
+        PARÁMETROS:
+            * dirPrincipal: direccion - es la direccion principal 
+            donde mueve el cabezal.
+            * dirSecundaria: direccion - es la direccion secundaria
+            donde mueve el cabezal.
+        PRECONDICIONES:
+            * dirPrincipal y dirSecundaria no pueden ser iguales ni 
+            opuestas
+    */
+    IrAlBorde(opuesto(dirPrincipal))
+    IrAlBorde(opuesto(dirSecundaria))
+
+
+}
+
+function estoyElFinalDeUnRecorrido__(dirPrincipal, dirSecundaria) {
+    /*
+        PROPÓSITO: Indica si el cabezal esta en el final de un recorrido
+        hacia dirPrincipal y dirSecundaria
+        PARÁMETROS:
+            * dirPrincipal: direccion - es la direccion prinicipal del
+            final del recorrido.
+            * dirSecundaria: direccion - es la direccion secundaria del
+            final del recorrido.
+        TIPO: Tipo
+        PRECONDICIONES:
+           * dirPrincipal y dirSecundaria no pueden ser iguales ni 
+            opuestas
+    */
+    
+    return ((not puedeMover(dirPrincipal)) && (not puedeMover(dirSecundaria)) )
+}
+
+procedure PasarASiguienteCelda__(dirPrincipal, dirSecundaria) {
+    /*
+        PROPÓSITO:  Mueve el cabezal a la siguiente celda en direccion 
+        dirPrincipal y dirSecundaria
+        PARÁMETROS:
+            * dirPrincipal: direccion - es la direccion principal 
+            donde mueve el cabezal.
+            * dirSecundaria: direccion - es la direccion secundaria
+            donde mueve el cabezal.
+        PRECONDICIONES:
+            * dirPrincipal y dirSecundaria no son opuestas ni iguales
+    */
+    
+
+    if (puedeMover(dirPrincipal)) {
+        
+        Mover(dirPrincipal)
+
+    }
+
+    else {
+        
+        Mover(dirSecundaria)
+        IrAlBorde(opuesto(dirPrincipal))
+
+    }
+
+
+
+}

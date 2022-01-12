@@ -1,0 +1,1824 @@
+/*******************************************************************************************
+**********                    BIBLIOTECA - Ejercicios de Prácticas                  ********
+********************************************************************************************/
+
+/*******************************************************************************************
+**********            Pr. 3 Ej. - 8.a - Mover__Veces(dirección, cantidad)           ********    
+********************************************************************************************/
+
+procedure Mover__Veces(direcciónAMover, distanciaAMover){
+    
+    /*
+        PROPÓSITO: Mover el cabezal "distanciaAMover" celdas hacia "direcciónAMover".
+        PARÁMETROS:
+            * direcciónAMover: Dirección - La dirección a la cual mover el cabezal.
+            * distanciaAMover: Número - El número de veces que se debe mover el cabezal.
+        PRECONDICIONES:
+            * Debe haber al menos "distanciaAMover" celdas hacia la dirección "direcciónAMover".
+    */   
+    
+    repeat (distanciaAMover){
+        Mover(direcciónAMover)
+    }
+}
+
+/*******************************************************************************************
+**********          Pr. 3 Ej. - 8.b - Mover__Veces(dirección, cantidad)             ********
+********************************************************************************************/
+
+/*
+    No es posible realizar éste ejercicio sin repetición simple, ya que al estar parametrizada
+    la distancia a mover, no es una cantidad fija y el modo de que conocemos por ahora de hacer
+    algo una cierta cantidad de veces es con repetición simple.
+*/
+
+/*******************************************************************************************
+**********          Pr. 3 Ej. - 8.c - Poner y Sacar__Veces(color,cantidad)          ********
+********************************************************************************************/
+
+procedure Poner__Veces(colorAPoner, cantidadAPoner){
+   
+    /*
+        PROPÓSITO: Poner tantas bolitas de "colorAPoner" como "cantidadAPoner" en la celda actual.
+        PARÁMETROS:
+            * colorAPoner: Color - El color de bolitas a poner.
+            * cantidadAPoner: Número - La cantidad de bolitas a poner.
+        PRECONDICIONES:
+            * Ninguna.
+    */   
+    
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+procedure Sacar__Veces(colorASacar, cantidadASacar){
+    
+    /*
+        PROPÓSITO: Sacar tantas bolitas de "colorASacar" como "cantidadASacar" de la celda actual.
+        PARÁMETROS:
+            * colorASacar: Color - El color de bolitas a sacar.
+            * cantidadASacar: Número - La cantidad de bolitas a sacar.
+        PRECONDICIONES:
+            * Existen al menos "cantidadASacar" bolitas del color "colorASacar" en la celda actual.
+    */   
+    
+    repeat (cantidadASacar){
+        Sacar(colorASacar)
+    }
+}
+
+/*******************************************************************************************
+**********           Pr. 4 Ej. 2 - Mover_SegúnColor_(dirección,color)               ********
+********************************************************************************************/
+
+procedure Mover_SegúnColor_(dirección, color) {
+    /*
+        PROPÓSITO:  Mover el cabezal en la dirección dada tantas veces como cantidad de bolitas 
+        del color dado que haya en la celda actual, dejando el cabezal en la última celda que 
+        se movió.
+        PARÁMETROS:
+            * dirección: tipo Dirección - La dirección en la cual se moverá el cabezal.
+            * color: tipo Color - El color de las bolitas a sensar en la celda actual.
+        PRECONDICIONES:
+            * Existen al menos la cantidad de celdas lindantes en la dirección dada como el color 
+            dado tenga de cantidad de bolitas en la celda actual.  
+    */
+    
+    repeat (nroBolitas(color)) {
+        Mover(dirección)
+    }
+    /*
+    Mover__Veces(dirección, nroBolitas(color))  //Otra solución
+    */
+}
+
+/*******************************************************************************************
+**********              Pr. 4 Ej. 6 - SacarTodas_(colorASacar)                    **********
+********************************************************************************************/
+
+procedure SacarTodas_(colorASacar) {
+    /*
+        PROPÓSITO:  Sacar todas las bolitas del color dado de la celda actual.
+        PARÁMETROS:
+            * colorASacar: tipo - descripción.
+        PRECONDICIONES:
+            * Ninguna. Es una operación total.
+    */
+    
+    Sacar__Veces(colorASacar, nroBolitas(colorASacar))
+}
+
+/*******************************************************************************************
+**********              Pr. 5 Ej. 2. e - Funciones Totales Verdaderas               ********
+********************************************************************************************/
+
+function hayBolitasDeTodosLosColores() {
+    /*
+        PROPÓSITO:  Indica si hay bolitas de todos los colores en la celda actual.
+        RESULTADO: Un Booleano.
+        PRECONDICIONES:
+            * Ninguna. Es una función total.
+    */
+    
+    return (hayBolitas(Azul) && hayBolitas(Negro) && hayBolitas(Rojo) && hayBolitas(Verde))
+}
+
+/*******************************************************************************************
+Pr. 5 Ej. 4 - b. Reemplazar_Y_Por_(1erColorAReemplazar, 2doColorAReemplazar, colorAAgregar)
+********************************************************************************************/
+
+procedure Reemplazar_Y_Por_(primerColorAReemplazar, segundoColorAReemplazar, colorAAgregar) {
+    /*
+        PROPÓSITO:  Reemplaza el primer y segundo color dado por el tercer color dado, en la
+        celda actual.
+        PARÁMETROS:
+            * primerColorAReemplazar: Tipo Color - El primer color a reemplazar.
+            * segundoColorAReemplazar: Tipo Color - El segundo color a reemplazar.
+            * colorAAgregar: Tipo Color - El color que reemplaza al primer y segundo color.
+        PRECONDICIONES:
+            * Existen al menos 1 bolita del primer y segundo color dado en la celda actual.
+    */
+    
+    Sacar__Veces(primerColorAReemplazar, 1)
+    Sacar__Veces(segundoColorAReemplazar, 1)
+    Poner__Veces(colorAAgregar, 1)
+}
+
+/*******************************************************************************************
+*********               Pr. 5 Ej. 5 - a. Poner_Si_(color, condición)                  ******
+********************************************************************************************/
+
+procedure Poner_Si_(color, condición) {
+    /*
+        PROPÓSITO:  Poner una bolita del color dado en la celda actual si la condición dada
+        se cumple.
+        PARÁMETROS:
+            * color: Tipo Color - El color de la bolita a poner.
+            * condición: Tipo Booleano - La condición a evaluar.
+        PRECONDICIONES:
+            * Ninguna. Es un procedimiento total.
+    */
+    
+    if (condición) {
+        Poner(color)
+    }
+}
+
+/*******************************************************************************************
+****  Pr. 5 Ej. 5 - b. Sacar_Si_(color, condición) y Mover_Si_(dirección, condición)  ******
+********************************************************************************************/
+
+procedure Sacar_Si_(color, condición) {
+    /*
+        PROPÓSITO:  Sacar una bolita del color dado en la celda actual si la condición dada
+        se cumple.
+        PARÁMETROS:
+            * color: Tipo Color - El color de la bolita a sacar.
+            * condición: Tipo Booleano - La condición a evaluar.
+        PRECONDICIONES:
+            * Existe al menos 1 bolita del color dado en la celda actual, cuando la condición 
+              se cumple.
+    */
+    
+    if (condición) {
+        Sacar(color)
+    }
+}
+
+procedure Mover_Si_(dirección, condición) {
+    /*
+        PROPÓSITO:  Mover el cabezal 1 celda en la dirección dada si la condición dada
+        se cumple.
+        PARÁMETROS:
+            * dirección: Tipo Dirección - La dirección a mover..
+            * condición: Tipo Booleano - La condición a evaluar.
+        PRECONDICIONES:
+            * Existe al menos 1 celda en la dirección dada cuando la condición se cumple.
+    */
+    
+    if (condición) {
+        Mover(dirección)
+    }
+}
+
+/*******************************************************************************************
+**********         Práctica 6 - Repetición condicional y recorridos                 ********
+********************************************************************************************/
+
+/* ESTRUCTURA GENERAL DE RECORRIDOS */
+
+    Ir al inicio de un recorrido
+    while (Quedan elementos por recorrer?){
+        Procesar elemento
+        Pasar al siguiente elemento
+    }
+    Finalizar recorrido.
+
+
+
+procedure RecorridoGenérico () {
+/*
+        PROPOSITO:
+            * procesar todos los elementos de una secuencia de elementos determinada
+        PRECONDICÍON: según el problema
+*/
+
+    IniciarReccorrido()
+    while (quedanElementosPorProcesar()) {
+        ProcesarElementoActual()
+        PasarAlSiguienteElemento()
+    }
+    FinalizarRecorrido()
+
+    // Recorrido por celdas de todo el tablero
+
+    IrAlInicioDeUnRecorrido__(dirPrincipal, dirSecundaria)   
+    while (not estoyElFinalDeUnRecorrido__(dirPrincipal, dirSecundaria)) {
+        ProcesarElementoActual()
+        PasarASiguienteCelda__(dirPrincipal, dirSecundaria)
+    } 
+    FinalizarRecorrido()
+
+/*******************************************************************************************
+**********              Pr. 6 Ej. 2 - SacarTodas_(color)                            ********
+********************************************************************************************/
+
+procedure SacarTodas_(color) {
+    /*
+        PROPÓSITO:  Sacar todas las bolitas del color dado de la celda actual.
+        PARÁMETROS:
+            * color: Tipo Color - El color de bolitas a sacar totalmente.
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    while (hayBolitas(color)) {
+        Sacar(color)
+    }
+}
+
+/*******************************************************************************************
+**********  Pr. 6 Ej. 7 - a. IrAlInicioDeUnRecorrido__(dirPrincipal, dirSecundaria) ********
+********************************************************************************************/
+
+procedure IrAlInicioDeUnRecorrido__(dirPrincipal, dirSecundaria) {
+    /*
+        PROPÓSITO:  Dejar el cabezal en la esquina opuesta a la indicada por las direcciones 
+        dadas.
+        PARÁMETROS:
+            * dirPrincipal: Tipo Dirección - La dirección principal a moverse.
+            * dirSecundaria: Tipo Dirección - La dirección secundaria a moverse.
+        PRECONDICIONES:
+            * Las direcciones dadas no pueden ser opuestas ni iguales.
+    */
+    
+    IrAlBorde(opuesto(dirPrincipal))
+    IrAlBorde(opuesto(dirSecundaria))
+}
+
+/*******************************************************************************************
+*********  Pr. 6 Ej. 7 - b. estoyElFinalDeUnRecorrido__(dirPrincipal, dirSecundaria) *******
+********************************************************************************************/
+
+function estoyElFinalDeUnRecorrido__(dirPrincipal, dirSecundaria) {
+    /*
+        PROPÓSITO:  Indica si la celda actual es el final de un recorrido en las direcciones
+        dadas.
+        PARÁMETROS:
+            * dirPrincipal: Tipo Dirección - La dirección principal a moverse en el recorrido.
+            * dirSecundaria: Tipo Dirección - La dirección secundaria a moverse en el recorrido.
+        RESULTADO: Un Booleano.
+        PRECONDICIONES:
+            * Las direcciones dadas no pueden ser opuestas ni iguales.
+    */
+    
+    return (not (puedeMover(dirPrincipal) || puedeMover(dirSecundaria)))
+}
+
+/*******************************************************************************************
+*********   Pr. 6 Ej. 7 - c. PasarASiguienteCelda__(dirPrincipal, dirSecundaria)     *******
+********************************************************************************************/
+
+procedure PasarASiguienteCelda__(dirPrincipal, dirSecundaria) {
+    /*
+        PROPÓSITO:  Dejar el cabezal en la siguiente celda, o bien hacia "dirPrincipal" o
+        hacia ....
+        PARÁMETROS:
+            * dirPrincipal: Tipo Dirección - La dirección principal a moverse.
+            * dirSecundaria: Tipo Dirección - La dirección secundaria a moverse.
+        PRECONDICIONES:
+            * Las direcciones dadas no son opuestas ni iguales.
+            * Existe al menos 1 celda en alguna de las direcciones dadas.
+    */
+    
+    if (puedeMover(dirPrincipal)) {
+        Mover(dirPrincipal)
+    } else {
+        Mover(dirSecundaria)
+        IrAlBorde(opuesto(dirPrincipal))
+    }
+}
+
+/*******************************************************************************************
+**********      Pr. 6 Ej. 8 - k. Mover_Bolitas_Al_(cantidad, color, dirección)      ********
+********************************************************************************************/
+
+procedure Mover_Bolitas_Al_(cantidad, color, dirección) {
+    /*
+        PROPÓSITO:  Quitar la cantidad dada del color de bolitas dado de la celda actual y 
+        ponerlas 1 celda lindante en la dirección dada, dejando allí el cabezal.
+        PARÁMETROS:
+            * cantidad: Tipo Número - La cantidad de bolitas a sacar.
+            * color: Tipo Color - El color de bolitas a sacar.
+            * dirección: Tipo Dirección - La dirección de la celda lindante.
+        PRECONDICIONES:
+            * Existen al menos la cantidad dada de bolitas del color dado.
+            * Existe al menos 1 celda lindante en la dirección dada.
+    */
+    
+    Sacar__Veces(color, cantidad)
+    Mover(dirección)
+    Poner__Veces(color, cantidad)
+}
+
+/********************************************************************************************
+**********         Pr. 7 - Ej. 1 hayBolitas_EnElBorde_(color, dirección)             ********
+********************************************************************************************/
+
+function hayBolitas_EnElBorde_(color, dirección) {
+    /*
+        PROPÓSITO:  Indicar si en el borde dado hay bolitas del color dado.
+        PARÁMETROS:
+            * color: Color - El color de bolitas.
+            * dirección: Dirección - La dirección del borde.
+        RESULTADO: Booleano.
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    IrAlBorde(dirección)
+    return (hayBolitas(color))
+}
+
+/********************************************************************************************
+**********         Pr. 7 - Ej. 2 tieneBolitas_Al_(color, dirección)                  ********
+********************************************************************************************/
+
+function tieneBolitas_Al_(color, dirección) {       // fción parcial, con la siguiente, se hace total
+    /*
+        PROPÓSITO:  Indicar si la celda lindante en la dirección dada tiene bolitas del color
+        dado. 
+        PARÁMETROS:
+            * color: Color - El color de bolitas.
+            * dirección: Dirección - La dirección de la celda lindante.
+        RESULTADO: Booleano.
+        PRECONDICIONES:
+            * Existe al menos 1 celda lindante en la dirección dada.
+    */
+    
+    Mover(dirección)
+    return (hayBolitas(color))
+}
+
+/********************************************************************************************
+**********         Pr. 7 - Ej. 3 hayBolitas_Al_(color, dirección)                    ********
+********************************************************************************************/
+
+function hayBolitas_Al_(color, dirección) {     // fción total, usando como base la parcial anterior
+    /*
+        PROPÓSITO:  Indicar si hay una celda lindante en la dirección dada y tiene bolitas del
+        color dado. 
+        PARÁMETROS:
+            * color: Color - El color de las bolitas.
+            * dirección: Dirección - La dirección de la celda lindante.
+        RESULTADO: Booleano.
+        PRECONDICIONES:
+            * Ninguno.
+    */
+    
+        return (puedeMover(dirección) && tieneBolitas_Al_(color, dirección))
+}
+
+/********************************************************************************************
+**********         Pr. 7 - Ej. 4 máximoEntre_Y_(valor1, valor2)                      ********
+********************************************************************************************/
+
+function máximoEntre_Y_(valor1, valor2) {
+    /*
+        PROPÓSITO:  Describe el valor máximo entre los valores dados.
+        PARÁMETROS:
+            * valor1: Número/Color/Dirección/Booleano - El primer valor a comparar si es el mayor.
+            * valor2: Número/Color/Dirección/Booleano - El segundo valor a comparar si es el mayor.
+        RESULTADO: Número
+        PRECONDICIONES:
+            * Los valores dados deben ser del mismo tipo.
+    */
+    
+    return (choose valor1 when (valor1 > valor2)
+                   valor2 otherwise)
+}
+
+/********************************************************************************************
+**********         Pr. 7 - Ej. 4 mínimoEntre_Y_(valor1, valor2)                      ********
+********************************************************************************************/
+
+function mínimoEntre_Y_(valor1, valor2) {
+    /*
+        PROPÓSITO:  Describe el valor mínimo entre los valores dados.
+        PARÁMETROS:
+            * valor1: Número - El primer valor a comparar si es el menor.
+            * valor2: Número - El segundo valor a comparar si es el menor.
+        RESULTADO: Número
+        PRECONDICIONES:
+            * Ninguno.
+    */
+    
+    return (choose valor1 when (valor1 < valor2)
+                   valor2 otherwise)
+}
+
+/********************************************************************************************
+**********         Pr. 7 - Ej. 7 distanciaAlBorde_(dirección)                        ********
+********************************************************************************************/
+
+function distanciaAlBorde_(dirección) {
+    /*
+        PROPÓSITO:  Describe la distancia que hay entre la celda actual y el borde de la
+        dirección dada. 
+        PARÁMETROS:
+            * dirección: Dirección - La dirección donde está el borde.
+        RESULTADO: Número.
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    cantidadDeCeldasHastaElBorde := 0
+    while (puedeMover(dirección)) {
+        cantidadDeCeldasHastaElBorde := cantidadDeCeldasHastaElBorde + 1
+        Mover(dirección)
+    }
+    return (cantidadDeCeldasHastaElBorde)
+}
+
+/********************************************************************************************
+**********                   Pr. 7 - Ej. 10 nroVacías()                              ********
+********************************************************************************************/
+
+function nroVacías() {
+    /*
+        PROPÓSITO:  Describe la cantidad de celdas vacías que hay en el tablero actual.
+        RESULTADO: Número.
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    IrAlInicioDeUnRecorrido__(Este, Norte)
+    cantidadDeCeldasVacíasVistas := unoSiEsCeldaVacíaCeroSiNo()   
+    while (not estoyElFinalDeUnRecorrido__(Este, Norte)) {
+        PasarASiguienteCelda__(Este, Norte)
+        cantidadDeCeldasVacíasVistas := cantidadDeCeldasVacíasVistas + unoSiEsCeldaVacíaCeroSiNo()
+    } 
+    return (cantidadDeCeldasVacíasVistas)
+}
+
+function unoSiEsCeldaVacíaCeroSiNo() {
+    /*
+        PROPÓSITO:  Describe 1 si la celda actual está vacía, 0 en caso contrario.
+        RESULTADO: Número.
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    return (choose  1 when (esCeldaVacía())
+                    0 otherwise)
+}
+
+function esCeldaVacía() {
+    /*
+        PROPÓSITO:  Indica si la celda actual está vacía.
+        RESULTADO: Booleano.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (not hayBolitas(Azul) && not hayBolitas(Negro) && 
+            not hayBolitas(Rojo) && not hayBolitas(Verde))
+}
+
+/********************************************************************************************
+**********                   Pr. 7 - Ej. 11 colorMínimoConBolitas()                  ********
+********************************************************************************************/
+
+function colorMínimoConBolitas() {
+    /*
+        PROPÓSITO:  Describe el color más chico del cual hay bolitas en la celda actual.
+        RESULTADO: Color
+        PRECONDICIONES:
+            * Existe al menos 1 bolita de cualquier color en la celda actual.
+    */
+    
+    colorActual := minColor()
+    while (colorActual /= maxColor() && not (hayBolitas(colorActual))) {
+        colorActual := siguiente(colorActual)
+    }
+    return (colorActual)
+}
+
+/********************************************************************************************
+**********               Pr. 7 - Ej. 15 IrANésimaVacía_(n)                           ********
+********************************************************************************************/
+
+procedure IrANésimaVacía_(n) {
+    /*
+        PROPÓSITO:  Posicionar el cabezal en la celda vacía número "n". Si no hubiera la 
+        cantidad "n" suficientes de celdas vacías, el cabezal finaliza en la esquina Nor-Este.
+        PARÁMETROS:
+            * n: Número - El número de celda vacía hacia la cual se posicionará el cabezal.
+        PRECONDICIONES:
+            * "n" debe ser mayor o igual a 1
+    */
+    
+    IrAlInicioDeUnRecorrido__(Este, Norte)
+    celdasVacíasYaVistas := unoSiEsCeldaVacíaCeroSiNo()
+    while (celdasVacíasYaVistas /= n && not estoyElFinalDeUnRecorrido__(Este, Norte)){
+        PasarASiguienteCelda__(Este, Norte)
+        celdasVacíasYaVistas := celdasVacíasYaVistas + unoSiEsCeldaVacíaCeroSiNo() 
+    }
+}
+
+/********************************************************************************************
+**********               Pr. 7 - unoSi_CeroSino(condición)                           ********
+********************************************************************************************/
+
+function unoSi_CeroSino(condición) {
+    /*
+        PROPÓSITO:  Describe 1 si la condición dada es verdadera, 0 sino.
+        PARÁMETROS:
+            * condición: Booleano - La condición a evaluar para describir 1 o 0 según corresponda.
+        RESULTADO: Número.
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    return (choose  1 when (condición)
+                    0 otherwise)
+}
+
+/********************************************************************************************
+**********                        PRÁCTICA 9 - Listas                                ********
+********************************************************************************************/
+
+function cons(elemento , lista) {           // con_agregadoAdelanteDeLaLista_
+    /*
+        PROPÓSITO:  Describir la lista que resulta de agregar el elemento de la lista dada,
+        adelante de todos los demás.
+        PARÁMETROS:
+            * elemento: es de un tipo cualquiera Elemento.
+            * lista: es de tipo Lista de Elementos.
+        RESULTADO: [Elementos].
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    return ( [elemento] ++ lista )
+}
+
+function snoc(lista , elemento) {           // laLista_con_AgregadoAtrás
+    /*
+        PROPÓSITO:  Describir la lista que resulta de agregar el elemento de la lista dada,
+        al final de todos los demás.
+        PARÁMETROS:
+            * elemento: es de un tipo cualquiera Elemento.
+            * lista: es de tipo Lista de Elementos.
+        RESULTADO: [Elementos].
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    return ( lista ++ [elemento] )
+}
+
+function secuenciaAritméticaDeNúmerosDe_A_(valorInicial, valorFinal) {
+    /*
+        PROPÓSITO:  Describir la lista que tiene todos los números desde el número 
+        "valorInicial" hasta el número "valorFinal"
+        PARÁMETROS:
+            * valorInicial: Número - descripción.
+            * valorFinal: Número - descripción.
+        RESULTADO: Una lista de tipo Lista de Números. Si valorFinal < valorInicial,
+        la lista estará vacía.
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    próximoNúmero := valorInicial
+    listaHastaAhora := []
+    repeat (valorFinal - valorInicial + 1) {
+        listaHastaAhora := listaHastaAhora ++ [próximoNúmero]
+        próximoNúmero := próximoNúmero + 1
+    }
+    return (listaHastaAhora)
+}
+
+function enTotal_IgualesA_(cantidad, elemento) {
+    /*
+        PROPÓSITO:  Describir la lista con cantidad de elementos iguales al elemento dado.
+        PARÁMETROS:
+            * cantidad: Número - descripción.
+            * elemento: es de un tipo cualquiera "Elemento".
+        RESULTADO: Una lista de tipo Lista de Elementos. Si "cantidad" <= 0, la lista estará
+        vacía.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    listaConstruídaHastaAhora := []     //Inicializar un acumulador SOLAMENTE tiene sentido en una acumulación
+    repeat (cantidad) {
+        listaConstruídaHastaAhora := [elemento] ++ listaConstruídaHastaAhora
+    }
+    return (listaConstruídaHastaAhora)
+}
+
+function filaActual() {
+    /*
+        PROPÓSITO:  Describir la fila actual del tablero como una lista de celdas.
+        RESULTADO: Una lista de tipo Lista de Celdas.
+        PRECONDICIONES:
+            * Ninguna.
+        OBSERVACIONES: Precisamos la función celdaActual definida antes.
+    */
+    
+    filaLeída := []
+    IrAlBorde(Oeste)
+    while (puedeMover(Este)) {
+        filaLeída := filaLeída ++ [celdaActual()]   //Se agrega al final para que el orden sea el mismo que en el que fueron recorridas
+        Mover(Este)
+    }
+    return (filaLeída ++ [celdaActual()])
+}
+
+function tableroActual() {
+    /*
+        PROPÓSITO:  ....
+        RESULTADO: Una lista de tipo Lista de Filas. (lista de listas de celdas)
+        PRECONDICIONES:
+            * Ninguna.
+        OBSERVACIONES: Precisamos la función filaActual recién definida.
+    */
+    
+    tableroLeído := []
+    IrAlBorde(Norte)
+    while (puedeMover(Sur)) {
+        tableroLeído := tableroLeído ++ [filaActual()]
+        Mover(Sur)
+    }
+    return (tableroLeído ++ [filaActual()])
+}
+
+/*
+    primero(<expLista>)
+        PROPÓSITO: describe el primer elemento de la lista dada
+        PRECONDICIÓN: la lista dada no es vacía
+        PARÁMETRO: la lista es de tipo Lista de “Elementos”
+        RESULTADO: un valor de tipo “Elemento”
+*/
+
+/*
+    resto(<expLista>)       //O SinElPrimero_
+        PROPÓSITO: describe una lista con los elementos de la lista dada, excepto que sin el primero de ellos
+        PRECONDICIÓN: la lista dada no es vacía
+        PARÁMETRO: la lista es de tipo Lista de “Elementos”
+        RESULTADO: un valor de tipo Lista de “Elementos”
+*/
+
+/*
+    esVacía(<expLista>)
+        PROPÓSITO: indica si la lista es vacía
+        PRECONDICIÓN: ninguna
+        PARÁMETRO: la lista es de tipo Lista de “Elementos”
+        RESULTADO: un valor de tipo Booleano
+*/
+
+function segundo(lista) {
+    /*
+        PROPÓSITO:  Describir el segundo elemento de la lista dada.
+        PARÁMETROS:
+            * lista: del tipo Lista de Elementos.
+        RESULTADO: Un valor de tipo Elemento
+        PRECONDICIONES:
+            * La lista dada tiene al menos 2 elementos.
+    */
+    
+    return (primero(resto(lista)))      //El segundo queda primero luego de sacar el primero
+}
+
+function sinLosDosPrimeros(lista) {
+    /*
+        PROPÓSITO:  Describir una lista con los elementos de la lista dada, excepto los 
+        primeros 2.
+        PARÁMETROS:
+            * lista: del tipo Lista de Elementos.
+        RESULTADO: Un valor de tipo de Lista Elemento
+        PRECONDICIONES:
+            * La lista dada tiene al menos 2 elementos.
+    */
+    
+    return (resto(resto(lista)))      //Al sacar el primero 2 veces seguidas, hay 2 elementos menos
+}
+
+function tercero(lista) {
+    /*
+        PROPÓSITO:  Describir el tercer elemento de la lista dada.
+        PARÁMETROS:
+            * lista: del tipo Lista de Elementos.
+        RESULTADO: Un valor de tipo Elemento
+        PRECONDICIONES:
+            * La lista dada tiene al menos 3 elementos.
+    */
+    
+    return (primero(sinLosDosPrimeros(lista)))      //Y al sacar 2, el que queda primero es el tercero
+}
+
+/*
+    Listas:
+        Son datos con estructura.
+        Tienen muchas partes, pero no siempre la misma cantidad.
+        Se pueden crear a través de funciones constructoras.
+        Se puede obtener información de ellas a través de funciones de acceso.
+        Se pueden hacer recorridos sobre los elementos de una lista.
+        Son un tipo de datos muy poderoso y útil.
+*/
+
+/********************************************************************************************
+**********                  Pr. 9 - Ej. 4 direccionesAlBorde                         ********
+********************************************************************************************/
+
+function direccionesAlBorde() {
+    /*
+        PROPÓSITO:  Describir una lista de direcciones hacía la cual el cabezal no se puede
+        mover.
+        RESULTADO: Una lista de tipo Lista de Direcciones.
+        PRECONDICIONES:
+            * Ninguna.
+        OBSERVACIONES:
+            * Si el cabezal se puede mover en todas las direcciones, el resultado es una lista
+            vacía.
+    */
+    
+    direccionesEncontradas := []
+    direcciónActual := minDir()
+    while (direcciónActual /= maxDir()) {
+        listaHastaAhora := direccionesEncontradas ++ dirección_SiNoPuedeMover(direcciónActual)
+        direcciónActual := siguiente(direcciónActual)
+    }
+    return (direccionesEncontradas ++ dirección_SiNoPuedeMover(direcciónActual))
+}
+
+function dirección_SiNoPuedeMover(direcciónAMover) {
+    /*
+        PROPÓSITO:  Describe una lista de direcciones de 1 elemento si el cabezal no puede 
+        moverse en la dirección dada, o una lista vacía en caso contrario.
+        PARÁMETROS:
+            * direcciónAMover: Dirección - La dirección a evaluar si el cabezal no se puede mover.
+        RESULTADO: Una Lista de Direcciones.
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    return (choose  [dirección] when (not puedeMover(dirección))
+                             [] otherwise)
+}
+
+/********************************************************************************************
+**********                      Pr. 9 - Ej. 5 esSingular_                            ********
+********************************************************************************************/
+
+function esSingular_(listaDeElementos) {
+    /*
+        PROPÓSITO:  Indicar si la lista dada tiene 1 sólo elemento.
+        PARÁMETROS:
+            * listaDeElementos: Lista de Elementos - La lista a evaluar si tiene 1 sólo elemento.
+        RESULTADO: Booleano.
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    //return (resto(listaDeElementos) == [])  // Otra forma de resolverlo.
+    return (not esVacía(listaDeElementos) && esVacía(resto(listaDeElementos)))
+}
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 7 longitudDe_                           ********
+********************************************************************************************/
+
+function longitudDe_(listaDeElementos) {
+    /*
+        PROPÓSITO:  Describir la longitud númerica que tiene la lista dada.
+        PARÁMETROS:
+            * listaDeElementos: Lista de Elementos - La lista de la cual se va a averiguar que
+            cantidad de elementos tiene.
+        RESULTADO: Número. Igual o mayor a 0. La cantidad es finita.
+        PRECONDICIONES:
+            * Ninguna.
+         OBSERVACIONES:
+            * Se usa foreach para recorrer toda la lista dada.
+    */
+    
+    cantidadDeElementosContadas := 0
+    foreach elemento in listaDeElementos {
+        cantidadDeElementosContadas := cantidadDeElementosContadas + 1
+    }
+    return (cantidadDeElementosContadas)
+}
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 8 a. sumatoriaDe_                       ********
+********************************************************************************************/
+
+function sumatoriaDe_(listaDeNúmeros) {
+    /*
+        PROPÓSITO:  Describir la sumatoria de todos los números de la lista dada.
+        PARÁMETROS:
+            * listaDeNúmeros: Lista de Números - La lista de números a evaluar cuanto
+            es la sumatoria de sus elementos numéricos.
+        RESULTADO: Número.
+        PRECONDICIONES:
+            * Ninguna.
+         OBSERVACIONES:
+            * Se usa foreach para recorrer toda la lista dada.
+    */
+    
+    sumatoriaHastaAhora := 0
+    foreach número in listaDeNúmeros {
+        sumatoriaHastaAhora := sumatoriaHastaAhora + número
+    }
+    return (sumatoriaHastaAhora)
+}
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 8 b. productoriaDe_                     ********
+********************************************************************************************/
+
+function productoriaDe_(listaDeNúmeros) {
+    /*
+        PROPÓSITO:  Describir el producto entre todos los números de la lista dada.
+        PARÁMETROS:
+            * listaDeNúmeros: Lista de Números - La lista de números a evaluar el
+            producto entre todos sus elementos numéricos.
+        RESULTADO: Número.
+        PRECONDICIONES:
+            * Ninguna.
+         OBSERVACIONES:
+            * Se usa foreach para recorrer toda la lista dada.
+    */
+    
+    productoriaHastaAhora := unoSi_CeroSino(not esVacía(listaDeNúmeros))
+    foreach número in listaDeNúmeros {
+        productoriaHastaAhora := productoriaHastaAhora * número
+    }
+    return (productoriaHastaAhora)
+}
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 10 reversoDe_                           ********
+********************************************************************************************/
+
+function reversoDe_(listaAInvertir) {
+    /*
+        PROPÓSITO:  Describir una lista de elementos como la lista dada, pero con el orden
+        de los elementos invertidos.
+        PARÁMETROS:
+            * listaAInvertir: [Elementos] - La lista de la cual se obtendrán los elementos 
+            para retornarlos en forma invertida en una nueva lista.
+        RESULTADO: [Elementos]
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    elementosInvertidosHastaAhora := []
+    foreach elementoAInvertir in listaAInvertir {
+        elementosInvertidosHastaAhora := cons(elementoAInvertir, elementosInvertidosHastaAhora)
+    }
+    return (elementosInvertidosHastaAhora)
+}
+
+/********************************************************************************************
+**********                          Pr. 10 - Ej. 14 contiene_A_                      ********
+********************************************************************************************/
+
+function contiene_A_(listaDeElementos, elementoAEncontrar) {
+    /*
+        PROPÓSITO:  Indicar si el elemento dado está en la lista dada.
+        PARÁMETROS:
+            * listaDeElementos: [Elemento] - La lista de elementos a evaluar si tiene el
+            elemento que se está buscando.
+            * elementoAEncontrar: Elemento - El elemento que se quiere evaluar si está en la
+            lista dada.
+        RESULTADO: Booleano.
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    elementosQueFaltanVer := listaDeElementos
+    while (not esVacía(elementosQueFaltanVer) && 
+           primero(elementosQueFaltanVer) /= elementoAEncontrar) {
+               elementosQueFaltanVer := resto(elementosQueFaltanVer)
+    }
+    return (not esVacía(elementosQueFaltanVer))
+}
+
+/********************************************************************************************
+**********                          Pr. 10 - Ej. 15 sinDuplicados_                   ********
+********************************************************************************************/
+
+function sinDuplicados_(listaDeElementos) {
+    /*
+        PROPÓSITO:  Describir una lista en base a la lista dada pero sin que tenga ninguno de
+        sus elementos repetidos luego de su primera aparición.
+        PARÁMETROS:
+            * listaDeElementos: [Elemento] - La lista de elementos a evaluar y quitar sus
+            elementos duplicados.
+        RESULTADO: [Elemento]
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    sinDuplicadosEncontrados := []
+    foreach elemento in listaDeElementos {
+        sinDuplicadosEncontrados := sinDuplicadosEncontrados ++
+                                    singular_Si_(elemento, not contiene_A_(sinDuplicadosEncontrados, elemento))
+    }
+    return (sinDuplicadosEncontrados)
+}
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 17 algunoDe_Entre_Y_                    ********
+********************************************************************************************/
+
+function algunoDe_Entre_Y_(listaDeNúmeros, desde, hasta) {
+    /*
+        PROPÓSITO:  Indicar si la lista dada contiene algún número que se encuentra entre
+        el rango de "desde" y "hasta", pero sin incluirlos.
+        PARÁMETROS:
+            * listaDeNúmeros: [Elemento] - La lista de números a evaluar si alguno de sus
+            elementos está en el rango buscado.
+            * desde: Número - El extremo menor del intervalo a evaluar.
+            * hasta: Número - El extremo mayor del intervalo a evaluar.
+        RESULTADO: Booleano.
+        PRECONDICIONES:
+            * "desde" debe ser menor a "hasta"
+    */
+    
+    númerosQueFaltanVer := listaDeNúmeros
+    while (not esVacía(númerosQueFaltanVer) && (not esValor_Entre_Y_(primero(númerosQueFaltanVer)), desde, hasta)) {
+            númerosQueFaltanVer := resto(númerosQueFaltanVer)
+    }
+    return (not esVacía(númerosQueFaltanVer))
+
+/*  OTRA SOLUCIÓN SIN SUBTAREA - VALENTINA - CONSULTAR
+
+    listaDeRango:= [(número1 + 1) .. (número2 - 1)] // +1 Y -1 porque es estrictamente mayor o menor.
+	while (not esVacía(listaDeRango) && not contiene_A_(lista, primero(listaDeRango))) {
+		listaDeRango:= sinElPrimero(listaDeRango)
+	}
+	return (not esVacía(listaDeRango))
+*/
+}
+
+function esValor_Entre_Y_(númeroAEvaluar, mínimoDelRango, máximoDelRango) {
+    /*
+        PROPÓSITO:  Indicar si el "númeroAEvaluar" es mayor al "mínimoDelRango" o si es menor
+        al "máximoDelRango"
+        PARÁMETROS:
+            * númeroAEvaluar: Número - El número que se desea evaluar si está dentro del rango
+            de valores dados.
+            * mínimoDelRango: Número - El extremo menor del intervalo a evaluar.
+            * máximoDelRango: Número - El extremo mayor del intervalo a evaluar..
+        RESULTADO: Booleano.
+        PRECONDICIONES:
+            * "mínimoDelRango" es menor a "máximoDelRango"
+    */
+    
+    return (númeroAEvaluar > mínimoDelRango || númeroAEvaluar < máximoDelRango)
+}
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 18 lista_estáIncluidaEn_                ********
+********************************************************************************************/
+
+function lista_estáIncluidaEn_(primeraLista, segundaLista) {
+    /*
+        PROPÓSITO:  Indicar si todos los elementos de la primera lista dada están incluídos
+        en la segunda segunda lista dada.
+        PARÁMETROS:
+            * primeraLista: [Elemento] - La lista que se desea saber si está contenida en la
+            segunda lista dada.
+            * segundaLista: [Elemento] - La lista a evaluar si tiene todos los elementos de
+            la primera lista dada.
+        RESULTADO: Booleano.
+        PRECONDICIONES:
+            * Las listas dadas deben ser del mismo tipo de elementos.
+            * Cada una de las listas dadas no pueden tener elementos duplicados.
+    */
+    
+    elementosIncluídosVistos := []
+    foreach elemento in primeraLista {
+        elementosIncluídosVistos := elementosIncluídosVistos ++
+                                    singular_Si_(elemento, contiene_A_(segundaLista, elemento))
+    }
+    return (primeraLista == elementosIncluídosVistos)
+}
+
+/*      OTRA SOLUCIÓN PERO CON WHILE - BÚSQUEDA
+
+    elementosQueFaltanVer := primeraLista
+    while (not esVacía(elementosQueFaltanVer) && contiene_A_(segundaLista, primero(elementosQueFaltanVer))){
+        elementosQueFaltanVer := resto(elementosQueFaltanVer)
+    }
+    return (esVacía(elementosQueFaltanVer))
+*/
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 19 estáOrdenada_                        ********
+********************************************************************************************/
+
+function estáOrdenada_(listaDeNúmeros) {
+    /*
+        PROPÓSITO:  Indicar si la lista dada tiene sus elementos numéricos ordenados de menor 
+        a mayor.
+        PARÁMETROS:
+            * listaDeNúmeros: [Número] - La lista a evaluar si tiene sus elementos ordenados
+            de menor a mayor.
+        RESULTADO: Booleano.
+        PRECONDICIONES:
+            * Ninguna. Es total.
+    */
+    
+    elementosPorVer := listaDeNúmeros
+    while (not esVacía(elementosPorVer) &&              // Evalúa que la lista dada no sea vacía, para no hacer boom ni tener precon
+           not esSingular_(elementosPorVer) &&          // Evalúa mientras la lista dada no tenga 1 sólo elemento, xq tengo q preguntar por el 1ero y el 2do elemento
+           (primero(elementosPorVer) <= segundo(elementosPorVer))) {        // Evalúa si el 1er elemento es menor o igual que el 2do para saber si está ordenada.
+                elementosPorVer := resto(elementosPorVer)           // Si se cumplen las condiciones, está ordenada, saco 1 elemento de la lista de la variable para
+    }                                                               // evaluar la próxima iteración.
+    return (esSingular_(elementosPorVer))       // Pregunta si la lista que tengo en la variable tiene un sólo elemento. Si es así, toda la lista está ordenada,
+} 
+
+/********************************************************************************************
+**********                   Pr. 10 - Ej. 20 posiciónDe_enLaQueAparece_              ********
+********************************************************************************************/
+
+function posiciónDe_enLaQueAparece_(lista, elemento) {
+    /*
+        PROPÓSITO:  Describir en que posición de la lista dada se encuentra la 1era aparición
+        del elemento dado.
+        PARÁMETROS:
+            * lista: [Elemento] - descripción.
+            * elemento: Elemento - del mismo tipo que los elementos de "lista" - descripción.
+        RESULTADO: Número.
+        PRECONDICIONES:
+            * La lista dada no es vacía.
+            * Existe al menos 1 aparición del elemento dado en la lista dada.
+    */
+    
+    elementosPorRecorrer := lista
+    posiciónDelElemento := 0
+    while (primero(elementosPorRecorrer) /= elemento) {
+        posiciónDelElemento := posiciónDelElemento + 1
+        elementosPorRecorrer := resto(elementosPorRecorrer)
+    }
+    return (posiciónDelElemento)
+}
+
+/********************************************************************************************
+**********                  Pr. 10 - Ej. 21 sinLaPrimeraApariciónDe_en_              ********
+********************************************************************************************/
+
+function sinLaPrimeraApariciónDe_en_(elemento, lista) {
+    /*
+        PROPÓSITO:  Describir una lista en base a la lista dada, pero sin la primera aparición
+        del elemento dado, si es que éste aparece en dicha lista.  
+        PARÁMETROS:
+            * elemento: Elemento, del mismo tipo que los elementos de la lista dada - El 
+            elemento a buscar y eliminar su primera aparición, si hubiere.
+            * lista: [Elemento] - La lista a buscar el elemento dado.
+        RESULTADO: [Elemento]
+        PRECONDICIONES:
+            * Ninguna. Función Total
+    */
+    
+    return (choose  lista_SinElElemento_(lista, elemento) when (contiene_A_(lista, elemento))
+                                                    lista otherwise)   
+}
+
+function lista_SinElElemento_(lista, elemento) {
+    /*
+        PROPÓSITO:  Describir una lista en base a la lista dada, pero sin la primera aparición
+        del elemento dado.  
+        PARÁMETROS:
+            * lista: [Elemento] - La lista donde se va a buscar el elemento dado.
+            * elemento: Elemento, del mismo tipo que los elementos de la lista dada - El 
+            elemento a buscar y filtrar su primera aparición en la lista retornada.
+        RESULTADO: [Elemento]
+        PRECONDICIONES:
+            * La lista dada no es vacía.
+            * La lista dada tiene al menos 1 aparición del elemento dado entre sus elementos.
+    */
+    
+    listaConElElementoABuscar := lista
+    listaSinElElementoBuscado := []
+    while (primero(listaConElElementoABuscar) /= elemento) {
+        listaSinElElementoBuscado := snoc(listaSinElElementoBuscado, primero(listaConElElementoABuscar))
+        listaConElElementoABuscar := resto(listaConElElementoABuscar)
+    }
+    return (listaSinElElementoBuscado ++ resto(listaConElElementoABuscar))
+}
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 22 a. mínimoElementoDe_                 ********
+********************************************************************************************/
+
+function mínimoElementoDe_(listaDeNúmeros) {
+    /*
+        PROPÓSITO:  Describir el número menor que tiene la lista dada.
+        PARÁMETROS:
+            * listaDeNúmeros: [Número] - La lista a buscar cual es el número menor.
+        RESULTADO: Número.
+        PRECONDICIONES:
+            * La lista dada no es vacía. 
+    */
+    
+    mínimoHastaAhora := primero(listaDeNúmeros)
+    foreach número in resto(listaDeNúmeros) {
+        mínimoHastaAhora := mínimoEntre_Y_(mínimoHastaAhora, número)
+    }
+    return (mínimoHastaAhora)
+}
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 22 b. sinElMínimoElemento_              ********
+********************************************************************************************/
+
+function sinElMínimoElemento_(listaDeNúmeros) {
+    /*
+        PROPÓSITO:  Describir una lista basada en la lista dada pero sin la primera aparición
+        del número menor de ella.
+        PARÁMETROS:
+            * listaDeNúmeros: [Número] - La lista a evaluar pero sin la primera aparición del
+            número menor.
+        RESULTADO: [Número]
+        PRECONDICIONES:
+            * La lista dada no es vacía.
+    */
+    
+    return (sinLaPrimeraApariciónDe_en_(mínimoElementoDe_(listaDeNúmeros), listaDeNúmeros))
+}
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 22 c. lista_ordenada                    ********
+********************************************************************************************/
+
+function lista_ordenada(listaDeNúmeros) {
+    /*
+        PROPÓSITO:  Describir, a partir de la lista dada, una lista con los mismos elementos
+        pero ordenados de menor a mayor.
+        PARÁMETROS:
+            * listaDeNúmeros: [Número] - La lista base para retornar una lista con los mismos
+            elementos pero ordenados de menor a mayor. 
+        RESULTADO: [Número]
+        PRECONDICIONES:
+            * La lista dada no es vacía.
+    */
+    
+    elementosOrdenados := [mínimoElementoDe_(listaDeNúmeros)]
+    elementosPorOrdenar := sinElMínimoElemento_(listaDeNúmeros)
+    while (not esVacía(elementosPorOrdenar)) {
+        elementosOrdenados := snoc(elementosOrdenados, mínimoElementoDe_(elementosPorOrdenar))
+        elementosPorOrdenar := sinElMínimoElemento_(elementosPorOrdenar)
+    }
+    return (elementosOrdenados)
+}
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 23 a. máximoElementoDe_                 ********
+********************************************************************************************/
+
+function máximoElementoDe_(listaDeNúmeros) {        //Hacer con foreach!!! ARREGLAR   
+    /*
+        PROPÓSITO:  Describir, de la lista dada,  el número mayor que en ella se encuentra.
+        PARÁMETROS:
+            * listaDeNúmeros: [Número] - La lista a buscar cual es el número mayor.
+        RESULTADO: Número.
+        PRECONDICIONES:
+            * La lista dada no es vacía. 
+    */
+    
+    máximoVisto := primero(listaDeNúmeros)
+    númerosPorComparar := resto(listaDeNúmeros)
+    while (not esVacía(númerosPorComparar)) {
+        máximoVisto := máximoEntre_Y_(máximoVisto, primero(númerosPorComparar))
+        númerosPorComparar := resto(listaDeNúmeros)
+    }
+    return (máximoVisto)
+}
+
+/********************************************************************************************
+**********                      Pr. 10 - Ej. 23 b. sinElMáximoElemento_              ********
+********************************************************************************************/
+
+function sinElMáximoElemento_(listaDeNúmeros) {
+    /*
+        PROPÓSITO:  Describir, a partir de una lista dada, una lista de elementos pero sin la
+        primera aparición del mayor número.  
+        PARÁMETROS:
+            * listaDeNúmeros: [Número] - La lista a evaluar cual es el mayor número para 
+            eliminarlo de la lista retornada
+        RESULTADO: [Número]
+        PRECONDICIONES:
+            * La lista dada no es vacía.
+    */
+    
+    return (sinLaPrimeraApariciónDe_en_(máximoElementoDe_(listaDeNúmeros), listaDeNúmeros))
+}
+
+/*******************************************************************************************
+**********                    BIBLIOTECA AUXILIARES - IMPLEMENTAR                 **********
+********************************************************************************************/
+
+/*******************************************************************************************
+*******           Pr. 4 Ej.  5 - Poner__VecesAl_(color, cantidad, dirección)          *******
+********************************************************************************************/
+
+procedure Poner__VecesAl_(color, cantidad, dirección) {
+    /*
+        PROPÓSITO:  Poner la cantidad dada del color dado en la celda lindante de la dirección
+        dada.
+        PARÁMETROS:
+            * color: Color - descripción.
+            * cantidad: Número - descripción.
+            * dirección: Dirección - descripción.
+        PRECONDICIONES:
+            * No importa q la celda en la dirección dada tenga bolitas
+            * Existe al menos una celda lindante en la dirección dada.
+    */
+    
+    Mover(dirección)
+    Poner__Veces(color, cantidad)
+    Mover(opuesto(dirección))
+}
+
+/*******************************************************************************************
+**********              Pr. 5 Ej. 2. cantidadTotalDeBolitasEnLaCeldaActual()        ********
+********************************************************************************************/
+
+function cantidadTotalDeBolitasEnLaCeldaActual() {
+    /*
+        PROPÓSITO:  Describe la cantidad total de bolitas en la celda actual. 
+        RESULTADO: Un Número.
+        PRECONDICIONES:
+            * Ninguna. Es una función total.
+    */
+    
+    return (nroBolitas(Azul) + nroBolitas(Negro) + nroBolitas(Rojo) + nroBolitas(Verde))
+}
+
+/*******************************************************************************************
+**********                       Pr. 5 Ej. 2. estáEnElBordeEste()                   ********
+********************************************************************************************/
+
+function estáEnElBordeEste() {
+    /*
+        PROPÓSITO:  Indicar si la celda actual está en el borde Este.
+        RESULTADO: Un Booleano.
+        PRECONDICIONES:
+            * Ninguna. Es una función total.
+    */
+    
+    return (not puedeMover(Este))
+}
+
+/*******************************************************************************************
+*** Pr. 5 Ej. 5 Sacar_Y_Si_(primerColorAReemplazar, segundoColorAReemplazar, condición) **** 
+********************************************************************************************/
+
+procedure Sacar_Y_Si_(primerColorAReemplazar, segundoColorAReemplazar, condición){
+    
+    /*Proposito: Saca una bolita del *primerColorAReemplazar y del *segundoColorAReemplazar 
+    cuando se cumple la condición dada.
+      Parametros: 
+                 *primerColorAReemplazar, es el color de una bolita que se va a sacar de la 
+                 celda actual.
+                 *segundoColorAReemplazar, es el color de una bolita que se va a sacar de la 
+                 celda actual.
+                 *condición, es un valor de verdad.
+      Precondiciones: - 
+    */
+    
+    if(condición){
+        Sacar(primerColorAReemplazar)
+        Sacar(segundoColorAReemplazar)
+    }
+}
+
+/*********************************************************************************/
+//              Practica 7. Variables y funciones. - By Diegote
+/*********************************************************************************/
+
+function tieneBolitas_Al_(color, dirección){        // Parcial
+    /*
+        PROPÓSITO: indica si la celda lindante en la dirección dada tiene bolitas 
+                   del color dado.
+        PARÁMETROS:
+            * color: es el color de las bolitas que se van a sensar
+            * dirección: es la dirección de la celda lindante
+        RESULTADO: Booleano
+        PRECONDICIONES:
+            * Debe existir una celda lindante en la dirección dada.
+    */
+    Mover(dirección)
+    return (hayBolitas(color))
+}
+
+function hayBolitas_Al_(color, dirección){      // Total
+    /*
+        PROPÓSITO: indica si hay una celda lindante en la dirección dada y la misma tiene
+                   bolitas del color dado.
+        PARÁMETROS:
+            * color: es el color de bolitas a sensar
+            * dirección: es la dirección de la celda lindante
+        RESULTADO: Booleano
+        PRECONDICIONES: Ninguna. 
+    */
+    
+    return (puedeMover(dirección) && tieneBolitas_Al_(color, dirección))
+}
+
+/*********************************************************************************/
+//              Practica 7. Variables y funciones. - By Diegote
+/*********************************************************************************/
+
+function describe_Si_Sino_( expresion1 ,condicion, expresion2){
+    
+    /* PROPOSITO: Denota la *expresión1 si se cumple la *condición dada caso contrario 
+                  denota el expresion2
+       precondicion:  expresion1 y expresion2 tienen que ser del mismo tipo.
+       parametros:
+       * expresion1 : es una expresion de cualquier tipo 
+       * condicion: es una Booleano
+       *expresion2: es una expresion de cualquier tipo 
+       Resultado:  Una expresión de cualquier tipo.
+    */
+
+    return (choose expresion1  when (condicion)
+                   expresion2  otherwise)
+}
+
+
+/*************** RECORRIDO DE ACUMULACIÓN ********************************/
+
+function totalDeBolitas_EnElTablero(color) {
+/*    
+    PROPÓSITO: Denota la cantidad total de bolitas del color dado en todo el tablero.
+    PRECONDICIONES: Ninguna(es una función total).
+    PARÁMETRO:
+                *color: Es el color de las bolitas que se van a contar.
+    RESULTADO: Un Número.
+    OBSERVACIÓN: Recorrido de acumulación celda por celda por el todo el tablero. 
+*/
+    cantidadDeBolitasYaContadas:= 0                                     //Inicialización de la variable.
+    IrAlInicioDeRecorridoA_Y_(direcciónPrincipal, direcciónSecundaria) //Inicialización de un recorrido.
+    while(quedanCeldasEnRecorridoAl_Y_(direcciónPrincipal, direcciónSecundaria)) { //¿Quedan elementos por recorrer?
+        cantidadDeBolitasYaContadas:= cantidadDeBolitasYaContadas + nroBolitas(color) //Procesar Elemento.
+        PasarALaSiguienteCeldaEnRecorridoAl_Y_(direcciónPrincipal, direcciónSecundaria)// Pasar a siguiente elemento.
+    }
+    return(cantidadDeBolitasYaContadas + nroBolitas(color))//Procesar ultimo elemento
+}
+
+/**************** RECORRIDO DE BUSQUEDA **********************************************/
+
+function hayBolita_(color) {        // Total
+/*    
+    PROPÓSITO: Indica si hay al menos una bolita del color dado en el tablero.
+    PRECONDICIONES: Ninguna (es una función total).
+    PARÁMETROS:
+                *color: Es el color de bolita que se va a buscar
+    RESULTADO: Un Booleano. 
+    OBSERVACIÓN: Recorrido de busqueda de celdas por el tablero.
+*/
+    IrAlInicioDeRecorridoA_Y_(direcciónPrincipal, direcciónSecundaria)//Inicialización de un recorrido.
+    while(not hayBolitas(color) && quedanCeldasEnRecorridoAl_Y_(direcciónPrincipal, direcciónSecundaria)) {//Busqueda y procesar elemento.
+        PasarALaSiguienteCeldaEnRecorridoAl_Y_(direcciónPrincipal, direcciónSecundaria)//Pasar al siguiente elemento.
+    }
+    return(hayBolitas(color))//Procesar Ultimo elemento.
+}
+
+/*************** RECORRIDO DE BUSQUEDA Y POSICIONAMIENTO DE CABEZAL ********************************/
+
+procedure EncontrarLaBolitaDe_(color) {
+/*    
+    PROPÓSITO: Posiciona el cabezal en la primer celda con bolitas del color dado.  
+    PRECONDICIONES: 
+                    *Hay, al menos, una bolita de color dado.
+    PARÁMETROS:
+                *color: es el color de bolitas que se va a buscar.
+    OBSERVACIÓN: La estrategia es un esquema de recorrido de busqueda.            
+*/
+    IrAlInicioDeRecorridoA_Y_(direcciónPrincipal, direcciónSecundaria)//Inicialización de un recorrido.
+    while(not hayBolitas(color)) {// ¿Encontre el elemento? - Procesar elemento.
+        PasarALaSiguienteCeldaEnRecorridoAl_Y_(direcciónPrincipal, direcciónSecundaria)// Pasar al siguiente celda.
+    } 
+}
+
+/****************** RECORRIDO DE BUSQUEDA POR ELEMENTOS (DIRECCIONES, COLORES, ETC)*****************/
+
+function direcciónEnLaQueSeEncuentra_(color) {
+/*
+    PROPÓSITO: Denota la dirección en la que se encuentra la bolita deL color dado.
+    PRECONDICIONES:
+                    *Las direcciones son ortogonales.
+                    *Existe una bolita de color dado en alguna de las 4 direcciones ortogonales.
+    PARÁMETROS:
+                *color: Es el color de bolita que se buscara
+    RESULTADO: Una Dirección.   
+    OBSERVACIÓN: Se estructura como un recorrido de busqueda por direcciones.
+*/
+    direcciónActual:= minDir()  //Inicialización del recorrido y de la variable.
+    while(direcciónActual /= maxDir() && not hayBolitas_Al_(direcciónActual, color)) {  //¿Encontre el elemento?
+        direcciónActual:= siguiente(direcciónActual)    //Pasar al siguiente elemento.
+    }
+    return(direcciónActual)
+}
+
+/*************************************************************************************************
+                        CANTIDAD TOTAL ROJAS ORTOGONAL - FALTA CONTRATOS Y SE PUEDE PARAM
+**************************************************************************************************/
+
+function cantidadTotalDeBolitas_Ortogonal(){
+    
+    cantidadRojasHastaAhora := 0
+    direcciónActual := minDir()
+    while (direcciónActual /= maxDir()){
+        cantidadRojasHastaAhora := cantidadRojasHastaAhora + cantidadDeRojasAl_(direcciónActual)
+        direcciónActual := siguiente(direcciónActual)
+    }
+    return (cantidadRojasHastaAhora + cantidadDeRojasAl_(direcciónActual))
+}
+
+function cantidadDeRojasAl_(dir){
+
+    /*
+        PRECON: Ninguna.
+    */
+    
+    return (choose cantRojasLindantesAl_(dir) when (puedeMover(dir))
+                                            0 otherwise)
+}
+
+function cantRojasLindantesAl_(dir){
+    /*
+        PRECON: Existe al menos 1 celda en la dirección dada.
+    */ 
+
+    Mover(dir)
+    return(nroBolitas(Rojo))   
+}
+
+/*************************************************************************************************
+                        CANTIDAD TOTAL ROJAS DIAGONAL - FALTA CONTRATOS Y SE PUEDE PARAM
+**************************************************************************************************/
+
+function cantidadTotalRojasEnDiagonal(){
+    
+    dirActual := minDir()
+    cantRojasEnDiagVistas := cantRojasEnDiagAl_YAl_(dirActual, siguiente(dirActual))
+    while (dirActual /= maxDir()){
+        dirActual := siguiente(dirActual) 
+        cantRojasEnDiagVistas := cantRojasEnDiagVistas +
+                                 cantRojasEnDiagAl_YAl_(dirActual, siguiente(dirActual))
+    }
+    return (cantRojasEnDiagVistas)
+}
+
+function cantRojasEnDiagAl_YAl_(dir1, dir2){
+    
+    return (choose cantRojasAl_Y_(dir1, dir2) when (puedeMover(dir1) && puedeMover(dir2))
+                                            0 otherwise)
+}
+
+function cantRojasAl_Y_(dir1, dir2){
+    
+    Mover(dir1)
+    Mover(dir2)
+    return (nroBolitas(Rojo))
+}
+
+/*************************************************************************************************
+           CANTIDAD TOTAL ROJAS EN TODAS LAS DIRECCIONES - FALTA CONTRATOS Y SE PUEDE PARAM
+**************************************************************************************************/
+
+function cantidadTotalRojasTodasLasDirecciones(){
+    
+    return (cantidadTotalDeBolitas_Ortogonal()
+            + cantidadTotalRojasEnDiagonal())
+}
+
+/*************************************************************************************************
+                            RECORRIDOS DE BÚSQUEDA
+**************************************************************************************************/
+
+function hayDeColor_Al_(color, dirección){  //Parcial
+    
+    Mover(dirección)
+    return (hayBolitas(color))
+}
+
+function tieneDeColor_Al_(color, dirección){    //Total
+    
+    return (puedeMover(dirección) && hayDeColor_Al_(color, dirección))
+}
+
+function direcciónLindanteConBolitas_(color){   //Recorrido para saber la dir
+    
+    direcciónActual := minDir()
+    while (direcciónActual /= maxDir() && not tieneDeColor_Al_(color, direcciónActual)){
+        direcciónActual := siguiente(direcciónActual)
+    }
+    return (direcciónActual)
+}
+
+function hayLindanteConBolitas_(color){     //Recorrido para saber si hay bolitas
+    
+    direcciónActual := minDir()
+    while (direcciónActual /= maxDir() && not tieneDeColor_Al_(color, direcciónActual)){
+        direcciónActual := siguiente(direcciónActual)
+    }
+    return (tieneDeColor_Al_(color, direcciónActual))
+}
+
+
+/*************************************************************************************************
+                    ESTÁ EL ELEMENTO A BUSCAR EN ALGUNA DIRECCIÓN ORTOGONAL?
+**************************************************************************************************/
+
+/*
+    1 - quiero saber si en alguna dirección ortogonal hay alguna bolita del color
+        dado. No tiene precondiciones -- 
+        
+        OK FUNCA!!
+*/
+
+function hayDeColor_EnOrtogonal(colorABuscar){
+    /*
+        PROPÓSITO:  Indicar si en alguna dirección de las celdas lindantes
+        ortogonales hay al menos 1 bolita del color dado.
+        PARÁMETROS:
+            * colorABuscar: Color - El Color de la bolita a buscar si está
+            en alguna de las celdas lindantes ortogonales.
+        RESULTADO: Booleano. Verdadero si en alguna dirección lindante
+        ortogonal hay una celda con bolitas del color dado.
+        PRECONDICIONES:
+            * Ninguna. Es una función total.
+        OBSERVACIONES:
+            * Se plantea la solución como un Recorrido de búsqueda por
+            direcciones.
+    */
+    
+    direcciónAMirar := minDir()
+    while (direcciónAMirar /= maxDir() && not tiene_Al_(colorABuscar, direcciónAMirar)){
+        direcciónAMirar := siguiente(direcciónAMirar)
+    }
+    return (tiene_Al_(colorABuscar, direcciónAMirar))
+}
+
+function tiene_Al_(colorAEncontrar, direcciónABuscar){
+    /*
+        PROPÓSITO: Indicar si la celda lindante en la dirección dada tiene bolitas
+        del color dado.
+        PARÁMETROS:
+            * colorAEncontrar: Color - El color de bolitas a buscar en la celda lindante
+            de la dirección dada.
+            * direcciónABuscar: Dirección - La dirección de la celda lindante en donde
+            se quiere evaluar si hay bolitas del color dado.
+        RESULTADO: Booleano. Verdadero en caso de que en la dirección dada haya bolitas
+        del color dado. Falso en caso contrario.
+        PRECONDICIONES:
+            * Ninguna. Es una función total.
+        OBSERVACIONES:
+            * 
+    */
+    
+    return (puedeMover(direcciónABuscar) && hayDeColor_Al_(colorAEncontrar, direcciónABuscar))
+}
+
+function hayDeColor_Al_(colorAEvaluar, direcciónAEvaluar){
+    /*
+        PROPÓSITO: Indicar si en la dirección dada hay bolitas del color dado.
+        PARÁMETROS:
+            * colorAEvaluar: Color - El color de bolitas a evaluar si está en la celda 
+            lindante de la dirección dada.
+            * direcciónAEvaluar: Dirección - La dirección a evaluar donde estarían las
+            bolitas del color dado.
+        RESULTADO: Booleano. Verdadero en caso de que en la dirección dada hay bolitas del
+        color dado.
+        PRECONDICIONES:
+            * Existe al menos 1 celda lindante en la dirección dada.
+        OBSERVACIONES:
+            * 
+    */  
+    
+    Mover(direcciónAEvaluar)
+    return(hayBolitas(colorAEvaluar))
+}
+
+program{
+    
+    return(hayDeColor_EnOrtogonal(Verde))   //
+}
+
+/*************************************************************************************************
+                        EN QUE DIRECCIÓN ESTÁ EL ELEMENTO QUE BUSCO? PARCIAL!
+**************************************************************************************************/
+
+/*
+    2 - Quiero que me diga en que dirección está la bolita del color dado.
+        debe haber una bolita en al menos una dirección. 
+        
+        OK FUNCA!!!
+        
+*/
+
+function direcciónLindanteDeBolita_(colorABuscar){
+    /*
+        PROPÓSITO:  Describir la dirección lindante a la celda actual donde se encuentra
+        la bolita del color dado.
+        PARÁMETROS:
+            * colorABuscar: Color - El color de la bolita a buscar.
+        RESULTADO: Dirección
+        PRECONDICIONES:
+            * Existe al menos 1 bolita del color dado en alguna dirección lindante
+            ortogonal.
+    */
+    
+    direcciónAEvaluar := minDir()
+    while (not tiene_Al_(colorABuscar, direcciónAEvaluar)){     //La condición debe ser total, si va a evaluar al Norte y NO se puede mover hace BOOM, OJO!!!
+        direcciónAEvaluar := siguiente(direcciónAEvaluar)
+    }
+    return (direcciónAEvaluar)
+}
+
+program{
+    
+    //return( hayDeColor_EnOrtogonal(Verde) )   //FUNCA
+    //return( direcciónLindanteDeBolita_(Verde) ) //Debería dar Sur - Funca
+    return( hayDeColor_EnOrtogonal(Verde), direcciónLindanteDeBolita_(Verde) )  //Puedo preguntar por 2 funciones, separadas por coma, de distinto tipo. Averiguar con los profes!!
+}
+
+/*************************************************************************************************
+                    QUE CANTIDAD DE ELEMENTOS HAY EN LAS CELDAS ORTOGONALES? TOTAL
+**************************************************************************************************/
+
+/*
+    3 - Quiero saber que cantidad de bolitas del color dado hay en todas las celdas
+    lindantes ortogonales. No tiene precondiciones, es totol, funciona siempre.
+    
+    OK FUNCA!!!
+*/
+
+function cantidadTotalDe_Lindantes(colorABuscar){
+    /*
+        PROPÓSITO:  Describir la cantidad total de bolitas del color dado que hay en las
+        celdas lindantes ortogonales de la celda actual.
+        PARÁMETROS:
+            * colorABuscar: Color - El color de las bolitas del cual quiero evaluar su
+            cantidad total en las celdas ortogonales.
+        RESULTADO: Número.
+        PRECONDICIONES:
+            * Ninguna. Es una función total.
+    */
+    
+    direcciónActual := minDir()
+    cantidadHastaAhora := cantidadDe_Al_(colorABuscar, direcciónActual)     // Inicializo la variable ya contando antes de entrar al while. En vez de evaluar el caso borde en el return, lo evalúo acá. 
+    while (direcciónActual /= maxDir()){
+        direcciónActual := siguiente(direcciónActual)
+        cantidadHastaAhora := cantidadHastaAhora + cantidadDe_Al_(colorABuscar, direcciónActual)
+    }
+    return( cantidadHastaAhora )
+}
+
+function cantidadDe_Al_(color, dirección){
+    /*
+        PROPÓSITO:  Describe la cantidad de bolitas del color dado que hay en la celda
+        lindante de la dirección dada. En caso de que no exista la celda en la dirección
+        dada, describe 0.
+        PARÁMETROS:
+            * color: Color - El color de bolitas a contar.
+            * dirección: Dirección - La dirección a donde se van a buscar las bolitas
+            del color dado.
+        RESULTADO: Número
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    return ( choose cantidadDe_En_(color, dirección) when (puedeMover(dirección))
+                                                   0 otherwise) 
+}
+
+function cantidadDe_En_(color, dirección){
+    /*
+        PROPÓSITO:  Describir la cantidad de bolitas del color dado que hay en la dirección
+        dada.
+        PARÁMETROS:
+            * color: Color - El color de bolitas a contar.
+            * dirección: Dirección - La dirección a donde se van a buscar las bolitas
+            del color dado.
+        RESULTADO: Número
+        PRECONDICIONES:
+            * Existe al menos 1 celda en la dirección dada.
+    */
+    
+    Mover(dirección)
+    return(nroBolitas(color))
+}
+
+program{
+    
+    //return( hayDeColor_EnOrtogonal(Verde) )   //FUNCA
+    //return( direcciónLindanteDeBolita_(Verde) ) //Debería dar Sur - Funca
+    //return( hayDeColor_EnOrtogonal(Verde), direcciónLindanteDeBolita_(Verde) )
+    return ( cantidadTotalDe_Lindantes(Verde) )
+}
+
+
+/********************************************************************************************
+**********           Pr. 9 - Números Invertidos - Implementar                        ********
+********************************************************************************************/
+
+function númerosDe_Invertidos(númeroADarVuelta) {
+    /*
+        PROPÓSITO:  Describir el número dado en forma invertida.
+        PARÁMETROS:
+            * númeroADarVuelta: Número - El número a invertir.
+        RESULTADO: Número.
+        PRECONDICIONES:
+            * "númeroAInvertir" debe tener al menos 2 dígitos.
+    */
+    
+    númeroAInvertir := númeroADarVuelta
+    númeroAlRevés := 0
+    while (númeroAInvertir > 0) {
+        númeroAlRevés := númeroAlRevés * 10 + (númeroAInvertir mod 10)
+        númeroAInvertir := númeroAInvertir div 10
+    }
+    return( númeroAlRevés ) 
+}
+
+/********************************************************************************************
+**********            Pr. 9 - singular_Si_      Fuera de la práctica pero  útil      ********
+********************************************************************************************/
+
+function singular_Si_(elemento, condición) {
+    /*
+        PROPÓSITO:  Describir una lista que contiene el único elemento dado si se cumple la
+        condición dada. Caso contrario describe una lista vacía.
+        PARÁMETROS:
+            * elemento: Cualquier Tipo.
+            * condición: Booleano - La condición a evaluar si el elemento se va agregar a la
+            lista.
+        RESULTADO: [Elemento]
+        PRECONDICIONES:
+            * Ninguna.
+    */
+    
+    return (choose [elemento] when (condición)
+                           [] otherwise)
+}
+
+/********************************************************************************************
+**********                         Último Elemento de la Lista                       ********
+********************************************************************************************/
+
+function últimoDeLa_(lista){
+//Describe el último elemento que tiene la lista
+//La lista dada no puede ser vacía
+    
+    últimoVisto := primero(lista)
+    foreach elemento in resto(lista){
+        últimoVisto := primero([elemento])
+    }
+    return (últimoVisto)
+}
+
+/********************************************************************************************
+**********                         PROCESAMIENTO DE LISTAS                           ********
+********************************************************************************************/
+
+// ESQUEMA DE RECORRIDO DE FILTRO - Los elementos de la lista con los que me quiero quedar
+function elemento_FiltradoDe_(elementoAFiltrar, listaAFiltrar) {
+    
+    elementosFiltradosAlMomento := []
+    foreach elemento in listaAFiltrar {
+        elementosFiltradosAlMomento := elementosFiltradosAlMomento ++
+                                       singular_Si_(elemento, seCumpleCondiciónDeFiltroPara_(elemento)) 
+    }   
+    return (elementosFiltradosAlMomento)
+}

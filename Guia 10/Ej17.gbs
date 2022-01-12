@@ -1,0 +1,23 @@
+function algunoDe_Entre_Y_(listaDeNumeros,desde,hasta) {
+    /*
+        PROPÓSITO: dada una lista **listaDeNumeros** y 2 numeros
+        **desde** y **hasta** indica si la lista contiene algun elemento
+        que se encuentre entre los numeros **desde** y **hasta** sin incluirlos
+        PARÁMETROS:
+            * listaDeNumeros: Lista de Numeros - describe la lista a recorrer
+            * desde: Numero - Es el limite inferior en el cual se desea saber si hay
+            algun numero mayor al mismo
+            * hasta: Numero - Es el limite superior en el cual se desea saber si hay
+            algun numero menor al mismo
+        TIPO: Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+
+    listaRecorridaHastaAhora:=listaDeNumeros
+    while(not esVacia(listaRecorridaHastaAhora) && not (primero(listaRecorridaHastaAhora)>desde && primero(listaRecorridaHastaAhora)<hasta)){
+        listaRecorridaHastaAhora:=resto(listaRecorridaHastaAhora)
+    }
+    
+    return (not primero(listaRecorridaHastaAhora))
+}

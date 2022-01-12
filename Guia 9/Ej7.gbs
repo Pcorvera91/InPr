@@ -1,0 +1,107 @@
+function primerCartaDeLaMano_(cartasDeLaMano) {
+    /*
+        PROPÓSITO:dadas una lista de cartas que
+        recibe el jugador,describa la primer carta
+        a jugar
+        PARÁMETROS:
+            * cartasDeLaMano:listaDeCartas - es son
+            las cartas que tiene el jugador
+           
+        TIPO: Carta
+        PRECONDICIONES:
+            * la lista **cartasDeLaMano** no esta
+            vacia
+    */
+    
+    return (primero(cartasDeLaMano))
+}
+
+function segundaCartaDeLaMano_(cartasDeLaMano) {
+    /*
+        PROPÓSITO:dadas una lista de cartas que
+        recibe el jugador,describa la segunda carta
+        a jugar
+        PARÁMETROS:
+            * cartasDeLaMano:listaDeCartas - es son
+            las cartas que tiene el jugador
+           
+        TIPO: Carta
+        PRECONDICIONES:
+            * la lista **cartasDeLaMano** no esta
+            vacia
+    */
+    
+    return (primero(resto(cartasDeLaMano)))
+}
+
+
+function tercerCartaDeLaMano_(cartasDeLaMano) {
+    /*
+        PROPÓSITO:dadas una lista de cartas que
+        recibe el jugador,describa la tercer carta
+        a jugar
+        PARÁMETROS:
+            * cartasDeLaMano:listaDeCartas - es son
+            las cartas que tiene el jugador
+           
+        TIPO: Carta
+        PRECONDICIONES:
+            * la lista **cartasDeLaMano** no esta
+            vacia
+    */
+    
+    return (primero(resto(resto(cartasDeLaMano))))
+}
+
+function laMano_LuegoDeRobarUnaCartaDe_(cartasDeLaMano,mazoDeCartas) {
+    /*
+        PROPÓSITO:dada una mano y un mazo de
+        Cartas del cual puede robar,
+        describir la mano resultante luego de robar la
+        carta del mazo
+        PARÁMETROS:
+            * cartasDeLaMano: lista de cartas - son las cartas
+            del jugador
+            * mazoDeCartas: lista de cartas - es el mazo de 
+            cartas.
+
+        TIPO:Lista de cartas
+        PRECONDICIONES:
+            * Hay al menos 1 carta en **mazoDeCartas**
+    */
+    
+    return (cartasDeLaMano ++ [primero(mazoDeCartas)])
+}
+
+function laMano_LuegoDeJugarUnaCarta(cartasDeLaMano) {
+    /*
+        PROPÓSITO:dada una mano describe la mano
+        resultante luego de jugar una carta
+        PARÁMETROS:
+            * cartasDeLaMano: lista de cartas - son las cartas
+            del jugador
+            
+        TIPO: Lista de cartas
+        PRECONDICIONES:
+            * Al menos hay una carta en **cartasDeLaMano**
+    */
+    
+    return (resto(cartasDeLaMano))
+}
+
+function laMano_LuegoDeJugarLaSegundaCarta(cartasDeLaMano) {
+    /*
+        PROPÓSITO:dada una mano, describir la
+        mano resultante luego de jugar exclusivamente la 
+        segunda de todas sus cartas.
+        PARÁMETROS:
+            * cartasDeLaMano: lista de cartas - son las cartas del jugador.
+            
+        TIPO:Lista de cartas
+        PRECONDICIONES:
+            * Al menos hay 2 cartas en **cartasDeLaMano**
+    */
+    
+    
+    return (resto(resto(cartasDeLaMano)) ++ primerCartaDeLaMano_(cartasDeLaMano) )
+}

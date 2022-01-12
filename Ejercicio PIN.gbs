@@ -1,0 +1,56 @@
+procedure EscribirPIN___(digito1,digito2,digito3,digito4) {
+    /*
+        PROPÓSITO:  Escribe un pin de 4 digitos con bolitas rojas en el tablero desde la celda actual
+        y hacia el este
+        PARÁMETROS:
+            * digito1:numero:es el primer digito
+            * digito2:numero:es el 2dodigito
+            * digito3:numero:es el 3er digito
+            * digito4:numero:es el 4to digito
+        PRECONDICIONES:
+            * Al menos debe haber 3 lindantes al este de la actual.
+            *tanto la celda actual como las 3 lindantes al este estan vacias
+            *cada digito debe estar entre el 0 y el 9 inclusive
+    */
+    EscribirDigito_(digito1)
+    AvanzarAlProximoDigito()
+    EscribirDigito_(digito2)
+    AvanzarAlProximoDigito()
+    EscribirDigito_(digito3)
+    AvanzarAlProximoDigito()
+    EscribirDigito_(digito4)
+    VolverAlPrimerDigito()
+    
+}
+
+procedure EscribirDigito_(numero) {
+    /*
+        PROPÓSITO:  dado un **numero** Escribe un digito en la celda actual
+        PARÁMETROS:
+            * digito: numero - es el digito representado con bolitas rojas
+            
+        PRECONDICIONES:
+            * **numero**P debe estar entre 0 y 9 inclusive
+    */
+    repeat (numero) {
+        Poner(Rojo)
+    }
+}
+
+procedure VolverAlPrimerDigito() {
+    /*
+        PROPÓSITO: Vuelve a la celda inicial
+        PRECONDICIONES:
+            * Al menos debe haber 3 celdas lindantes al oeste
+    */
+    Mover__Veces(Oeste,3)
+}
+
+procedure AvanzarAlProximoDigito() {
+    /*
+        PROPÓSITO:  Avanza al proximo digito
+        PRECONDICIONES:
+            * Al menos debe haber una posicion al este del digito actual
+    */
+    Mover(Este)
+}

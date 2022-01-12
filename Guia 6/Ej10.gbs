@@ -1,0 +1,407 @@
+/*
+Bolitas rojas:Numero del jugador
+Bolitas Azules: numero apostado
+Bolitas Verdes: monto apostado c/verde es 1 peso.
+
+Puede haber varias apuestas del mismo apostador 
+
+Jugador1: aposto 19 pesos al 48
+Jugador 2 aposto 22 pesos al 7 y 13 pesos al 13 (en diferentes celdas
+cada apuesta)
+Jugador 3: aposto 5 al 15
+Hay espacio para 2 apuestas mas
+
+
+*/
+
+procedure AgregarApuestaDe_Al_Para_(monto, nroApostado, nroJugador) {
+    /*
+        PROPÓSITO: Agrega la apuesta de nroJugador con un monto al nroApostado
+        en alguna celda vacia del tablero
+        PARÁMETROS:
+            * monto: numero - es el monto apostado por nroJugador.
+            * nroApostado: numero - es el numero que apuesta el jugador
+            nroJugador.
+            *nroJugador: numero - es el numero del jugador en el cual realiza
+            la apuesta
+        PRECONDICIONES:
+            * al menos debe existir una celda vacia en el tablero
+    */
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not hayCeldaVacia()) {
+
+         PasarASiguienteCelda__(Este,Norte)
+
+    }
+
+    Apostar_Al_Por_EnLaCeldaActual(monto, nroApostado, nroJugador)
+
+}
+
+procedure Apostar_Al_Por_EnLaCeldaActual(monto, nroApostado, nroJugador) {
+    /*
+        PROPÓSITO: Se apuesta un monto al nroApostado por el jugador
+        nroJugador en la celda actual
+        PARÁMETROS:
+             * monto: numero - es el monto apostado por nroJugador.
+            * nroApostado: numero - es el numero que apuesta el jugador
+            nroJugador.
+            *nroJugador: numero - es el numero del jugador en el cual realiza
+            la apuesta
+        PRECONDICIONES:
+            * La celda actual debe estar vacia
+    */
+    
+    Poner__Veces(Rojo,nroJugador)
+    Poner__Veces(Azul,nroApostado)
+    Poner__Veces(Verde,monto)
+
+
+
+
+}
+
+
+procedure PagarYCobrarAl_(nroQueSalio) {
+    /*
+        PROPÓSITO:  paga las apuestas que acertaron al nroQueSalio
+        y retire el total del dinero de las que no acertaron
+        PARÁMETROS:
+            * nroQueSalio: numero - es el numero ganador.
+           
+        PRECONDICIONES:
+            * ninguna
+    */
+    PagarAl_(nroQueSalio)
+    CobrarATodosMenosAl_(nroQueSalio)
+}
+
+
+
+procedure PagarAl_(nroQueSalio) {
+    /*
+        PROPÓSITO:Paga las apuestas que acertaron al numero que
+        salio
+        PARÁMETROS:
+             * nroQueSalio: numero - es el numero ganador.
+            
+        PRECONDICIONES:
+            * ninguna
+    */
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyElFinalDeUnRecorrido__(Este,Norte)) {
+        
+        PagarSiEstaEl_(nroQueSalio)
+        PasarASiguienteCelda__(Este,Norte)
+
+
+    }
+    PagarSiEstaEl_(nroQueSalio)
+
+
+}
+
+
+procedure PagarSiEstaEl_(nroQueSalio) {
+    /*
+        PROPÓSITO: Paga la apuesta si esta el nroQueSalio 
+        PARÁMETROS:
+            * nroQueSalio: numero - es el numero ganador.
+           
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    if (estaEl_(nroQueSalio)) {
+        
+        
+        Poner__Veces(Verde,nroBolitas(Verde)*5)
+        
+    
+    }
+    
+}
+
+
+procedure CobrarATodosMenosAl_(nroQueSalio) {
+    /*
+        PROPÓSITO:Cobra a todos los jugadores que no apostaron
+        al nroQueSalio
+        PARÁMETROS:
+            * nroQueSalio: numero - es el numero ganador.
+           
+        PRECONDICIONES:
+            * Ninguna
+    */
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyElFinalDeUnRecorrido__(Este,Norte)) {
+        
+       CobrarAlQueNoApostoAl_(nroQueSalio)
+        PasarASiguienteCelda__(Este,Norte)
+
+    }
+
+    CobrarAlQueNoApostoAl_(nroQueSalio)
+}
+
+procedure CobrarAlQueNoApostoAl_(nroQueSalio) {
+    /*
+        PROPÓSITO: Cobra al que no aposto al nroQueSalio  
+        
+        PARÁMETROS:
+            * nroQueSalio: numero - es el numero ganador.
+            
+        PRECONDICIONES:
+            * Ninguna
+    */
+    if (not estaEl_(nroQueSalio)) {
+               
+        SacarTodas_(Verde)
+    
+    }
+}
+
+
+
+function estaEl_(numeroDeApuesta) {
+    /*
+        PROPÓSITO: Indica si en la celda actual esta el numeroDeApuesta
+        en la celda actual
+        PARÁMETROS:
+            * numeroDeApuesta: numero - es el numero que se aposto en
+            la celda actual.
+           
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+        OBSERVACIONES:El numeroDeApuesta esta representado por la 
+        cantidad de bolitas azules 
+    */
+    
+    return (nroBolitas(Azul)==numeroDeApuesta)
+}
+
+procedure  RecogerPropinas() {
+    /*
+        PROPÓSITO: extrae un peso de cada celda donde haya al
+        menos 15 pesos.
+        
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+     IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyElFinalDeUnRecorrido__(Este,Norte)) {
+        
+       RecogerPropina()
+        PasarASiguienteCelda__(Este,Norte)
+
+    }
+
+    RecogerPropina()
+
+
+
+}
+
+procedure RecogerPropina() {
+    /*
+        PROPÓSITO:  Extrae un peso de la celda actual si hay al menos
+        15 pesos
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    if (montoApostado() >= 15) {
+        Sacar(Verde)
+    }
+
+
+}
+
+function montoApostado() {
+    /*
+        PROPÓSITO: Describe el monto apostado en la celda actual
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguno
+    */
+    
+    return (nroBolitas(Verde))
+}
+
+procedure DuplicarApuestasAl_(nroApostado) {
+    /*
+        PROPÓSITO:Duplica el monto de las apuestas al nroApostado
+        PARÁMETROS:
+            * nroApostado: numero - es el numero apostado en el cual
+            se quiere duplicar su monto.
+            
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyElFinalDeUnRecorrido__(Este,Norte)) {
+        
+       DuplicarApuestaAl_(nroApostado)
+        PasarASiguienteCelda__(Este,Norte)
+
+    }
+
+    DuplicarApuestaAl_(nroApostado)
+
+
+
+
+
+}
+
+
+procedure DuplicarApuestaAl_(nroApostado) {
+    /*
+        PROPÓSITO:Duplica el monto de la apuesta al nroApostado
+        PARÁMETROS:
+            * nroApostado: numero - es el numero apostado en el cual
+            se quiere duplicar su monto.
+            
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    if (estaEl_(nroApostado)) {
+        Poner__Veces(Verde,nroBolitas(Verde))
+    }
+
+
+
+
+
+}
+
+
+procedure DuplicarApuestasDelJugador_(nroJugador){
+    /*
+        PROPÓSITO:duplica el monto de las apuestas que hizo el jugador
+        nroJugador 
+        PARÁMETROS:
+            * nroJugador: numero - es el numero del jugador en el cual
+            se quiere duplicar la apuesta.
+            
+        PRECONDICIONES:
+            *Ninguna
+    */
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyElFinalDeUnRecorrido__(Este,Norte)) {
+        
+        DuplicarApuestaAl_(numeroApostadoActual())
+        PasarASiguienteCelda__(Este,Norte)
+    }
+
+    DuplicarApuestaAl_(numeroApostadoActual())
+
+}
+
+function numeroApostadoActual() {
+    /*
+        PROPÓSITO:Indica el numero que se aposto en la celda actual
+        TIPO: numero
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (nroBolitas(Azul))
+}
+
+procedure CambiarNroApostadoDel_Al_(nroAnterior, nroNuevo) {
+    /*
+        PROPÓSITO:cambia todas las apuestas de ​nroAnterior para que
+         pasen a apostar a nroNuevo​.
+        PARÁMETROS:
+            * nroAnterior: numero - es el numero de la apuesta
+            que se desea cambiar.
+            * nroNuevo: numero - es el nuevo de la nueva apuesta.
+        PRECONDICIONES:
+            * Ninguna
+    */
+     IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyElFinalDeUnRecorrido__(Este,Norte)) {
+        
+        CambiarNroApostadoActual_Por_(nroAnterior, nroNuevo)
+        PasarASiguienteCelda__(Este,Norte)
+    }
+
+    CambiarNroApostadoActual_Por_(nroAnterior, nroNuevo)
+}
+
+procedure CambiarNroApostadoActual_Por_(nroAnterior, nroNuevo) {
+    /*
+        PROPÓSITO:Cambia el numero  nroAnterior por nroNuevo en la celda
+        actual
+        PARÁMETROS:
+             * nroAnterior: numero - es el numero de la apuesta
+            que se desea cambiar.
+            * nroNuevo: numero - es el nuevo de la nueva apuesta.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    if (estaEl_(nroAnterior)) {
+
+        SacarTodas_(Azul)
+        Poner__Veces(Azul,nroNuevo)
+
+    }
+
+
+
+}
+
+
+procedure AumentarEn_LaApuestaDelJugador_Al_(monto, nroJugador,nroApostado) {
+    /*
+        PROPÓSITO:agrega el monto indicado a la apuesta de este jugador
+        nroJugador al número nroApostado.
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        PRECONDICIONES:
+            * ....
+    */
+    BuscarApuestaDelJugador_Al_(nroJugador, nroApostado)
+    AumentarMonto_(monto)
+}
+
+
+procedure BuscarApuestaDelJugador_Al_(nroJugador, nroApostado) {
+    /*
+        PROPÓSITO:posiciona el cabezal en una celda que sea el registro
+         de una apuesta del jugador nroJugador y nroApostado,
+         el cabezal termina en el extremo noreste
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while ((not estoyElFinalDeUnRecorrido__(Este,Norte)) && (not esElJugador_(nroJugador))) {
+        
+        PasarASiguienteCelda__(Este,Norte)
+    }
+}
+
+
+procedure AumentarMonto_(monto) {
+    /*
+        PROPÓSITO:Aumenta una cantidad de monto en la celda actual
+        PARÁMETROS:
+            * monto:numero - es el monto a aumentar.
+            
+        PRECONDICIONES:
+            *ninguna
+    */
+    
+    Poner__Veces(Verde,monto)
+
+}

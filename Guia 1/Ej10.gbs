@@ -1,0 +1,70 @@
+program{
+    DibujarCuadradoMulticolorDeLado4()
+}
+
+procedure PonerUnaDeCada(){
+/*
+    PROPOSITO:pone una bolita de cada color en la celda actual
+    PRECONDICION:Ninguna
+    
+*/    
+
+    Poner(Rojo)
+    Poner(Verde)
+    Poner(Azul)
+    Poner(Negro)
+
+}
+
+procedure Mover3AlOeste(){
+/*
+    PROPOSITO:mueve el cabezal tres celdas hacia el Oeste.
+    PRECONDICION:al menos debe haber tres celdas lindantes al oeste de la celda actual
+
+*/
+
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+
+}
+
+procedure DibujarLíneaMulticolorDeLargo4(){
+/*
+    PROPOSITO:ponga una línea de cuatro celdas hacia el Este en la que cada celda tenga una bolita de cada color.
+    Elcabezal debe quedar en la celda inicial.
+    
+    PRECONDICION:Al menos debe haber 4 celdas al este de la celda actual
+
+*/    
+
+    PonerUnaDeCada()
+    Mover(Este)
+    PonerUnaDeCada()
+    Mover(Este)
+    PonerUnaDeCada()
+    Mover(Este)
+    PonerUnaDeCada()
+    Mover3AlOeste()
+}
+
+
+procedure DibujarCuadradoMulticolorDeLado4(){
+/*
+    PROPOSITO:ponga un cuadrado de 4 × 4
+    celdas en la que cada celda tenga una bolita de cada color. El cabezal debe
+    quedar en la esquina inferior izquierda del cuadrado
+
+    PRECONDICION:Al menos debe haber 4 celdas al norte y cuatro celdas al este de la celda actual
+
+*/    
+    DibujarLíneaMulticolorDeLargo4()
+    Mover(Norte)
+    DibujarLíneaMulticolorDeLargo4()
+    Mover(Norte)
+    DibujarLíneaMulticolorDeLargo4()
+    Mover(Norte)
+    DibujarLíneaMulticolorDeLargo4()
+    IrAlBorde(Sur)
+    
+}

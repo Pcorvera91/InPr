@@ -1,0 +1,285 @@
+////////////////////////////definido en la clase teorica//////////////////////////////////////////////
+
+function unoSi_0CeroSino(condición) {
+    /*PROPÓSITO: indicar según la "condición" dada si es 1 o 0.
+      PARÁMETROS: condición, tipo Booleano.
+      RESULTADO: un 1 si se cumple la condición, 0 sino.
+    */
+
+	return (choose 1 when (condición)
+    		       0 otherwise)
+}
+
+//////////////definidos en las diapositivas de Listas///////////////////////////////////////
+function secuenciaAritméticaDeNúmerosDe_A_(valorInicial,valorFinal) {
+    /*PROPÓSITO: describe la lista que tiene todos los números desde el 
+      número valorInicial hasta el número valorFinal.
+      PRECONDICIONES: ninguna
+      PARÁMETROS: valorInicial - tipo Número 
+                  valorFinal - tipo Número
+      RESULTADO: una lista de tipo Lista de Números 
+    */
+    próximoNúmero := valorInicial  //pone el valor inicial, en este caso 1// a partir de cada repeat va cambiando próximoNúmero
+    listaHastaAhora := [] //lista vacia para agregar la secuencia de números 
+    repeat(valorFinal - valorInicial + 1) {    //le suma 1 por cada vez que agrega un elemento
+        listaHastaAhora := listaHastaAhora ++ [próximoNúmero] //a la lista sumale el próximoNúmero, al principio 1 
+        próximoNúmero := próximoNúmero + 1 //modifica la variable próximoNúmero sumandole 1, la modifica en todos lados!! 
+    }
+    return(listaHastaAhora) //devolveme la lista hasta ahora 
+}
+
+function enTotal_Iguales_(cantidad,elemento) {
+    /*PROPÓSITO: describe la lista con cantidad de elementos iguales al 
+      elemento dado.
+      PRECONDICIÓN: ninguna
+      PARÁMETROS: cantidad - tipo Número 
+                  elemento - tipo cualquier "Elemento"
+      RESULTADO: una lista de tipo Lista de "Elementos"
+    */
+    listaConstruidaHastaAhora := []
+    repeat(cantidad) {
+        listaConstruidaHastaAhora := listaConstruidaHastaAhora ++ [elemento]
+    }
+    return(listaConstruidaHastaAhora)
+}
+
+function tercero_(lista) {                        --me da el tercero de una lista 
+    /*PROPÓSITO: describe el tercer elemento de la lista dada.
+      PRECONDICIÓN: la lista tiene al menos tres elementos.
+      PARÁMETROS: lista es de tipo Lista de "Elementos".
+      RESULTADO: un valor de tipo "Elemento".
+    */
+    return(primero(sinLosDosPrimeros_(lista)))
+}
+
+function sinLosDosPrimeros_(lista) {                            --me da una lista sin los dos primeros 
+    /*PROPÓSITO: describe una lista con los elementos de la lista dada,excepto los 2 primeros.
+      PRECONDICIÓN: la lista tiene al menos 2 elementos.
+      PARÁMETROS: lista es de tipo Lista de "Elementos".
+      RESULTADO: un valor de tipo Lista de "Elementos".
+    */
+    return(resto(resto(lista)))
+}
+
+//////////////////////////////////////////definidos en tp 3 ejercicio 8//////////////////////////////////////////
+
+procedure Mover__Veces(dirección,cantidad)
+
+procedure Poner__Veces(color,cantidad)
+
+procedure Sacar__Veces(color,cantidad) 
+
+//////////////////////////////////////////definido en tp 4 ejercicio 3-d//////////////////////////////////////////
+
+procedure PonerElDobleDe_QueDe_(colorAPoner, colorAImitar) {
+                 /* PROPÓSITO: Poner bolitas del colorAPoner en una cantidad
+                      que sea el doble de las que hay del colorAImitar en la
+                      celda actual.
+                      PRECONDICIONES: ninguna
+                      PARÁMETROS:
+                                  * colorAPoner, un color del que se pondrán bolitas.
+                                  * colorAImitar, un color del que se mirará cuántas bolitas hay en la celda actual.
+	*/
+	    repeat(2*nroBolitas(colorAImitar)) {
+				 Poner(colorAPoner)
+		}
+}
+
+
+//////////////////////////////////////////definido en tp 4 ejercicio 2//////////////////////////////////////////
+
+procedure Mover_SegúnColor_(dirección,color) {
+             /* propósito: mover el cabezal en la dirección "dirección" tantas celdas como bolitas de color "color" dado hay en la
+                  celda actual.
+	parámetros: dirección - tipo dirección - indica la dirección en la cual va a moverse el cabezal.
+	                      color - tipo color - indica el color que se debe observar.
+	precondición: debe haber al menos la cantidad celdas al Este en dirección "dirección" de la celda actual. 
+              */
+
+		repeat(nroBolitas(color)){
+			Mover(dirección)
+                                    }
+}	
+
+//////////////////////////////////////////definido en tp 5 ejercicio 5d//////////////////////////////////////////
+
+procedure Reemplazar_Y_Por_(primerColorAReemplazar, 
+                 segundoColorAReemplazar, colorAAgregar)
+                 
+//////////////////////////////////////////definido en tp 5 ejercicio 5d//////////////////////////////////////////
+                 
+function hay_Y_(color1, color2) {
+    /*
+        PROPÓSITO: Indica si hay bolitas de "color1" y también de
+                    "color2"
+        PRECONDICIONES: No hay.
+        PARÁMETROS: 
+            -color1: un Color que indica el color de una bolita.
+            -color2: un Color que indica el color de una bolita.
+        RESULTADO: un valor de verdad.
+            -verdadero si ambas bolitas de los colores dados. 
+            -falso si no hay ambas bolitas de los colores dados. 
+    */    
+    return(
+        hayBolitas(color1)
+        &&
+        hayBolitas(color2)
+        )
+}
+
+//////////////////////////////////////////definido en tp 5 ejercicio 5b//////////////////////////////////////////
+
+procedure Mover_Si_(dirección, condición) {
+    /*
+        PROPÓSITO: Mueve una posición a la dirección dada
+                    si la condición se cumple
+        PRECONDICIONES:
+            -Debe existir al menos una posición hacia la dirección 
+                dada. 
+        PARÁMETROS:
+            -dirección: una Dirección que indica hacia donde mover.
+            -condición: un Booleano que indica la condición que se debe 
+                    cumplir 
+    */
+    
+    if (condición) {
+        Mover(dirección)
+    }
+}
+
+//////////////////////////////////////definido en tp 5 ejercicio 5b/////////////////////////////////////////////
+
+procedure Sacar_Si_(color, condición) {
+    /*
+        PROPÓSITO: Saca una bolita del color dado si la condición se cumple
+        PRECONDICIONES: 
+            -Debe existir al menos una bolita del color dado.
+        PARÁMETROS:
+            -color: un Color que indica el color a sacar.
+            -condición: un Booleano que indica la condición que se debe 
+                    cumplir 
+    */
+    
+    if (condición) {
+        Sacar(color)
+    }
+}
+
+////////////////////////////////////definido en tp 5 ejercicio 5a////////////////////////////////////////////////
+
+procedure Poner_Si_(color, condición) {
+    /*
+        PROPÓSITO: Pone una bolita del color dado si la condición se cumple
+        PRECONDICIONES: No hay.
+        PARÁMETROS:
+            -color: un Color que indica el color a poner.
+            -condición: un Booleano que indica la condición que se debe 
+                    cumplir 
+    */
+    
+    if (condición) {
+        Poner(color)
+    }
+}
+
+///////////////////////////////////////definido en tp 6 ejercicio 2 //////////////////////////////////////////
+
+procedure SacarTodas_(color) {
+    /*propósito: saca todas las bolitas de color "color" en la celda actual. 
+        precondición: ninguna                                                   //////////porque pregunta si tiene, Y SI NO HAY NO HACE NADA///////////
+        parámetros: "color" - tipo color- indica el color de bolitas a sacar.
+    */
+
+        while (hayBolitas (color)) {      //////// mientras pase esto///////////////////
+               Sacar (color)
+        }
+    
+}
+
+///////////////////////////////////definido en tp 6 ejercicio 1////////////////////////////////////////// 
+
+procedure IrAlBorde_(dirección) { 
+    /*propósito: Ir al borde "dirección" del tablero.
+      precondición: ninguna.
+      parámetros: "dirección" - tipo dirección - indica el borde en el cual dejamos el cabezal.
+    */
+    
+        while (puedeMover (dirección)) {       ///////quedanCeldasAl_(dirección), otro nombre//////////
+               Mover (dirección)
+        }
+    
+}
+
+
+
+
+/////////////////////////////////ESTRATEGIA DE RECORRIDO BÁSICO//////////////////////////////
+1-Iniciar recorrido.
+2- while(quedan elementos por recorrer?) { ////////////procesa todos los elementos/////////////
+             3-procesar elemento
+             4-Pasar al siguiente elemento
+     }
+5-Finalizar recorrido.
+
+
+
+
+
+/////////////////////////////////ESTRATEGIA DE RECORRIDO DE BÚSQUEDA//////////////////////////////
+1-Iniciar recorrido.
+2- while(NO encontre el elemento que estoy buscando) { /////////busca un elemento en particular//////////////////
+             3-Pasar al siguiente elemento
+     }
+4-Hacer algo con el elemento encontrado. 
+
+
+
+
+
+
+////////////////////////////recorrido parametrizado(práctica 6 - ejercicio 7)///////////////////////////////////////
+
+procedure IrAlInicioDeUnRecorrido__(dirPrincipal, dirSecundaria) {
+
+	   /*propósito: ir al inicio de un recorrido en *dirPrincipal* y *dirSecundaria*.
+         parámetros: dirPrincipal - tipo Dirección - indica la dirección principal del inicio del recorrido.
+ 	                 dirSecundaria - tipo Dirección - indica la dirección secundaria del inicio del recorrido. 
+         precondición: las direcciones no pueden ser opuestas o iguales.
+       */   
+
+         IrAlBorde(dirPrincipal)
+	     IrAlBorde(dirSecundaria)
+}
+
+function estoyEnElFinalDeUnRecorrido__(dirPrincipal, dirSecundaria) {
+
+       /*propósito: indicar si estoy en el final de un recorrido mediante los
+         parámetros *dirPrincipal* y *dirSecundaria*.
+	     precondición: ninguna.
+	     parámetros: dirPrincipal - tipo Dirección - indica la dirección principal.
+                     dirSecundaria - tipo Dirección -  indica la dirección secundaria.
+         resultado: un booleano, verdadero si se obtiene el opuesto de las direcciones *dirPrincipal* y *dirSecundaria*.
+       */
+
+   return (not puedeMover(opuesto(dirPrincipal)) && not puedeMover(opuesto(dirSecundaria)))
+
+}
+
+procedure PasarASiguienteCelda__(dirPrincipal, dirSecundaria) {
+
+
+	/*propósito: pasar a la siguiente celda en *dirPrincipal* y *dirSecundaria*.
+	  precondición: ninguna.
+	  parámetros: dirPrincipal - tipo Dirección - indica la dirección principal.
+	              dirSecundaria - tipo Dirección -  indica la dirección secundaria.
+    */ 
+
+
+       if (puedeMover(opuesto(dirPrincipal))) // Sur // mover Norte
+	        { Mover(opuesto(dirPrincipal)) }    // mover norte 
+       else { 
+	          IrAlBorde(dirPrincipal) //sur // 
+	          Mover(opuesto(dirSecundaria))   // Oeste // mover Norte
+       }
+}
+

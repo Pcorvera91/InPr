@@ -1,0 +1,288 @@
+Pablo Corvera
+#6018
+
+
+
+Canal de texto
+🔒chat-privado-a4
+Buscar
+
+No tienes permiso para ver el historial de mensajes de #🔒chat-privado-a4.
+9 de noviembre de 2021
+
+Corvera, Pablo — hoy a las 16:52
+Buenas
+[16:53]
+Primero tengo una duda de como plantear 
+lista_estáIncluidaEn_
+[16:53]
+Y ahora paso las funciones para saber si estan bien
+[16:53]
+function estaOrdenada_(listaDeNumeros) {
+    /*
+        PROPÓSITO:dada una lista de numeros indica si esta ordenada
+        de menor a mayor
+        PARÁMETROS:
+            * listaDeNumeros: es la lista de numeros en el cual se desea
+            saber si esta ordenada.
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    numeroActual:=primero(listaDeNumeros)
+    numerosQueFaltan:=resto(listaDeNumeros)
+
+    while (not esVacia(numerosQueFaltan) && numeroActual <=primero(numerosQueFaltan)) {
+        numeroActual:=primero(numerosQueFaltan)
+        numerosQueFaltan:= resto(numerosQueFaltan)
+    }
+    return (esVacia(numerosQueFaltan))
+}
+[16:54]
+function posicionDe_EnLaQueAparece(lista,elemento) {
+    /*
+        PROPÓSITO:dada una lista y un elemento, describe la posicion de la lista en la que
+        aparece ese elemento por primera vez
+
+        PARÁMETROS:
+            * lista: Lista de Elementos - describe la lista en el cual se quiere buscar el
+            elemento
+            * elemento: elemento de cualquier tipo - es el elemento que se desea buscar la
+            posicion donde se encuentra.
+        TIPO:Numero
+        PRECONDICIONES:
+            * El elemento esta contenido en la lista
+        OBSERVACIONES:No tiene sentido que la funcion sea total porque el contador que se 
+        establece para hallar su posicion va a devolver el numero total de elementos de la 
+        lista, si no se encuentra el elemento dado.
+    */
+    listaHastaAhora:=lista
+    posicionActual:= 0
+    while(not contiene_A_(lista,elemento)){
+        listaHastaAhora:=resto(listaHastaAhora)
+        posicionActual:=posicionActual + 1
+    }
+    return (posicionActual)
+}
+[16:55]
+ function sinLaPrimeraAparicionDe_En_(elemento,lista) {
+    /*
+        PROPÓSITO:dado un elemento y una lista,describe la lista que se obtiene al eliminar
+        una unica vez el elemento si este aparece en la lista
+        PARÁMETROS:
+            * elemento: elemento de cualquier tipo - describe el elemento a filtrar de la 
+            lista dada
+            * lista: lista de elementos - es la lista en el cual se desea eliminar la primera
+            aparicion del elemento dado
+        TIPO:Lista de elementos
+        PRECONDICIONES:
+            * Al menos aparece el elemento 1 vez
+    */
+    listaHastaAhora:=[]
+    elementosQueFaltan:=lista
+    repeat (posicionDe_EnLaQueAparece(lista,elemento) -1 ) {
+        listaHastaAhora:=listaHastaAhora ++ primero(elementosQueFaltan)
+        elementosQueFaltan:=resto(elementosQueFaltan)
+    }
+
+    return (
+        listaHastaAhora ++
+        lista_FiltradaHastaLaPosicionDe_(lista,elemento)
+        )
+}
+
+function lista_FiltradaHastaLaPosicionDe_(lista,elemento) {
+    /*
+        PROPÓSITO:Dada una lista y un elemento, describe la lista
+        filtrada tantas veces como el numero de la posicion del elemento
+        dado
+        PARÁMETROS:
+            * lista: lista de elementos - describe la lista a filtrar
+            * elemento: es el elemento maximo que se desea filtrar.
+        TIPO:Lista de elementos
+        PRECONDICIONES:
+            * Al menos aparece el elemento 1 vez
+    */
+    elementosQueFaltan:=lista
+
+    repeat (posicionDe_EnLaQueAparece(lista,elemento)) {
+        elementosQueFaltan:=resto(elementosQueFaltan)
+    }
+    return (elementosQueFaltan)
+}
+ Esta ultima funcion, la plantee asi, me gustaria saber si hay algo menos triste que esto jajajaj
+[16:57]
+en listaestáIncluidaEn como divido en subtareas?, porque lo unico que se me ocurre es hacer un for anidados, que se que esta muy mal
+
+Lafon, Isaias — hoy a las 17:55
+@Corvera, Pablo recién lo estoy viendo.
+
+@Corvera, Pablo
+function estaOrdenada_(listaDeNumeros) {     /*         PROPÓSITO:dada una lista de numeros indica si esta ordenada         de menor a mayor         PARÁMETROS:             * listaDeNumeros: es la lista de numeros en el cual se desea             saber si esta ordenada.                      TIPO: Booleano         PRECONDICIONES:             * Ninguna     */     numeroActual:=primero(listaDeNumeros)     numerosQueFaltan:=resto(listaDeNumeros)      while (not esVacia(numerosQueFaltan) && numeroActual <=primero(numerosQueFaltan)) {         numeroActual:=primero(numerosQueFaltan)         numerosQueFaltan:= resto(numerosQueFaltan)     }     return (esVacia(numerosQueFaltan)) }
+
+Lafon, Isaias — hoy a las 17:57
+es innecesaria una de las variables, te das cuenta cual y por qué?
+
+Corvera, Pablo — hoy a las 17:59
+Seria primero(numerosQueFaltan) < segundo(numerosQueFaltan) ?
+
+Lafon, Isaias — hoy a las 18:02
+claro, pero tenes que asegurarte por cortocircuito algo más. Igual está en el borde de uso de variables, lo estoy consultando. Eso sí, si la lista que te dan es vacía fallaría por usar en la inicialización primero() y resto()
+
+Corvera, Pablo — hoy a las 18:04
+En el caso del circuito corto, que me conviene mejor, poner si no es vacia al principio o al final en cualquier problema de este tipo
+
+Lafon, Isaias — hoy a las 18:04
+function posicionDe_EnLaQueAparece(lista,elemento) {
+    /*
+        PROPÓSITO:dada una lista y un elemento, describe la posicion de la lista en la que
+        aparece ese elemento por primera vez
+
+        PARÁMETROS:
+            * lista: Lista de Elementos - describe la lista en el cual se quiere buscar el
+            elemento
+            * elemento: elemento de cualquier tipo - es el elemento que se desea buscar la
+            posicion donde se encuentra.
+        TIPO:Numero
+        PRECONDICIONES:
+            * El elemento esta contenido en la lista
+        OBSERVACIONES:No tiene sentido que la funcion sea total porque el contador que se 
+        establece para hallar su posicion va a devolver el numero total de elementos de la 
+        lista, si no se encuentra el elemento dado.
+    */
+    listaHastaAhora:=lista
+    posicionActual:= 0
+    while(not contiene_A_(lista,elemento)){
+        listaHastaAhora:=resto(listaHastaAhora)
+        posicionActual:=posicionActual + 1
+    }
+    return (posicionActual)
+}
+
+Este no tiene sentido, porque usas "no contiene a" y en la precondición asumis que el elmento existe en la lista dada
+
+Corvera, Pablo — hoy a las 18:05
+yo lo exprese como que me repita hasta que aparezca el elemento dado en la lista dada
+
+Lafon, Isaias — hoy a las 18:06
+es que "contiene a" se fija si un elemento dado está en una lista (en alguna posición cualquiera) y desde el principio lo va a contener siempre
+
+Corvera, Pablo — hoy a las 18:07
+ahhh claro
+[18:08]
+entonces seria mientras que primero(listaHastaAhora) /= elemento
+
+Lafon, Isaias — hoy a las 18:09
+exacto!
+
+Corvera, Pablo — hoy a las 18:09
+el reultilizar codigos me jugo en contra jeje
+
+Lafon, Isaias — hoy a las 18:11
+ function sinLaPrimeraAparicionDe_En_(elemento,lista) {
+    /*
+        PROPÓSITO:dado un elemento y una lista,describe la lista que se obtiene al eliminar
+        una unica vez el elemento si este aparece en la lista
+        PARÁMETROS:
+            * elemento: elemento de cualquier tipo - describe el elemento a filtrar de la 
+            lista dada
+            * lista: lista de elementos - es la lista en el cual se desea eliminar la primera
+            aparicion del elemento dado
+        TIPO:Lista de elementos
+        PRECONDICIONES:
+            * Al menos aparece el elemento 1 vez
+    */
+    listaHastaAhora:=[]
+    elementosQueFaltan:=lista
+    repeat (posicionDe_EnLaQueAparece(lista,elemento) -1 ) {
+        listaHastaAhora:=listaHastaAhora ++ primero(elementosQueFaltan)
+        elementosQueFaltan:=resto(elementosQueFaltan)
+    }
+
+    return (
+        listaHastaAhora ++
+        lista_FiltradaHastaLaPosicionDe_(lista,elemento)
+        )
+}
+Para que necesitas "listaFiltradaHastaLaPosicionDe(lista,elemento)" si ya tenes esos elementos en las 2 variables?
+[18:12]
+si lo vas a resolver de esa manera, quizás sea mejor tener uno que te da los anteriores a esos y otro los posteriores, y luego hacer el append de ambos
+
+Lafon, Isaias
+claro, pero tenes que asegurarte por cortocircuito algo más. Igual está en el borde de uso de variables, lo estoy consultando. Eso sí, si la lista que te dan es vacía fallaría por usar en la inicialización primero() y resto()
+
+Lafon, Isaias — hoy a las 18:14
+sí, es variables es innecesaria absolutamente (numeroActual:=primero(listaDeNumeros)) del 1er ejercicio que enciaste
+
+Corvera, Pablo — hoy a las 18:19
+Eso es lo que quise hacer primero que me agregue los elementos hasta que aparece el elemento a filtrar (por eso el -1) y en listaFiltradaHastaLaPosicionDe(lista,elemento) lo que hace es eliminarme los elementos que estan antes del elemento a filtrar (inclusive) y despues ahi junto los 2 trozos de listas
+
+@Corvera, Pablo
+Eso es lo que quise hacer primero que me agregue los elementos hasta que aparece el elemento a filtrar (por eso el -1) y en listaFiltradaHastaLaPosicionDe(lista,elemento) lo que hace es eliminarme los elementos que estan antes del elemento a filtrar (inclusive) y despues ahi junto los 2 trozos de listas
+
+Lafon, Isaias — hoy a las 18:20
+igual tendrías que aplicar el esquema de recorridos. Tratá de resolverlo sin usar el "posiciónDeEnLaQueAparece"
+
+Corvera, Pablo — hoy a las 18:21
+para eso tengo que ver la clase del segundo cuatri del 2020 jajajaj.
+[18:21]
+la veo y te consulto
+[18:21]
+pero mas o menos esta la idea (editado)
+[18:21]
+?
+[18:22]
+Estoy bien encaminado?
+
+Lafon, Isaias — hoy a las 18:31
+sí, pero la idea es que apliques los recorridos modelos de ser posible. Va encaminado, pero el detalle de que:
+numeroActual:=primero(listaDeNumeros)
+numerosQueFaltan:=resto(listaDeNumeros)
+
+Te puede explotar por los aires deberías verlo.
+
+Corvera, Pablo — hoy a las 18:44
+me cuesta verlo, por que explota? (editado)
+
+Lafon, Isaias — hoy a las 18:45
+que precondicion tiene primero()? y resto()?
+
+Corvera, Pablo — hoy a las 18:46
+primero que la lista al menos debe tener un elemento
+[18:47]
+y resto que no este vacia
+
+Lafon, Isaias — hoy a las 18:47
+ambas es la misma, al menos tienen 1 elemento
+[18:47]
+¿ahora ves por que explota?
+
+Corvera, Pablo — hoy a las 18:48
+pero no lo salva la condicion del while? (editado)
+[18:48]
+esa es la duda que tengo
+
+Lafon, Isaias — hoy a las 18:48
+como? si vos cuando inicias las variables haces primero y resto!
+
+Corvera, Pablo — hoy a las 18:49
+ahh
+[18:49]
+claro
+[18:49]
+jejejje
+[18:50]
+no lo habia visto
+
+Lafon, Isaias — hoy a las 19:03
+exacto. ¿Tenías alguna otra consulta?
+
+Corvera, Pablo — hoy a las 19:06
+Lo de listaestáIncluidaEn como la subdivido para que el elemento actual de la lista1 esta dentro de la lista 2 y asi con los elementos restantes de la lista 1, se me hace que son 2 for anidados,pero como se que eso esta mal, no se como dividirla en subtareas (editado)
+
+Lafon, Isaias — hoy a las 19:09
+si queres vamos al de voz. Si, estaría mal si no usas una subtarea
+
+Corvera, Pablo — hoy a las 19:10
+voy

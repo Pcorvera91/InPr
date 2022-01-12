@@ -1,0 +1,38 @@
+function interseccionDe_Con_(lista1,lista2) {
+    /*
+        PROPÓSITO:dadas 2 listas,describe la lista de todos los elementos
+        que aparecen en ambas
+        PARÁMETROS:
+            * lista1: Lista de Elementos - describe a la primer
+            lista a intersectar
+            * lista2: Lista de Elementos - describe a la segunda 
+            lista a intersectar
+        TIPO:Lista de Elementos
+        PRECONDICIONES:
+            * las 2 listas dadas no tienen elementos repetidos
+    */
+   listaConInterseccionHastaAhora:=[]
+   foreach elemento in lista1 {
+       listaConInterseccionHastaAhora:=listaConInterseccionHastaAhora ++ 
+                                       singularSi(elemento, contiene_A_(lista2,elemento))
+   } 
+    return (listaConInterseccionHastaAhora)
+}
+
+function uniónDe_Con_(lista1,lista2) {
+    /*
+        PROPÓSITO:dadas 2 listas, describe una lista sin repetidos que contenga
+        todos los elementos que aparecen en alguna de las 2 listas
+        PARÁMETROS:
+             * lista1: Lista de Elementos - describe a la primer
+            lista a unir
+            * lista2: Lista de Elementos - describe a la segunda 
+            lista a unir
+        TIPO: Lista de Elementos
+        PRECONDICIONES:
+            * las 2 listas dadas no tienen elementos repetidos
+    */
+    
+    return (sinDuplicados_(lista1 ++ lista2))
+}
+

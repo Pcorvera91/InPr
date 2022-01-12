@@ -1,0 +1,17 @@
+function lista_EstaIncluidaEn_(lista1,lista2) {
+    /*
+        PROPÓSITO:dadas 2 listas. describe si todos los elementos de
+        la primer lista aparecen en la segunda lista
+        PARÁMETROS:
+            * lista1: Lista De Elementos - describe la primer lista a comparar
+            * lista2: Lista De Elementos - describe la segunda lista a comparar
+        TIPO:Booleano
+        PRECONDICIONES:
+            * las 2 listas no tienen elementos repetidos
+    */
+    listaQueFalta:=lista1
+    while(not esVacia(listaQueFalta) && not contiene_A_(lista2,primero(listaQueFalta))){
+        listaQueFalta:=resto(listaQueFalta)
+    }
+    return (esVacia(listaQueFalta))
+}

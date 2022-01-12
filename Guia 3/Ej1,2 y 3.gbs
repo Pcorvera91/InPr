@@ -1,0 +1,157 @@
+
+// 1)--------------------------------------------------------------------------------------------------------
+
+procedure Mover_3Veces(direccionAMover){
+    /*
+        PROPÓSITO:  dada una dirección direcciónAMover 
+        mueve el cabezal tres posiciones en dicha dirección.
+        PARÁMETROS:
+            * direccionAMover: direccion - indica la direccion 
+            donde tiene que mover el cabezal
+            
+        PRECONDICIONES:
+            * al menos debe haber 3 celdas lindantes a 
+            **direccionAMover** de la celda actual.
+    */
+    repeat (3) {
+        Mover(direccionAMover)
+    }
+}
+// 2)--------------------------------------------------------------------------------------------------------
+procedure DibujarRelojAnalógicoSimplificadoDeRadio_(radio) {
+    /*
+        PROPÓSITO: Dibuja un reloj simplificado de radio **radio**
+        PARÁMETROS:
+            * radio: numero - Es el radio del reloj.
+            
+        PRECONDICIONES:
+            * al menos debe haber **radio** celdas lindantes al
+            Norte,Sur,Este y oeste de la celda inicial.
+            *El tablero esta vacio.
+    */
+    Mover_Dibujar12Yvolver(radio)
+    Mover_Dibujar6Yvolver(radio)
+    Mover_Dibujar9Yvolver(radio)
+    Mover_Dibujar3Yvolver(radio)
+}
+
+procedure Mover_Dibujar12Yvolver(cantidad) {
+    /*
+        PROPÓSITO:  Dibuja el numero 12 del reloj a **cantidad** celdas de 
+        distancia al norte de la celda inicial
+        PARÁMETROS:
+            * cantidad: numero - cantidad de celdas a mover.
+        PRECONDICIONES:
+            * Al menos debe haber **cantidad** celdas lindantes al norte de la
+            celda inicial.
+            * la ultima celda de las **cantidad** lindantes al norte de la actual
+            esta vacia
+    */
+    Mover_Al_(cantidad,Norte)
+    Poner_Rojas(12)
+    Mover_Al_(cantidad,Sur)
+    
+}
+
+procedure Mover_Dibujar6Yvolver(cantidad) {
+    /*
+        PROPÓSITO:Dibuja el numero 6 del reloj,a **cantidad** celdas de 
+        distancia  al sur de la celda inicial
+        PARÁMETROS:
+            * cantidad: numero - cantidad de celdas a mover.
+        PRECONDICIONES:
+            * Al menos debe haber **cantidad** celdas lindantes al sur de la
+            celda inicial.
+            *la ultima celda de las **cantidad** lindantes al sur de la actual
+            esta vacia
+    */
+    Mover_Al_(cantidad,Sur)
+    Poner_Rojas(6)
+    Mover_Al_(cantidad,Norte)
+
+}
+
+procedure Mover_Dibujar9Yvolver(cantidad) {
+    /*
+        PROPÓSITO:Dibuja el numero 9 del reloj,a 2 celdas de 
+        distancia al oeste de la celda inicial
+        PARÁMETROS:
+            * cantidad: numero - cantidad de celdas a mover.
+        PRECONDICIONES:
+            * Al menos debe haber 2 celdas lindantes al Oeste de la
+            celda inicial.
+            *la ultima celda de las 2 lindantes al oeste de la actual
+            esta vacia
+    */
+    
+    Mover_Al_(cantidad,Oeste)
+    Poner_Rojas(9)
+    Mover_Al_(cantidad,Este)
+}
+
+procedure Mover_Dibujar3Yvolver(cantidad) {
+    /*
+         PROPÓSITO:Dibuja el numero 3 del reloj,a 2 celdas de 
+        distancia al este de la celda inicial
+        PARÁMETROS:
+            * cantidad: numero - cantidad de celdas a mover.
+        PRECONDICIONES:
+            * Al menos debe haber 2 celdas lindantes al este de la
+            celda inicial.
+            *la ultima celda de las 2 lindantes al este de la actual
+            esta vacia
+    */
+    Mover_Al_(cantidad,Este)
+    Poner_Rojas(3)
+    Mover_Al_(cantidad,Oeste)
+}
+
+
+procedure Mover_Al_(cantidad,direccion) {
+    /*
+        PROPÓSITO:  El cabezal mueve **cantidad** celdas a **direccion**
+        PARÁMETROS:
+            * cantidad: numero - cantidad de celdas a mover.
+        PRECONDICIONES:
+            * Al menos debe haber **cantidad** celdas a **direccion** de la celda actual
+    */
+    repeat (cantidad) {
+        Mover(Norte)
+    }
+    
+}
+
+
+
+procedure Poner_Rojas(cantidad) {
+    /*
+        PROPÓSITO:  Pone **cantidad** Bolitas Rojas
+        PARÁMETROS:
+            * cantidad: numero - cantidad de bolitas rojas a poner.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    repeat (cantidad) {
+        Poner(Rojo)
+    }
+    
+}
+
+// 3)--------------------------------------------------------------------------------------------------------
+
+procedure Poner_ADistancia3Al_(color, dirección)  {
+    /*
+        PROPÓSITO: Mueve el cabezal 3 celdas lindantes al **direccion**
+        de la celda actual y pone una bolita de **color**
+        PARÁMETROS:
+            * color: color - Describe la bolita de un color dado.
+            * direccion:direccion - describe la direccion a mover.
+        PRECONDICIONES:
+            * Al menos debe haber 3 celdas lindantes a **direccion**
+            de la celda actual
+    */
+    Mover_3Veces(dirección)
+    Poner(color)
+
+}
+

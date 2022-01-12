@@ -1,0 +1,15 @@
+procedure SacarExactamente_Bolitas_(cantidadASacar, colorASAcar) {
+    /*
+        PROPÓSITO: Saca una cantidadASacar de bolitas de colorASacar en la celda actual
+        PARÁMETROS:
+            * cantidadASacar: numero - son la cantidad de bolitas a sacar en la celda actual
+            * colorASacar: color - es el color de bolitas a sacar en la celda actual
+        PRECONDICIONES:
+            * Ninguna, Es total
+    */
+    repeat (cantidadASacar) {
+        
+        Sacar_Si_(colorASacar, hayBolitas(colorASacar)) 
+
+    }
+}

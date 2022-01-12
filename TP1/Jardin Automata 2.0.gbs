@@ -1,0 +1,101 @@
+program {
+    PrepararJardinEnFormatoBanderin ()
+}
+
+procedure PrepararJardinEnFormatoBanderin () {
+    /*
+        PROPÓSITO: Preparar el jardin del autómata jardinero en formato banderín
+         finalizando en la parcela más el Noroeste del jardín de 6X5.
+        
+        PRECONDICIONES:
+            - El jardín no tiene la tierra preparada para su plantación, ni flores
+              ni pasto y ninguna de sus parcelas está regada.
+            - Hay al menos 5 celdas lintantes al Este y 4 celdas lindantes al Norte
+              de la celda actual.
+        
+        OBSERVACIONES:
+         - El  jardin es de 5X6.
+         La representacion del jardín en formato banderín se construye realizando
+         cada una de las actividades en cada una de las filas de parcelas, dependiendo
+         de la cantidad de semillas que haya en la primer parcela de la fila. 
+    */
+         repeat (4) {
+            PrepararFilaDeJardínDe_ (nroBolitas (Rojo) div 3)
+            IrAProximaFila ()
+         }
+         PrepararFilaDeJardínDe_ (nroBolitas (Rojo) div 3)
+         
+}
+
+procedure PrepararFilaDeJardínDe_ (cantidadDeParcelas) {
+    /*
+        PROPÓSITO: Preparar fila de jardín preparando la Tierra para la plantación, plantar el pasto,
+         plantar las flores y regar cada una de las parcelas que componen
+         dicha fila según la **cantidadDeParcelas** dada.
+        
+        PRECONDICIONES:
+            - La fila actual no tiene la tierra preparada para su plantación, ni flores
+              ni pasto y ninguna de sus parcelas está regada.
+            - Hay al menos tantas parcelas lindantes hacia el Este de la parcela actual como
+              **cantidadDeParcelas** lo indica.
+        
+        OBSERVACIONES: La cantidad de parcelas depende de la cantidad de semillas que hay en la
+         primera parcelad de la fila.
+    */
+        SacarSemillas (cantidadDeParcelas * 3)
+        PrepararLaTierraEnFilaDe_Parcelas (cantidadDeParcelas)
+        PlantarPastoEnFilaDe_Parcelas (cantidadDeParcelas)
+        PlantarFloresEnFilaDe_Parcelas (cantidadDeParcelas)
+        RegarFilaDe_ (cantidadDeParcelas)
+    }
+}
+
+procedure SacarSemillas (cantidadDeSemillas) {
+    /*
+        PROPÓSITO: Sacar semillas de la celda actual según la **cantidadDeSemillas** dada.
+        
+        PRECONDICIONES:
+         - Hay al menos tanta cantidad de semillas como **cantidadDeSemillas** lo indica en la
+           celda actual.
+        
+        OBSERVACIONES: Las semillas se representan mediante bolitas de color Rojo.
+    */
+    
+    repeat (cantidadDeSemillas * 3) {
+        Sacar (Rojo)
+    }
+}
+
+procedure PrepararLaTierraEnFilaDe_Parcelas (cantidadDeParcelas) {
+    /*
+        PROPÓSITO: Preparar la tierra en la fila actual según la **cantidadDeParcelas** dada.
+        
+        PRECONDICIÓNES:
+         - Hay al menos tantas parcelas hacia el Este de la parcela actual como **cantidadDeParcelas**
+           lo indica.
+         - La tierra no está preparada en la parcela actual ni en las **cantidadDeParcelas** hacia el
+           Este.
+        
+        PARÁMETROS:
+         - cantidadDeParcelas: Un valor numérico que indica la cantidad de parcelas a preparar la tierra.
+    */
+    
+    repeat (cantidadDeParcelas) {
+        Mover(Este)
+        PrepararTierra()
+    }
+    Mover__Veces (Oeste, cantidadDeParcelas)
+}
+
+procedure PrepararTierra () {
+    /*
+        PROPÓSITO: Preparar la tierra en la parcela actual.
+        
+        PRECONDICIONES: No está la Tierra preparada en la parcela actual.
+        
+        OBSERVACIONES: La tierra preparada en la parcela actual se representa con una bolita de color
+         Negro.
+    */
+    
+    Poner(Negro)
+}

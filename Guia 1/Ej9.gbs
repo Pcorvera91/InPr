@@ -1,0 +1,76 @@
+program{
+    DibujarRectánguloRojoYNegroDe5x3()
+}
+
+
+procedure DibujarRectánguloRojoYNegroDe5x3(){
+/*
+    PROPÓSITO: dibuja un rectángulo de 5 celdas de ancho y 3 celdas de
+    alto, en la que cada celda tenga una bolita roja y una negra; donde la celda
+    actual es la esquina inferior izquierda de dicho rectángulo.
+
+    PRECONDICIONES: hay al menos 4 celdas al Este y 2 celdas al Norte
+    de la celda actual.
+
+*/
+
+    DibujarLíneaRojaYNegraDeTamaño5()
+    Mover(Norte)
+    DibujarLíneaRojaYNegraDeTamaño5()
+    Mover(Norte)
+    DibujarLíneaRojaYNegraDeTamaño5()
+
+
+}
+
+procedure DibujarLíneaRojaYNegraDeTamaño5(){
+
+/*  PROPOSITO:dibuja una linea de 5 celdas de largo y
+    en la que cada celda tenga una bolita roja y una negra; la celda
+    actual debe ser el borde izquierdo de la linea.
+    
+    PRECONDICION: hay al menos 4 celdas al este de la celda actual
+
+*/
+
+    PonerUnaNegraYUnaRoja()
+    Mover(Este)
+    PonerUnaNegraYUnaRoja()
+    Mover(Este)
+    PonerUnaNegraYUnaRoja()
+    Mover(Este)
+    PonerUnaNegraYUnaRoja()
+    Mover(Este)
+    PonerUnaNegraYUnaRoja()
+    Mover4AlOeste()
+
+}
+
+
+procedure Mover4AlOeste(){
+/*  PROPOSITO:Mueve el cabezal 4 celdas al oeste
+
+    PRECONDICION:Al menos debe haber 4 celdas al oeste
+
+*/
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+    
+
+}
+
+procedure PonerUnaNegraYUnaRoja(){
+/*  PROPOSITO:Pone una bolita negra y roja en la celda actual
+
+    PRECONDICION:Ninguna
+
+*/
+
+    Poner(Negro)
+    Poner(Rojo)
+
+
+}
+

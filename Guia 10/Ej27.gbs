@@ -1,0 +1,21 @@
+function laLista_SinLosPrimeros_(lista,cantidad) {
+    /*
+        PROPÓSITO:Dada una lista de elementos y una cantidad describe la lista que se 
+        obtiene de quedarse con todos los elementos excepto el segmento inicial del largo
+        dado.
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO:Lista de elementos
+        PRECONDICIONES:
+            * ....
+    */
+    elementosQueFaltan:=lista
+    contador:=0
+    while ( not esVacía(lista) && contador/=cantidad) {
+        elementosQueFaltan:=resto(elementosQueFaltan)
+        contador:=contador + 1
+    }
+
+    return (elementosQueFaltan)
+}

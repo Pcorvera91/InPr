@@ -1,0 +1,306 @@
+Pablo Corvera
+#6018
+
+
+
+🔒chat-privado-a2
+Buscar
+
+No tienes permiso para ver el historial de mensajes de #🔒chat-privado-a2.
+10 de septiembre de 2021
+
+Corvera, Pablo Alfredo — hoy a las 11:45
+Buenas!!
+[11:46]
+Y gracias
+[11:46]
+Tengo problemas con el micro asi le escribo por el chat
+[11:47]
+Tengo varias dudas sobre el ejercicio 6 de la guia 2
+[11:47]
+Mas que todo con los nombres de los procedimientos, los contratos y me gustaria mejorar la legilibilidad del codigo
+[11:47]
+ahora se lo comparto
+
+Atila, Perla — hoy a las 11:48
+Dale.
+[11:48]
+Si lo mandás así te lo pinta lindo:
+```js
+CÓDIGO ACÁ
+```
+
+Corvera, Pablo Alfredo — hoy a las 11:49
+procedure LevantarPared() {
+    /*
+        PROPÓSITO:construye una pared de ladrillos de ocho ladrillos de alto por
+        cuatro ladrillos de ancho
+        PRECONDICIONES:
+            * al menos debe haber 3 celdas al este y 3 al norte de la actual
+            
+    */
+    PonerFilaEnteraDeLadrillos()
+    IrAlaSiguienteFilaAlNorte()
+    PonerFilaEnteraDeLadrillos()
+    IrAlaSiguienteFilaAlNorte()
+    PonerFilaEnteraDeLadrillos()
+    IrAlaSiguienteFilaAlNorte()
+    PonerFilaEnteraDeLadrillos()
+    IrAlBorde(Sur)
+}
+
+procedure PonerFilaEnteraDeLadrillos() {
+    /*
+        PROPÓSITO:  Pone una filera de ladrillos es decir,pone la hilera
+        inferior y superior
+        PRECONDICIONES:
+            
+    */
+    PonerHileraInferiorDeLadrillosEnFila()
+    PonerHileraSuperiorDeLadrillosEnFila()
+}
+
+procedure PonerHileraInferiorDeLadrillosEnFila() {
+    /*
+        PROPÓSITO:  Pone la hilera inferior de ladrillos en una fila
+        PRECONDICIONES:
+            * La fila debe contener cemento
+            *Al menos debe haber 3 lindantes al este de la celda actual
+    */
+    PonerCementoEnFila()
+    PonerLadrilloEnteroEnFila()
+}
+
+procedure PonerCementoEnFila() {
+    /*
+        PROPÓSITO:  Coloca cemento en una fila
+        PRECONDICIONES:
+            * La fila debe estar vacia
+            *Al menos debe haber 3 celdas al este de la actual
+    */
+    PonerCemento()
+    Mover(Este)
+    PonerCemento()
+    Mover(Este)
+    PonerCemento()
+    Mover(Este)
+    PonerCemento()
+    IrAlBorde(Oeste)
+    
+}
+[11:49]
+procedure PonerHileraSuperiorDeLadrillosEnFila() {
+    /*
+        PROPÓSITO:  Pone la hilera superior de ladrillos en una fila
+        PRECONDICIONES:
+            * Debe haber una hilera inferior de ladrillos
+            *Debe haber cemento en el mismo
+            *al menos debe haber 3 lindantes al este de la actual
+    */
+    PonerCementoEnFila()
+    PonerMedioLadrilloEnElBordeOeste()
+    Mover(Este)
+    PonerLadrillo()
+    Mover(Este)
+    PonerLadrillo()
+    Mover(Este)
+    PonerLadrillo()
+    PonerMedioLadrilloEnElBordeEste()
+    IrAlBorde(Oeste)
+
+}
+
+
+
+procedure PonerLadrilloEnteroEnFila() {
+    /*
+        PROPÓSITO:  Pone una fila de ladrillos enteros
+        PRECONDICIONES:
+            * La fila debe contener cemento solamente
+            *Al menos debe haber 3 celdas lindantes al oeste de la actual
+    */
+    PonerLadrillo()
+    Mover(Este)
+    PonerLadrillo()
+    Mover(Este)
+    PonerLadrillo()
+    Mover(Este)
+    PonerLadrillo()
+    IrAlBorde(Oeste)
+}
+
+procedure IrAlaSiguienteFilaAlNorte() {
+    /*
+        PROPÓSITO:  Se mueve a la siguiente fila al norte
+        PRECONDICIONES:
+            * Al menos debe haber 1 celda al norte de la actual
+    */
+    Mover(Norte)
+}
+
+Atila, Perla — hoy a las 11:53
+En LevantarPared, ¿no pedís que las celdas donde vas a ubicar los ladrillos estén vacías?
+[11:54]
+¿Y por qué dejás el cabezal en el borde Sur? Eso no está en el propósito.
+[11:54]
+Deberías agregar "El cabezal termina en el borde Sur".
+
+Corvera, Pablo Alfredo — hoy a las 11:54
+O en la celda inicial
+
+Atila, Perla — hoy a las 11:55
+Pero no necesariamente la deja en la inicial.
+[11:55]
+Y si la deja en la inicial, entonces no tenés que decir nada.
+
+Corvera, Pablo Alfredo — hoy a las 11:55
+Ahh claro
+
+Atila, Perla — hoy a las 11:55
+Si empieza en la 1.1, termina en la 0.1.
+
+Corvera, Pablo Alfredo — hoy a las 11:56
+Hace falta mencionar las precondiciones de la subtareas en LevantarPared()?
+
+Atila, Perla — hoy a las 11:58
+Respecto a IrAlaSiguienteFilaAlNorte, no está muy bueno el nombre. Si ya sabés que lo que hace es moverse una posición al Norte, es mucho más claro leer "Mover(Norte)". Ese procedimiento se justificaría sólo para darle un significado extra al movimiento por lo que debería llamarse IrAlaSiguienteFila, abstrayendo el detalle de que pasar de una fila a otra sólo implica moverse al Norte.
+
+@Corvera, Pablo Alfredo
+Hace falta mencionar las precondiciones de la subtareas en LevantarPared()?
+
+Atila, Perla — hoy a las 11:58
+No pero sí es una precondición de LevantarPared que todas las celdas estén vacías.
+[11:58]
+Si alguna no lo está, entonces no se va a cumplir el propósito.
+
+Corvera, Pablo Alfredo — hoy a las 11:59
+El tablero debe estar vacio
+
+Atila, Perla — hoy a las 11:59
+No necesariamente.
+[11:59]
+Si tenés un tablero de 8x4 y querés levantar dos paredes, no vas a poder levantar la segunda.
+
+Corvera, Pablo Alfredo — hoy a las 11:59
+Claro
+
+Atila, Perla — hoy a las 11:59
+Sólo las celdas que vas a usar.
+[12:00]
+Una opción es decir "las celdas contenidas en la grilla de 4x4 hacia el Este y hacia el Norte desde la celda actual están vacías".
+[12:01]
+En el propósito de PonerFilaEnteraDeLadrillos dice "filera".
+
+Corvera, Pablo Alfredo — hoy a las 12:01
+Ok eso lo modifico y despues te consulto
+[12:01]
+Error de tipeo mio, perdon
+
+Atila, Perla — hoy a las 12:02
+Y no tiene precondiciones.
+[12:02]
+En PonerHileraInferiorDeLadrillosEnFila pedís que haya cemento pero lo primero que hacés es poner cemento.
+
+Corvera, Pablo Alfredo — hoy a las 12:03
+Ahi incluyo las precondiciones del PonerHileraInferiorDeLadrillosEnFila()
+PonerHileraSuperiorDeLadrillosEnFila()?
+[12:03]
+Tenia la duda si ponerlo o no, que debe contener cemento(editado)
+
+Atila, Perla — hoy a las 12:03
+En PonerCementoEnFila pedís que "la fila debe estar vacía". No hace falta que TODA la fila esté vacía, sólo las celdas que vas a usar.
+
+@Corvera, Pablo Alfredo
+Tenia la duda si ponerlo o no, que debe contener cemento(editado)
+
+Atila, Perla — hoy a las 12:04
+Me parece que debería ser que las celdas estén vacías.
+[12:04]
+Porque primero ponés cemento y después los ladrillos.
+[12:05]
+Lo mismo en PonerHileraSuperiorDeLadrillosEnFila. Está bien que pidas que haya una hilera inferior pero volvés a pedir que haya cemento y lo primero que hacés es poner cemento.
+
+Corvera, Pablo Alfredo — hoy a las 12:06
+Ok, ahora en el caso de que no se me ocurra ninguna precondicion, cual vendria ser el "paso a paso" para escribir primero el contrato antes de escribir codigo, ademas de leer con detenimiento?
+[12:06]
+Y en cuanto a la legibilidad del codigo?
+
+Atila, Perla — hoy a las 12:07
+Tenés que pensar qué necesitás para poder cumplir el propósito, más allá de las instrucciones concretas que ejecutes.
+[12:07]
+Sin pensar en código, ¿qué necesitás para poder poner una hilera de ladrillos?
+
+Corvera, Pablo Alfredo — hoy a las 12:07
+Yo la recurso esta materia, pero la diferencia es que la primera vez que hice este ej,hice cualquier cosa, y tratar de hacerlo como ustedes lo piden, cuesta bastante.
+
+Atila, Perla — hoy a las 12:08
+O sea, no lo veas por el lado de las instrucciones que se van a ejecutar sino por el lado de las cosas que tenés que hacer.
+
+@Corvera, Pablo Alfredo
+Yo la recurso esta materia, pero la diferencia es que la primera vez que hice este ej,hice cualquier cosa, y tratar de hacerlo como ustedes lo piden, cuesta bastante.
+
+Atila, Perla — hoy a las 12:08
+Es difícil, sí.
+[12:08]
+Por eso hay que practicar mucho.
+[12:08]
+Pero no te preocupes, a todes nos cuesta al principio.
+
+Corvera, Pablo Alfredo — hoy a las 12:08
+Si mal
+
+Atila, Perla — hoy a las 12:09
+Así que consultá lo más que puedas.
+
+Corvera, Pablo Alfredo — hoy a las 12:09
+Me quede con la legibilidad del codigo
+[12:09]
+Esta bien? como lo puedo mejorar?
+
+Atila, Perla — hoy a las 12:09
+Bueno, la división es subtareas y la legibilidad están muy bien.
+
+Corvera, Pablo Alfredo — hoy a las 12:10
+Bueno me alegro el dia jejejej
+
+Atila, Perla — hoy a las 12:10
+Faltan estos temas con las precondiciones más que nada.
+
+Corvera, Pablo Alfredo — hoy a las 12:10
+Lo que mas cuesta
+
+Atila, Perla — hoy a las 12:10
+Y ojo que en todos los "horizontales" también estás usando IrAlBorde para volver.
+[12:10]
+Lo que hace (al igual que IrAlBorde(Sur)) que sólo funcione si empezás en la esquina.
+[12:11]
+Deberías reemplazarlos por 3 Mover.
+
+Corvera, Pablo Alfredo — hoy a las 12:11
+Aunque sea para un tablero de 4x4 lo tengo que pensar en general,es decir para cualquier tablero no?
+
+@Corvera, Pablo Alfredo
+Lo que mas cuesta
+
+Atila, Perla — hoy a las 12:11
+No sé, hay muchos casos en los que me parece más difícil la elección de nombres o la correcta descripción del propósito.
+
+Corvera, Pablo Alfredo — hoy a las 12:12
+Ademas jeje
+
+@Corvera, Pablo Alfredo
+Aunque sea para un tablero de 4x4 lo tengo que pensar en general,es decir para cualquier tablero no?
+
+Atila, Perla — hoy a las 12:12
+Es que el enunciado no dice que es para un tablero de 4x4.
+[12:12]
+Lo que dije antes: imaginate que querés construir 2 paredes.
+[12:13]
+Una al lado de la otra, o una arriba de la otra.
+[12:13]
+Entonces la celda inicial no va a ser la esquina.
+
+Corvera, Pablo Alfredo — hoy a las 12:13
+Claro
+[12:14]
+Bueno, trato de corregir eso y despues consulto de vuelta si esta bien, te agradezco un monton

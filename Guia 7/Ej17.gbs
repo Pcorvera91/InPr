@@ -1,0 +1,60 @@
+function estáElJugador_(nroJugador) {
+    /*
+        PROPÓSITO:Describe si el jugador nroJugador tiene registrada al 
+        menos una apuesta
+        PARÁMETROS:
+            * nroJugador: numero - es el numero del jugador
+            a buscar.
+           
+        TIPO: Booleano,denota verdadero si si el jugador
+        indicado tiene registrada, al menos, una apuesta.
+        PRECONDICIONES:
+            * Al menos nroJugador debe tener una apuesta
+    */
+    
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyAlFinalDeUnRecorrido__(Este,Norte) && not hayJugadorConApuesta_(nroJugador)) {
+        PasarASiguienteCelda__(Este,Norte)
+    }
+
+    return(hayJugadorConApuesta_(nroJugador))
+}
+
+function alguienJugóA_MasDe_(nroApostado, cantidadMínima) {
+    /*
+        PROPÓSITO: Indica si algun jugador aposto un monto mayor a 
+        cantidadMinima al numero nroApostado
+        PARÁMETROS:
+            * nroApostado: numero - es el numero al que aposto algun jugador .
+            * cantidadMínima: numero - es la cantidad  minima permitida para apostar
+        TIPO: Booleano,denota verdadero si algún jugador nroJugador
+              apostó al número indicado por un monto mayor a cantidadMínima​.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyAlFinalDeUnRecorrido__(Este,Norte) && not hayApuestaAl_PorUnMontoMayorA_(nroApostado,cantidadMinima)) {
+        PasarASiguienteCelda__(Este,Norte)
+    }
+
+    return(hayApuestaAl_PorUnMontoMayorA_(nroApostado,cantidadMinima))
+}
+
+function hayApuestaAl_PorUnMontoMayorA_(nroApostado,cantidadMinima) {
+    /*
+        PROPÓSITO: Indica si hay una apuesta al nroApostado por
+        un monto mayor a cantidadMinima,en la celda actual
+        PARÁMETROS:
+            * nroApostado: numero - es el numero que se aposto.
+            * cantidadMínima: numero - es la cantidad  minima permitida
+             para apostar
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroApostadoActual()==nroApostado && montoApostado > cantidadMinima)
+}
+
+

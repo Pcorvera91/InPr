@@ -1,0 +1,156 @@
+type Coodernada is record {
+
+/*
+    PROPOSITO:Modela una coordenada
+    INV.REP: la coordenada de la fila y la columna es > 0
+
+*/
+
+    field fila		// Numero
+    field columna	// Numero
+}
+
+function coordenada__(x, y) {
+    /*
+        PROPÓSITO: Dados 2 numeros x e y retorna una nueva coordenada
+        PARÁMETROS:
+            * x: numero - es la coordenada x .
+            * y: numero - es la coordenada y .
+        TIPO: Coordenada
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (Coordenada(fila <- x,
+                       columna <- y))
+}
+
+function esCoordenadaOrigen_(coordenada) {
+    /*
+        PROPÓSITO: Dada una coordenada determina si la misma es coordenada
+        de origen es decir que tiene fila y columna en 0
+        PARÁMETROS:
+            * coordenada: Coordenada - es la coordenada que se quiere
+            verificar si esta en el origen
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (fila(coordenada)==0 && columna(coordenada)==0)
+}
+
+function esLaMayorCoordenadaEntre_Y_(coordenada1, coordenada2) {
+    /*
+        PROPÓSITO: Indica si la coordenada1 es mayor a la coordenada2
+        PARÁMETROS:
+            * coordenada1: coordenada - es la primer coordenada que se desea
+            comparar.
+            * coordenada2: coordenada -es la segunda coordenada que se desea
+            comparar.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (columnaDe_EsMayorALaDe_(coordenada1,coordenada2)
+            ||
+            filaDe_EsMayorALaDe_(coordenada1,coordenada2))
+}
+
+function columnaDe_EsMayorALaDe_(coordenada1,coordenada2) {
+    /*
+         PROPÓSITO: Indica si la columna de coordenada1 es mayor a la 
+         coordenada2
+        PARÁMETROS:
+            * coordenada1: coordenada - es la primer coordenada que se
+             desea comparar.
+            * coordenada2: coordenada -es la segunda coordenada que se 
+            desea comparar.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (columna(coordenada1) > columna(coordenada2))
+}
+
+function filaDe_EsMayorALaDe_(coordenada1,coordenada2) {
+    /*
+         PROPÓSITO: Indica si la fila de coordenada1 es mayor a la 
+         coordenada2
+        PARÁMETROS:
+            * coordenada1: coordenada - es la primer coordenada que se
+             desea comparar.
+            * coordenada2: coordenada -es la segunda coordenada que se 
+            desea comparar.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (fila(coordenada1) > fila(coordenada2))
+}
+
+function coordenadaActual() {
+    /*
+        PROPÓSITO: Describe la coordenada donde se encuentra el cabezal
+        TIPO: Coordenada
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Coordenada(fila <- coordenadaX(),
+                       columna <- coordenadaY()))
+}
+
+function últimaCoordenada() {
+    /*
+        PROPÓSITO:describe la última coordenada del tablero en un
+        recorrido hacia el Noreste.
+        TIPO: Coordenada
+        PRECONDICIONES:
+            *Ninguna
+    */
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyAlFinalDeUnRecorrdo(Este,Norte)) {
+        PasarALaSiguienteCelda__(Este,Norte)
+    }
+    return (coordenadaActual())
+}
+
+procedure IrACoordenada_(coordenadaAPosicionar) {
+    /*
+        PROPÓSITO:dada una coordenada posicione el cabezal en la
+        celda correspondiente del tablero.  
+        PARÁMETROS:
+            * coordenadaAPosicionar: Coordenada - es la coordenada del
+            tablero donde se desea posicionar el cabezal.
+            
+        PRECONDICIONES:
+            * Ninguna
+    */
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyAlFinalDeUnRecorrdo(Este,Norte) && not esCoordenada_(coordenadaAPosicionar)) {
+        PasarALaSiguienteCelda__(Este,Norte)
+    }
+   
+    
+}
+
+
+function esCoordenada_(coordenada) {
+    /*
+        PROPÓSITO:Describe la coordenada dada 
+        PARÁMETROS:
+            * coordenada:coordenada - es la coordenada a describir.
+           
+        TIPO: Coordenada
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (Coordenada( fila <- fila(coordenada),
+                        columna <- columna(coordenada)))
+}

@@ -1,0 +1,133 @@
+/* REPRESENTACIÓN DEL DOMINIO
+   - los virus se representan con bolitas Rojas, de 1 a 6 
+   - una indicación de que la máquina de la celda actual no 
+     tiene virus (indicación de OK) se representa con una 
+     bolita Verde
+   - el Hall del edificio en la celda 0,0 con la cantidad de 
+     pisos representada por las bolitas Azules
+   - el Hall del piso en la celda del borde Oeste de cada piso, 
+     con la cantidad de máquinas del piso representada por las 
+     bolitas Negras 
+*/
+
+program {
+  RepararEdificio()
+}
+
+procedure RepararEdificio(){
+  /* 
+     PROPÓSITO: 
+       * reparar todas las máquinas del edificio. 
+         El cabezal queda en el Hall del último piso 
+         del edificio (el hall más al Norte)
+     PRECONDICIONES: 
+       * el cabezal debe estar en la hall del edificio
+  */
+  
+  
+    repeat(nroBolitas(Azul)){
+        
+        Mover(Norte)
+        RepararPiso()
+        
+        
+    }
+  
+  
+  
+  
+}
+
+procedure RepararPiso(){
+  /* 
+     PROPÓSITO: 
+       * reparar todas las máquinas del piso actual
+         (sacando todos los Virus de las máquinas del piso)
+     PRECONDICIONES: 
+       * la celda actual es el Hall del piso
+  */
+  
+  
+  repeat(nroBolitas(Negro)){
+      
+      Mover(Este)
+      RepararMáquina()
+      
+      
+      
+  }
+  
+  
+    IrAlBorde(Oeste)
+    
+    
+    
+}
+
+procedure RepararMáquina(){
+  /* 
+     PROPÓSITO: 
+       * eliminar los virus de la celda actual y dejar 
+         la marca de OK 
+     PRECONDICIONES: 
+       * en la celda actual hay una máquina con virus
+         y sin marcas de OK
+  */
+  
+  
+    QuitarVirus()
+    IndicarOk()
+  
+  
+  
+  
+}
+
+
+procedure QuitarVirus(){
+    /*
+        PROPOSITO:Quita el virus de la celda actual
+        PRECONDICION:Al menos debe haber virus en la celda actual
+    
+    */
+    
+    
+    SacarTodas_(Rojo)
+    
+    
+}
+
+procedure IndicarOk() {
+  /* 
+     PROPÓSITO: 
+       * indicar que la máquina de la celda actual no tiene 
+         virus poniendo la indicación de OK
+     PRECONDICIONES: 
+       * la máquina de la celda actual no tiene virus ni 
+         indicación de OK
+  */
+  
+  
+    Poner(Verde)    
+    
+    
+}
+
+procedure SacarTodas_(colorASacar) {
+  /*
+     PROPÓSITO: 
+       * sacar de la celda actual todas las bolitas 
+         del color dado
+     PRECONDICIONES: 
+       * ninguna (es una operación total)
+     PARÁMETROS:
+       * colorASacar es un color, que indica el color 
+          de las bolitas que se deben sacar
+  */
+  repeat(nroBolitas(colorASacar)){
+      
+      Sacar(colorASacar)
+      
+  }
+}
+

@@ -1,0 +1,16 @@
+function longitudDe_(lista) {
+    /*
+        PROPÓSITO:  ....
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO: Tipo
+        PRECONDICIONES:
+            * ....
+    */
+    contador:=0
+    foreach elemento in lista {
+        contador:= contador +1
+    }
+    return (contador)
+}

@@ -1,0 +1,273 @@
+function esFechaDeAñoBisiesto_(fecha) {
+    /*
+        PROPÓSITO: dada una fecha indica si la misma cae dentro del
+        año bisiesto
+        PARÁMETROS:
+            * fecha: fecha - es la fecha que se desea saber si es bisiesto
+            o no.
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (elAnio_esMultiploDe4YDe400(anio(fecha))
+}
+
+function elAnio_esMultiploDe4YDe400(anio) {
+    /*
+        PROPÓSITO:Indica si el año dado es multiplo de 4 y de 100
+        PARÁMETROS:
+            * anio: numero - es el año a evaluar.
+            
+        TIPO:booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return ((anio mod 4 == 0) && (anio mod 400 == 0))
+}
+
+function mismoAnio__(fecha1, fecha2) {
+    /*
+        PROPÓSITO: dada 2 fechas indican si pertenece al mismo año
+        PARÁMETROS:
+            * fecha1: fecha - es la primer fecha a evaluar.
+            * fecha2: fecha - es la segunda fecha a evaluar.
+        TIPO: Tipo
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (anio(fecha1) == anio(fecha2))
+}
+
+function mismoMes__(fecha1, fecha2) {
+    /*
+        PROPÓSITO: dada 2 fechas indican si pertenece al mismo Mes
+        PARÁMETROS:
+            * fecha1: fecha - es la primer fecha a evaluar.
+            * fecha2: fecha - es la segunda fecha a evaluar.
+        TIPO: Tipo
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (mes(fecha1) == mes(fecha2))
+}
+
+
+function estáAntesQue__(mes1, mes2) {
+    /*
+        PROPÓSITO:dados dos meses indica si el primero aparece antes que el segundo en el mismo año.
+        PARÁMETROS:
+            * mes1: mes - es el primer mes a comparar.
+            * mes2: mes - es el segundo mes a comparar.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * tanto mes1 o mes2 son los meses del año
+    */
+    
+    return (mes_TransformadoANumero(mes1) < mes_TransformadoANumero(mes2))
+}
+
+function esMásAntigua_Que_(fecha1, fecha2) {
+    /*
+        PROPÓSITO:dadas dos fechas indica si la primera es
+        anterior a la segunda.
+        PARÁMETROS:
+            * fecha1: fecha - es la fecha a comparar
+            * fecha2: fecha - es la fecha a comparar
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return ((elAnio_EstaAntesQue_(anio(fecha1),anio(fecha2)) && mismoMes__(mes(fecha1),mes(fecha2))) 
+        || (estáAntesQue__(mes(fecha1),mes(fecha2)) && mismoAnio__(anio(fecha1), anio(fecha2))))
+}
+
+
+function elAnio_EstaAntesQue_(anio1,anio2) {
+    /*
+        PROPÓSITO:Dados 2 años indica si el primero esta antes del
+        segundo
+        PARÁMETROS:
+            * anio1: numero - es el primer año a comparar.
+            * anio2: numero - es el segundo año a comparar.
+        TIPO:Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (anio(anio1) < anio(anio2) )
+}
+
+function mes_TransformadoANumero(mesATransformar) {
+    /*
+        PROPÓSITO: Describe el numero del mes mesATransformar
+        PARÁMETROS:
+            *mesATransformar: Mes - es el mes que se desea transformar.
+           
+        TIPO:numero
+        PRECONDICIONES:
+            * mesATransformar es de Enero a Diciembre
+    */
+    
+    return (choose
+                1 when (mes(mesATransformar)==Enero)
+                2 when (mes(mesATransformar)==Febrero || mes(mesATransformar) ==FebreroBisiesto )
+                3 when (mes(mesATransformar)==Marzo)
+                4 when (mes(mesATransformar)==Abril)
+                5 when (mes(mesATransformar)==Mayo)
+                6 when (mes(mesATransformar)==Junio)
+                7 when (mes(mesATransformar)==Julio)
+                8 when (mes(mesATransformar)==Agosto)
+                9 when (mes(mesATransformar)==Septiembre)
+                10 when (mes(mesATransformar)==Octubre)
+                11 when (mes(mesATransformar)==Noviembre)
+                12 otherwise
+    })
+}
+
+function primerDíaDelInviernoDe_(anio) {
+    /*
+        PROPÓSITO: describe el primer día del invierno del año dado 
+        PARÁMETROS:
+            * anio: numero - es el anio 
+           
+        TIPO: Fecha
+        PRECONDICIONES:
+            * es el primer dia de invierno en el hemisferio sur
+    */
+    
+    return return(Fecha(
+                 dia <- 21,
+                 mes <- Junio,
+                 anio <- anio))
+}
+
+function últimoDíaDelInviernoDe_​(anio) {
+    /*
+        PROPÓSITO: describe el ultimo día del invierno del año dado 
+        PARÁMETROS:
+            * anio: numero - es el anio 
+           
+        TIPO: Fecha
+        PRECONDICIONES:
+            * es el ultimo dia de invierno en el hemisferio sur
+    */
+    
+    return return(Fecha(
+                 dia <- 21,
+                 mes <- Diciembre,
+                 anio <- anio))
+}
+
+function esInviernoEl_(fecha) {
+    /*
+        PROPÓSITO:dada una fecha indica si el día dado es uno del
+            invierno
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO: Tipo
+        PRECONDICIONES:
+            * ....
+    */
+    
+    return (esMásAntigua_Que_(fecha1, fecha2) && esMásAntigua_Que_(fecha1, fecha2))
+}
+
+
+function cuántosAñosPasaronEntre_Y_(fecha1, fecha2) {
+    /*
+        PROPÓSITO:dadas dos fechas describa el
+        número de años que hay entre las dos fechas
+        PARÁMETROS:
+            * fecha1: fecha- descripción.
+            * fecha2: fecha- descripción.
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    cantidadDeDias:=cuántosDiasPasaronEntre_Y_(fecha1, fecha2)
+    añosContados:=0
+    while(cantidadDeDias >= 365){
+
+        cantidadDeDias:=cantidadDeDias - 365
+        añosContados:=añosContados + 1 
+
+    }
+    return (añosContados)
+}
+
+
+function cuántosDiasPasaronEntre_Y_(fecha1, fecha2) {
+    /*
+        PROPÓSITO: Dadas 2 fechas describe la cantidad de dias que
+        pasaron entre las 2 fechas dadas
+        PARÁMETROS:
+            * fecha1: fecha - es la primer fecha a
+            * fecha2: fecha - es la segunda fecha
+        TIPO: Tipo
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (restaDe__(dia(fecha1),dia(fecha2)+
+            (restaDe__(mes_TransformadoANumero(mes(fecha1)),mes_TransformadoANumero(mes(fecha2))*30))+
+            (restaDe__(anio(fecha1),anio(fecha2)))*365))
+}
+
+
+
+
+function restaDe__(numero1,numero2) {
+    /*
+        PROPÓSITO: Dados 2 numeros, describe su resta
+        PARÁMETROS:
+            * numero1: numero - es el primer numero a restar.
+            * numero2: numero - es el segundo numero a restar.
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (numero1- numero2)
+}
+
+
+
+
+type Estacion is variant {
+    
+    case Verano{}
+    case Otoño {}
+    case invierno {}
+    case Primavera {}
+
+
+}
+
+
+
+
+function estaciónDe_(fecha) {
+    /*
+        PROPÓSITO: Dada una fecha,retorna su estacion
+        PARÁMETROS:
+            * fecha: fecha - es la fecha en el cual se desea saber cual es su estacion
+           
+        TIPO: Estacion
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (choose
+        Verano when (esVeranoEl_(fecha) == True)
+        Otoño when (esOtoñoEl_(fecha) == True)
+        Invierno when (esInviernoEl_(fecha) == True)
+        Primavera otherwise
+    })
+}

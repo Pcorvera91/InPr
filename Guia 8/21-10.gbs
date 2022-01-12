@@ -1,0 +1,171 @@
+Practica 8 
+
+1) 
+
+a) 
+
+type DiaDeLaSemana is variant {
+    /*
+        PROPÓSITO: modelar los días de la semana 
+    */
+    case Lunes {}
+    case Martes {}
+    case Miercoles {}
+    case Jueves {}
+    case Viernes {}
+    case Sabado {}
+    case Domingo {}
+}
+
+function diaSiguiente_(diaDeLaSemana) {
+    /*
+        PROPÓSITO:  describe el día siguiente al día **diaDeLaSemana**
+        PARÁMETROS:
+            * diaDeLaSemana: DiaDeLaSemana - describe el dia de la semana dado.
+        RESULTADO: DiaDeLaSemana
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (choose  Martes when (diaDeLaSemana == Lunes)
+                    Miercoles when (diaDeLaSemana == Martes)
+                    Jueves when (diaDeLaSemana == Miercoles)
+                    Viernes when (diaDeLaSemana == Jueves)
+                    Sabado when (diaDeLaSemana == Viernes)
+                    Domingo when (diaDeLaSemana == Sabado)
+                    Lunes otherwise)
+}
+
+b) 
+
+function diaPrevio_(diaDeLaSemana) {
+    /*
+        PROPÓSITO:  describe el día previo al día **diaDeLaSemana**
+        PARÁMETROS:
+            * diaDeLaSemana: DiaDeLaSemana - describe el dia de la semana dado.
+        RESULTADO: DiaDeLaSemana
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (choose  Lunes when (diaDeLaSemana == Martes)
+                    Martes when (diaDeLaSemana == Miercoles)
+                    Miercoles when (diaDeLaSemana == Jueves)
+                    Jueves when (diaDeLaSemana == Viernes)
+                    Viernes when (diaDeLaSemana == Sabado)
+                    Sabado when (diaDeLaSemana == Domingo)
+                    Domingo otherwise)
+}
+
+c)
+
+function esFinDeSemana_(diaDeLaSemana) {
+    /*
+        PROPÓSITO: indica si el dia **diaDeLaSemana** es parte del fin de semana
+        PARÁMETROS:
+            * diaDeLaSemana: diaDeLaSemana - describe el dia de la semana dado..
+        RESULTADO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+        OBSERVACIÓN: los dias de la semana son sabado y domingo
+    */
+    
+    return (diaDeLaSemana == Sabado || diaDeLaSemana == Domingo)
+}
+
+2)
+
+type Carta is record {
+    /*
+        PROPÓSITO: modela cartas españolas de truco
+        INV. REP.: el número esta entre el 1 y el 7 o entre el 10 y el 12
+    */
+    field número  // Tipo Número
+    field palo    // Tipo Palo
+}
+
+a)
+
+function esFigura_(carta) {
+    /*
+        PROPÓSITO:  indica si la carta **carta** es figura
+        PARÁMETROS:
+            * carta: Carta - describe la carta dada.
+        RESULTADO: Booelano
+        PRECONDICIONES:
+            * Ninguna
+        OBSERVACIONES: una carta es una figura si es un 10, 11 o 12 
+    */
+    
+    return (numero(carta) => 10)
+}
+
+b)
+
+function envidoCon_Y_(primerCarta, segundaCarta) {
+    /*
+        PROPÓSITO:  describe el valor del envido con las cartas dadas
+        PARÁMETROS:
+            * primerCarta: Carta - describe la primer carta a sumar con envido 
+            * segundaCarta: Carta - describe la segunda carta a sumar con envido 
+        RESULTADO: Número
+        PRECONDICIONES:
+            * **primeraCarta** y **segundaCarta** son del mismo palo 
+    */
+    
+    return (choose  envidoSimpleCon_Y_(primeraCarta, segundaCarta) when (ningunaEsFigura__(primeraCarta, segundaCarta))
+                    numero(segundaCarta) + 20 when (esFigura_(primerCarta)) && not(esFigura_(segundaCarta))
+                    numero(primerCarta) + 20 when (esFigura_(segundaCarta)) && not(esFigura_(primerCarta))
+                    20 otherwise
+    )
+}
+
+
+function envidoCon_Y_(primerCarta, segundaCarta) {
+    /*
+        PROPÓSITO:  describe el valor del envido con las cartas dadas
+        PARÁMETROS:
+            * primerCarta: Carta - describe la primer carta a sumar con envido 
+            * segundaCarta: Carta - describe la segunda carta a sumar con envido 
+        RESULTADO: Número
+        PRECONDICIONES:
+            * **primeraCarta** y **segundaCarta** son del mismo palo 
+    */
+    
+    return (valorParaEnvidoDe_(primerCarta) + valorParaEnvidoDe_(segundaCarta) + 20)
+}
+
+function valorParaEnvidoDe_(carta){
+    /*
+        PROPÓSITO:  describe el valor para envido de la carta **carta**
+        PARÁMETROS:
+            * carta: Carta - describe la carta a evaluar para envido
+        RESULTADO: Número
+        PRECONDICIONES:ninguna.
+    */
+    
+    return (choose numero(carta) when (not (esFigura_(carta)))
+                   0 otherwise
+    )
+}
+
+
+function envidoCon_Y_mayorA_(primerCarta, segundaCarta, cantidad){
+    /*
+        PROPÓSITO: Indica si la primera carta y la segunda carta suman un envido mayor a la cantidad dada.
+        PARÁMETROS:
+            * primerCarta: Carta - describe la primer carta a evaluar para envido con la segunda carta.
+            * segundaCarta: Carta - describe la segunda carta a evaluar para envido con la primera carta.
+            * cantidad: Numero - describe la cantidad a la cual comparar con el envido.
+        RESULTADO: Booleano.
+        PRECONDICIONES:
+            * las cartas dadas deben ser del mismo palo
+    */
+    
+    return (envidoCon_Y_(primerCarta, segundaCarta) > cantidad)
+}
+
+
+
+
+

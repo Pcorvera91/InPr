@@ -1,0 +1,103 @@
+type Persona is record{
+/*
+    PROPOSITO:Modela los datos de una persona
+    INV.REP:Ninguna
+
+*/
+    field nroDNI // String
+    field domicilio // String
+    field fechaNacimiento // Fecha
+    field esDonante // Booleano
+}
+
+function sonConvivientes_Y_(​persona1, persona2) {
+    /*
+        PROPÓSITO:dadas dos personas indica si comparten
+        domicilio
+        PARÁMETROS:
+            * persona1: persona - es la primer persona a comparar.
+            * persona2: persona - es la segunda persona a comparar.
+        TIPO: Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (domicilio(persona1) == domicilio(persona2))
+}
+
+function sinAsignar() {
+    /*
+        PROPÓSITO:Denota un string vacio
+        TIPO: String
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (" ")
+}
+
+function  personaNacidaDe_El_(personaMadre,fecha) {
+    /*
+        PROPÓSITO:dada una persona madre y una fecha,
+                  describe a una nueva persona que haya nacido en la fecha dada
+        PARÁMETROS:
+            * personaMadre: Persona - describe a la madre del nacido.
+            * fecha: Fecha - describe la fecha de nacimiento de la 
+            persona que nacio
+        TIPO:Persona
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (Persona(personaMadre | nroDNI <- sinAsignar(),
+                                   fechaNacimiento <- fecha,
+                                   esDonante <- False))
+}
+
+function persona_RegistradaCon_(persona,nroDNIAAsignar) {
+    /*
+        PROPÓSITO:Dada una persona y un DNI de Registro describe a la
+        persona dada con el DNI asignado al dado.
+        PARÁMETROS:
+            * persona: Persona - es la persona en el cual se le quiere
+            asignar el DNI
+            * nroDNIAAsignar:Numero - es el DNI a asignar
+        TIPO: Persona
+        PRECONDICIONES:
+            * La persona no tiene asignado un DNI
+    */
+    
+    return (Persona(persona | nroDNI <- nroDNIAAsignar))
+}
+
+function  persona_ConDomicilioNuevoEn_(persona,nuevoDomicilio) {
+    /*
+        PROPÓSITO:dada una persona y un nuevo domicilio y describe a la 
+        persona con el domicilio cambiado.
+        PARÁMETROS:
+            * persona: Persona - es la persona que desea cambiar su 
+            domicilio.
+            * nuevoDomicilio: numero - es el domicilio nuevo a cambiar
+        TIPO: Persona
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (Persona(persona | domicilio <- nuevoDomicilio))
+}
+
+function persona_ConSituaciónComoDonanteCambiada(persona) {
+    /*
+        PROPÓSITO:Dada una persona, describe a la persona pero con
+        su situacion como donante cambiada
+        PARÁMETROS:
+            * persona: Persona - Es la persona que quiere cambiar su
+            condicion de donante
+            
+        TIPO: Persona
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Persona(persona | esDonante <- opuesto(esDonante(persona))))
+}

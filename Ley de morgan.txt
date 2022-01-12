@@ -1,0 +1,2 @@
+la ley de morgan dice que cuando tengo 2 negaciones con un && este me devuelve verdadero pero cuando lo ejecuto
+en un while niego la condicion y el operador logico me transforma en un ||.

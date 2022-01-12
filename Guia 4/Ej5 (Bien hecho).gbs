@@ -1,0 +1,64 @@
+procedure PasarPalabraActualAMayusculas() {
+    /*
+        PROPÓSITO:Teniendo una palabra minuscula en la fila actual, pone
+        la misma palabra en mayusculas en la fila lindante al norte
+        PRECONDICIONES:
+            * Al menos debe haber tantas celdas lindantes al este como
+            cantidad de letras (cantidad de bolitas rojas) y una celda
+            lindante al norte de la celda actual.
+
+            * la cantidad de bolitas negras que representan el codigo
+            ASCII deben ser entre 97 y 122 
+    */
+    
+    repeat(nroBolitas(Rojo)){
+        
+        Mover(Este)
+
+        Pasar_AMayuscula(nroBolitas(Negro))/* se rellena el agujero con nroBolitas(Negro) es decir se guarda en el parametro letraMinuscula
+                                            se mueve al norte y pone nroBolitas(Negro)-32 bolitas negras*/    
+        
+        
+
+        
+    }
+
+
+}
+
+procedure Pasar_AMayuscula(letraMinuscula) {
+    /*
+        PROPÓSITO: Pasa a mayuscula la letraMinuscula
+        PARÁMETROS:
+            * : letraMinuscula - Describe la letra minuscula representada en codigo ASCII
+            
+        PRECONDICIONES:
+            * letraMinuscula debe ser un numero entre 97 y 122
+            * al menos debe haber una celda lindante al norte de la actual
+    */
+    
+    Mover(Norte)
+
+    Poner__Veces(Negro,letraMinuscula-32) //se resta 32 al agujero letraMinuscula
+    
+    Mover(Sur)
+}
+
+
+
+
+procedure Poner__Veces(color, cantidad) {
+    /*
+        PROPÓSITO:  pone una cantidad de bolitas de 
+        color dado
+        PARÁMETROS:
+            * color: color - es el color de la bolita a poner.
+            * cantidad: numero - es la cantidad de bolitas a 
+            poner
+        PRECONDICIONES:
+            * ninguna
+    */
+    repeat (cantidad) {
+        Poner(color)
+    }
+}

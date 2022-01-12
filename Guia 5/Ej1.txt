@@ -1,0 +1,26 @@
+Tablero A:
+not hayBolitas(Rojo)=V
+puedeMover(Sur) && puedeMover(Oeste)=F
+puedeMover(Sur) || puedeMover(Oeste)=F
+not puedeMover(Sur) && puedeMover(Oeste)=F
+nroBolitas(Negro) == nroBolitas(Azul) && nroBolitas(Negro) == nroBolitas(Verde) =F
+puedeMover(opuesto(opuesto(dirección)))=F
+not puedeMover(dirección) && not puedeMover(opuesto(dirección))
+
+Tablero B:
+not hayBolitas(Rojo)=V
+puedeMover(Sur) && puedeMover(Oeste)=F
+puedeMover(Sur) || puedeMover(Oeste)=V
+not puedeMover(Sur) && puedeMover(Oeste)=V
+nroBolitas(Negro) == nroBolitas(Azul) && nroBolitas(Negro) == nroBolitas(Verde) =V
+puedeMover(opuesto(opuesto(dirección)))=F
+not puedeMover(dirección) && not puedeMover(opuesto(dirección))
+
+Tablero C:
+not hayBolitas(Rojo)=F
+puedeMover(Sur) && puedeMover(Oeste)=V
+puedeMover(Sur) || puedeMover(Oeste)=V
+not puedeMover(Sur) && puedeMover(Oeste)=F
+nroBolitas(Negro) == nroBolitas(Azul) && nroBolitas(Negro) == nroBolitas(Verde) =V
+puedeMover(opuesto(opuesto(dirección)))=V
+not puedeMover(dirección) && not puedeMover(opuesto(dirección))

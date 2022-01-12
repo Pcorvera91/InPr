@@ -1,0 +1,76 @@
+function haySiguienteTramoEn_(ruta) {
+    /*
+        PROPÓSITO:Dada una ruta Indica si la ruta tiene al menos un tramo completo
+        PARÁMETROS:
+            * ruta: lista de direcciones - son las direcciones en el cual se desea
+            saber si hay un tramo siguiente.
+            
+        TIPO: booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+
+
+    return (not esVacia(resto(resto(ruta)))
+}
+
+function sigueUnaCurvaDerechaEn_(ruta) {
+    /*
+        PROPÓSITO:Dada una ruta, Indica si la curva que siguie en la ruta es hacia la derecha
+        PARÁMETROS:
+           * ruta: lista de direcciones - son las direcciones en el cual se desea
+            saber si hay una curva hacia la derecha
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            *en el siguiente semitramo del actual,hay una curva.
+            *hay al menos 1 tramo completo en **ruta**
+    */
+    
+    return (tercero(ruta) == Este)
+}
+
+function sigueUnaCurvaizquierdaEn_(ruta) {
+    /*
+        PROPÓSITO:Dada una ruta, Indica si la curva que siguie en la ruta es hacia la izquierda
+        PARÁMETROS:
+           * ruta: lista de direcciones - son las direcciones en el cual se desea
+            saber si hay una curva hacia la izquierda
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            *en el siguiente semitramo del actual,hay una curva.
+            *hay al menos 1 tramo completo en **ruta**
+    */
+    
+    return (tercero(ruta) == Oeste)
+}
+
+function sigueUnaCurvaEn_(ruta) {
+    /*
+        PROPÓSITO:Dada una ruta Indica si el tramo que sigue es una curva
+        PARÁMETROS:
+            * ruta: lista de direcciones - es la ruta en el cual se desea saber si el tramo
+            que sigue del actual hay una curva
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (sigueUnaCurvaizquierdaEn_(ruta) || sigueUnaCurvaDerechaEn_(ruta))
+}
+
+function  sigueRectaEn_(ruta) {
+    /*
+        PROPÓSITO:Dada una ruta indica si el tramo que sigue en la ruta es una recta
+        PARÁMETROS:
+            * ruta:lista de direcciones - es la ruta en el cual se desea saber si el tramo
+            que sigue del actual es recto
+        TIPO:Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (not sigueUnaCurvaEn_(ruta))
+}

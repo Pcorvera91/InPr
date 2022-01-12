@@ -1,0 +1,86 @@
+procedure Intercambiar_Por_Al_(formaFicha1,formaFicha2,direccionAIntercambiar ) {
+    /*
+        PROPÓSITO: Intercambia la ficha actual **formaFicha1** por
+        **formaFicha2** en la celda lindante a **direccionAIntercambiar**
+
+        PARÁMETROS:
+            * formaFicha1: es un numero que indica la forma de la ficha actual
+            * formaFicha1: es un numero que indica la forma de la ficha 
+            * direccionAIntercambiar:Es la direccion donde se quiere intercambiar la ficha
+        PRECONDICIONES:
+            * Al menos debe haber una ubicacion lindante a direccionAIntercambiar de la ubicacion actual
+            * **formaFicha1** y **formaFicha2** debe ser un numero que este entre 2 y 5
+            *en la ubicacion actual debe haber 1 ficha
+    */
+        RetirarFicha_(formaFicha1)
+        ColocarFicha_(formaFicha2)
+        IrALaSiguienteUbicacionAl_(direccionAIntercambiar)
+        RetirarFicha_(formaFicha2)
+        ColocarFicha_(formaFicha1)
+
+
+
+}
+
+procedure RetirarFicha_(formaDeFichaARetirar) {
+    /*
+        PROPÓSITO:  Retira una ficha de la ubicacion actual
+        PARÁMETROS:
+            * formaDeFichaARetirar:es un numero que indica la forma de la ficha que se debe retirar
+        PRECONDICIONES:
+            * Debe haber una ficha de formaDeFichaARetirar en la ubicacion Actual
+            * formaDeFichaARetirar debe ser un numero entre 2 y 5
+    */
+    Sacar(Negro)
+    repeat(formaDeFichaARetirar){
+        Sacar(Azul)
+    }
+}
+
+procedure ColocarFicha_(formaDeFichaAColocar) {
+    /*
+        PROPÓSITO:  Coloca una ficha de la ubicacion actual
+        PARÁMETROS:
+            * formaDeFichaAColocar:es un numero que indica la forma de la ficha que se debe colocar
+        PRECONDICIONES:
+            * formaDeFichaAColocar debe ser un numero entre 2 y 5
+            *En la ubicacion actual no hay una ficha
+    */
+    Poner(Negro)
+    repeat(formaDeFichaARetirar){
+        Poner(Azul)
+    }
+}
+
+procedure IrALaSiguienteUbicacionAl_(direccionAMover) {
+    /*
+        PROPÓSITO: Mueve el cabezal a la ubicacion a direccionAMover
+        PARÁMETROS:
+            *direccionAMover:es la direccion de la siguiente ubicacion 
+        PRECONDICIONES:
+            * Al menos debe haber una ubicacion lindante a direccionAMover
+    */
+    Mover(direccionAMover)
+}
+
+procedure Reponer_FichasAl_ (cantidadAReponer, direccionAReponer) {
+    /*
+        PROPÓSITO: Repone fichas en una cantidadAReponer de celdas hacia direccionAReponer,el cabezal
+        queda a cantidadAReponer celdas de distancia de la celda actual
+        PARÁMETROS:
+            * cantidadAReponer: numero  - Indica la cantidad de celdas a reponer 
+            * direccionAReponer: indica la direccion a reponer 
+        PRECONDICIONES:
+            * Al menos debe haber (cantidadAReponer - 1) celdas lindantes a direccioAReponer de la celda
+            actual
+            *tanto la celda actual como (cantidadAReponer - 1 ) de celdas lindantes a direccionAReponer
+            deben estar vacias.
+    */
+    
+    repeat (cantidadAReponer-1) {
+        
+        PonerFichaAleatoria()
+        Mover(Este)
+    }
+    PonerFichaAleatoria()
+}

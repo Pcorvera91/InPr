@@ -1,0 +1,144 @@
+procedure PasarPalabraActualAMayusculas() {
+    /*
+        PROPÓSITO:Teniendo una palabra minuscula en la fila actual, pone
+        la misma palabra en mayusculas en la fila lindante al norte
+        PRECONDICIONES:
+            * Al menos debe haber tantas celdas lindantes al este como
+            cantidad de letras (cantidad de bolitas rojas) y una celda
+            lindante al norte de la celda actual.
+
+            * la cantidad de bolitas negras que representan el codigo
+            ASCII deben ser entre 97 y 122 
+    */
+    
+    repeat(nroBolitas(Rojo)){
+        
+        IrALaSiguienteLetraAlEste()
+
+        ProcesarMinuscula()
+
+        ConvertirMayusculaAlNorte()
+        
+        
+
+        
+    }
+
+
+}
+
+
+procedure ProcesarMinuscula() {
+    /*
+        PROPÓSITO:Procesa la letra minuscula en la celda actual
+        PRECONDICIONES:
+            * Al menos debe haber entre 97 y 122 en la celda actual
+            *al menos debe haber una lindante al norte de la actual
+    */
+    
+
+    Poner__Veces(Verde,nroBolitas(Negro)-32)
+
+    repeat (nroBolitas(Verde)) {
+        
+        Sacar(Verde)
+        Mover(Norte)
+        Poner(Verde)
+        Mover(Sur)
+        
+
+    }
+
+    
+
+}
+
+procedure ConvertirMayusculaAlNorte() {
+    /*
+        PROPÓSITO:Convierte la letra minuscula a mayuscula
+        PRECONDICIONES:
+            * Al menos debe haber una lindante al norte de la actual
+    */
+    
+    
+    PosicionarseEnLaMayuscula()
+    Imitar_ParaPoner_(Verde,Negro)
+    SacarTodas_(Verde)
+    VolverALaMinuscula()
+
+}
+
+procedure IrALaSiguienteLetraAlEste() {
+    /*
+        PROPÓSITO: Mueve a la siguiente letra al este
+        PRECONDICIONES:
+            * Al menos hay una lindante al este de la celda actual
+    */
+    
+    Mover(Este)
+}
+
+
+
+
+
+procedure SacarTodas_(colorASacar) {
+  /*
+     PROPÓSITO: 
+       * sacar de la celda actual todas las bolitas 
+         del color dado
+     PRECONDICIONES: 
+       * ninguna (es una operación total)
+     PARÁMETROS:
+       * colorASacar es un color, que indica el color 
+          de las bolitas que se deben sacar
+  */
+  repeat(nroBolitas(colorASacar)){
+      
+      Sacar(colorASacar)
+      
+  }
+}
+
+procedure Poner__Veces(color, cantidad) {
+    /*
+        PROPÓSITO:  pone una cantidad de bolitas de 
+        color dado
+        PARÁMETROS:
+            * color: color - es el color de la bolita a poner.
+            * cantidad: numero - es la cantidad de bolitas a 
+            poner
+        PRECONDICIONES:
+            * ninguna
+    */
+    repeat (cantidad) {
+        Poner(color)
+    }
+}
+
+procedure Imitar_ParaPoner_(colorAImitar,colorAPoner){
+/*
+
+    
+*/    
+    repeat(nroBolitas(colorAImitar)){
+        Poner(colorAPoner)
+    }
+}
+
+
+
+procedure PosicionarseEnLaMayuscula(){
+/**/    
+    
+    Mover(Norte)
+    
+}
+
+procedure VolverALaMinuscula(){
+/**/    
+   
+   Mover(Sur)
+    
+}
+

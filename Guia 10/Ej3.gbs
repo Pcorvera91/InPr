@@ -1,0 +1,23 @@
+function aparicionesDeColor_(colorABuscar) {
+    /*
+        PROPÓSITO:Describe una lista de numeros que indica para cada una de las
+        celdas del tablero la cantidad de bolitas de color **colorABuscar** en esa celda del
+        tablero
+        PARÁMETROS:
+            * colorABuscar: Color - es el color que se desea buscar en el tablero.
+           
+        TIPO: Lista de numeros
+        PRECONDICIONES:
+            * Ninguna
+    */
+
+    listaDeCantidadDeRojasHastaAhora:=[]
+
+    IrAlInicioDeUnRecorrido__(Norte,Oeste)
+    while (not estoyAlFinalDeUnRecorrido__(Norte,Oeste)) {
+        
+        listaDeCantidadDeRojasHastaAhora:=cons(nroBolitas(colorABuscar),listaDeCantidadDeRojasHastaAhora)
+        PasarASiguienteCelda__(Norte,Oeste)
+    }
+    return (cons(nroBolitas(colorABuscar),listaDeCantidadDeRojasHastaAhora))
+} 

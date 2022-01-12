@@ -1,0 +1,215 @@
+function hayFicha_(colorFicha) {
+    /*
+        PROPÓSITO: Indica si hay una ficha de colorFicha en la celda
+        Actual
+        PARAMETRO:colorFicha es el color de la ficha a comprobar 
+        TIPO: Booleano
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (hayBolitas(colorFicha))
+}
+
+
+
+procedure SacarUnaFicha_SiSePuede(colorDeLaFicha){
+    /*
+        PROPÓSITO:Saca una ficha de colorDeLaFicha
+        PARÁMETROS:
+            * colorDeLaFicha: color - es el color de la ficha a 
+            sacar
+            
+        PRECONDICIONES:
+            * Ninguna,es total
+    */
+    
+    if (hayFicha_(colorDeLaFicha)) {
+
+        Sacar(colorDeLaFicha)
+
+    }
+
+
+}
+
+
+
+function puntajeEquipoDeColor_(colorEquipo) {
+    /*
+        PROPÓSITO:Describe el puntaje del equipo colorEquipo
+        PARÁMETROS:
+            * colorEquipo: color - es el color del equipo .
+            
+        TIPO: Numero
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (nroBolitas(colorEquipo))
+}
+
+
+
+procedure DesempatarParaElLocal__(colorDelLocal, colorDelVisitante) {
+    /*
+        PROPÓSITO: Dados el color del equipo local **colorDelLocal** 
+        y el color del equipo visitante **colorDelVisitante** desempata
+        si tanto el equipo local y el visitante tienen el mismo puntaje
+        PARÁMETROS:
+            * colorLocal: color - es el color del equipo local.
+            * colorVisitante: color - es el color del equipo Visitante.
+        PRECONDICIONES:
+            * colorDelLocal es diferente que colorDelVisitante
+    */
+    if (puntajeEquipoDeColor_(colorDelLocal)==puntajeEquipoDeColor_(colorVisitante)) {
+        
+        AnotarUnPuntoParaElEquipo_(colorDelLocal)
+
+    }
+    
+}
+
+procedure AnotarUnPuntoParaElEquipo_(colorDelEquipo) {
+    /*
+        PROPÓSITO:  Anota 1 punto para el equipo colorDelEquipo
+        PARÁMETROS:
+            * colorDelEquipo: color - indica el color del equipo.
+            
+        PRECONDICIONES:
+            * Ninguna
+    */
+
+
+    Poner(colorDelEquipo)
+
+
+}
+
+function cantidadDeBacterias() {
+    /*
+        PROPÓSITO:Describe el cantidad de bacterias en la celda actual
+       
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Verde))
+}
+
+
+function cantidadDeNutrientes() {
+    /*
+        PROPÓSITO:Describe el cantidad de Nutrientes en la celda actual
+       
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Rojo))
+}
+
+function bacteria() {
+    /*
+        PROPÓSITO:Representa una bacteria
+        TIPO:color
+        PRECONDICIONES:
+            *ninguna
+    */
+    
+    return (Verde)
+}
+
+
+function nutriente() {
+    /*
+        PROPÓSITO:Representa una nutriente
+        TIPO:color
+        PRECONDICIONES:
+            *ninguna
+    */
+    
+    return (Rojo)
+}
+
+
+
+procedure ExpandirBacterias() {
+    /*
+        PROPÓSITO:agrega una bacteria si al menos hay 2 nutrientes en la 
+        celda actual
+        PRECONDICIONES:
+            * Ninguna
+    */
+    if (cantidadDeBacterias()>=1 && cantidadDeNutrientes()>=2) {
+        ConsumirNutrientesYAgregarBacterias()
+    }
+
+
+}
+
+procedure ConsumirNutrientesYAgregarBacterias() {
+    /*
+        PROPÓSITO: consume cada 2 nutrientes por una bacteria que se
+        genera
+        PRECONDICIONES:
+            * al menos debe haber 2 nutrientes y 1 bacteria
+             en la celda actual
+    */
+    
+    repeat (cantidadDeNutrientes() div 2) {
+        Consumir2Nutrientes()
+        AgregarUnaBacteria()
+    }
+
+
+}
+
+procedure Consumir2Nutrientes() {
+    /*
+        PROPÓSITO:  Consume 2 nutrientes en la celda actual
+        PRECONDICIONES:
+            * Al menos debe haber 2 nutrientes en la celda actual
+    */
+    Sacar__Veces(nutriente,2)
+}
+
+procedure AgregarUnaBacteria() {
+    /*
+        PROPÓSITO:  Agrega una bacteria en la celda actual
+        PRECONDICIONES:
+            * Ninguna
+    */
+    Poner(bacteria)
+}
+
+procedure PonerFlecha_AlNorteSiCorresponde(colorDeLaFlecha) {
+    /*
+        PROPÓSITO: Pone una flecha de color colorDeLaFlecha al norte
+        si existe espacio para moverse a esa direccion
+        PARÁMETROS:
+            * colorDeLaFlecha: color - describe el color de la flecha.
+           
+        PRECONDICIONES:
+            * Ninguna
+    */
+    if (puedeMover(Norte)) {
+        Mover(Norte)
+        PonerFlechaDeColor_(colorDeLaFlecha)
+    }
+    
+}
+
+procedure PonerFlechaDeColor_(color) {
+    /*
+        PROPÓSITO: Pone una flecha de un color dado
+        PARÁMETROS:
+            * Es el color de la flecha: tipo - descripción.
+            
+        PRECONDICIONES:
+            * color puede ser Rojo,Negro,Azul,Verde
+    */
+    Poner(color)
+}

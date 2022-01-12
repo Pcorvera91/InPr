@@ -1,0 +1,48 @@
+procedure DibujarCuadrado_DeTamaño_(colorDelCuadrado,tamañoCuadrado) {
+/* PROPÓSITO:
+     Dibuja un cuadrado con relleno de **tamañoCuadrado** de color **colorDelCuadrado**
+PRECONDICIONES:
+    * Existen al menos (**tamañoCuadrado**-1) celdas al Norte y (**tamañoCuadrado**-1) al Este de la actual
+PARÁMETROS:
+    * colorDelCuadrado: el color con el que se dibuja el cuadrado
+    *tamañoCuadrado: es el tamaño del cuadrado
+*/
+    repeat(tamañoCuadrado-1){
+        DibujarLínea_DeLongitud_(colorDelCuadrado,tamañoCuadrado)
+        Moverse_VecesAlOesteEIrALaSiguienteLinea(tamañoCuadrado-1)
+    }
+    DibujarLínea_DeLongitud_(colorDelCuadrado,tamañoCuadrado)
+}
+procedure DibujarLínea_DeLongitud_(colorLinea,longitudLinea) {
+/* PROPÓSITO: 
+    Dibujar una línea de longitud 2 de color **colorCuadrado**
+    PRECONDICIONES:
+        *existe al menos (**longitudLinea** -1) celdas al Este de la actual
+    PARAMETROS:
+        *colorLinea:Es el color de la linea a dibujar
+        *longitudLinea: es la longitud de la linea a dibujar
+
+*/
+    repeat (longitudLinea-1) {
+        Poner(colorLinea)
+        Mover(Este)
+    }
+    Poner(colorLinea)
+}
+
+procedure Moverse_VecesAlOesteEIrALaSiguienteLinea(cantidad) {
+    /*
+        PROPÓSITO:Mueve el cabezal una **cantidad** de  al oeste y va a la siguiente linea 
+        moviendose al norte
+    
+        PARÁMETROS:
+            * cantidad: numero - son la cantidad de veces en el cual el cabezal se 
+            mueve a la siguiente linea
+            
+        PRECONDICIONES:
+            * Al menos debe haber **cantidad** celdas al oeste de la celda actual
+    */
+    Mover__Veces(Oeste,cantidad)
+    Mover(Norte)
+}
+

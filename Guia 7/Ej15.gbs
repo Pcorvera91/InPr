@@ -1,0 +1,24 @@
+procedure IrANésimaVacía_(n) {
+    /*
+        PROPÓSITO:Posiciona el cabezal en la celda numero n que se 
+        encuentra en un recorrido del tablero por celdas en las
+        direcciones este y norte,si no hay suficientes celdas vacias
+        deja el cabezal en la esquina NorEste.
+        PARÁMETROS:
+            * n: numero - es el numero de la celda donde posiciona
+            el cabezal.
+            
+        PRECONDICIONES:
+            * Ninguna
+    */
+    cantidadDeCeldasVaciasVistas:=escogeUnoSiEsVaciaSinoCero()
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while ((not estoyElFinalDeUnRecorrido__(Este,Norte)) && (not cantidadDeCeldasVaciasVistas == n)) {
+        PasarASiguienteCelda__(Este,Norte)
+       cantidadDeCeldasVaciasVistas:= cantidadDeCeldasVaciasVistas+
+                                      escogeUnoSiEsVaciaSinoCero()
+        
+    }
+    cantidadDeCeldasVaciasVistas:= cantidadDeCeldasVaciasVistas+
+                                      escogeUnoSiEsVaciaSinoCero()
+}

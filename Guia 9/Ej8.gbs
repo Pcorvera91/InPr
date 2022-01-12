@@ -1,0 +1,60 @@
+function primeraTresCartasDeLaTira_(tiraDeCartas) {
+    /*
+        PROPÓSITO: Dada una tira describe la tlista con las primeras 3
+        cartas de la misma
+
+        PARÁMETROS:
+            * tiraDeCartas:lista de cartas - describe la tira de cartas
+            en el cual se quiere describir las primeras 3 cartas de la
+            misma
+            
+        TIPO: lista de cartas
+        PRECONDICIONES:
+            * Al menos hay 3 cartas en tiraDeCartas
+    */
+
+    nuevaTiraHastaAhora:=[]
+    tirasDeCartasActual:=tiraDeCartas
+    repeat (3) {
+        nuevaTiraDeCartasHastaAhora:=nuevaTiraDeCartasHastaAhora ++
+                                    [primero(tiraDeCartasActual)]
+        tiraDeCartasActual:=resto(tiraDeCartasActual)
+    }
+    
+    return (nuevaTiraDeCartasHastaAhora)
+}
+
+function laMano_TieneJugadaParaAgregarALaTira_(manoDelJugador,tiraDeCartas) {
+    /*
+        PROPÓSITO:Dada una mano del jugador y una tira de cartas indica
+        si la primer carta que puede jugar el jugador puede ser agregada 
+        en la tira o no.
+        PARÁMETROS:
+            * manoDelJugador: lista de cartas - describe las cartas del jugador
+            * tiraDeCartas: lista de cartas - describe las cartas de la tira
+        TIPO:Lista de cartas
+        PRECONDICIONES:
+            *Al menos debe haber una carta en la mano del jugador dada
+    */
+
+
+    
+    return (
+            (palo(primero(manoDelJugador)) /= palo(primero(tiraDeCartas))) &&
+            (numero(primero(manoDelJugador)) < numero(primero(tiraDeCartas)))
+        )
+}
+
+function laTira_DespuésDeJugar_(tiraDeCartas,carta) {
+    /*
+        PROPÓSITO:  ....
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO: Tipo
+        PRECONDICIONES:
+            * ....
+    */
+    
+    return (tiraDeCartas ++ singularSi(carta,))
+}

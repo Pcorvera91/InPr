@@ -1,0 +1,176 @@
+function haySemillas() {
+    /*
+        PROPÓSITO:Indica si hay semillas en la celda actual
+        TIPO: Booleano, denota verdadero si al menos hay una semilla en la celda actual
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (hayBolitas(Rojo))
+}
+
+function cantidadDeNutrientes() {
+    /*
+        PROPÓSITO:Denota la cantidad de nutrientes que hay en la celda actual
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Azul))
+}
+
+function cantidadDeArboles() {
+    /*
+        PROPÓSITO:Denota la cantidad de arboles en la celda actual
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Verde))
+}
+
+
+procedure GerminarSemilla() {
+    /*
+        PROPÓSITO:transforma una semilla en un árbol en la celda
+        actual. La germinación consume tres unidades de nutrientes. Si en la celda
+        no hay semilla, o no hay suficientes nutrientes, no se hace nada.
+        PRECONDICIONES:
+            * Ninguna (Procedimiento total)
+    */
+    if (haySemillas() && cantidadDeNutrientes()==3) {
+        Sacar_Nutrientes(3)
+        Sacar_Semillas(1)
+        Poner_Arboles(1)
+    }
+}
+
+procedure AlimentarÁrboles() {
+    /*
+        PROPÓSITO: Alimentan a los arboles de la celda actual consumiendo un nutriente cada uno
+        Si hay menos nutrientes de lo que se necesita, se consumen todos los que hay.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    repeat (cantidadDeArboles()) {
+        AlimentarUnArbol()
+    }
+}
+
+procedure AlimentarUnArbol() {
+    /*
+        PROPÓSITO: Alimenta un arbol si hay al menos 1 nutriente disponible en la celda actual
+        PRECONDICIONES:
+            * Ninguna
+    */
+    if(cantidadDeNutrientes >=1 ){
+
+        Sacar_Nutrientes(1)
+
+    }
+}
+
+procedure ExplotarBomba() {
+    /*
+        PROPÓSITO:Explota una bomba en la celda actual
+        eliminando 5 arboles en la celda actual y 3
+        en la celda lindante al norte,en el caso de que
+        haya menos de 5 arboles en la celda actual y menos
+        de 3 arboles en la celda lindante al norte, elimina
+        las que haya, el cabezal termina en la celda lindante
+        al norte de la actual
+        PRECONDICIONES:
+            * Al menos debe haber una celda lindante al
+            norte de la celda actual
+    */
+    
+    SacarBomba()
+    Derribar_ArbolesSiLosHay(5)
+    Derribar_ArbolesAlNorteSiLosHay(3)
+
+    
+    
+    
+}
+
+procedure Derribar_ArbolesSiLosHay(cantidadADerribar){
+    /*
+        PROPÓSITO:Derriban cantidadADerriBar de arboles si los hay.
+        de lo contrario,derriba la cantidad que hay en la celda actual.
+        PARAMETROS:cantidadADerribar-numero- es la cantidad de arboles a derribar
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    if (cantidadADerribar >= cantidadDeArboles()) {
+        
+        Sacar_Arboles(cantidadADerribar)
+
+    }
+
+    else {
+        
+        Sacar_Arboles(cantidadDeArboles())
+
+    }
+
+
+}
+
+procedure Derribar_ArbolesAlNorteSiLosHay(cantidadADerribar) {
+    /*
+        PROPÓSITO:Derriban cantidadADerriBar de arboles al norte
+        si los hay.de lo contrario,derriba la cantidad
+        que hay en la celda actual.
+        PARAMETROS:cantidadADerribar-numero- es la cantidad de arboles a derribar
+        PRECONDICIONES:
+            *ninguna
+    */
+    if(puedeMover(Norte)){
+        Mover(Norte)
+        Derribar_ArbolesSiLosHay(3)
+
+    }
+    
+
+}
+
+procedure Polinizar() {
+    /*
+        PROPÓSITO:agrega semillas en la celda lindante al este, si hay alguna
+        se agregan tantas semillas al este como arboles en la celda actual
+        menos 3, el cabezal queda en la celda lindante al este
+        PRECONDICIONES:
+            * Ninguna
+    */
+    if(puedeMover(Este)){
+
+        Poner_SemillasAlEste(cantidadDeArboles() - 3)
+
+    }
+}
+
+procedure Poner_SemillasAlEste(cantidadDeSemillasAPoner) {
+    /*
+        PROPÓSITO:Pone cantidadDeSemillasAPoner si hay
+        una celda lindante  al este
+        de la celda actual,el cabezal queda en la celda 
+        lindante al este 
+        PARÁMETROS:
+            * cantidadDeSemillasAPoner:numero- es la cantidad
+            de semillas que pone en la celda lindante al este de 
+            la actual
+        PRECONDICIONES:
+            * al menos debe haber una celda lindante al este de la actual
+    */
+    
+
+        Mover(Este)
+        Poner_Semillas(cantidadDeSemillasAPoner)
+
+  
+    
+
+}

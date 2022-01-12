@@ -1,0 +1,15 @@
+function elBoleto_EsParejaCapicúaDe_(boleto1, boleto2) {
+    /*
+        PROPÓSITO:dados dos boletos, boleto1 y
+        boleto2, indique si el número del primer boleto es igual al
+        número del segundo boleto dado vuelta. 
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBoleto(boleto1) == esCapicua_(nroBoleto(boleto2)))
+}

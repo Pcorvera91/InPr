@@ -1,0 +1,26 @@
+function posicionDe_EnLaQueAparece(lista,elemento) {
+    /*
+        PROPÓSITO:dada una lista y un elemento, describe la posicion de la lista en la que
+        aparece ese elemento por primera vez
+
+        PARÁMETROS:
+            * lista: Lista de Elementos - describe la lista en el cual se quiere buscar el
+            elemento
+            * elemento: elemento de cualquier tipo - es el elemento que se desea buscar la
+            posicion donde se encuentra.
+        TIPO:Numero
+        PRECONDICIONES:
+            * El elemento esta contenido en la lista
+        OBSERVACIONES:No tiene sentido que la funcion sea total porque el contador que se 
+        establece para hallar su posicion va a devolver el numero total de elementos de la 
+        lista, si no se encuentra el elemento dado.
+    */
+    listaHastaAhora:=lista
+    posicionActual:= 0
+    while(not contiene_A_(lista,elemento)){
+        listaHastaAhora:=resto(listaHastaAhora)
+        posicionActual:=posicionActual + 1
+    }
+    return (posicionActual)
+}
+

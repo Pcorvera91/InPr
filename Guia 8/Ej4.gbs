@@ -1,0 +1,270 @@
+type TipoDeCuenta is variant {
+/* PROPÓSITO: modelar los diferentes tipos de cuenta que
+ofrece el banco
+*/
+    case CuentaCorriente {}
+    case CajaDeAhorro {}
+    case CuentaSueldo {}
+} 
+
+
+type Moneda is variant {
+/* PROPÓSITO: modelar los diferentes tipos de moneda con los
+que trabaja el banco
+*/
+    case Pesos {}
+    case Dólares {}
+    case Euros {}
+    case Reales {}
+}
+
+type Cuenta is record{
+/*
+    PROPOSITO:Modela una cuenta
+    INV.REP: saldo>=0
+*/
+
+    field tipoDeCuenta // TipoDeCuenta
+    field nombreDelCliente // String
+    field moneda //Moneda
+    field saldo //Numero
+
+
+}
+
+function cuenta_ConSaldoActualizadoA_(cuentaAActualizar,nuevoSaldo) {
+    /*
+        PROPÓSITO: Dada una cuentaAActualizar y un nuevoSaldo
+        describe la cuenta con el saldo actualizado.
+        PARÁMETROS:
+            * cuentaAActualizar: Cuenta - es la cuenta que se desea 
+            actualizar su saldo.
+            * nuevoSaldo: Numero - Es el saldo nuevo 
+        TIPO: Cuenta
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Cuenta(cuentaAActualizar | saldo <-saldoAActualizar))
+}
+
+function ​cuenta_ConTipoCambiadoSegúnDisposición(cuentaACambiar) {
+    /*
+        PROPÓSITO:Dada una cuenta cuentaACambiar,cambia el tipo de
+        cuenta si la cuenta cuentaACambiar es de tipo sueldo y cuyo
+        saldo supera los $25.000
+        PARÁMETROS:
+            * cuentaACambiar: Cuenta - Es la cuenta que se desea cambiar
+            su tipo segun la disposicion
+            
+        TIPO: Cuenta
+        PRECONDICIONES:
+            * El tipo de cuenta no es caja de ahorro
+    */
+    
+    return (Cuenta(cuentaACambiar | tipoDeCuenta <- cambia_ATipoAhorro(cuentaACambiar)))
+}
+
+function cambia_ATipoAhorro(cuentaACambiar){
+/**/
+
+  return(choose CajaDeAhorro when (saldo(cuentaACambiar)>25000)
+                tipoDeCuentaDe_(cuentaACambiar) otherwise)
+          
+}
+
+function tipoDeCuentaDe_(cuentaAConsultar){
+    /*
+        PROPÓSITO:Describe el tipo de cuenta de cuentaAConsultar
+        PARÁMETROS:
+            * cuentaAConsultar: Cuenta - es la cuenta que se desea
+            consultar
+            
+        TIPO: TipoDeCuenta
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (tipoDeCuenta(cuentaAConsultar))
+}
+
+function saldoEnPesosDe_(cuentaAConsultar) {
+    /*
+        PROPÓSITO:dada una cuenta describe el saldo en pesos de la
+        misma
+        PARÁMETROS:
+            * cuentaAConsultar: Cuenta - .
+            
+        TIPO: Numero
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (choose
+                  conversionDeDolaresAPesosEn_(cuentaAConsultar) when laCuenta_esEnDolares(cuentaAConsultar),
+                  conversionDeEurosAPesosEn_(cuentaAConsultar) when laCuenta_esEnEuros(cuentaAConsultar),
+                  conversionDeRealesAPesosEn_(cuentaAConsultar) when laCuenta_esEnReales(cuentaAConsultar),
+                  saldo(cuentaAConsultar) otherwise )
+}
+
+function conversionDeDolaresAPesosEn_(cuentaAConsultar) {
+    /*
+        PROPÓSITO:Describe la conversion de dolares a pesos de la cuenta
+        cuentaAConsultar
+        PARÁMETROS:
+            * cuentaAConsultar: Cuenta - Es la cuenta que se desea
+            consultar para convertir su saldo en dolares a pesos
+            
+        TIPO: Numero
+        PRECONDICIONES:
+            * La cuenta debe estar en dolares
+    */
+    
+    return (saldo(cuentaAConsultar) * 68)
+}
+
+
+function conversionDeEurosAPesosEn_(cuentaAConsultar) {
+    /*
+        PROPÓSITO:Describe la conversion de Euros a pesos de la cuenta
+        cuentaAConsultar
+        PARÁMETROS:
+            * cuentaAConsultar: Cuenta - Es la cuenta que se desea
+            consultar para convertir su saldo en Euros a pesos
+            
+        TIPO: Numero
+        PRECONDICIONES:
+            * La cuenta debe estar en Euros
+    */
+    
+    return (saldo(cuentaAConsultar) * 74)
+}
+
+function conversionDeRealesAPesosEn_(cuentaAConsultar) {
+    /*
+        PROPÓSITO:Describe la conversion de Reales a pesos de la cuenta
+        cuentaAConsultar
+        PARÁMETROS:
+            * cuentaAConsultar: Cuenta - Es la cuenta que se desea
+            consultar para convertir su saldo en Reales a pesos
+            
+        TIPO: Numero
+        PRECONDICIONES:
+            * La cuenta debe estar en Reales
+    */
+    
+    return (saldo(cuentaAConsultar) * 12)
+}
+
+function númeroDeCuentaConMayorSaldoEntre_Y_(primerCuenta,segundaCuenta) {
+    /*
+        PROPÓSITO: dadas dos cuentas bancarias describe el número de la
+        cuenta que tiene mayor saldo entre ambas. 
+        PARÁMETROS:
+            * primerCuenta: Cuenta- Es la primer cuenta a comparar.
+            * segundaCuenta: Cuenta - Es la segunda cuenta a comparar.
+        TIPO: Cuenta
+        PRECONDICIONES:
+            * Ninguna
+        OBSERVACIONES:las cuentas pueden estar expresadas en
+                      diferentes monedas.
+    */
+    
+    return (choose
+        primerCuenta when (saldoEnPesosDe_(primerCuenta) > saldoEnPesosDe_(segundaCuenta) )
+         
+        segundaCuenta otherwise
+    })
+}
+
+function laCuenta_esEnDolares(cuentaAConsultar) {
+    /*
+        PROPÓSITO:Describe si la cuenta cuentaAConsultar esta en Dolares
+        PARÁMETROS:
+            * cuentaAConsultar: Cuenta - Es ;a cuenta que se desea 
+            consultar
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (tipoDeCuenta(cuentaAConsultar) == Dolares)
+}
+
+function laCuenta_esEnReales(cuentaAConsultar) {
+    /*
+        PROPÓSITO:Describe si la cuenta cuentaAConsultar esta en Reales
+        PARÁMETROS:
+            * cuentaAConsultar: Cuenta - Es ;a cuenta que se desea 
+            consultar
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (tipoDeCuenta(cuentaAConsultar) == Reales)
+}
+
+function laCuenta_esEnEuros(cuentaAConsultar) {
+    /*
+        PROPÓSITO:Describe si la cuenta cuentaAConsultar esta en Euros
+        PARÁMETROS:
+            * cuentaAConsultar: Cuenta - Es ;a cuenta que se desea 
+            consultar
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (tipoDeCuenta(cuentaAConsultar) == Euros)
+}
+
+
+function cuenta_ActualizadaTrasExtracciónDeCajeroDe_(cuenta,montoAExtraer) {
+    /*
+        PROPÓSITO:dada una cuenta y un monto a extraer describa la 
+        cuenta con el saldo actualizado. 
+        PARÁMETROS:
+            * cuenta: Cuenta - es la cuenta que se desea actualizar 
+            luego de extraer un monto montoAExtraer.
+            * montoAExtraer: Numero - es el monto que se desea extaer.
+        TIPO: Cuenta
+        PRECONDICIONES:
+            * El monto no debe ser mayor al saldo presente en cuenta.
+    */
+    
+    return (Cuenta(cuenta | saldo <- saldo(cuenta) - montoAExtraer))
+}
+
+function puedeExtraer_PorCajeroDeLaCuenta_(montoAExtraer,cuenta) {
+    /*
+        PROPÓSITO: dado un monto a extraer y una cuenta indique si la 
+        extracción NO resultaría en un saldo negativo.
+        PARÁMETROS:
+            * montoAExtraer: Numero - es el monto que se quiere extraer.
+            * cuenta: Cuenta - es la cuenta a consultar.
+        TIPO: Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (saldo(cuenta) > montoAExtraer)
+}
+
+function cuenta_ActualizadaTrasDepósitoEnCajeroDe_(cuenta,montoADepositar) {
+    /*
+        PROPÓSITO:dada una cuenta y un monto a depositar describa la 
+        cuenta con el saldo actualizado.
+        PARÁMETROS:
+            * cuenta: Cuenta - es el destinatario en el cual se quiere depositar.
+            * montoADepositar : Numero - es el numero que se quiere depositar.
+        TIPO:cuenta
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Cuenta(cuenta | saldo <- saldo(cuenta) + montoADepositar))
+}

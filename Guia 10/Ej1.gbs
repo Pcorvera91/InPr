@@ -1,0 +1,16 @@
+procedure PonerColores_EnLaCeldaActual(listaDeColores) {
+    /*
+        PROPÓSITO:Dada una lista de colores pone una bolita del color correspondiente por 
+        cada uno de los elementos de la misma
+        PARÁMETROS:
+            * listaDeColores:son los colores a poner en la celda actual
+            
+        PRECONDICIONES:
+            * Son los colores disponibles en gobstones
+    */
+    
+    foreach color in listaDeColores {
+        Poner(color)
+    }
+
+}

@@ -1,0 +1,67 @@
+function esSingular_(listaDeElementos) {
+    /*
+        PROPÓSITO:dada una lista de elementos de cualquier tipo
+        PARÁMETROS:
+            * listaDeElementos: lista de elementos de cualquier tipo  -
+            es la lista de elementos en el cual se desea
+            saber si contiene un solo elemento.
+           
+        TIPO: Booleano
+        PRECONDICIONES:
+            *Ninguna
+    */
+    return (esVacia(resto(listaDeElementos)))
+}
+
+function las3PrimerasDe_ConLaMismaCantidad(listaDeCantidadDeBolitasRojas) {
+    /*
+        PROPÓSITO:dada una lista de numeros con la cantidad de bolitas
+        rojas,indica si las primeras 3 celdas al oeste tienen la misma cantidad
+        de bolitas rojas
+        PARÁMETROS:
+            * listaDeCantidadDeBolitasRojas: lista de numeros - describe la cantidad
+            de bolitas rojas que hay en cada celda.
+            
+        RESULTADO: Booleano
+        PRECONDICIONES:
+            * Al menos hay 3 elementos en la lista **listaDeCantidadDeBolitasRojas**
+    */
+    
+    return (primero(listaDeCantidadDeBolitasRojas) == segundo(listaDeCantidadDeBolitasRojas) && 
+            segundo(listaDeCantidadDeBolitasRojas) == tercero(listaDeCantidadDeBolitasRojas))
+}
+
+function las3PrimerasDe_ConDistintasCantidades(bolitasRojaEnFilaActual) {
+    /*
+        PROPÓSITO:dada una lista **bolitasRojasEnFilaActual** indica si  las 3 
+        primeras celdas al oeste tienen diferente cantidad de bolitas rojas
+        PARÁMETROS:
+            * bolitasRojasEnFilaActual: lista de numeros - describe la cantidad 
+            de bolitas rojas que hay en la fila actual.
+            
+        TIPO:Booleano
+        PRECONDICIONES:
+            * Al menos hay 3 elementos en la lista **bolitasRojasEnFilaActual**
+    */
+    
+     return (primero(bolitasRojasEnFilaActual) /= segundo(bolitasRojasEnFilaActual) && 
+            segundo(bolitasRojasEnFilaActual) /= tercero(bolitasRojasEnFilaActual))
+}
+
+function hayAlgunaCantidadIgualEnLas3PrimerasDe_ (bolitasRojasEnFilaActual) {
+    /*
+        PROPÓSITO:dada una lista con la cantidad de bolitas rojas en la fila actual
+        indica si las 3 primeras celdas hay algun caso en el cual tiene la misma
+        cantidad de bolitas rojas
+        PARÁMETROS:
+            * bolitasRojasEnLaFilaActual: lista de numeros - describe la cantidad de bolitas 
+            rojas que hay en la fila actual.
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Al menos hay 3 elementos en la lista **bolitasRojasEnFilaActual**
+    */
+    
+    return (primero(bolitasRojasEnFilaActual) == segundo(bolitasRojasEnFilaActual) || 
+            segundo(bolitasRojasEnFilaActual) == tercero(bolitasRojasEnFilaActual))
+}

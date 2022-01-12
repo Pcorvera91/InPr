@@ -1,0 +1,52 @@
+/*
+Nombre Goba:1 azul y 1 negra
+Objeto Goba:1 azul y 2 negras
+Objeto Piedra: 8 Azul y 2 negras
+Nombre Piedra: 8 azul y 1 negra
+Nombre Bandera: 2 azul y 1 negra
+Objeto bandera: 2 azul y 2 negras
+Objeto Pared: 4 azul y 2 negras
+Nombre Pared: 4 azul y 1 negra
+Conector ES: 1 verde y 1 negra
+Atributo VOS: 1 Roja y 1 negra
+Atributo GANAR: 2 rojas y 1 negra
+Atributo FRENAR: 4 rojas y 1 negra
+Atributo EMPUJAR: 8 rojas y 1 negra
+
+Para describir la clase( si es un texto u objeto) se ultilizan bolitas negras (1 si es texto
+y 2 si es objeto),la funcion clase retorna color negro,la funcion texto retorna el numero de 
+bolitas negras igual a 1 y la funcion objeto el numero de bolitas negras igual a 2
+
+los nombres conectivos y atributos se representan con diferentes colores segun la cantidad
+de bolitas de cada elemento
+
+la funcion nombre con bolitas azules(que puede ser compartida con el texto u objeto), 
+la funcion conectivo con 1 bolita verde y la funcion atributo con bolitas rojas
+
+la bolitas de color nombre indica el objeto en cuestion y atributo identifican los atributos
+del objeto
+
+funciones:
+
+
+*/
+
+
+function cantidadDeAfirmacionesSimples() {
+    /*
+        PROPÓSITO:Describe la cantidad total de afirmaciones simples que hay en el tablero
+        RESULTADO:Numero, describe el total de afirmaciones simples
+        PRECONDICIONES:
+            * Hay una representacion del juego "Goba es vos" en el tablero
+    */
+    cantidadDeAfirmacionesSimplesVistas:=0
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while (not estoyAlFinalDeUnRecorrido__(Este,Norte)) {
+        
+        cantidadDeAfirmacionesSimplesVistas:=cantidadDeAfirmacionesSimplesVistas +
+                                             unoSi_SinoCero(esCentroDeAfirmacionSimple())
+
+    }
+    return (cantidadDeAfirmacionesSimplesVistas +
+                                             unoSi_SinoCero(esCentroDeAfirmacionSimple()))
+}

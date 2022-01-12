@@ -1,0 +1,23 @@
+function segmentoInicialDeLargo_de_(cantidadDeElementos,lista) {
+    /*
+        PROPÓSITO:dado un numero que representa la cantidad y una lista de elementos,describe 
+        la lista que se obtiene de quedarse unicamente con esa cantidad de elementos de la
+        lista
+        PARÁMETROS:
+            * cantidadDeElementos:Numero - describe a la cantidad de elementos que contiene la nueva 
+            lista
+            * lista: Lista de elementos de cualquier tipo - describe a la lista que se desea
+            copiar la cantidad de elementos
+        TIPO:Lista de elementos
+        PRECONDICIONES:
+            * Ninguna
+    */
+    nuevaListaHastaAhora:=[]
+    elementosQueFaltan:=lista
+    while (not esVacia(elementosQueFaltan) && longitudDe_(nuevaListaHastaAhora) < cantidadDeElementos) {
+        nuevaListaHastaAhora:=nuevaListaHastaAhora ++ [primero(elementosQueFaltan)]
+        elementosQueFaltan:=resto(elementosQueFaltan)
+    }
+
+    return (nuevaListaHastaAhora)
+}

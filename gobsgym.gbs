@@ -1,0 +1,128 @@
+type TipoDeEjercicio is variant { 
+case Musculación{}
+case Cardio{} 
+case Fit {} 
+}
+
+type Máquina is record { 
+ /*  PROPÓSITO: modela un máquina de GobsGym
+INV.REP.: 
+ * "nombre" no puede estar vacío
+  * "precio" es >= 0  */
+field nombre  // String 
+field tipo  // TipoDeEjercicio
+field enReparacion  // Booleano
+field precio  // Número
+ }
+ 
+ type TicketDeUso is record {  
+/*  PROPÓSITO: modela el uso de una máquina por un deportista
+INV.REP.: 
+ * "númeroDeTarjeta" es un número >=0  * "nombreDeMáquina" no puede estar vacío  */
+field númeroDeTarjeta  // Número
+field nombreDeMáquina  // String
+ }
+ 
+type GobsGym is record { 
+ /*  PROPÓSITO: modela una plataforma de registro de las  máquinas usadas en el gimnasio
+INV.REP.: "máquinas" no contiene dos máquinas con el mismo nombre  */
+field usosEfectuados  // [TicketDeUso]
+field máquinas  // [Máquina]
+}
+
+function cantidadDeAccesosAl_RegistadosEn_(nombreDeMaquina,gobsGym){
+/*PROPOSITO:dado un nombre de máquina y un sistema GobsGym, describe la cantidad de contrataciones que se  realizaron para esa máquina.
+PRECONDICION: No hay
+RESULTADO:lista tipo gobgym
+gobsGym:sistema gobsGym
+nombreDeMaquina:nombre de la maquina
+OBSERVACION:notar que si el nombre de la máquina no existe, debe describir al número 0.
+*/
+    cantidadDeContratacionesVerificadas:=0
+    foreach ticket en usosEfectuados(gobsGym){
+        cantidadDeContratacionesVerificadas:=cantidadDeContratacionesVerificadas ++
+                                            devuelveSi(1,nombreDeMaquina(ticket)==nombreDeMaquina)
+    }
+    return(cantidadDeContratacionesVerificadas)
+
+}
+
+function máquinasQueSeUsaronMásDe_RegistradosEn_(cantidad, gobsGym){
+/*PROPOSITO:dado un número y un sistema GobsGym retorna
+la lista de los nombres de las máquinas 
+que registraron más tickets que la cantidad recibida.
+PRECONDICION:No hay
+RESULTADO:lista tipo string
+*/
+    
+    maquinasContratadasVistas:=[]
+    foreach maquina in usosEfectuados(gobsGym){
+        maquinasContratadasVistas:=maquinasContratadasVistas ++ 
+        singularSi(nombreDeMaquina,cantidadDeAccesosAl_RegistadosEn_(nombreDeMaquina,gobsGym)>cantidad)
+        
+
+    }
+
+    return(sinDuplicados_(maquinasContratadasVistas))
+
+}
+
+
+function gymConAccesosDe_A_En_(numeroDeTarjeta,listaDeNombresDeMaquinas,gobsGym){
+/*PROPOSITO:
+PRECONDICION:No hay
+RESULTADO:gobsgym
+gobsgym:sistema gobsgym
+numeroDeTarjeta:numero de tarjeta del gobsgym
+listaDeNombreDeMaquinas
+*/
+
+    
+
+}
+
+
+function MPGym(){
+    return(GobsGym(usosEfectuados <- [TicketDeUso(numeroDeTarjeta <- 12345,
+                                                  nombreDeMaquina <- "Dorsal")]
+                   nombreDeMaquina <- [Maquina(nombre <-"Dorsal",
+                                               tipo <- Musculacion,
+                                               enReparacion <- False,
+                                               precio <- 50)])
+                    
+}
+
+
+function (listaDeMaquinas,gobsGym)
+
+
+
+function maquinasDe_QueFuncionan_(gobsGym){
+/*PROPOSITO:Dado el nombre de la maquina y un gobsgym,selecciona las maquinas que funcionan
+PRECONDICION:No hay
+RESULTADO:listas de maquinas
+*/
+    maquinasQueFuncionanVistas:=[]
+    foreach machine in maquinas(gobsGym){
+        maquinasQueFuncionanVistas:=maquinasQueFuncionanVistas ++
+                                    laMaquina_Funciona(machine)
+    }
+    
+    return(maquinasQueFuncionanVistas)
+    
+
+}
+
+
+
+function laMaquina_Funciona(nombreMaquina){
+/*PROPOSITO:Indica si la maquina nombreMaquina funciona
+PRECONDICION:No hay
+RESULTADO:String
+nombreMaquina:es el nombre de la maquina
+*/
+
+    return(singularSi(nombreMaquina,enReparacion(nombreMaquina)==False))
+
+}
+

@@ -1,0 +1,40 @@
+function lasPublicacionesConISBNsEn_DeLas_(listaIsbn,listaEditoriales){
+/*PROPOSITO:dada una lista ISBNs y una lista de editoriales,
+describe una lista que informe cuántas editoriales de las dadas 
+venden esa Publicación. O sea, el resultado tiene exactamente una
+cantidad por cada ISBN dado, en el orden dado.
+PRECONDICION:No hay
+RESULTADO:Lista de numeros
+PARAMETROS:
+listaIsbn:es una lista de ISBN
+listaEditoriales:es una lista de tipo Editorial
+*/
+    cantidadDeEditorialesConIsbn:=[]
+    foreach isbn in listaIsbn{
+        cantidadDeEditorialesConIsbn:=cantidadDeEditorialesConIsbn ++ [cantidadDeEditorialesCon_ISBNsEn_DeLas_(isbn,listaEditoriales)]
+    }
+    return(cantidadDeEditorialesConIsbn)
+}
+
+function cantidadDeEditorialesCon_ISBNsEn_DeLas_(isbn,listaEditoriales){
+    
+    cantidadDeEditorialesContados:=0
+    foreach editorial in listaEditoriales{
+        cantidadDeEditorialesContados:=cantidadDeEditorialesContados + devuelveSi_(1,tiene_La_(isbn,editorial))
+        
+    }
+
+    return(cantidadDeEditorialesContados)
+}
+
+
+function tiene_La_(isbn,editorial){
+    
+    
+    
+}
+
+function devuelveSi_(numero,condicion){
+    return(choose numero when condicion,
+                  0 otherwise)
+}

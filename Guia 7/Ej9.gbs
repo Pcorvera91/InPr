@@ -1,0 +1,85 @@
+/*
+se usará el tablero para representar un bosque. 
+Cada celda representa a una parcela. 
+Cada bolita verde representa un árbol.
+Cada bolita roja representa una semilla.
+Una bolita negra representa una bomba.
+Una bolita azul representa una unidad de nutrientes.
+
+
+*/
+
+function árbol() {
+    /*
+        PROPÓSITO:  Representa a un arbol
+        TIPO:color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Verde)
+}
+
+function semilla() {
+    /*
+        PROPÓSITO:  Representa a un semilla
+        TIPO:color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Rojo)
+}
+
+function bomba() {
+    /*
+        PROPÓSITO:  Representa a un bomba
+        TIPO:color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Negro)
+}
+
+function nutriente() {
+    /*
+        PROPÓSITO:  Representa a un nutriente
+        TIPO:color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Azul)
+}
+
+function ​nroTotalDeÁrbolesEnElTerreno() {
+    /*
+        PROPÓSITO:Describe la cantidad total de arboles que hay
+        en el bosque
+        TIPO:numero
+        PRECONDICIONES:
+            *Ninguna
+    */
+    cantidadDeArbolesVistos:=nroArbolesEnLaFilaActualDeParcelas ()
+    IrAlBorde(Sur)
+    while (puedeMover(Norte)) {
+        Mover(Norte)
+        cantidadDeArbolesVistos:=cantidadDeArbolesVistos + 
+                                 nroArbolesEnLaFilaActualDeParcelas ()
+    }
+    return (cantidadDeArbolesVistos)
+}
+
+
+function nroArbolesEnLaFilaActualDeParcelas (){
+    /*
+        PROPÓSITO:describe la cantidad total de arboles que hay en la 
+        fila actual de parcelas  
+        TIPO:numero
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (nroBolitas_EnLaFilaActual(árbol))
+}

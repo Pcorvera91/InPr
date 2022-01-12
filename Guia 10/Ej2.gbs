@@ -1,0 +1,16 @@
+procedure RecprrerCamino_(listaDeDirecciones) {
+    /*
+        PROPÓSITO:dada una lista de Direcciones mueve el cabezal en la dirección indicada por
+        cada elemento, en orden.
+        PARÁMETROS:
+            * listaDeDirecciones:  Son las direcciones en el cual se mueven el cabezal
+            
+        PRECONDICIONES:
+            * al menos debe haber una direccion lindante de la celda con la direccion anterior
+    */
+
+    foreach direccion in listaDeDirecciones {
+        Mover(direccion)
+    }
+    
+}

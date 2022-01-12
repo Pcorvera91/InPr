@@ -1,0 +1,38 @@
+function maximoElementoDe_(listaDeNumeros) {
+    /*
+        PROPÓSITO: dada una lista de numeros describe el elemento mas
+        grande que se encuentra en la lista
+        PARÁMETROS:
+            * listaDeNumeros:es la lista en el cual se desea saber
+            cual es el maximo elemento
+        TIPO: Numero
+        PRECONDICIONES:
+            * Al menos hay 2 elementos en la lista dada
+    */
+    numeroMaximoActual:=primero(listaDeNumeros)
+    numerosQueFaltan:=resto(listaDeNumeros)
+    while (not esVacia(numerosQueFaltan)) {
+        numeroMaximoActual:=maximoEntre__(numeroMaximoActual,primero(numerosQueFaltan))
+        numerosQueFaltan:=resto(numerosQueFaltan)
+    }
+    
+    return (numeroMaximoActual)
+}
+
+function maximoEntre__(n1,n2) {
+    /*
+        PROPÓSITO: dados 2 numeros describe el maximo entre ellos 2
+        PARÁMETROS:
+            * n1: numero - es el primer numero a evaluar
+            * n2: numero - es el segundo numero a evaluar
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (choose
+         n1   when (n1>=n2)
+        
+        n2 otherwise
+    })
+}

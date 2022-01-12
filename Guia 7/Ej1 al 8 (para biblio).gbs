@@ -1,0 +1,204 @@
+function hayBolitas_EnElBorde_(color, dirección) {
+    /*
+        PROPÓSITO: Indica si hay bolitas de color en la celda que se 
+        encuentra en el borde dado por la direccion
+        PARÁMETROS:
+            * color: color - es el color de las bolitas en la cual se
+            quiere comprobar,si esta en la celda que se encuentra
+            en el borde direccion.
+            * direccion: direccion - es la direccion de la celda que esta
+            al borde.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+
+    IrAlBorde(dirección)
+    return (hayBolitas(color))
+
+
+}
+
+function tieneBolitas_Al_(color, dirección) {
+    /*
+        PROPÓSITO: Indica si hay bolitas de color en la una celda 
+        lindante a direccion
+        PARÁMETROS:
+            * color: color - hace referencia al color de las bolitas.
+            * direccion: direccion - hace referencia a la direccion
+            de la celda lindante.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * al menos debe haber una celda lindante a direccion
+    */
+    
+    Mover(dirección)
+    return (hayBolitas(color))
+
+}
+
+function ​hayBolitas_Al_(color, dirección) {
+    /*
+        PROPÓSITO: indica si hay una celda lindante a direccion
+        y la misma tienen bolitas de color
+        PARÁMETROS:
+            * color: color - hace referencia al color de las bolitas .
+            * direccion: direccion - hace referencia a la direccion de
+            la celda lindante.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * 
+    */
+    
+    return (puedeMover(dirección) && tieneBolitas_Al_(color, dirección) )
+}
+
+function máximoEntre_Y_(valor1, valor2) {
+    /*
+        PROPÓSITO: Describe el valor mas grande entre valor1 
+        y valor2
+        PARÁMETROS:
+            * valor1: numero -es el primer valor a comparar.
+            * valor2: numero -es el segundo valor a comparar.
+        TIPO: numero
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (choose
+                valor1 when (valor1>valor2)
+        
+                valor2 otherwise
+    })
+}
+
+function minimoEntre_Y_(valor1, valor2) {
+    /*
+        PROPÓSITO: Describe el valor minimo entre valor1 
+        y valor2
+        PARÁMETROS:
+            * valor1: numero -es el primer valor a comparar.
+            * valor2: numero -es el segundo valor a comparar.
+        TIPO: numero
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (choose
+                valor1 when (valor1<valor2)
+        
+                valor2 otherwise
+    })
+}
+
+function nroBolitas_EnLaFilaActual(color) {
+    /*
+        PROPÓSITO:Describe la cantidad de bolitas de color en la fila
+        actual
+        PARÁMETROS:
+            * color: color - denota el color de las bolitas a evaluar.
+            
+        TIPO: numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+
+    cantidadDeBolitasYaVistas:=nroBolitas(color)
+    IrAlBorde(Oeste)
+    while(puedeMover(Este)){
+       
+        Mover(Este)
+        cantidadDeBolitasYaVistas:=cantidadDeBolitasYaVistas + 
+                                            nroBolitas(color)
+
+    }
+    
+    return (cantidadDeBolitasYaVistas)
+}
+
+
+function  ​nroFilas() {
+    /*
+        PROPÓSITO:  Describen la cantidad de filas del tablero
+        TIPO: numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    cantidadDeFilasContadas:=1
+    IrAlBorde(Sur)
+    while (puedeMover(Norte)) {
+        
+        Mover(Norte)
+        cantidadDeFilasContadas:=cantidadDeFilasContadas+1
+
+    }
+    return (cantidadDeFilasContadas)
+}
+
+function  ​nroColumnas() {
+    /*
+        PROPÓSITO:  Describen la cantidad de Columnas del tablero
+        TIPO: numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    cantidadDeColumnasContadas:=1
+    IrAlBorde(Oeste)
+    while (puedeMover(Este)) {
+        
+        Mover(Este)
+        cantidadDeColumnasContadas:=cantidadDeColumnasContadas+1
+
+    }
+    return (cantidadDeColumnasContadas)
+}
+
+function  ​distanciaAlBorde_(dirección) {
+    /*
+        PROPÓSITO:describe la cantidad de celdas que hay entre
+        la celda actual y el borde indicado
+        PARÁMETROS:
+            * direccion: direccion - describe la direccion
+            del borde.
+        OBSERVACION: si la celda actual se encuentra en el borde, 
+        la distancia es 0.
+        TIPO: numero
+        PRECONDICIONES:
+            *Ninguna
+    */
+    cantidadDeCeldasContadas:=0
+    while (puedeMover(direccion)) {
+        Mover(direccion)
+        cantidadDeCeldasVistas:=cantidadDeCeldasVistas + 1
+    }
+    
+    return (cantidadDeCeldasVistas)
+}
+
+function coordenadaX() {
+    /*
+        PROPÓSITO:Retorna la coordenada columna 
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+        OBSERVACIONES:si la celda actual se encuentra en el borde,
+        la distancia es 0.
+    */
+    
+    return (distanciaAlBorde_(Oeste))
+}
+
+function coordenadaY() {
+    /*
+        PROPÓSITO:Retorna la coordenada fila
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+        OBSERVACIONES:si la celda actual se encuentra en el borde,
+        la distancia es 0.
+    */
+    
+    return (distanciaAlBorde_(Sur))
+}

@@ -1,0 +1,86 @@
+function escogeElColor_SihayMasBolitasSino_(color1,color2) {
+    /*
+        PROPÓSITO:Describe el color de entre los dados que tiene mas 
+        bolitas en la celda actual
+        PARÁMETROS:
+            * color1: color - es el primer color de la bolita a comparar.
+            * color2: color - es el segundo color de la bolita a comparar.
+        TIPO: Color
+        PRECONDICIONES:
+            * Al menos debe haber una bolita de color1 o color2 en la
+            celda actual
+    */
+    
+    return (choose
+                color2 when (nroBolitas(color2) > nroBolitas(color1))
+        
+                color1 otherwise
+    }       )
+}
+
+function máximoEntre_Y_(valor1, valor2) {
+    /*
+        PROPÓSITO:  Describe el mayor de dos valores dados
+        PARÁMETROS:
+            * valor1: numero -es el primer valor a comparar.
+            * valor2: numero -es el segundo valor a comparar.
+        TIPO: numero
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (choose
+                valor1 when (valor1>valor2)
+        
+                valor2 otherwise
+    })
+}
+
+function cantidadDeBolitas_EnElTablero(color) {
+    /*
+        PROPÓSITO:Describe la cantidad de bolitas del color
+        que tiene el tablero.
+        PARÁMETROS:
+            * color: color - es el color de las bolitas a contar.
+           
+        TIPO: numero
+        PRECONDICIONES:
+            * ninguna
+    */
+    IrAlInicioDeUnRecorrido__(Norte, Este)
+    cantidadDeBolitasVistas := 0
+    while(not estoyElFinalDeUnRecorrido__(Norte, Este)) {
+        cantidadDeBolitasVistas := cantidadDeBolitasVistas + nroBolitas(color)
+        PasarASiguienteCelda__(Norte, Este)
+    } 
+    return(cantidadDeBolitasVistas + nroBolitas(color))
+}
+
+function totalDeBolitasDeTodosLosColores() { 
+/*
+    PROPOSITO:Describe la cantidad total de bolitas de todos los
+    colores de la celda actual
+    PRECONDICION:Ninguna
+
+*/
+    cantidadDeBolitasVistas := 0
+    colorActual := Azul
+    while (colorActual /= Verde) {
+
+        cantidadDeBolitasVistas := cantidadDeBolitasVistas + 
+                                    nroBolitas(colorActual)
+        colorActual := siguiente(colorActual)
+    
+    }
+    return(cantidadDeBolitasVistas + nroBolitas(colorActual))
+}
+
+function mayorCantidadDeBolitasEntre_Y_(color1, color2) { 
+/*
+    PROPOSITO: Describe cuál es la mayor cantidad de bolitas del color 
+    dado que tiene alguna celda del tablero.
+    PRECONDICION:Ninguna
+
+*/
+    return(máximoEntre_Y_(nroBolitas(color1), nroBolitas(color2)))
+}

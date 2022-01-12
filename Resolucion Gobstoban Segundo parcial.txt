@@ -1,0 +1,143 @@
+/*
+hay un solo encargado hay cajas y en ciertas zonas hay paredes que no pueden ser atravesadas 
+por el encargado ni tampoco por las cajas y hay metas
+las paredes son un elemento excluyente del resto es decir, si en una celda esta
+representada una pared no puede haber en la misma celda una representacion de meta pared
+ni caja.
+y el resto de los elementos caen en 2 categorias:
+
+elemento de primer plano: son la caja y el encargado y son excluyentes entre si (no puede
+haber una representacion de encargado ni de caja en la misma celda) ademas con las paredes
+
+elemento de segundo plano:metas que son excluyentes con las paredes pero no con los elementos
+de primer plano (en una misma celda puede haber una representacion de encargado o caja y
+una representacion de una meta pero no de una pared)
+
+en otras ubicaciones hay marcadores de meta es una ubicacion que no puede coincidir con una
+pared y es la marca donde debe ubicarse la caja para pasar el nivel
+
+la caja puede ser empujada cuando el encargado se para a su lado y se mueve hacia ella
+(la representacion del encargado esta una celda lindante a la de la representacion de la caja
+y la direccion del encargado es la misma que la de la caja cuando la empuja)
+
+para que sea empujada la caja debe haber una ubicacion que no contenga ni pared ni otra caja
+mas hacia esa direccion (es decir necesito una celda mas libre a la que tengo con la
+representacion de la caja)
+
+paredes de color colorElementoInmovil 
+los elementos de primer plano se representan con bolitas de colorDePrimerPlano
+segun su codigo por codigoEncargado y codigoCaja
+
+y elementos de segundo plano se representan con tantas bolitas de color colorDeSegundoPlano
+como su codigo CodigoMeta
+
+
+*/
+
+function hayEncargadoEnElJuego() {
+    /*
+        PROPÓSITO:Indica si hay al menos un encargado en el nivel
+        TIPO:Booleano
+        PRECONDICIONES:
+            * Hay una representacion del juego Gobstoban en el tablero
+    */
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+
+    while (not estoyAlFinalDeUnRecorrido && not esElemento_ElElementoEn_(codigoEncargado(),colorDePrimerPlano())) {
+        
+        PasarASiguienteCelda__(Este,Norte)
+
+    }
+
+    return (esElemento_ElElementoEn_(codigoEncargado(),colorDePrimerPlano()))
+}
+
+
+//la funcion hayEncargadoEnElJuego se la considera como primitiva 
+
+
+function esGobstobanConsistente() {
+    /*
+        PROPÓSITO:Indica si el nivel actual es consistente
+        RESULTADO:Booleano
+        PRECONDICIONES:
+            * Hay una representacion del juego Gobstoban en el tablero
+        OBSERVACIONES:
+                      Decimos que un juego de Gobstoban es consistente cuando hay al menos un
+                      encargado en el juego, y además la cantidad de cajas y la cantidad de 
+                      marcas de meta son iguales.
+    */
+    
+    return (hayEncargadoEnElJuego() && hayLaMismaCantidadDeCajasQueDeMetas())
+}
+
+function hayLaMismaCantidadDeCajasQueDeMetas() {
+    /*
+        PROPÓSITO:Indica si en el nivel hay la misma cantidad de cajas que de metas
+        RESULTADO:Booleano
+        PRECONDICIONES:
+            * Hay representaciones de cajas y de metas en el nivel
+    */
+    
+    return (cantidadTotalDeCajasEnElNivel()  == cantidadTotalDeMetasEnElNivel())
+}
+
+
+function cantidadTotalDeMetasEnElNivel() {
+    /*
+        PROPÓSITO:Describe la cantidad total de Metas que hay en el nivel
+        RESULTADO:Numero
+        PRECONDICIONES:
+            * Hay Representaciones de Metas en el nivel
+    */
+    
+    return (cantidadTotalDeElemento_DePlano_EnElNivel(códigoMeta(),colorDeSegundoPlano()))
+}
+
+
+function cantidadTotalDeCajasEnElNivel() {
+    /*
+        PROPÓSITO:Describe la cantidad total de cajas que hay en el nivel
+        RESULTADO:Numero
+        PRECONDICIONES:
+            * Hay Representaciones de cajas en el nivel
+    */
+    
+    return (cantidadTotalDeElemento_DePlano_EnElNivel(códigoCaja(),colorDePrimerPlano()))
+}
+
+
+function cantidadTotalDeElemento_DePlano_EnElNivel(elementoAContar,planoDelElemento) {
+    /*
+        PROPÓSITO:Cuenta la cantidad total de **elementoAContar** de plano 
+        **planoDelElemento** que hay en el nivel
+        PARÁMETROS:
+            * elementoAContar: Numero - describe el codigo del elemento en el cual se desea
+            saber la cantidad total que hay en el nivel
+            * planoDelElemento: Color - describe el plano del elemento de **elementoAContar**
+            en el cual se desea saber su cantidad total.
+        RESULTADO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    cantidadDeElementosVistos:=0
+
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+
+    while (not estoyAlFinalDeUnRecorrido__(Este,Norte)) {
+        
+        cantidadDeElementosVistos:=cantidadDeElementosVistos + 
+                                   unoSi_SinoCero(esElemento_ElElementoEn_(elementoAContar,planoDelElemento))
+
+        PasarASiguienteCelda__(Este,Norte)
+
+
+    }
+
+
+    return (
+        cantidadDeElementosVistos + 
+        unoSi_SinoCero(esElemento_ElElementoEn_(elementoAContar,planoDelElemento))
+            )
+}

@@ -1,0 +1,21 @@
+function estaOrdenada_(listaDeNumeros) {
+    /*
+        PROPÓSITO:dada una lista de numeros indica si esta ordenada
+        de menor a mayor
+        PARÁMETROS:
+            * listaDeNumeros: es la lista de numeros en el cual se desea
+            saber si esta ordenada.
+            
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    numerosQueFaltan:=resto(listaDeNumeros)
+
+    while (not esVacia(numerosQueFaltan) && primero(numerosQueFaltan) <= segundo(numerosQueFaltan)) {
+        numeroActual:=primero(numerosQueFaltan)
+        numerosQueFaltan:= resto(numerosQueFaltan)
+    }
+    return (esVacia(numerosQueFaltan))
+}

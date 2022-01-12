@@ -1,0 +1,107 @@
+program{
+    DibujarCuadradoVerdeDeTamanio3()
+    BorrarCuadradoVerdeDeTamanio3()
+}
+
+procedure DibujarCuadradoVerdeDeTamanio3(){
+/*
+    PROPOSITO:Dibuja Un cuadrado de tamaño 3 con bolitas de color verde dejando el cabezal en el centro del cuadrado
+    
+    PRECONDICION:Al menos el tablero debe tener un tamaño de 3x3 o mas
+*/
+    
+    IrAlBordeInferiorIzquierdo()
+    DibujarLineaVerdeDeTamanio3()
+    Mover(Norte)
+    DibujarLineaVerdeDeTamanio3()
+    Mover(Norte)
+    DibujarLineaVerdeDeTamanio3()
+    IrAlCentroDelCuadrado()
+
+}
+
+
+
+
+procedure DibujarLineaVerdeDeTamanio3(){
+
+/*
+    PROPOSITO:Dibuja Una linea de tamaño 3 con bolitas de color verde dejando el cabezal en la celda de partida
+    
+    PRECONDICION:Al menos debe haber 2 celdas lindantes al Este desde la celda inicial
+    
+*/
+    IrAlBorde(Oeste)
+    Poner(Verde)
+    Mover(Este)
+    Poner(Verde)
+    Mover(Este)
+    Poner(Verde)
+    IrAlBorde(Oeste)
+
+
+}
+
+
+procedure IrAlCentroDelCuadrado(){
+/*
+    PROPOSITO:El cabezal se posiciona hacia el centro del cuadrado 
+    
+    PRECONDICION:Ninguna
+*/
+
+    IrAlBorde(Sur)
+    Mover(Este)
+    Mover(Norte)
+
+}
+
+
+procedure IrAlBordeInferiorIzquierdo(){
+/*
+    PROPOSITO:Posiciona el Cabezal en el borde inferior izquierdo
+    
+    PRECONDICION:Ninguna
+*/
+
+    IrAlBorde(Oeste)
+    IrAlBorde(Sur)
+
+}
+
+procedure BorrarCuadradoVerdeDeTamanio3(){
+/*
+    PROPOSITO:Borra Un cuadrado de tamaño 3 con bolitas de color verde dejando en el centro 
+    
+    PRECONDICION:*Al menos el tablero debe tener un tamaño de 3x3 o mas
+                *Al Menos debe haber una bolita verde en cada celda 
+*/
+    IrAlBordeInferiorIzquierdo()
+    BorrarLineaVerdeDeTamanio3()
+    Mover(Norte)
+    BorrarLineaVerdeDeTamanio3()
+    Mover(Norte)
+    BorrarLineaVerdeDeTamanio3()
+    IrAlCentroDelCuadrado()
+
+}
+
+procedure BorrarLineaVerdeDeTamanio3(){
+
+/*
+    PROPOSITO:Borra Una linea de tamaño 3 con bolitas de color verde dejando el cabezal en la celda de partida
+    
+    PRECONDICION:*Al menos debe haber 2 celdas lindantes al Este desde la celda inicial.
+                 *Al menos debe haber una bolita verde en cada celda
+    
+*/
+    IrAlBorde(Oeste)
+    Sacar(Verde)
+    Mover(Este)
+    Sacar(Verde)
+    Mover(Este)
+    Sacar(Verde)
+    IrAlBorde(Oeste)
+
+
+}

@@ -1,0 +1,38 @@
+procedure ConstruirEscaleraAzulDe4Escalones() {
+    /*
+        PROPÓSITO:  Construye una escalera azul con 4 escalones
+        PRECONDICIONES:
+            * Al menos debe haber 4 celdas al este y 3 al norte de la 
+            celda inicial
+    */
+    ConstruirPeldanioAzulYMoverAlNorte()
+    ConstruirPeldanioAzulYMoverAlNorte()
+    ConstruirPeldanioAzulYMoverAlNorte()
+    ConstruirPeldanioAzul()
+
+}
+
+procedure ConstruirPeldanioAzulYMoverAlNorte() {
+    /*
+        PROPÓSITO:  Construye un peldaño azul de una escalera
+        PRECONDICIONES:
+            * al menos debe haber una lindante al este de la celda
+            actual ,y una celda al norte de la lindante al este de la 
+            celda actual
+    */
+    ConstruirPeldanioAzul()
+    Mover(Norte)
+
+}
+
+procedure ConstruirPeldanioAzul() {
+    /*
+        PROPÓSITO:  Construye un peldaño azul
+        PRECONDICIONES:
+            * Al menos debe haber una celda lindante al este de la
+            actual
+    */
+    Poner(Azul)
+    Mover(Este)
+    Poner(Azul)
+}

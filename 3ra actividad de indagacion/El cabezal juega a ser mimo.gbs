@@ -1,0 +1,9 @@
+program {
+    Imitar_ParaPoner_(Azul,Rojo)
+}
+
+procedure Imitar_ParaPoner_(colorAImitar,colorAPoner){
+    repeat(nroBolitas(colorAImitar)){
+        Poner(colorAPoner)
+    }
+}

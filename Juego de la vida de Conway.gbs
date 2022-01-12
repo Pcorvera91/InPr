@@ -1,0 +1,399 @@
+interactive program {
+  K_UP     -> { PrepararElPróximoTick()  }
+  K_RIGHT  -> { CompletarElPróximoTick() }
+  K_RETURN -> { SimularUnTick()          }
+}
+
+function esCélulaViva() {
+/*
+    PROPOSITO:Determina si la celula actual esta viva
+    PRECONDICION:Ninguna
+    RESULTADO:Booleano
+
+*/    
+  return (hayBolitas(Verde))
+}
+
+
+function esCelulaMuerta(){
+/*
+
+    PROPOSITO:Indica si la celula actual esta muerta
+    PRECONDICION:Ninguna
+    RESULTADO:Booleano
+
+
+*/    
+
+    return(not esCélulaViva())
+    
+    
+}
+
+function nroDeVecinasVivas() {
+/*
+    PROPOSITO:Determina el numero de vecinas vivas desde la celda actual
+    PRECONDICION:Ninguna
+    RESULTADO:Numero
+
+*/    
+  return (nroVecinasEnDireccionesOrtogonales() + nroVecinasVivasEnLasDiagonales())
+}
+
+
+function nroVecinasEnDireccionesOrtogonales(){
+/*
+    PROPOSITO:Describe la cantidad de celulas vecinas vivas en direcciones ortogonales
+    PRECONDICION:hay 1 celula en cada direccion ortogonal
+    RESULTADO:Numero
+*/    
+    direccionActual:=minDir()
+    cantidadDeVecinasVistas:=0
+    while(direccionActual /= maxDir()){
+        cantidadDeVecinasVistas:=cantidadDeVecinasVistas + cantidadDeCelulasVivasAl_(direccionActual)
+        direccionActual:=siguiente(direccionActual)
+    }
+
+    return(cantidadDeVecinasVistas + cantidadDeCelulasVivasAl_(direccionActual))
+
+}
+
+function nroVecinasVivasEnLasDiagonales(){
+
+/*
+    PROPOSITO:Describe la cantidad de celulas vecinas en las diagonales
+    PRECONDICION:hay 1 celula en cada diagonal
+    RESULTADO:Numero
+
+
+*/    
+    
+    
+    return(nroVecinasEnLasDiagonalesAl_(Norte) + nroVecinasEnLasDiagonalesAl_(Sur))
+    
+    
+}
+
+
+function nroVecinasEnLasDiagonalesAl_(direccion){
+    
+/*
+    PROPOSITO:Describe la cantidad de vecinas vivas en las diagonales Oeste y este a direccion
+    PRECONDICION:Hay 1 celula en cada diagonal
+    RESULTADO:Numero
+
+*/
+
+    Mover_Si_(direccion,puedeMover(direccion))
+    
+    return(cantidadDeCelulasVivasAl_(Oeste) + cantidadDeCelulasVivasAl_(Este))
+
+    
+    
+}
+
+
+procedure Mover_Si_(direccion, condicion) {
+    /*
+        PROPÓSITO:  Dado un color y un valor de verdad llamado condicion
+        mueve el cabezal
+         una celda a la direccion dada si el valor de verdad de la 
+        condicion es verdadero y si no lo es, no lo mueve
+        PARÁMETROS:
+            * direccion: direccion - es la direccion a mover.
+            * condicion: booleano - es el valor de verdad que indica verdadero
+            mueve el cabezal a direccion.
+        PRECONDICIONES:
+            *Al menos debe haber una celda a direccion de la celda actual
+    */
+    if (condicion) {
+        Mover(direccion)
+    }
+}
+
+
+function cantidadDeCelulasVivasAl_(direccion){
+/*
+    PROPOSITO:Describe la cantidad de celulas vivas que hay en la direccion dada
+    PRECONDICION:Hay 1 bolita verde en la celda lindante a direccion
+    RESULTADO:Numero
+*/    
+
+
+    Mover_Si_(direccion,puedeMover(direccion))
+    
+    return(elegir_Cuando_YSiNo_(1,esCélulaViva(),0))
+
+
+}
+
+
+
+
+function haySobrepoblacion(){
+    
+/*
+    PROPOSITO:Indica si esta sobrepoblada de celulas vecinas en relacion
+    a la celula actual
+    PRECONDICION:Ninguna
+    RESULTADO:Booleano
+
+*/
+
+
+    return(nroDeVecinasVivas() > 3)
+    
+}
+
+
+function hay3VecinasVivasParaReproducion(){
+/*
+    PROPOSITO:Indica si hay 3 celulas vecinas vivas para que la celula
+    actual se reanime
+    PRECONDICION:Ninguna
+    RESULTADO:Booleano
+
+*/
+
+    return(nroDeVecinasVivas() == 3)
+
+
+}
+
+
+function hayEscasezDePoblacion(){
+/*
+    PROPOSITO:Indica si la celula actual tiene 2 vecinas vivas
+    es decir hay escasez de poblacion
+    RESULTADO:Booleano
+    PRECONDICION:Ninguna
+
+*/    
+
+    return(nroDeVecinasVivas() < 2)    
+
+    
+}
+
+procedure Simular_Ticks(cantidad) {
+/*
+
+    PROPOSITO:Dada una cantidad simula la cantidad de ticks sobre el 
+    universo
+    PRECONDICIONES:Ninguna
+
+*/
+
+    repeat(cantidad){
+        
+        SimularUnTick()
+    }
+
+
+}
+
+procedure SimularUnTick() {
+/*
+    PROPOSITO:Simula un tick, es decir primero prepara el universo
+    y despues lo actualiza.
+    PRECONDICION:Ninguna
+
+
+*/
+
+    PrepararElPróximoTick()
+    CompletarElPróximoTick()
+
+
+
+}
+
+
+
+procedure PrepararCélulaActual() {
+/*
+    PROPOSITO:Aplica las pautas del juego en la celula actual
+    PRECONDICION:Ninguna
+
+*/
+
+    MarcarCelulaSiEstaVivaHayEscasezDePoblacionOSobrepoblacion()
+    MarcarCelulaSiEstaMuertaYHay3VecinasVivas()
+
+
+}
+
+
+
+
+
+
+
+procedure MarcarCelulaSiEstaVivaHayEscasezDePoblacionOSobrepoblacion(){
+    
+/*
+    PROPOSITO:La celula actual muere si hay escasez de poblacion o sobrepoblacion de 
+    celulas lindantes vecinas vivas.
+    PRECONDICION:Ninguna
+
+
+*/    
+    
+    if( esCélulaViva() && (hayEscasezDePoblacion() || haySobrepoblacion()) ){
+        
+        MarcarCélulaParaSerEliminada()
+        
+        
+    }
+
+    
+    
+}
+
+
+procedure MarcarCelulaSiEstaMuertaYHay3VecinasVivas(){
+/*
+    PROPOSITO:La celula muerta actual se reproduce si hay 3 celulas vecinas
+    vivas
+    PRECONDICION:Ninguna
+*/    
+
+    if(esCelulaMuerta() && hay3VecinasVivasParaReproducion()){
+        
+        MarcarCélulaParaSerReanimada()
+        
+        
+    }
+
+    
+}
+
+procedure PrepararElPróximoTick() {
+/*
+    PROPOSITO:Prepara todas las celulas a marcar para luego actualizar
+    el universo (es decir completar el tick)
+    PRECONDICION:Ninguna
+
+*/
+
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while(not estoyAlFinalDeUnRecorrido__(Este,Norte)){
+        PrepararCélulaActual()
+        PasarASiguienteCelda__(Este,Norte)
+        
+    }
+
+
+
+}
+
+procedure EliminarOReanimarCelula(){
+/*
+    PROPOSITO:Elimina o reanima la celula actual si esta marcada para eliminar
+    o marcada para reanimarla.
+    PRECONDICION:Ninguna
+
+*/
+
+    if(estáMarcadaParaSerEliminada()){
+        
+        EliminarCélula()
+    }
+    
+    elseif (estáMarcadaParaSerReanimada()){
+        
+        ReanimarCélula()
+        
+    }
+
+    
+    
+}
+
+procedure CompletarElPróximoTick() {
+/*
+    PROPOSITO:Actualiza el universo leyendo todas las marcas de eliminacion y
+    reanimacion y segun la marca que obtenga las elimina o reanima
+    
+    PRECONDICION:Ninguna
+*/
+
+    IrAlInicioDeUnRecorrido__(Este,Norte)
+    while(not estoyAlFinalDeUnRecorrido__(Este,Norte)){
+        
+        EliminarOReanimarCelula()
+        PasarASiguienteCelda__(Este,Norte)
+        
+    }
+
+
+}
+
+
+procedure IrAlInicioDeUnRecorrido__(dirPrincipal, dirSecundaria) {
+    /*
+        PROPÓSITO: Mueve el cabezal al inicio de un recorrido
+        PARÁMETROS:
+            * dirPrincipal: direccion - es la direccion principal 
+            donde mueve el cabezal.
+            * dirSecundaria: direccion - es la direccion secundaria
+            donde mueve el cabezal.
+        PRECONDICIONES:
+            * dirPrincipal y dirSecundaria no pueden ser iguales ni 
+            opuestas
+    */
+    IrAlBorde(opuesto(dirPrincipal))
+    IrAlBorde(opuesto(dirSecundaria))
+
+
+}
+
+function estoyAlFinalDeUnRecorrido__(dirPrincipal, dirSecundaria) {
+    /*
+        PROPÓSITO: Indica si el cabezal esta en el final de un recorrido
+        hacia dirPrincipal y dirSecundaria
+        PARÁMETROS:
+            * dirPrincipal: direccion - es la direccion prinicipal del
+            final del recorrido.
+            * dirSecundaria: direccion - es la direccion secundaria del
+            final del recorrido.
+        TIPO: Tipo
+        PRECONDICIONES:
+           * dirPrincipal y dirSecundaria no pueden ser iguales ni 
+            opuestas
+    */
+    
+    return ((not puedeMover(dirPrincipal)) && (not puedeMover(dirSecundaria)) )
+}
+
+procedure PasarASiguienteCelda__(dirPrincipal, dirSecundaria) {
+    /*
+        PROPÓSITO:  Mueve el cabezal a la siguiente celda en direccion 
+        dirPrincipal y dirSecundaria
+        PARÁMETROS:
+            * dirPrincipal: direccion - es la direccion principal 
+            donde mueve el cabezal.
+            * dirSecundaria: direccion - es la direccion secundaria
+            donde mueve el cabezal.
+        PRECONDICIONES:
+            * dirPrincipal y dirSecundaria no son opuestas ni iguales
+    */
+    
+
+    if (puedeMover(dirPrincipal)) {
+        
+        Mover(dirPrincipal)
+
+    }
+
+    else {
+        
+        Mover(dirSecundaria)
+        IrAlBorde(opuesto(dirPrincipal))
+
+    }
+
+
+
+}
+

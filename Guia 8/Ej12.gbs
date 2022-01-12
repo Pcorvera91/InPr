@@ -1,0 +1,79 @@
+type Alumno is record{
+/*
+    PROPOSITO:Modela los datos del alumno
+    INV.REP: nroLegajo materiasCursadas y materiasAprobadas es mayor
+    o igual que 0
+
+
+*/    
+    field identidad // Persona
+    field nroLegajo // Numero
+    field ingresoAUni // Fecha
+    field materiasCursadas // Numero
+    field materiasAprobadas // Numero
+}
+
+function alumno_IngresanteEn_Con_(datosPersonales,fechaIngreso,legajo) {
+    /*
+        PROPÓSITO: dada una fecha de ingreso y un numero de legajo
+        describe un alumno que ingresó en la fecha dada con el legajo dado, y no cursó aún
+         ninguna materia 
+        PARÁMETROS:
+            *datosPersonales: Persona- son los datos personales del alumno
+            * fehcaIngreso:Fecha - es la fecha de ingreso del alumno a la universidad.
+            * legajo: Numero - es el numero de legajo asignado al alumno ingresante.
+        TIPO: Alumno
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Alumno(identidad <- datosPersonales
+                   ingresoAUni <- fechaIngreso,
+                    nroLegajo <- legajo,
+                    materiasCursadas <- 0,
+                    materiasAprobadas <- 0))
+}
+
+function materiasDesaprobadasPor_​(alumno) {
+    /*
+        PROPÓSITO:Describe el numero de materias desaprobadas por el alumno dado
+        PARÁMETROS:
+            * alumno: persona - es el alumno que se desea saber cuantas materias 
+            desaprobo.
+           
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (materiasCursadas(alumno) - materiasAprobadas(alumno))
+}
+
+function alumno_ConLegajoNuevo_(alumno,legajo) {
+    /*
+        PROPÓSITO: dado un alumno y un número de legajo
+        describe el alumno que resulta de modificar el legajo dado al alumno dado
+        PARÁMETROS:
+            * alumno: Alumno - es el alumno que quiere modificar su legajo.
+            * legajo: numero - es el numero de legajo a modificar.
+        TIPO: Alumno
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Alumno(alumno | nroLegajo <- legajo))
+}
+
+function edadDelAlumno_AlIngresar(alumno) {
+    /*
+        PROPÓSITO:Describe la edad del alumno al ingresar a la universidad
+        PARÁMETROS:
+            * alumno: Alumno - es el alumno que se desea saber su edad
+            
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (edadDe_Al_())
+}

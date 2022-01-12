@@ -1,0 +1,61 @@
+/*(alto + largo-1)*/
+
+
+procedure DibujarBanda_EnDiagonalNEDe_x_(color, alto, largo) {
+    /*
+        PROPÓSITO:  Dibuja una banda **color** de **alto** x **largo**,
+        el cabezal queda a (**alto**-1) celdas lindantes de la celda actual
+        PARÁMETROS:
+            * color:color de la banda
+            *alto: es un numero que indica el alto de la banda
+            *largo:es un numero que indica el largo de la banda
+        PRECONDICIONES:
+            * al menos debe haber **largo** celdas lindantes al
+            este y (**largo**-2) celdas al norte de la celda inicial
+
+    */
+    repeat (alto-1) {
+        DibujarLinea_DiagonalDe_(color,largo)
+        Mover(Norte)
+    }
+    DibujarLinea_DiagonalDe_(color,largo)
+    
+}
+
+procedure DibujarLinea_DiagonalNEDe_(colorLinea,largoLinea) {
+    /*
+        PROPÓSITO:Dibuja una linea diagonal de **colorLinea**
+        de tamaño **largoLinea**
+        PARÁMETROS:
+            * colorLinea: color - describe el color de la linea diagonal
+            * largoLinea: numero - describe el tamaño de la linea de largo
+        PRECONDICIONES:
+            * al menos debe haber **largoLinea** celdas al este
+            y **largoLinea** Celdas al norte de la celda actual
+    */
+    repeat(largoLinea-1){
+        Poner(Negro)
+
+        Mover(Este) Mover(Norte)
+    }
+
+    Poner(Negro)
+
+    VolverAlInicioDeLaDiagonalDe_(largoLinea)
+}
+
+
+procedure VolverAlInicioDeLaDiagonalDe_(largoDiagonal) {
+    /*
+        PROPÓSITO: el cabezal,vuelve al inicio de la diagonal 
+        de tamaño largoDiagonal al suroeste.
+        PARÁMETROS:
+            * largoDiagonal:numero-indica el largo de la diagonal
+        PRECONDICIONES:
+            * al menos debe haber largoDiagonal celdas al oeste
+            y al sur de la celda actual
+    */
+    repeat (largoDiagonal-1) {
+        Mover(Sur)  Mover(Oeste)
+    }
+}

@@ -1,0 +1,29 @@
+function sinLaPrimeraAparicionDe_En_(elemento,lista) {
+    /*
+        PROPÓSITO:dado un elemento y una lista,describe la lista que se obtiene al eliminar
+        una unica vez el elemento si este aparece en la lista
+        PARÁMETROS:
+            * elemento: elemento de cualquier tipo - describe el elemento a filtrar de la 
+            lista dada
+            * lista: lista de elementos - es la lista en el cual se desea eliminar la primera
+            aparicion del elemento dado
+        TIPO:Lista de elementos
+        PRECONDICIONES:
+            * Al menos aparece el elemento 1 vez
+    */
+    listaHastaAhora:=[]
+    elementosQueFaltan:=lista
+   
+    while (primero(elementosQueFaltan) /= elemento) {
+        
+    
+        listaHastaAhora:=listaHastaAhora ++ [primero(elementosQueFaltan)]
+        elementosQueFaltan:=resto(elementosQueFaltan)
+    }
+
+    return (
+        listaHastaAhora ++
+        resto(elementosQueFaltan)
+        )
+}
+

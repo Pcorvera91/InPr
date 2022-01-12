@@ -1,0 +1,146 @@
+program{
+    LevantarPared()
+}
+
+procedure LevantarPared() {
+    /*
+        PROPÓSITO:construye una pared de ladrillos de ocho ladrillos de alto por
+        cuatro ladrillos de ancho
+        PRECONDICIONES:
+            * al menos debe haber 3 celdas al este y 3 al norte de la actual
+            
+    */
+    PonerFilaEnteraDeLadrillos()
+    IrAlaSiguienteFilaAlNorte()
+    PonerFilaEnteraDeLadrillos()
+    IrAlaSiguienteFilaAlNorte()
+    PonerFilaEnteraDeLadrillos()
+    IrAlaSiguienteFilaAlNorte()
+    PonerFilaEnteraDeLadrillos()
+    IrAlBorde(Sur)
+}
+
+procedure PonerFilaEnteraDeLadrillos() {
+    /*
+        PROPÓSITO:  Pone una filera de ladrillos es decir,pone la hilera
+        inferior y superior
+        PRECONDICIONES:
+            
+    */
+    PonerHileraInferiorDeLadrillosEnFila()
+    PonerHileraSuperiorDeLadrillosEnFila()
+}
+
+procedure PonerHileraInferiorDeLadrillosEnFila() {
+    /*
+        PROPÓSITO:  Pone la hilera inferior de ladrillos en una fila
+        PRECONDICIONES:
+            * La fila debe contener cemento
+            *Al menos debe haber 3 lindantes al este de la celda actual
+    */
+    PonerCementoEnFila()
+    PonerLadrilloEnteroEnFila()
+}
+
+procedure PonerCementoEnFila() {
+    /*
+        PROPÓSITO:  Coloca cemento en una fila
+        PRECONDICIONES:
+            * La fila debe estar vacia
+            *Al menos debe haber 3 celdas al este de la actual
+    */
+    PonerCemento()
+    Mover(Este)
+    PonerCemento()
+    Mover(Este)
+    PonerCemento()
+    Mover(Este)
+    PonerCemento()
+    IrAlBorde(Oeste)
+    
+}
+
+procedure PonerHileraSuperiorDeLadrillosEnFila() {
+    /*
+        PROPÓSITO:  Pone la hilera superior de ladrillos en una fila
+        PRECONDICIONES:
+            * Debe haber una hilera inferior de ladrillos
+            *Debe haber cemento en el mismo
+            *al menos debe haber 3 lindantes al este de la actual
+    */
+    PonerCementoEnFila()
+    PonerMedioLadrilloEnElBordeOeste()
+    Mover(Este)
+    PonerLadrillo()
+    Mover(Este)
+    PonerLadrillo()
+    Mover(Este)
+    PonerLadrillo()
+    PonerMedioLadrilloEnElBordeEste()
+    IrAlBorde(Oeste)
+
+}
+
+
+
+procedure PonerLadrilloEnteroEnFila() {
+    /*
+        PROPÓSITO:  Pone una fila de ladrillos enteros
+        PRECONDICIONES:
+            * La fila debe contener cemento solamente
+            *Al menos debe haber 3 celdas lindantes al oeste de la actual
+    */
+    PonerLadrillo()
+    Mover(Este)
+    PonerLadrillo()
+    Mover(Este)
+    PonerLadrillo()
+    Mover(Este)
+    PonerLadrillo()
+    IrAlBorde(Oeste)
+}
+
+procedure IrAlaSiguienteFilaAlNorte() {
+    /*
+        PROPÓSITO:  Se mueve a la siguiente fila al norte
+        PRECONDICIONES:
+            * Al menos debe haber 1 celda al norte de la actual
+    */
+    Mover(Norte)
+}
+
+
+
+
+
+procedure PonerCemento()
+/* PROPÓSITO: Poner cemento en la celda actual
+PRECONDICIONES:
+* o bien la celda actual debe estar vacía,
+* o bien debe tener un ladrillo entero en la parteinferior, sin cemento sobre él
+*/
+procedure PonerLadrillo()
+/* PROPÓSITO: Poner un ladrillo en la celda actual
+PRECONDICIONES:
+* si no hay ladrillos en la celda actual, debe haber
+cemento en la misma
+* si hay un ladrillo entero en la celda actual, debe haber
+cemento sobre el mismo, y debe existir una celda al Oeste
+que ya contenga un ladrillo entero y medio ladrillo del
+lado izquierdo
+*/
+procedure PonerMedioLadrilloEnElBordeOeste()
+/* PROPÓSITO: Poner medio ladrillo en la celda actual
+PRECONDICIONES:
+* la celda actual debe estar en el borde Oeste
+* debe haber un ladrillo entero en la parte inferior de la
+celda actual, y cemento sobre él
+*/
+procedure PonerMedioLadrilloEnElBordeEste()
+/* PROPÓSITO: Poner medio ladrillo en la celda actual
+PRECONDICIONES:
+* la celda actual debe estar en el borde Este
+* debe haber un ladrillo entero en la parte inferior de la
+celda actual, cemento sobre él, y medio ladrillo del lado
+izquierdo de la celda
+*/

@@ -1,0 +1,105 @@
+procedure Pintar3PuntosAzules() {
+    /*
+        PROPÓSITO:  Pinta 3 puntos azules a una distancia de 3 
+        celdas una de la otra
+        PRECONDICIONES:
+            * Al menos debe haber 6 celdas lindantes al este
+            de la actual
+    */
+    Poner(Azul)
+    Poner_ADistancia3Al_(Azul, Este)
+    Poner_ADistancia3Al_(Azul, Este)
+    Mover_6Veces(Oeste)
+}
+
+procedure Mover_6Veces(direccionAMover){
+/*  PROPOSITO:Mueve 6 celdas a direccionAMover de la celda actual
+    PARAMETROS:
+        *direccionAMover:direccion-Es la direccion en el cual se
+        mueve el cabezal
+    PRECONDICIONES:
+            * Al menos debe haber 6 celdas lindantes a direccionAMver
+            de la actual
+*/
+
+    Mover_3Veces(direccionAMover)
+    Mover_3Veces(direccionAMover)
+}
+
+procedure Pintar3Puntos_(colorPunto) {
+    /*
+        PROPÓSITO:  Pinta 3 puntos de colorPunto a una distancia de 3 
+        celdas una de la otra 
+        PARAMETROS:
+            *colorPunto:color-es el color del punto
+        PRECONDICIONES:
+            * Al menos debe haber 6 celdas lindantes al este
+            de la actual
+    */
+    Poner(colorPunto)
+    Poner_ADistancia3Al_(colorPunto, Este)
+    Poner_ADistancia3Al_(colorPunto, Este)
+    Mover_6Veces(Oeste)
+}
+
+procedure PintarArcoIris() {
+    /*
+        PROPÓSITO: Pinta un Arcoiris de 9 celdas de ancho y 
+        2 de alto
+        PRECONDICIONES:
+            * Al menos debe haber 8 celdas lindantes al este
+            y 1 al norte de la celda inicial
+            *El tablero debe estar vacio
+    */
+    Pintar3PuntosNegrosYMoverAlEste()
+    Pintar3PuntosAzulesYMoverAlNorte()
+    Pintar3PuntosVerdesYMoverAlSureste()
+    Pintar3PuntosRojosYVolverAlInicio()
+}
+
+procedure Pintar3PuntosNegrosYMoverAlEste() {
+    /*
+        PROPÓSITO:  Pinta 3 puntos Negroso a una distancia de 3 
+        celdas una de la otra 
+        PRECONDICIONES:
+            * Al menos debe haber 6 lindantes al este de la actual
+            *La celda actual y las 6 lindantes al este,estan vacias
+    */
+    Pintar3Puntos_(Negro)
+    Mover(Este)
+}
+
+
+procedure Pintar3PuntosAzulesYMoverAlNorte() {
+    /*
+        PROPÓSITO:  Pinta 3 puntos Azules a una distancia de 3 
+        celdas una de la otra 
+        PRECONDICIONES:
+            * Al menos debe haber 6 lindantes al este y 1 al norte
+             de la actual
+            *La celda actual y las 6 lindantes al este,estan vacias
+    */
+    Pintar3Puntos_(Azul)
+    Mover(Norte)
+}
+
+procedure Pintar3PuntosVerdesYMoverAlSureste() {
+    /*
+        PROPÓSITO:  Pinta 3 puntos verdes a una distancia de 3 
+        celdas una de la otra 
+        PRECONDICIONES:
+            * Al menos debe haber 6 lindantes al este de la actual
+            *La celda actual y las 6 lindantes al este,estan vacias
+    */
+    Pintar3Puntos_(Verde)
+    Mover(Sur) Mover(Este)
+}
+procedure Pintar3PuntosRojosYVolverAlInicio() {
+    /*
+        PROPÓSITO:  ....
+        PRECONDICIONES:
+            * ....
+    */
+    Pintar3Puntos_(Rojo)
+    Mover(Oeste) Mover(Oeste)
+}

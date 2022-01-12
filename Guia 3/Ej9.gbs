@@ -1,0 +1,130 @@
+procedure DibujarNombrePablo{
+/*
+    PROPOSITO:Dibuja el nombre PABLO de un ancho de 19 celdas
+    y un alto de 4 celdas (incluyendo un espacio entre cada
+    nombre de una columna de 4 celdas de alto)
+    
+    PRECONDICIONES:
+    *al menos debe haber 19 lindantes al
+    Este  y 4 Lindantes al Norte de la celda inicial.
+    *El tablero esta vacio
+
+   
+    OBSERVACIONES: 
+    *la caligrafia de cada letra del nombre 
+    se las consideran rectas es decir, sin angulos ni curvas
+
+*/    
+    DibujarLetraPEIrALaSiguiente()
+    
+    DibujarLetraAEIrALaSiguiente()
+    
+    DibujarLetraBEIrALaSiguiente()
+    
+    DibujarLetraLEIrALaSiguiente()
+    
+    DibujarLetraO()
+
+    VolverALaCeldaInicial()
+    
+
+}
+
+procedure DibujarLetraPEIrALaSiguiente() {
+    /*
+        PROPÓSITO:  Dibuja la letra P con un tamaño de 4 celdas
+        de alto y 3 de ancho y se posiciona 
+        a la siguiente letra y dejando un espacio de 1 celda de ancho
+        PRECONDICIONES:
+            * Al menos debe haber 3 celdas lindantes al norte y 
+            4 celdas al este de la celda actual
+            *las 4x4 celdas donde se dibuja la letra P 
+            (Incluyendo el espacio) debe estar Vacio
+    */
+    DibujarLíneaHacia_DeLargo_(Norte,4)
+    Mover(Norte) Mover(Este)
+
+    DibujarLínea_DeLongitud_(Este,2)
+    Mover(Este) Mover(Norte)
+
+    DibujarLínea_DeLongitud_(Norte,2)
+    Mover(Norte) Mover(Oeste)
+
+    DibujarLínea_DeLongitud_(Oeste,2)
+    Mover__Veces(Sur,3) Mover__Veces(Este,2) 
+    
+    
+
+}
+
+procedure DibujarLetraAEIrALaSiguiente() {
+    /*
+        PROPÓSITO:  Dibuja la letra A con un tamaño de 4 celdas
+        de alto y 3 de ancho y se posiciona 
+        a la siguiente letra y dejando un espacio de 1 celda de ancho
+        PRECONDICIONES:
+            * Al menos debe haber 3 celdas lindantes al norte y 
+            4 celdas al este de la celda actual
+            *las 4x4 celdas donde se dibuja la letra A 
+            (Incluyendo el espacio) debe estar Vacio
+    */
+    DibujarLíneaHacia_DeLargo_(Norte,4)
+    Mover__Veces(Este,2) 
+
+    DibujarLíneaHacia_DeLargo_(Norte,4)
+    Mover(Oeste) Mover(Norte)
+
+    DibujarLínea_DeLongitud_(Norte,1)
+    Mover__Veces(Norte,2)
+
+    DibujarLínea_DeLongitud_(Este,1)
+    Mover__Veces(Sur,3) Mover__Veces(Este,2)
+    
+    
+
+}
+
+
+procedure DibujarLetraLEIrALaSiguiente() {
+    /*
+        PROPÓSITO:  Dibuja la letra L con un tamaño de 4 celdas
+        de alto y 3 de ancho y se posiciona 
+        a la siguiente letra y dejando un espacio de 1 celda de ancho
+        PRECONDICIONES:
+            * Al menos debe haber 3 celdas lindantes al norte y 
+            4 celdas al este de la celda actual
+            *las 4x4 celdas donde se dibuja la letra L 
+            (Incluyendo el espacio) deben estar Vacias
+    */
+    DibujarLíneaHacia_DeLargo_(Norte,4)
+    Mover(Este)
+
+    DibujarLíneaHacia_DeLargo_(Este,2)
+    Mover__Veces(Este,4)
+
+    
+    
+
+}
+
+
+
+
+
+
+
+
+procedure DibujarLíneaHacia_DeLargo_(dirección, largoDeLaLínea)
+/* PROPÓSITO:
+* Dibuja una línea de longitud largoDeLaLínea en dirección
+dirección.
+PRECONDICIONES:
+* La celda actual está vacía y debe haber al menos
+largoDeLaLínea celdas en dirección dirección.
+PARÁMETROS:
+* largoDeLaLínea: la longitud de la línea que se dibuja
+* dirección: la dirección hacia la que se dibuja la línea
+OBSERVACIONES:
+* Notar por la descripción del propósito, que el cabezal debe
+terminar en la celda inicial
+*/

@@ -1,0 +1,85 @@
+/*
+Se puede modelar el paseo de un caminante por el tablero con las siguientes
+consideraciones para la representación.
+● El caminante está representado por una a cuatro bolitas azules. La dirección
+de su paseo es Norte si es una bolita, Este si son dos, Sur si son tres y Oeste
+si son cuatro.
+● Las indicaciones de cambio de dirección se representan con bolitas verdes.
+Si el caminante llega a una celda con una de estas indicaciones, debe
+cambiar de dirección. La cantidad de bolitas verdes indica la nueva dirección,
+con la misma representación de direcciones dadas para el caminante.
+● El caminante deja una huella de bolitas negras a su paso, una por cada paso.
+● La meta se representa con cualquier número de bolitas rojas. El paseo del
+caminante termina si llega a la meta.
+● La celda actual siempre se encuentra sobre el caminante.
+● La única celda con bolitas azules es la del caminante.
+● Todas las celdas tienen un máximo de 4 bolitas verdes.
+● Las indicaciones llevan al caminante a la meta
+
+
+*/
+
+function direcciónDelCódigo_(código)
+/* PROPÓSITO:
+describe la dirección correspondiente al código dado
+PRECONDICIONES:
+* el código está entre 1 y 4
+PARÁMETROS:
+* código es un número que codifica una dirección
+*/
+
+function caminante() {
+    /*
+        PROPÓSITO:Representa al caminante
+        TIPO: color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Azul)
+}
+
+function indicador() {
+    /*
+        PROPÓSITO:Representa al indicador
+        TIPO: color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Verde)
+}
+
+
+function meta() {
+    /*
+        PROPÓSITO:Representa al la meta
+        TIPO: color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Rojo)
+}
+
+functio huella() {
+    /*
+        PROPÓSITO:Representa a huella
+        TIPO: color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Negro)
+}
+
+procedure LlevarAlCaminanteALaMeta() {
+    /*
+        PROPÓSITO:Lleva al caminante hacia la meta
+        PRECONDICIONES:
+            *Hay un escenario valido en el tablero
+            *la celda actual siempre se encuentra sobre el caminante
+            *todas las celdas tienen un maximo de 4 bolitas verdes
+    */
+    
+}

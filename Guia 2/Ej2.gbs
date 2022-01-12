@@ -1,0 +1,131 @@
+procedure RegistrarElDiaDeLaMemoria(){
+/*  
+    PROPOSITO:Registra el dia de la memoria,en la celda actual 
+    y las 2 proximas al este
+        
+    
+    PRECONDICION: 
+        *hay al menos 2 celdas lindantes al este de la celda 
+        inicial.
+        *tanto la celda actual como las 2 lindantes al este estan vacias
+
+
+*/
+    RegistrarDia()
+    Mover(Este)
+    RegistrarMes()
+    Mover(Este)
+    RegistrarAnio()
+
+}
+
+procedure RegistrarDia(){
+   /* 
+    PROPOSITO: Pone 24 bolitas Azules representando el dia de la fecha
+        de la memoria
+
+        PRECONDICION:La celda actual esta vacia.
+   
+   */ 
+
+    Poner24Azules()
+}
+
+
+procedure RegistrarMes(){
+   /* 
+    PROPOSITO: Pone 3 bolitas Rojas representando el mes del dia 
+        de la memoria
+
+        PRECONDICION:La celda actual esta vacia.
+   
+   */ 
+
+    Poner3Rojas()
+}
+
+procedure RegistrarAnio(){
+   /* 
+    PROPOSITO: Pone 1976 bolitas Verdes representando el anio del dia 
+        de la memoria
+
+        PRECONDICION:La celda actual esta vacia.
+   
+   */ 
+
+   Poner1976Verdes()
+}
+
+procedure Poner24Azules() {
+    /*
+        PROPÓSITO:  ....
+        PRECONDICIONES:
+            * ....
+    */
+    Poner20Azules()
+    Poner4Azules()
+}
+
+procedure Poner20Azules() {
+    /*
+        PROPÓSITO:  ....
+        PRECONDICIONES:
+            * ....
+    */
+    Poner10Azules()
+    Poner10Azules()
+}
+
+procedure Poner10Azules() {
+    /*
+        PROPÓSITO:  ....
+        PRECONDICIONES:
+            * ....
+    */
+    Poner5Azules()
+    Poner5Azules()
+}
+
+procedure Poner5Azules() {
+    /*
+        PROPÓSITO:  ....
+        PRECONDICIONES:
+            * ....
+    */
+    Poner4Azules
+    Poner(Azul)
+}
+
+procedure Poner2Azules() {
+    /*
+        PROPÓSITO:  ....
+        PRECONDICIONES:
+            * ....
+    */
+    Poner(Azul)
+    Poner(Azul)
+}
+
+procedure Poner4Azules() {
+    /*
+        PROPÓSITO:  ....
+        PRECONDICIONES:
+            * ....
+    */
+    Poner2Azules()
+    Poner2Azules
+}
+
+procedure Poner3Rojas() {
+    /*
+        PROPÓSITO:  ....
+        PRECONDICIONES:
+            * ....
+    */
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+}
+
+
+

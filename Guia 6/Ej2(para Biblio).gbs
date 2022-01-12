@@ -1,0 +1,19 @@
+procedure SacarTodas_(color) {
+    /*
+        PROPÓSITO: saca todas las bolitas de color en la celda actual
+        PARÁMETROS:
+            * color: color - describe el color de las bolitas a sacar.
+           
+        PRECONDICIONES:
+            * Ninguna
+    */
+
+    while (hayBolitas(color)) {
+        
+        Sacar(color)
+
+    }
+    
+}
+
+

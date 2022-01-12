@@ -1,0 +1,450 @@
+function _esMasFuerteQue_(poke1,poke2) {
+    /*
+        PROPÓSITO:dados 2 pokemons indica si el primero tiene mas fuerza que el segundo
+        PARÁMETROS:
+            * poke1: pokemon - es el primer pokemon a evaluar
+            * poke2: pokemon - es el segundo pokemon a evaluar
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (fuerza(poke1)>fuerza(poke2))
+}
+
+function esDeMayorNivel_Que_(poke1,poke2) {
+    /*
+        PROPÓSITO:dados 2 pokemons indica si el primero tiene un nivel mayor que el segundo
+        PARÁMETROS:
+            * poke1: pokemon - es el primer pokemon a evaluar
+            * poke2: pokemon - es el segundo pokemon a evaluar
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nivel(poke1)>nivel(poke2))
+}
+
+function pokemon_PotenciadoEn_(poke,numero) {
+    /*
+        PROPÓSITO:Dado 1 pokemon y 1 numero describe el pokemon resultante de multiplicar la
+        fuerza y el nivel del pokemon dado por ese numero
+        PARÁMETROS:
+            * poke: Pokemon - Es el pokemon en el cual se desea multiplicar su fuerza y nivel
+            * numero: Numero - Es el mutiplicador de fuerza y el nuevo nivel del pokemon
+        TIPO: Pokemon
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Pokemon(poke | fuerza -> fuerza(poke) * numero,
+                           nivel -> numero ))
+}
+
+function pókemon_ConValoresDuplicados(poke) {
+    /*
+        PROPÓSITO:Dado 1 pokemon describe el pokemon resultante de duplicar la
+        fuerza y el nivel del pokemon
+        PARÁMETROS:
+            * poke: Pokemon - Es el pokemon en el cual se desea duplicar su fuerza y nivel
+    
+        TIPO: Pokemon
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Pokemon(poke | fuerza -> fuerza(poke) * 2,
+                           nivel -> nivel(poke) * 2 ))
+    
+   
+}
+
+function pókemon_PotenciadoSiEsDeTipo_En(pokémon , tipo,n) {
+    /*
+        PROPÓSITO:dado un Pókemon, un tipo de Pókemon y un número, describe el Pokémon 
+        resultante de potenciar el dado en el número dado, solamente si es del tipo recibido,
+        y el original si no.
+        PARÁMETROS:
+            * pokémon: Pokemon - describe el pokemon a potenciar.
+            * tipo: TipoDePokemon - describe al tipo de pokemon que se desea potenciar
+            * n: Numero - es el potenciador del pokemon dado.
+        TIPO:Pokemon
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+    return (choose
+        pokemon_PotenciadoEn_(pokemon,n) when (tipo(pokemon)==tipo)
+        pokemon otherwise
+    })
+}
+
+function pókemon_Derrotado(pokemon) {
+    /*
+        PROPÓSITO:dado un Pókemon, describe el Pokémon resultante de debilitar al Pókemon 
+        dado
+        PARÁMETROS:
+            * pokémon: Pokemon - describe el pokemon a debilitar.
+          
+        TIPO: Pokemon
+        PRECONDICIONES:
+            *Ninguna
+    */
+    
+     return (Pokemon(pokemon | fuerza -> 0,
+                           estaVivo -> False ))
+}
+
+function pokemonDe_Entrenados_(pokemons,potenciador) {
+    /*
+        PROPÓSITO:dada una lista de Pókemon y un número, describe la lista resultante de 
+        potenciar cada Pókemon de la lista dada en la cantidad dada.
+        PARÁMETROS:
+            * pokemons: Lista de pokemon - son los pokemons que se desean potenciar.
+            * potenciador: Numero - describe el potenciador de cada pokemon.
+        TIPO: Lista de Pokemon
+        PRECONDICIONES:
+            * Ninguna
+    */
+    pokemonsPotenciadosHastaAhora:=[]
+
+    foreach pokemon in pokemons {
+        pokemonsPotenciadosHastaAhora:=pokemonsPotenciadosHastaAhora ++ 
+                                      pokemon_PotenciadoEn_(pokemon,potenciador)
+    }
+
+    return (pokemonsPotenciadosHastaAhora)
+}
+
+function pókemonDe_DelTipo_(pokemons, tipoPokemon) {
+    /*
+        PROPÓSITO:dada una lista de Pókemon y un tipo de Pókemon, describe la lista de
+        aquellos Pókemon de la lista dada que son del tipo dado
+        PARÁMETROS:
+            * pokemons: Lista de pokemon - son los pokemons a filtrar.
+            * tipoPokemon: TipoDePokemon - describe el tipo de pokemon que se desea filtrar.
+        TIPO: Lista de pokemons
+        PRECONDICIONES:
+            * Ninguna
+    */
+    pokemosFiltradosHastaAhora:=[]
+
+    foreach pokemon in pokemons {
+        pokemosFiltradosHastaAhora:=pokemosFiltradosHastaAhora ++ 
+                                    singularSi(pokemon,tipo(pokemon)==tipoPokemon)
+    }
+
+    return (pokemosFiltradosHastaAhora)
+}
+
+function pókemonDe_DelTipo_Duplicados(pokemones, tipoPokemon) {
+    /*
+        PROPÓSITO:dada una lista de Pókemon y un tipo de Pókemon, describe lista de Pókemon 
+        resultante de duplicar aquellos Pókemon de la lista original que son del tipo dado, 
+        dejando los demás exactamente igual. El orden en la lista resultante debe ser el 
+        mismo que en la lista dada.
+        PARÁMETROS:
+            * pokemones: Lista de pokemon - describe a los pokemones a duplicar si son del
+            tipo dado.
+            * tipoPokemon: TIPODEPOKEMON - describe el tipo de pokemon que se desea duplicar.
+        TIPO:Lista de pokemones
+        PRECONDICIONES:
+            * Ninguna
+    */
+    pokemonesVistos:=[]
+
+    foreach pokemon in pokemones {
+        pokemonesVistos:=pokemonesVistos ++ 
+                         pókemon_PotenciadoSiEsDeTipo_En(pokemones ,tipoPokemon,2)
+    }
+
+
+    return (pokemonesVistos)
+}
+
+function elPókemonMásDébilDe_(pokemones) {
+    /*
+        PROPÓSITO:dada una lista de Pókemon describe al Pókemon de nivel más bajo de toda la 
+        lista; si hay dos o más del mismo nivel más bajo, da lo mismo cual se describe. 
+        PARÁMETROS:
+            * pokemones: Lista de Pokemon - Son los pokemons en el cual se desea buscar
+            quien es el mas debil.
+            
+        TIPO:Pokemon
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    
+    pokemonDebilVisto:=primero(pokemones)
+    pokemonesQueFaltan:=resto(pokemones)
+
+    while (not esVacia(pokemonesQueFaltan)) {
+        pokemonDebilVisto:=minimoEntre_Y_(pokemonDebilVisto,primero(pokemonesQueFaltan))
+        pokemonesQueFaltan:=resto(pokemonesQueFaltan)
+    }
+
+    return (pokemonDebilVisto)
+}
+
+function pókemonDebilitadosDe_(pokemones) {
+    /*
+        PROPÓSITO:dada una lista de Pókemon, describe la lista de aquellos Pókemon de la 
+        lista dada que están debilitados
+        PARÁMETROS:
+            * pokemones: Lista de Pokemon - son los pokemones en el cual se desean saber los
+            que estan debilitados.
+           
+        TIPO: Lista de Pokemon debilitados
+        PRECONDICIONES:
+            * Ninguna
+    */
+    pokemonsDebilitadosVistos:=[]
+
+    foreach pokemon in pokemones {
+        pokemonsDebilesVistos:=pokemonsDebilesVistos ++ 
+                               singularSi(pokemon,estaVivo(pokemon) == False)
+    }
+
+    return (pokemonsDebilitadosVistos)
+}
+
+function cantidadDePókemonSaludablesEn_(pokemones) {
+    /*
+        PROPÓSITO:dada una lista de Pókemon, describe la cantidad de Pókemon de la lista que
+        no están debilitados.
+        PARÁMETROS:
+            * pokemones: Lista de Pokemon - Son los pokemones en el cual se desean saber
+            los saludables.
+            
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (sumatoriaDe_(pokemones) - sumatoriaDe_(pókemonDebilitadosDe_(pokemones)))
+}
+
+
+function existePókemonEn_ConFuerza_Tipo_YNivel_(pokemones,fuerza,tipoPokemon,nivel) {
+    /*
+        PROPÓSITO:dada una lista de Pókemon, un número para indicar una fuerza, un tipo de 
+        Pókemon y un número para indicar un nivel, indica si en la lista dada existe algun 
+        Pókemon de ese tipo con esa fuerza y ese nivel.
+        PARÁMETROS:
+            * pokemones: Lista de Pokemons - son los pokemones en el cual se desea saber si
+            existe algun pokemon con el numero de fuerza dada el tipo dado y el nivel dado.
+            * fuerza: Numero - describe la fuerza del pokemon a buscar.
+            * tipoPokemon: TipoDePokemon - describe el tipo de pokemon a buscar.
+            * nivel: Numero - describe el nivel del pokemon a buscar.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    pokemonesQueFaltan:=pokemones
+
+    while (not esVacia(pokemonesQueFaltan && 
+            not elPokemon_EsDeNivel_ConFuerza_YTipo_(primero(pokemonesQueFaltan),nivel,fuerza,tipoPokemon))) {
+        
+        pokemonesQueFaltan:=resto(pokemonesQueFaltan)
+    }
+
+    return (not esVacia(pokemonesQueFaltan))
+}
+
+
+function elPokemon_EsDeNivel_ConFuerza_YTipo_(pokemon,nivel,fuerza,tipoPokemon) {
+    /*
+        PROPÓSITO:dada un pokemon un numero para indicar el nivel ,1 numero para indicar la
+        fuerza y un tipo de pokemon, indica si el pokemon es del nivel dado fuerza dada y 
+        tipo de pokemon dado
+        PARÁMETROS:
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+            * parámetro1: tipo - descripción.
+            * parámetro2: tipo - descripción.
+        TIPO:Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nivel(pokemon)==nivel && fuerza(pokemon)==fuerza && tipo(pokemon)==tipoPokemon)
+}
+
+
+function entrenador__(idEntrenador,esTactico?) {
+    /*
+        PROPÓSITO:dados un identificador y un booleano que indica si el entrenador es táctico, describe un Entrenador con los datos dados. 
+        PARÁMETROS:
+            * idEntrenador:Numero - describe el identificador del entrenador.
+            * esTactico?: Booleano - Indica si el entrenador es tactico o no.
+        TIPO: Entrenador
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Entrenador(lista -> [],
+                       identificador -> idEntrenador,
+                       esTactico -> esTactico?))
+}
+
+
+function entrenador_ConPókemon_Agregado(entrenador, pokemonAAgregar) {
+    /*
+        PROPÓSITO:dados un entrenador y un Pókemon, describe al entrenador resultante de agregar al Pókemon dado a la lista de Pókemon del entrenador dado.
+        PARÁMETROS:
+            * entrenador: Entrenador - describe al entrenador en el cual se desea agregar al pokemon en su lista de pokemones.
+            * pokemonAAgregar: Pokemon - describe al pokemon a agregar.
+        TIPO: Entrenador con pokemon agregado
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Entrenador (entrenador | lista -> lista(entrenador) ++ [pokemonAAgregar]))
+}
+
+function cantidadDePókemonDe_(entrenador) {
+    /*
+        PROPÓSITO:dado un entrenador, describe la cantidad de Pókemon del entrenador recibido.
+        PARÁMETROS:
+            * entrenador: Entrenador - describe al entrenador en el cual se desea saber la cantidad de Pokemons que tiene.
+           
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (longitudDe_(lista(entrenador)))
+}
+
+
+function cantidadTotalDePókemonEn_(entrenadores) {
+    /*
+        PROPÓSITO:dada una lista de entrenadores, describe la cantidad total de Pókemon entre todos los entrenadores de la lista.
+        PARÁMETROS:
+            * entrenadores : Lista De Entrenadores - describe a los entrenadores en el cual se desea saber la cantidad total de 
+            pokemons que tienen.
+            
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    cantidadDePokemonesContados:=0
+
+    foreach entrenador in entrenadores {
+        cantidadDePokemonesContados:=cantidadDePokemonesContados + cantidadDePókemonDe_(entrenador)
+    }
+
+    return (cantidadDePokemonesContados)
+}
+
+function entrenadorMásAntiguoEntre_Y_(entrenador1, entrenador2) {
+    /*
+        PROPÓSITO:dados dos entrenadores, describe al entrenador más antiguo de ambos 
+        PARÁMETROS:
+            * entrenador1: Entrenador - describe al primer entrenador a comparar.
+            * entrenador2: Entrenador - describe al segundo entrenador a comparar.
+        TIPO: entrenador
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (choose
+        entrenador1 when (identificador(entrenador1) < identificador(entrenador2))
+        
+        entrenador2 otherwise
+    })
+}
+
+
+
+function elMásAntiguoEn_(entrenadores) {
+    /*
+        PROPÓSITO:dada una lista de entrenadores, describe al entrenador más antiguo de la lista dada.
+        PARÁMETROS:
+            * entrenadores: Lista de Entrenadores - Son los entrenadores en el cual se desea saber cual es el mas antiguo de todos
+          
+        TIPO: Entrenador
+        PRECONDICIONES:
+            * Al menos hay 1 entrenador en la lista de entrenadores dada
+    */
+    
+    entrenadorVisto:=primero(entrenadores)
+
+    foreach entrenador in resto(entrenadores) {
+        entrenadorVisto:=entrenadorMásAntiguoEntre_Y_(entrenadorVisto,entrenador) 
+    }
+
+    return (entrenadorVisto)
+}
+
+function entrenadorGanadorDeDesafíoEntre_Y_(entrenador1,entrenador2) {
+    /*
+        PROPÓSITO:dados dos entrenadores, describe al Entrenador ganador del desafío.
+        PARÁMETROS:
+            * entrenador1: Entrenador - describe al primer entrenador a evaluar.
+            * entrenador2: Entrenador - describe al segundo entrenador a evaluar.
+        TIPO: Entrenador
+        PRECONDICIONES:
+            * Ninguna
+        OBSERVACIONES:El desafío consiste en que compitan un Pókemon de cada entrenador hasta que se acaben los Pókemon de uno de ellos, resultando en batallas del primero
+        con el primero, el segundo con el segundo, etc. En cada pelea entre dos Pókemon siempre gana el más fuerte, y si tienen igual fuerza, la pelea no cuenta para ninguno de 
+        los dos. Gana el desafío el entrenador que consiga ganar más batallas, o de haber empate en la cantidad de peleas ganadas, el de mayor antigüedad.
+    */
+    
+    return (choose
+            entrenador1 when (entrenador_LeGanaA_(entrenador1 , entrenador2))
+        
+            entrenador2 otherwise
+    })
+}
+
+function entrenador_LeGanaA_(entrenador1 , entrenador2) {
+    /*
+        PROPÓSITO: dados 2 entrenadores indica si el primer entrenador gano al segundo entrenador
+        PARÁMETROS:
+            * entrenador1: Entrenador - describe al primer entrenador a evaluar.
+            * entrenador2: Entrenador - describe al segundo entrenador a evaluar.
+        TIPO:Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (cantidadDeVictoriasDe_Contra_(entrenador1,entrenador2) )
+}
+
+function cantidadDeVictoriasDe_Contra_(entrenador1,entrenador2) {
+    /*
+        PROPÓSITO:Dados 2 entrenadores describe la cantidad de victorias que obtuvo el primer entrenador frente al segundo entrenador
+        PARÁMETROS:
+            * entrenador1: Entrenador - describe al entrenador en el cual se desea saber las cantidad de victorias frente a 2do entrenador dado.
+            * entrenador2: Entrenador - describe al entrenador en el cual se desea comparar la cantidad de victorias frente al 1er entrenador dado.
+        TIPO:Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    cantidadDeVictoriasContadas:=0
+    pokemonesDelEntrenador1QueFaltan:=lista(entrenador1)
+    pokemonesDelEntrenador2QueFaltan:=lista(entrenador2)
+
+    while (ningunaEstaVaciaDe__(pokemonesDelEntrenador1QueFaltan,pokemonesDelEntrenador2QueFaltan)) {
+        cantidadDeVictoriasContadas:= cantidadDeVictoriasContadas +  unoSi_SinoCero(_esMásFuerteQue_(primero(pokemonesDelEntrenador1QueFaltan) , primero(pokemonesDelEntrenador2QueFaltan)))
+        pokemonesDelEntrenador1QueFaltan:=resto(pokemonesDelEntrenador1QueFaltan)
+        pokemonesDelEntrenador2QueFaltan:=resto(pokemonesDelEntrenador2QueFaltan) 
+    }
+    return (cantidadDeVictoriasContadas)
+}
+
+/*
+    El pokemon del entrenador1 le gana al pokemon del entrenador 2
+
+    _esMásFuerteQue_(el poke del entrenador 1 , el poke del entrenador 2)
+
+
+    Recorrido:
+    1) 
+
+*/

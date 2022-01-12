@@ -1,0 +1,132 @@
+/*
+Soldados:1 negra
+enemigos:1 roja por cada soldado
+*/
+
+procedure EnviarAliadosPraDuplicarEnemigos() {
+    /*
+        PROPÓSITO:Agrega soldados aliados en la celda actual para que
+        haya el doble de aliados que de soldados enemigos
+        PRECONDICIONES:
+            *Ninguna
+    */
+    Poner__Veces(Negro,nroBolitas(Rojo)*2)
+}
+
+
+procedure PelearLaBatalla() {
+    /*
+        PROPÓSITO:  Simula una batalla entre soldados aliados y enemigos
+        PRECONDICIONES:
+            * al menos debe haber 2 soldados enemigos y 3 aliados en la
+            celda actual
+    */
+    
+    Sacar__Veces(Negro,(nroBolitas(Rojo)*3) div 2)
+    
+    SacarTodas_(Rojo)
+
+
+}
+
+function colorAliado() {
+    /*
+        PROPÓSITO:  Denota el color del soldado aliado
+        TIPO: Color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Negro)
+}
+
+
+function colorEnemigo() {
+    /*
+        PROPÓSITO:  Denota el color del soldado Enemigo
+        TIPO: Color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Rojo)
+}
+
+function cantidadDeSoldados_(colorDelEjercito) {
+    /*
+        PROPÓSITO: describe la cantidad de
+        soldados de colorDelEjercito en la celda actual
+        PARÁMETROS:
+            * colorDelEjercito: color - Indica el color de soldados
+            
+        TIPO: numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(colorDelEjercito))
+}
+
+function estadoDeEmergencia() {
+    /*
+        PROPÓSITO:  Indica si en la celda actual esta indefensa y
+        hay mas de 100 soldados enemigos 
+        
+        TIPO: Booleano, denota verdadero si la celda actual es indefensa y hay mas de 
+        100 soldados enemigos
+        PRECONDICIONES:
+            * ninguna
+    */
+    
+    return (cantidadDeSoldados_(colorEnemigo()) > 100 && esCeldaIndefensa())
+}
+
+function esCeldaIndefensa() {
+    /*
+        PROPÓSITO: Indica que la celda actual es indefensa en el caso
+        de que no haya soldados aliados
+        TIPO: Booleano,describe verdadero cuando no 
+        hay soldados aliados en la celda actual.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (cantidadDeSoldados_(colorAliado)==0)
+}
+
+function haySuficientesAliados(cantidadDefensa, cantidadAtaque) {
+    /*
+        PROPÓSITO:Indica si hay por lo menos cantidadDefensa de
+        Soldados aliados por cada cantidadAtaque de soldados enemigos
+        en la celda actual
+        PARÁMETROS:
+            * cantidadDefensa: numero -indica la cantidad de soldados
+            aliaddos en la celda actual.
+            * cantidadAtaque: numero - indica la cantidad de soldados
+            enemigos en la celda actual.
+        TIPO: Booleano describe verdadero si hay por lo menos ​
+        cantidadDefensa soldados aliados por cada ​cantidadAtaque 
+        ​soldados enemigos en la celda actual.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (cantidadDeSoldados_(colorEnemigo())*cantidadDefensa/cantidadAtaque >=cantidadDeSoldados_(colorAliado) )
+}
+
+function aliadosNecesariosParaDefensaEficaz(cantidadDeSoldados) {
+    /*
+        PROPÓSITO: Dada una cantidadDeSoldados describe el número de 
+        soldados aliados que faltan para defender la celda actual. 
+        PARÁMETROS:
+            * cantidadDeSoldados: numero - Describe a la cantidad de 
+            soldados aliados que hay en la celda actual.
+           
+        TIPO: Numero
+        PRECONDICIONES:
+            * No hay suficientes cantidadDeSoldados aliados en
+            la celda actual
+    */
+    
+    return (cantidadDeSoldados_(color))
+}
